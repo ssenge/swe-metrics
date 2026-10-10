@@ -2,8 +2,12 @@
 import json
 
 import pytest
+import tree_sitter_java
+from tree_sitter import Language, Parser
 
 from swe_metrics.analyzers.cognitive import Cognitive
+from swe_metrics.analyzers.cognitive.grammars import JAVA
+from swe_metrics.analyzers.cognitive.walk import score_functions
 from swe_metrics.core.target import Target
 from tests.helpers import FIXTURES
 
@@ -48,3 +52,32 @@ def test_only_jumps_to_a_label_count(name, source, tmp_path):
     (tmp_path / name).write_text(source)
     metrics = Cognitive().measure(Target(str(tmp_path), (name,)), (name,), "/unused").metrics
     assert [m.value for m in metrics if m.scope.level == "function"] == [1.0]
+
+
+def java_scores(source):
+    """(name, score) of every method in a Java source, in order."""
+    tree = Parser(Language(tree_sitter_java.language())).parse(source.encode())
+    return [(f.name, f.complexity) for f in score_functions(tree.root_node, JAVA)]
+
+
+def test_overloads_and_super_are_not_recursion():
+    """A same-named call is recursion only if the argument count picks this overload; super never is."""
+    source = """class O {
+      String name(Class<?> c) { return name(c.getName()); }
+      String name(String s) { return s.isEmpty() ? "" : name(s.substring(1)); }
+      int sum(int a) { return sum(a, 0); }
+      int sum(int a, int b) { return a > 0 ? sum(a - 1, b + 1) : b; }
+      int v(int n) { return super.v(n); }
+      int fact(int n) { return n < 2 ? 1 : n * fact(n - 1); }
+    }"""
+    # name/1 twice: ambiguous without types, not counted; sum(a, 0) calls the other overload; sum/2 recurses
+    assert java_scores(source) == [("name", 0), ("name", 1), ("sum", 0), ("sum", 2), ("v", 0), ("fact", 2)]
+
+
+def test_loop_headers_are_nested_but_if_conditions_are_not():
+    """A ternary in a loop header is inside the loop (+2); in an if condition it is at the if's level (+1)."""
+    source = """class H {
+      int loop(int n) { while ((n > 0 ? 1 : 2) > 1) { n--; } return n; }
+      int cond(int n) { if ((n > 0 ? 1 : 2) > 1) { n--; } return n; }
+    }"""
+    assert java_scores(source) == [("loop", 3), ("cond", 2)]

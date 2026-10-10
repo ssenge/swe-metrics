@@ -16,9 +16,11 @@ from swe_metrics.analyzers.cognitive.grammars import Grammar
 
 Node = Any  # tree_sitter.Node (untyped library)
 # receivers through which a method calls itself (PHP `$this->f()`, `static::f()`; Rust `Self::f()`)
-SELF = frozenset({"self", "this", "cls", "super", "Self", "$this", "static"})
+SELF = frozenset({"self", "this", "cls", "Self", "$this", "static"})  # not `super`: another method
 OWNERS = ("object", "operand", "value", "argument", "scope", "path", "expression")  # `x` in `x.f`, `x::f`
-MEMBERS = ("property", "attribute", "field", "name")                   # `f` there
+MEMBERS = ("property", "attribute", "field", "name")
+PARAMETERS = ("parameters", "parameter_list", "formal_parameters", "function_value_parameters")
+ARGUMENTS = ("arguments", "argument_list", "value_arguments")                   # `f` there
 
 
 @dataclass(frozen=True)
@@ -38,7 +40,8 @@ def score_functions(root: Node, grammar: Grammar) -> list[Scored]:
         node = stack.pop()
         # a lambda outside any function (e.g. `const f = () => ...`) is a function of its own
         if node.type in grammar.functions or node.type in grammar.nested:
-            walker = _Walker(grammar, _name(node, node.type in grammar.functions))
+            name = _name(node, node.type in grammar.functions)
+            walker = _Walker(grammar, name, _overload_arity(node, grammar, name))
             walker.children(node, 0)
             found.append(Scored(walker.name, node.start_point[0] + 1, walker.total))
         else:
@@ -49,9 +52,9 @@ def score_functions(root: Node, grammar: Grammar) -> list[Scored]:
 class _Walker:
     """Walks one function's body and adds up its increments."""
 
-    def __init__(self, grammar: Grammar, name: str) -> None:
-        """The grammar's roles, and the function's name (for recursion)."""
-        self.g, self.name, self.total = grammar, name, 0
+    def __init__(self, grammar: Grammar, name: str, arity: int | None) -> None:
+        """The grammar's roles, the function's name, and the argument count a recursive call must have."""
+        self.g, self.name, self.arity, self.total = grammar, name, arity, 0
 
     def walk(self, node: Node, nesting: int) -> None:
         """Score a node and everything below it; a keyword token scores nothing (Ruby's `if` in an `if`)."""
@@ -64,8 +67,8 @@ class _Walker:
         if kind in g.ifs:
             self.if_(node, nesting, else_if=False)
         elif kind in g.loops or kind in g.switches or kind in g.catches or kind in g.ternaries:
-            self.total += 1 + nesting
-            self.children(node, nesting, deeper=True)
+            self.total += 1 + nesting  # the whole structure, header included, is one level deeper
+            self.children(node, nesting + 1)
         elif kind in g.nested or kind in g.functions:
             self.children(node, nesting + 1)
         elif self.logical_operator(node) and not self.inside_logical(node):
@@ -75,11 +78,10 @@ class _Walker:
             self.total += self.jump(node) + self.recursion(node)
             self.children(node, nesting)
 
-    def children(self, node: Node, nesting: int, deeper: bool = False) -> None:
-        """Walk the children; with `deeper`, everything but the condition is one level deeper."""
-        for i, child in enumerate(node.children):
-            nested = deeper and node.field_name_for_child(i) != "condition"
-            self.walk(child, nesting + 1 if nested else nesting)
+    def children(self, node: Node, nesting: int) -> None:
+        """Walk the children at the given nesting."""
+        for child in node.children:
+            self.walk(child, nesting)
 
     def if_(self, node: Node, nesting: int, else_if: bool) -> None:
         """if: +1 plus nesting; else if and else: +1 (hybrid); the bodies are one level deeper."""
@@ -161,7 +163,34 @@ class _Walker:
 
     def recursion(self, node: Node) -> int:
         """A call to the function itself: +1."""
-        return 1 if node.type in self.g.calls and _callee(node, self.g.generics) == self.name else 0
+        if node.type not in self.g.calls or _callee(node, self.g.generics) != self.name:
+            return 0
+        return 1 if self.arity is None or _count(node, ARGUMENTS) == self.arity else 0
+
+
+def _overload_arity(node: Node, grammar: Grammar, name: str) -> int | None:
+    """Where a name is overloaded, the parameter count that identifies this function (-1: ambiguous).
+
+    Without types, a call to an overload with the same number of parameters can't be told apart, so it
+    isn't counted as recursion. None: the name is unique in its scope, any call by that name counts.
+    """
+    if not grammar.overloads or node.parent is None:
+        return None
+    siblings = [c for c in node.parent.named_children
+                if c.type in grammar.functions and c.id != node.id and _name(c, True) == name]
+    if not siblings:
+        return None
+    own = _count(node, PARAMETERS)
+    return -1 if own in {_count(s, PARAMETERS) for s in siblings} else own
+
+
+def _count(node: Node, kinds: tuple[str, ...]) -> int:
+    """The number of parameters or arguments: the named children of the first matching list."""
+    found = _field(node, kinds) or next((c for c in node.named_children if c.type in kinds), None)
+    if found is None:
+        declarator = node.child_by_field_name("declarator")
+        return _count(declarator, kinds) if declarator is not None else 0
+    return sum(1 for c in found.named_children if c.type != "comment")
 
 
 def _name(node: Node, declared: bool) -> str:

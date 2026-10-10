@@ -35,6 +35,7 @@ class Grammar:
     calls: frozenset[str] = frozenset()         # call nodes, for recursion
     generics: frozenset[str] = frozenset()      # a generic function in a call (`f<T>()`), for recursion
     parens: frozenset[str] = frozenset({"parenthesized_expression"})
+    overloads: bool = False  # methods can be overloaded: recursion must match the parameter count
 
 
 JAVA = Grammar(
@@ -49,6 +50,7 @@ JAVA = Grammar(
     labeled=frozenset({"break_statement", "continue_statement"}), labels=frozenset({"identifier"}),
     logical=frozenset({"binary_expression"}),
     calls=frozenset({"method_invocation"}),
+    overloads=True,
 )
 
 JAVASCRIPT = Grammar(
@@ -110,6 +112,7 @@ CSHARP = Grammar(
     flat=frozenset({"goto_statement"}),
     logical=frozenset({"binary_expression"}),
     calls=frozenset({"invocation_expression"}),
+    overloads=True,
 )
 
 KOTLIN = Grammar(  # no ternary: the elvis operator `?:` is not a branch
@@ -125,6 +128,7 @@ KOTLIN = Grammar(  # no ternary: the elvis operator `?:` is not a branch
     jump_labels=frozenset({"break@", "continue@"}),
     logical=frozenset({"binary_expression"}),
     calls=frozenset({"call_expression"}),
+    overloads=True,
 )
 
 PHP = Grammar(
@@ -163,6 +167,7 @@ CPP = replace(
     catches=frozenset({"catch_clause"}),
     nested=frozenset({"lambda_expression"}),
     generics=frozenset({"template_function"}),
+    overloads=True,
 )
 
 RUST = Grammar(
