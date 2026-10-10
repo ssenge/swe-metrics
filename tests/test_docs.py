@@ -10,26 +10,11 @@ from swe_metrics.analyzers import markdownlint as markdownlint_module
 from swe_metrics.analyzers.lychee import Lychee
 from swe_metrics.analyzers.markdownlint import Markdownlint
 from swe_metrics.core.target import Target
-from tests.helpers import FIXTURES
+from tests.helpers import FIXTURES, values
 
 DOCS = FIXTURES / "docs"
 EXPECTED = json.loads((DOCS / "expected.json").read_text())
 FILES = ("README.md", "guide/setup.md")
-
-
-def values(metrics, metric_id):
-    """A metric's values as in expected.json: per file, per label value and the total."""
-    found = {}
-    for m in metrics:
-        if m.id != metric_id:
-            continue
-        if m.scope.level == "file":
-            found[m.scope.path] = m.value
-        elif m.labels:
-            found.setdefault(m.labels[0][0], {})[m.labels[0][1]] = m.value
-        else:
-            found["total"] = m.value
-    return found
 
 
 def recorded_markdownlint(argv, cwd, ok=(0,)):

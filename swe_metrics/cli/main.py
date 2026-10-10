@@ -16,6 +16,8 @@ from swe_metrics.analyzers.lizard import Lizard
 from swe_metrics.analyzers.lychee import Lychee
 from swe_metrics.analyzers.markdownlint import Markdownlint
 from swe_metrics.analyzers.opengrep import Opengrep
+from swe_metrics.analyzers.terraform import Terraform
+from swe_metrics.analyzers.tflint import Tflint
 from swe_metrics.analyzers.trivy import Trivy
 from swe_metrics.core.analyzer import Analyzer
 from swe_metrics.core.catalog import families
@@ -39,7 +41,7 @@ NO_SETTINGS = Settings()
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
     return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
-            Markdownlint(), Lychee()]
+            Markdownlint(), Lychee(), Terraform(), Tflint()]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:

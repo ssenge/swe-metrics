@@ -45,3 +45,18 @@ class FakeAnalyzer:
         metrics = [Metric("size.files", self.tool, scope, float(len(files))),
                    Metric("complexity.cyclomatic", self.tool, scope, 1.0)]
         return Measurement(metrics, (("sarif", str(detail)),))
+
+
+def values(metrics, metric_id):
+    """A metric's values as in expected.json: per file or module, per label value and the total."""
+    found = {}
+    for m in metrics:
+        if m.id != metric_id:
+            continue
+        if m.scope.path:
+            found[m.scope.path] = m.value
+        elif m.labels:
+            found.setdefault(m.labels[0][0], {})[m.labels[0][1]] = m.value
+        else:
+            found["total"] = m.value
+    return found
