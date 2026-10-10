@@ -54,3 +54,14 @@ def test_languages():
     assert language("src/A.java") == "java" and language("Dockerfile") == "dockerfile"
     assert language("README") is None
     assert languages(["a.py", "b.py", "c.md", "d.unknown"]) == (("python", 2), ("markdown", 1))
+
+
+def test_version_matches_pyproject():
+    """Built-in analyzers report swe-metrics' version; it must equal the package version."""
+    import tomllib
+    from pathlib import Path
+
+    import swe_metrics
+
+    pyproject = tomllib.loads((Path(__file__).resolve().parents[1] / "pyproject.toml").read_text())
+    assert swe_metrics.__version__ == pyproject["project"]["version"]
