@@ -44,7 +44,7 @@ def _run(analyzer: Analyzer, target: Target, only: tuple[str, ...],
          scratch: str) -> tuple[AnalyzerRun, Measurement]:
     """Run one analyzer; a missing tool, a missing prerequisite or a fault is a status, never an exception."""
     def status(state: str, reason: str = "", version: str = "") -> AnalyzerRun:
-        return AnalyzerRun(analyzer.id, analyzer.tool, state, version, reason)
+        return AnalyzerRun(analyzer.id, analyzer.tool, state, version, reason, tuple(analyzer.families))
 
     nothing = Measurement([])
     if only and not set(analyzer.families) & set(only):

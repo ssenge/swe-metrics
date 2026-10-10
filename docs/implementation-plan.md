@@ -12,12 +12,12 @@ swe-metrics measures software. It takes an input and returns the metrics for it:
 
 Where the underlying tools produce detailed analysis, it returns that too: findings with locations, per-function values, dependency graphs.
 
-It is a **measuring instrument, not a judge.** It never decides whether a value is good or bad. Thresholds, verdicts, ratchets against earlier values, trends, and the combination of several tools into one opinion all belong to the consumers that call it: loop harnesses, CI pipelines, dashboards, review tools.
+`measure` is a **measuring instrument, not a judge.** It never decides whether a value is good or bad. Judging happens in one explicit, separate place: `score` (§12) turns a report into one quality score with a **scoring definition**, which is Python code with a name and a version. swe-metrics ships a default definition; callers can replace it. Ratchets over time, trends and verdicts on single metrics remain the business of the consumers that call it: loop harnesses, CI pipelines, dashboards, review tools.
 
 ## 2. Principles
 
 1. **Stateless.** One call, one input, one report. No database, no history, no cache that changes results. Anything a consumer wants to compare, it compares itself, using the per-file and per-function values in the report.
-2. **No interpretation.** No thresholds, no pass/fail, no scores that mix metrics, no "quality grade". A value carries its unit and its direction (lower is better, higher is better, or neutral), so consumers can interpret it without guessing.
+2. **No interpretation in `measure`.** The measurement has no thresholds, no pass/fail, no scores that mix metrics. A value carries its unit and its direction (lower is better, higher is better, or neutral), so consumers can interpret it without guessing. All judgement lives in scoring definitions (§12): explicit code with a name and version, replaceable by the caller, and every score names the definition that produced it.
 3. **Consumer-agnostic.** swe-metrics knows nothing about any consumer: no imports, no config formats, no names. Consumers adapt to its report format, never the other way round.
 4. **Reproducible.** The same input with the same tool versions gives the same report. The report records every tool's version, and the date of any vulnerability database used.
 5. **Read-only.** swe-metrics never modifies its input. Tools that write next to the sources run on a temporary copy.
@@ -178,6 +178,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 | **M3 Structure and tier B** *(done)* | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
 | **M4 History** *(done)* | Change frequency, code age, change coupling from Git history | Values match a fixture repository with scripted history |
 | **M5 Local tools** *(done)* | Remove the container image (`container/`, `.dockerignore`, references). `tools.lock` at the repository root with entries for macOS and Linux on arm64 and x86_64. `scripts/install-tools.sh` (`--only`, `--check`, `--prefix`). Golden-report integration tests with the local tools. README: install in two commands | On a clean macOS user account and in a Linux shell, `pip install -e .` plus `scripts/install-tools.sh` makes `swe-metrics tools` report every analyzer as installed at the pinned version, and the integration tests pass |
+| **M6 Quality score** | `swe-metrics score` with scoring definitions in Python (building blocks: gates, linear components, densities, regressions against a baseline report), the shipped default `swe-default@1`, score schema, `--definition` for custom code | The default gives the hand-computed score on the fixtures; a failed gate caps the score; a missing tool fails closed; a regression against a baseline lowers the score |
 
 Each milestone is a set of small changes (≤ 400 changed code lines each), every one passing the gate.
 
@@ -218,3 +219,29 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
 2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report (done); later an option to point trivy at a database the caller provides.
 3. **Monorepos.** Should `module` scopes come from build files (Maven modules, npm workspaces) or from directories? Proposal: from build files when present, otherwise top-level directories.
 4. **Very large repositories.** Is there a need for streaming output or sharding by directory? Proposal: not before a real case needs it.
+
+## 12. Quality score (M6)
+
+`swe-metrics score REPORT [--baseline REPORT] [--definition FILE.py | package.module:NAME] [--out FILE]`
+
+One number for loop harnesses and dashboards, computed from a report by a **scoring definition**. The single metrics stay available in the score's breakdown and in the report.
+
+**Definitions are Python code.** A definition is an object with `name`, `version` and `score(report, baseline) -> dict`. Most definitions are built from the building blocks in `swe_metrics.scoring`; a custom function can do anything else. A definition must be deterministic and must not do I/O. It is the caller's own code and runs in their process, like a test file.
+
+**Building blocks.**
+- **`select(metric, stat=…, labels=…, tool=…)`**: a value from the report's target-level metrics. With `labels`, the rows that carry those labels are summed (e.g. severity critical and high); without, the unlabeled total. `stat` reads a statistic (`p95`, `max`, `sum`, …).
+- **`per_kloc(selector)`**: a count as a density per 1,000 lines of code, so that targets of different size compare.
+- **`gate(selector, max=… | min=…, cap=40)`**: a hard limit. A failed gate caps the score, so the score stays low until every gate holds.
+- **`linear(selector, good=…, bad=…, weight=…, required=False)`**: a sub-score from 0 to 100, linear between `bad` (0) and `good` (100), clamped. `good` may be above or below `bad`.
+- **`regression(selector, tolerance=…, penalty=…)`**: with `--baseline`, a value that got worse than in the baseline report by more than the tolerance costs `penalty` points. The direction comes from the metric's `direction`. This is still stateless: both reports are inputs.
+
+**Score.** The weighted mean of the available components' sub-scores, minus regression penalties, at least 0, then capped by the lowest `cap` of the failed gates. Rounded to two decimals.
+
+**Missing metrics.**
+- **Not applicable:** every analyzer of the metric's family was skipped (no matching files, not selected, a prerequisite such as SAST rules or a coverage report not given). Components are dropped and the weights renormalized; gates pass.
+- **Unavailable:** an analyzer of the family failed or isn't installed. Gates fail (fail closed). A required component makes the score incomplete (`score: null`); an optional one is dropped.
+- Every dropped or failed part is listed in the score's `notes`.
+
+**Output** (schema `swe-metrics/score/v1`): the definition (name and version), the score, every gate (value, limit, passed), every component (value, sub-score, weight, contribution), every regression, and the notes.
+
+**The default definition `swe-default@1`** (`swe_metrics/scoring/default.py`). Thresholds come from established sources, cited in the code: McCabe's limit of 10 for cyclomatic complexity, SonarSource's 15 for cognitive complexity, SonarQube's default quality gate (duplication ≤ 3 %, coverage ≥ 80 % on new code), and zero critical or high vulnerabilities and zero secrets. Changing a threshold or weight means a new version (`swe-default@2`), because scores are only comparable under the same definition.

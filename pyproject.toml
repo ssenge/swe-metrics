@@ -36,7 +36,8 @@ include_external_packages = true
 name = "core is pure: no other layer, no tool libraries"
 type = "forbidden"
 source_modules = ["swe_metrics.core"]
-forbidden_modules = ["swe_metrics.analyzers", "swe_metrics.runner", "swe_metrics.cli", "lizard", "subprocess"]
+forbidden_modules = ["swe_metrics.analyzers", "swe_metrics.runner", "swe_metrics.cli", "swe_metrics.scoring",
+                     "lizard", "subprocess"]
 
 [[tool.importlinter.contracts]]
 name = "analyzers depend only on core"
@@ -48,6 +49,13 @@ forbidden_modules = ["swe_metrics.runner", "swe_metrics.cli"]
 name = "analyzers never import each other"
 type = "independence"
 modules = ["swe_metrics.analyzers.*"]
+
+[[tool.importlinter.contracts]]
+name = "scoring is pure and depends on nothing but the report format"
+type = "forbidden"
+source_modules = ["swe_metrics.scoring"]
+forbidden_modules = ["swe_metrics.analyzers", "swe_metrics.runner", "swe_metrics.cli", "swe_metrics.tools",
+                     "subprocess"]
 
 [[tool.importlinter.contracts]]
 name = "tools depend only on core"

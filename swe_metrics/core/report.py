@@ -71,6 +71,7 @@ class AnalyzerRun:
     status: str
     version: str = ""
     reason: str = ""
+    families: tuple[str, ...] = ()  # lets a scorer tell "not applicable" from "tool failed"
 
     def as_dict(self) -> dict[str, Any]:
         """The JSON form: only the fields that are set."""

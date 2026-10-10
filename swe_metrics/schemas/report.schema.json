@@ -32,7 +32,8 @@
           "tool": { "type": "string" },
           "status": { "enum": ["ran", "skipped", "failed"] },
           "version": { "type": "string" },
-          "reason": { "type": "string" }
+          "reason": { "type": "string" },
+          "families": { "type": "array", "items": { "type": "string" } }
         }
       }
     },
