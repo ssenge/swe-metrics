@@ -96,6 +96,8 @@ def test_custom_definitions_from_file_and_module(tmp_path, capsys):
     assert (result["definition"], result["score"]) == ({"name": "mine", "version": "7"}, 50.0)
     assert main(["score", report, "--definition", "swe_metrics.scoring.default:DEFINITION"]) == 0
     assert json.loads(capsys.readouterr().out)["score"] == 100.0
+    assert main(["score", report, "--definition", "swe-default"]) == 0  # the default, named explicitly
+    assert json.loads(capsys.readouterr().out)["definition"]["name"] == "swe-default"
 
 
 @pytest.mark.parametrize(

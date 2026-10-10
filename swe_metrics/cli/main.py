@@ -154,7 +154,7 @@ def parser() -> argparse.ArgumentParser:
     score = sub.add_parser("score", help="one quality score from a report, by a scoring definition")
     score.add_argument("report", help="a report written by `swe-metrics measure`")
     score.add_argument("--baseline", help="an earlier report; worse values cost points (regressions)")
-    score.add_argument("--definition", help="FILE.py or package.module:NAME (default: swe-default)")
+    score.add_argument("--definition", help="swe-default (default), FILE.py or package.module:NAME")
     score.add_argument("--out", help="write the score to this file (default: stdout)")
     return p
 
