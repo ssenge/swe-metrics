@@ -1,7 +1,7 @@
 """Reading a selector's value from a report (JSON form), and why a value is missing when it is."""
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 from swe_metrics.scoring.blocks import Selector, select
@@ -24,12 +24,27 @@ def lookup(report: Report, selector: Selector) -> Value:
     """The selector's value: one statistic, or the sum of the matching rows; densities per 1,000 lines."""
     rows = [m for m in report.get("metrics", []) if _matches(m, selector)]
     values = _numbers(rows, selector.stat)
+    if not values and selector.labels:
+        values = _zero_if_counted(report, selector)
     if not values:
         return absent(report, selector.family, selector.describe())
     if selector.stat and len(values) > 1:
         raise ValueError(f"{selector.describe()}: several tools report it; name one with tool=")
-    found = Value(OK, sum(values), direction=rows[0]["direction"])
+    direction = rows[0]["direction"] if rows else _direction(report, selector.metric)
+    found = Value(OK, sum(values), direction=direction)
     return _density(report, found) if selector.per_kloc else found
+
+
+def _direction(report: Report, metric: str) -> str:
+    """The direction any row of the metric states."""
+    return next((m["direction"] for m in report.get("metrics", []) if m["id"] == metric), "neutral")
+
+
+def _zero_if_counted(report: Report, selector: Selector) -> list[float]:
+    """Label rows exist only for labels that occurred: with the metric's total present, the count is 0."""
+    total = replace(selector, labels=(), per_kloc=False)
+    has_total = any(_matches(m, total) for m in report.get("metrics", []))
+    return [0.0] if has_total and not selector.stat else []
 
 
 def _numbers(rows: list[dict[str, Any]], stat: str) -> list[float]:

@@ -1,0 +1,61 @@
+"""The default scoring definition `swe-default@1`: hard limits as gates, weighted quality components.
+
+Where the thresholds come from:
+- Cyclomatic complexity 10 per function: McCabe, "A Complexity Measure" (IEEE TSE, 1976), and NIST
+  SP 500-235 (1996), which recommends 10 as the limit.
+- Cognitive complexity 15 per function: the default threshold of SonarSource's rule S3776, which
+  implements its "Cognitive Complexity" white paper.
+- Duplicated lines 3 % and coverage 80 %: the conditions on new code in SonarQube's built-in quality
+  gate "Sonar way".
+- Mutation score 80 (good) and 60 (bad): Stryker's default `thresholds` (high 80, low 60).
+- Doc coverage 80 %: interrogate's default `fail-under`.
+- No critical or high vulnerabilities, no secrets, no error-level SAST findings, no failing tests: the
+  usual release blockers; here they are gates, so no weighted improvement elsewhere can hide them.
+Any change to a threshold, weight or part means a new version: scores compare only under one version.
+"""
+from __future__ import annotations
+
+from swe_metrics.scoring import Definition, gate, linear, per_kloc, regression, select
+
+P95 = "p95"
+DEFINITION = Definition(
+    name="swe-default",
+    version="1",
+    gates=(
+        gate(select("dependencies.vulnerabilities", labels={"severity": ["critical", "high"]}), max=0),
+        gate("secrets.findings", max=0),
+        gate(select("security.findings", labels={"level": "error"}), max=0),
+        gate("tests.failed", max=0),
+        gate("tests.errors", max=0),
+        gate("iac.validation_errors", max=0),
+        gate("architecture_model.errors", max=0, cap=60),
+    ),
+    components=(
+        linear(select("complexity.cyclomatic", stat=P95), good=5, bad=10, weight=3),
+        linear(select("complexity.cyclomatic", stat="max"), good=10, bad=25, weight=1),
+        linear(select("complexity.cognitive", stat=P95), good=5, bad=15, weight=3),
+        linear(select("size.function_length", stat=P95), good=20, bad=60, weight=1),
+        linear("duplication.percent", good=3, bad=10, weight=2),
+        linear("coverage.line_percent", good=80, bad=40, weight=3),
+        linear("mutation.score", good=80, bad=60, weight=2),
+        linear("doc_coverage.percent", good=80, bad=30, weight=1),
+        linear("structure.modules_in_cycles", good=0, bad=10, weight=2),
+        linear(select("dependencies.vulnerabilities", labels={"severity": "medium"}), good=0, bad=20,
+               weight=1),
+        linear(per_kloc(select("security.findings", labels={"level": "warning"})), good=0, bad=5, weight=1),
+        linear("iac.misconfigurations", good=0, bad=20, weight=1),
+        linear("iac.lint_findings", good=0, bad=10, weight=1),
+        linear("container.lint_findings", good=0, bad=10, weight=1),
+        linear("docs.broken_links", good=0, bad=10, weight=1),
+    ),
+    regressions=(
+        regression(select("complexity.cyclomatic", stat=P95), tolerance=0.5),
+        regression(select("complexity.cognitive", stat=P95), tolerance=0.5),
+        regression("duplication.percent", tolerance=0.5),
+        regression("coverage.line_percent", tolerance=1),
+        regression("mutation.score", tolerance=2),
+        regression("doc_coverage.percent", tolerance=2),
+        regression("structure.modules_in_cycles"),
+        regression("dependencies.vulnerabilities"),
+    ),
+)

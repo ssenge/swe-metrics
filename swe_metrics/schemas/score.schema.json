@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "swe-metrics/score/v1",
+  "title": "swe-metrics score",
+  "description": "One quality score computed from a report by a scoring definition, with its breakdown.",
+  "type": "object",
+  "required": ["schema", "definition", "score", "gates", "components", "regressions", "notes"],
+  "properties": {
+    "schema": { "const": "swe-metrics/score/v1" },
+    "definition": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": { "name": { "type": "string" }, "version": { "type": "string" } }
+    },
+    "score": { "type": ["number", "null"], "description": "null: incomplete (see notes)" },
+    "gates": { "type": "array", "items": { "type": "object", "required": ["metric", "passed"] } },
+    "components": { "type": "array", "items": { "type": "object", "required": ["metric", "weight"] } },
+    "regressions": { "type": "array", "items": { "type": "object", "required": ["metric", "worse"] } },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

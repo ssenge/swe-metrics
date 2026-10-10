@@ -52,6 +52,14 @@ def test_lookup_rows_labels_stats_and_densities():
     assert labeled.describe() == "dependencies.vulnerabilities [severity=critical|high]"
 
 
+def test_labels_that_did_not_occur_count_zero():
+    """With the metric's total present, a label without a row (e.g. no critical findings) counts 0."""
+    assert lookup(REPORT, select("dependencies.vulnerabilities", labels={"severity": "high"})).value == 0
+    no_total: dict[str, list[dict[str, str]]] = {"analyzers": [], "metrics": []}
+    assert lookup(no_total, select("dependencies.vulnerabilities", labels={"severity": "high"})).status == (
+        NOT_APPLICABLE)
+
+
 def test_missing_values_say_why():
     """A failed analyzer makes its family unavailable; a skipped one makes it not applicable."""
     assert lookup(REPORT, select("secrets.findings")).status == UNAVAILABLE

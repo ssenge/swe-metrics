@@ -1,4 +1,4 @@
-"""swe-metrics command line: measure a target, list the analyzers, print the report schema."""
+"""swe-metrics command line: measure a target, score a report, list the analyzers, print the schemas."""
 from __future__ import annotations
 
 import argparse
@@ -30,6 +30,7 @@ from swe_metrics.analyzers.python_imports import PythonImports
 from swe_metrics.analyzers.terraform import Terraform
 from swe_metrics.analyzers.tflint import Tflint
 from swe_metrics.analyzers.trivy import Trivy
+from swe_metrics.cli.definitions import load_definition
 from swe_metrics.core.analyzer import Analyzer
 from swe_metrics.core.catalog import families
 from swe_metrics.core.reports import REPORT_KINDS, parse_reports
@@ -80,14 +81,18 @@ def cmd_measure(args: argparse.Namespace) -> int:
     except (OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return USAGE_ERROR
-    text = json.dumps(report.as_dict(), indent=2) + "\n"
-    if not args.out:
+    return _write(json.dumps(report.as_dict(), indent=2) + "\n", args.out)
+
+
+def _write(text: str, out: str | None) -> int:
+    """Write a JSON document to the file or stdout; exit code 1 if the file can't be written."""
+    if not out:
         sys.stdout.write(text)
         return 0
     try:
-        Path(args.out).write_text(text)
+        Path(out).write_text(text)
     except OSError as exc:
-        print(f"error: can't write the report: {exc}", file=sys.stderr)
+        print(f"error: can't write {out}: {exc}", file=sys.stderr)
         return 1
     return 0
 
@@ -106,9 +111,25 @@ def cmd_tools(args: argparse.Namespace) -> int:
 
 
 def cmd_schema(args: argparse.Namespace) -> int:
-    """Print the report JSON Schema."""
-    sys.stdout.write((files("swe_metrics") / "schemas" / "report.schema.json").read_text())
+    """Print the JSON Schema of the report or of the score."""
+    sys.stdout.write((files("swe_metrics") / "schemas" / f"{args.document}.schema.json").read_text())
     return 0
+
+
+def cmd_score(args: argparse.Namespace) -> int:
+    """Score a report with a scoring definition (default: swe-default) and write the score as JSON."""
+    try:
+        definition = load_definition(args.definition)
+        report = json.loads(Path(args.report).read_text())
+        baseline = json.loads(Path(args.baseline).read_text()) if args.baseline else None
+        result = definition.score(report, baseline)
+    except (OSError, ValueError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return USAGE_ERROR
+    if not isinstance(result, dict) or "score" not in result:
+        print("error: the definition's score() must return a score document", file=sys.stderr)
+        return 1
+    return _write(json.dumps(result, indent=2) + "\n", args.out)
 
 
 def parser() -> argparse.ArgumentParser:
@@ -127,14 +148,20 @@ def parser() -> argparse.ArgumentParser:
                    help=f"build report to read; repeatable. Kinds: {', '.join(sorted(REPORT_KINDS))}")
     tools = sub.add_parser("tools", help="list the analyzers and their tools")
     tools.add_argument("--json", action="store_true", help="print JSON instead of a table")
-    sub.add_parser("schema", help="print the report JSON Schema")
+    schema = sub.add_parser("schema", help="print the JSON Schema of the report or the score")
+    schema.add_argument("document", nargs="?", choices=["report", "score"], default="report")
+    score = sub.add_parser("score", help="one quality score from a report, by a scoring definition")
+    score.add_argument("report", help="a report written by `swe-metrics measure`")
+    score.add_argument("--baseline", help="an earlier report; worse values cost points (regressions)")
+    score.add_argument("--definition", help="FILE.py or package.module:NAME (default: swe-default)")
+    score.add_argument("--out", help="write the score to this file (default: stdout)")
     return p
 
 
 def main(argv: list[str] | None = None) -> int:
     """Entry point of the `swe-metrics` command."""
     args = parser().parse_args(sys.argv[1:] if argv is None else argv)
-    commands = {"measure": cmd_measure, "tools": cmd_tools, "schema": cmd_schema}
+    commands = {"measure": cmd_measure, "tools": cmd_tools, "schema": cmd_schema, "score": cmd_score}
     return commands[args.command](args)
 
 

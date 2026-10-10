@@ -53,4 +53,4 @@ def test_unusable_output_paths(tmp_path, capsys):
     assert main(["measure", str(root), "--details", str(blocked / "details")]) == 2
     assert "--details directory can't be created" in capsys.readouterr().err
     assert main(["measure", str(root), "--only", "size", "--out", str(blocked / "report.json")]) == 1
-    assert "can't write the report" in capsys.readouterr().err
+    assert "can't write" in capsys.readouterr().err
