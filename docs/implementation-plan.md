@@ -89,9 +89,9 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `dependencies` | direct and transitive dependencies; known vulnerabilities per severity; licenses | trivy (SBOM and vulnerabilities), osv-scanner |
 | `secrets` | secret findings per rule | gitleaks |
 | `security` | static analysis findings per level, for rules the caller gives (`--sast-rules`); without rules the analyzer is skipped, because the findings depend entirely on the rule set | opengrep |
-| `structure` | module dependency graph; afferent and efferent coupling, instability, cycles | grimp (Python), jdeps (Java bytecode, needs tier B), dependency-cruiser (JS/TS) |
+| `structure` | module dependency graph; afferent and efferent coupling, instability, cycles | built-in `ast` import parser (Python), jdeps (Java bytecode, needs tier B), dependency-cruiser (JS/TS) |
 | `docs` | markdown lint findings, broken links, readability statistics | markdownlint, lychee |
-| `doc_coverage` | share of public APIs with a doc comment | interrogate (Python), checkstyle Javadoc check (Java) |
+| `doc_coverage` | share of public APIs with a doc comment | built in: Python's `ast`, a small Java lexer |
 | `iac` | validation errors, lint findings, misconfiguration findings per severity, resources without tags | terraform validate, tflint, checkov, trivy config |
 | `container` | Dockerfile lint findings, base image and its runtime version | hadolint, Dockerfile parser |
 | `architecture_model` | model validity, elements, relationships, views, elements per view | LikeC4, Structurizr CLI |
@@ -174,6 +174,15 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
    - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
    - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
    - opengrep is installed from its signed release binary (signature checked with cosign) until the container image (M2) pins it.
+   - **M3 structure/doc coverage.**
+     - Graph metrics are pure code (`core/graph.py`). Ca and Ce count distinct other modules; instability is left out when both are 0. A cycle is a strongly connected component with more than one module, or a module that depends on itself. Module scopes carry the module's name in `path`: the dotted module (Python), the file (JS/TS), the package (Java).
+     - Python imports are parsed with `ast` (built in, `python-imports`) instead of grimp: grimp imports nothing, but needs the package names up front and a `sys.path` set-up. A module's name is its file path in dotted form, minus everything up to the first `src` directory. Every import statement counts, including function-local and `TYPE_CHECKING` ones. A `from X import a` edge goes to `X.a` when that is a module, else to `X`. Imports from outside the target, and a module importing its own names, are dropped. A file that doesn't parse fails the analyzer, with the file named.
+     - dependency-cruiser runs with `--no-config` (recorded in its version string), so a target's config can't change the result. As a consequence, path aliases from `tsconfig` or bundlers are not resolved. Only edges between the target's JS/TS files count.
+     - jdeps runs as `jdeps -verbose:package` on the `classes` report. The target's own packages are the packages the classes contain; JDK and library packages are dropped. Without the report, the analyzer is skipped.
+     - Doc coverage is built in (`doc-coverage`), not interrogate or checkstyle. interrogate's library API isn't documented, and its notion of public depends on its options. checkstyle's MissingJavadoc* checks report only what is missing, so the total of public APIs, which a percentage needs, would still need a parser.
+       - Python: public means no leading underscore in the name or in any enclosing module or class. It counts the module, top-level classes and functions, and the methods and nested classes of public classes. A non-empty docstring counts as documented.
+       - Java: a lexer drops comments and literals and cuts the code at `{ ; }` outside parentheses. It counts public types, methods and constructors (interface members are implicitly public) inside public types, with a `/** */` before the declaration. `@Override` methods are left out, as in checkstyle's default.
+       - The output has per-file values, totals per language (label `language`) and an unlabeled total. A file without public APIs gets counts but no percentage.
 
 1. **Cognitive complexity beyond Python.** No permissive open-source tool covers Java, JS and others the way SonarQube does. Options: implement the published cognitive-complexity rules on top of a parser (tree-sitter), or report the gap. Proposal: report the gap in v1, then decide.
 2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report; offer an offline mode with a database snapshot inside the container image.
