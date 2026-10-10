@@ -5,7 +5,7 @@
   "description": "The metrics of one measurement. Values carry unit and direction; the report never judges them.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema", "subject", "analyzers", "metrics"],
+  "required": ["schema", "subject", "analyzers", "metrics", "details"],
   "properties": {
     "schema": { "const": "swe-metrics/report/v1" },
     "subject": {
@@ -70,6 +70,19 @@
             }
           },
           "labels": { "type": "object", "additionalProperties": { "type": "string" } }
+        }
+      }
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["analyzer", "format", "path"],
+        "properties": {
+          "analyzer": { "type": "string" },
+          "format": { "type": "string" },
+          "path": { "type": "string" }
         }
       }
     }

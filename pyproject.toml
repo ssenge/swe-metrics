@@ -50,6 +50,12 @@ type = "independence"
 modules = ["swe_metrics.analyzers.*"]
 
 [[tool.importlinter.contracts]]
+name = "tools depend only on core"
+type = "forbidden"
+source_modules = ["swe_metrics.tools"]
+forbidden_modules = ["swe_metrics.analyzers", "swe_metrics.runner", "swe_metrics.cli"]
+
+[[tool.importlinter.contracts]]
 name = "runner depends only on core (analyzers are injected)"
 type = "forbidden"
 source_modules = ["swe_metrics.runner"]

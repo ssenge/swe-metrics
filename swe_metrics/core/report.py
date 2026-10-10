@@ -78,6 +78,19 @@ class AnalyzerRun:
 
 
 @dataclass(frozen=True)
+class Detail:
+    """A detailed tool output kept next to the report (e.g. SARIF), relative to the details directory."""
+
+    analyzer: str
+    format: str
+    path: str
+
+    def as_dict(self) -> dict[str, Any]:
+        """The JSON form."""
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class Subject:
     """What was measured: the target as given, its kind, the commit, and its files per language."""
 
@@ -100,9 +113,11 @@ class Report:
     subject: Subject
     analyzers: tuple[AnalyzerRun, ...]
     metrics: tuple[Metric, ...]
+    details: tuple[Detail, ...] = ()
 
     def as_dict(self) -> dict[str, Any]:
         """The JSON form (schema swe-metrics/report/v1)."""
         return {"schema": SCHEMA, "subject": self.subject.as_dict(),
                 "analyzers": [a.as_dict() for a in self.analyzers],
-                "metrics": [m.as_dict() for m in self.metrics]}
+                "metrics": [m.as_dict() for m in self.metrics],
+                "details": [d.as_dict() for d in self.details]}

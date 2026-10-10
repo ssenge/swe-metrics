@@ -1,0 +1,13 @@
+{"$schema": "https://json.schemastore.org/sarif-2.1.0.json", "version": "2.1.0",
+ "runs": [{"tool": {"driver": {"name": "gitleaks", "rules": [{"id": "github-pat"}, {"id": "aws-access-token"}]}},
+   "results": [
+     {"ruleId": "github-pat", "message": {"text": "github-pat has detected secret for file config.py."},
+      "locations": [{"physicalLocation": {"artifactLocation": {"uri": "config.py"},
+                     "region": {"startLine": 1, "snippet": {"text": "REDACTED"}}}}]},
+     {"ruleId": "github-pat", "message": {"text": "github-pat has detected secret for file .venv/lib/x.py."},
+      "locations": [{"physicalLocation": {"artifactLocation": {"uri": ".venv/lib/x.py"},
+                     "region": {"startLine": 3, "snippet": {"text": "REDACTED"}}}}]},
+     {"ruleId": "aws-access-token", "message": {"text": "aws-access-token has detected secret for file app/settings.py."},
+      "locations": [{"physicalLocation": {"artifactLocation": {"uri": "app/settings.py"},
+                     "region": {"startLine": 7, "snippet": {"text": "REDACTED"}}}}]}
+   ]}]}

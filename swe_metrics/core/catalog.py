@@ -22,6 +22,7 @@ CATALOG: dict[str, MetricDef] = {
     "size.function_length": MetricDef("lines", "lower_better", "Lines of code of a function"),
     "size.parameters": MetricDef("count", "lower_better", "Parameters of a function"),
     "complexity.cyclomatic": MetricDef("count", "lower_better", "McCabe complexity of a function"),
+    "secrets.findings": MetricDef("count", "lower_better", "Secrets found (location and rule only)"),
 }
 
 

@@ -13,7 +13,7 @@ def measured(fixture):
     expected = json.loads((FIXTURES / fixture / "expected.json").read_text())
     target, _ = discover(FIXTURES / fixture)
     analyzer = Lizard()
-    return analyzer.measure(target, analyzer.applicable(target)), expected
+    return analyzer.measure(target, analyzer.applicable(target), "/unused").metrics, expected
 
 
 @pytest.mark.parametrize("fixture", ["python_small", "java_small"])

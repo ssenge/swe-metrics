@@ -6,6 +6,7 @@ from pathlib import Path
 import lizard
 from lizard_ext import version as lizard_version
 
+from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.report import Metric, Scope
 from swe_metrics.core.stats import rollup
 from swe_metrics.core.target import Target, language
@@ -25,18 +26,22 @@ class Lizard:
         """The installed lizard version."""
         return str(lizard_version)
 
+    def prerequisites(self) -> str:
+        """lizard needs nothing beyond itself."""
+        return ""
+
     def applicable(self, target: Target) -> tuple[str, ...]:
         """The files lizard has a language reader for."""
         return tuple(path for path in target.files if lizard.get_reader_for(path))
 
-    def measure(self, target: Target, files: tuple[str, ...]) -> list[Metric]:
+    def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
         """Per-file and per-function values, then the target-level counts and statistics."""
         metrics = [m for path in files for m in _file_metrics(Path(target.root), path)]
         functions = sum(1 for m in metrics if m.id == "complexity.cyclomatic")
         summary = [Metric("size.files", TOOL, Scope("target"), float(len(files))),
                    Metric("size.functions", TOOL, Scope("target"), float(functions))]
         rollups = [rollup(metrics, metric_id, TOOL) for metric_id in ("size.lines_of_code", *PER_FUNCTION)]
-        return metrics + summary + [m for m in rollups if m]
+        return Measurement(metrics + summary + [m for m in rollups if m])
 
 
 def _file_metrics(root: Path, path: str) -> list[Metric]:

@@ -4,7 +4,7 @@ import subprocess
 import pytest
 
 from swe_metrics.runner.discover import discover
-from swe_metrics.runner.measure import measure
+from swe_metrics.runner.measure import Options, measure
 from tests.helpers import FakeAnalyzer, copy_fixture
 
 
@@ -38,10 +38,11 @@ def test_discover_without_git(tmp_path, monkeypatch):
     (FakeAnalyzer(version=None), (), "failed", "fake-tool is not installed"),
     (FakeAnalyzer(applicable=False), (), "skipped", "no applicable files"),
     (FakeAnalyzer(fault=RuntimeError("boom")), (), "failed", "RuntimeError: boom"),
+    (FakeAnalyzer(missing="no rules given"), (), "skipped", "no rules given"),
 ])
 def test_analyzer_statuses(tmp_path, analyzer, only, status, reason):
     """Every outcome of an analyzer is a status in the report, never an exception."""
-    report = measure(copy_fixture("python_small", tmp_path), [analyzer], only)
+    report = measure(copy_fixture("python_small", tmp_path), [analyzer], Options(only))
     run = report.analyzers[0]
     assert (run.status, run.reason) == (status, reason)
 
@@ -49,5 +50,15 @@ def test_analyzer_statuses(tmp_path, analyzer, only, status, reason):
 def test_only_filters_metric_families(tmp_path):
     """--only keeps the metrics of the selected families only."""
     report = measure(copy_fixture("python_small", tmp_path), [FakeAnalyzer(families=("size", "complexity"))],
-                     only=("complexity",))
+                     Options(only=("complexity",)))
     assert [m.id for m in report.metrics] == ["complexity.cyclomatic"]
+    assert report.details == ()
+
+
+def test_details_are_kept_only_on_request(tmp_path):
+    """Detailed outputs are copied out of the scratch directory, named after the analyzer."""
+    details = tmp_path / "details"
+    report = measure(copy_fixture("python_small", tmp_path), [FakeAnalyzer()], Options(details=details))
+    expected = [{"analyzer": "fake", "format": "sarif", "path": "fake.sarif"}]
+    assert [d.as_dict() for d in report.details] == expected
+    assert (details / "fake.sarif").read_text() == "{}"
