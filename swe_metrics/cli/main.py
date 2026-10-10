@@ -14,6 +14,7 @@ from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.jscpd import Jscpd
 from swe_metrics.analyzers.lizard import Lizard
 from swe_metrics.analyzers.opengrep import Opengrep
+from swe_metrics.analyzers.python_imports import PythonImports
 from swe_metrics.analyzers.trivy import Trivy
 from swe_metrics.core.analyzer import Analyzer
 from swe_metrics.core.catalog import families
@@ -36,7 +37,8 @@ NO_SETTINGS = Settings()
 
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules)]
+    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
+            PythonImports()]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:
