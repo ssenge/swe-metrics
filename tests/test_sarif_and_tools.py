@@ -47,3 +47,9 @@ def test_run_and_version():
 def test_read_json():
     """A JSON file a tool wrote."""
     assert read_json(FIXTURES / "recorded" / "gitleaks.sarif")["version"] == "2.1.0"
+
+
+def test_run_tolerates_invalid_utf8():
+    """Output that isn't valid UTF-8 is decoded with replacement characters, not an exception."""
+    out = run([sys.executable, "-c", "import sys; sys.stdout.buffer.write(b'caf\\xe9\\n')"], ".")
+    assert out == "caf�\n"

@@ -17,7 +17,8 @@ class ToolError(RuntimeError):
 
 def run(argv: Sequence[str], cwd: str, ok: Sequence[int] = (0,)) -> str:
     """Run a tool in cwd and return its stdout; ToolError for an exit code not in `ok`."""
-    done = subprocess.run(list(argv), cwd=cwd, capture_output=True, text=True,
+    # errors="replace": tool output (e.g. file names in git log) may not be valid UTF-8
+    done = subprocess.run(list(argv), cwd=cwd, capture_output=True, text=True, errors="replace",
                           timeout=TIMEOUT, check=False)
     if done.returncode not in ok:
         tail = (done.stderr or done.stdout).strip().splitlines()[-3:]

@@ -2,8 +2,7 @@
 # Columns (tab-separated): tool  version  arch  kind  sha256  source
 #   arch: arm64 | amd64 | any.  kind: tar:<member> | zip:<member> | bin:<name> | jar:<name> | node | npm | pip
 #   sha256: from the upstream checksum file; opengrep: computed after its cosign signature verified;
-#           checkstyle: computed from the release asset (no upstream checksum file); npm/pip: "-" (registry
-#           integrity; pinned by exact version).
+#           npm/pip: "-" (registry integrity; pinned by exact version).
 # Rule: only releases at least two weeks old when pinned (supply-chain hygiene).
 gitleaks	8.30.1	arm64	tar:gitleaks	e4a487ee7ccd7d3a7f7ec08657610aa3606637dab924210b3aee62570fb4b080	https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_arm64.tar.gz
 trivy	0.74.0	arm64	tar:trivy	b94ce1976bbf3c15b514b605ee88be7c6d94a29be2302847ff01cb794d47aad5	https://github.com/aquasecurity/trivy/releases/download/v0.74.0/trivy_0.74.0_Linux-ARM64.tar.gz
@@ -21,7 +20,6 @@ hadolint	2.15.1	amd64	bin:hadolint	c7187db94eeeeca956519a6af171adc31453941a1e777
 lychee	0.24.2	amd64	tar:lychee	1f4e0ef7f6554a6ed33dd7ac144fb2e1bbed98598e7af973042fc5cd43951c9a	https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz
 node	24.21.0	amd64	node	fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6	https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz
 opengrep	1.30.1	amd64	bin:opengrep	d3195b9d8d5ae93179f6aa5f5daaba6a920a5a09d38c5d5ae5e60924050210c4	https://github.com/opengrep/opengrep/releases/download/v1.30.1/opengrep_manylinux_x86
-checkstyle	14.1.0	any	jar:checkstyle	51e2bc7fed1bb56808aa39045f655a316194997acd24bac5195253dcf342b380	https://github.com/checkstyle/checkstyle/releases/download/checkstyle-14.1.0/checkstyle-14.1.0-all.jar
 jscpd	4.0.5	any	npm	-	jscpd
 markdownlint-cli2	0.23.3	any	npm	-	markdownlint-cli2
 likec4	1.59.4	any	npm	-	likec4
