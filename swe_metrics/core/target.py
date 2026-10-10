@@ -14,6 +14,8 @@ LANGUAGES = {
     ".xml": "xml", ".sh": "shell", ".sql": "sql", ".jsp": "jsp", ".html": "html", ".c4": "likec4",
 }
 SPECIAL_NAMES = {"Dockerfile": "dockerfile", "Makefile": "make"}
+CODE_LANGUAGES = frozenset({"python", "java", "kotlin", "scala", "javascript", "typescript", "go", "csharp",
+                            "ruby", "php", "c", "cpp", "swift", "rust", "jsp"})
 
 
 @dataclass(frozen=True)
@@ -28,6 +30,11 @@ def language(path: str) -> str | None:
     """The language or file kind of a path, by its file name; None if unknown."""
     pure = PurePath(path)
     return SPECIAL_NAMES.get(pure.name) or LANGUAGES.get(pure.suffix.lower())
+
+
+def code_files(files: Iterable[str]) -> tuple[str, ...]:
+    """The files written in a programming language (not markup, data or docs)."""
+    return tuple(path for path in files if language(path) in CODE_LANGUAGES)
 
 
 def languages(files: Iterable[str]) -> tuple[tuple[str, int], ...]:

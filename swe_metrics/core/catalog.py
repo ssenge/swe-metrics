@@ -23,6 +23,9 @@ CATALOG: dict[str, MetricDef] = {
     "size.parameters": MetricDef("count", "lower_better", "Parameters of a function"),
     "complexity.cyclomatic": MetricDef("count", "lower_better", "McCabe complexity of a function"),
     "secrets.findings": MetricDef("count", "lower_better", "Secrets found (location and rule only)"),
+    "dependencies.packages": MetricDef("count", "neutral", "Packages a manifest or lock file declares"),
+    "dependencies.vulnerabilities": MetricDef("count", "lower_better", "Known vulnerabilities of packages"),
+    "security.findings": MetricDef("count", "lower_better", "Static analysis findings of the given rules"),
 }
 
 

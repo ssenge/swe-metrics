@@ -17,7 +17,7 @@ class ToolError(RuntimeError):
 
 def run(argv: Sequence[str], cwd: str, ok: Sequence[int] = (0,)) -> str:
     """Run a tool in cwd and return its stdout; ToolError for an exit code not in `ok`."""
-    done = subprocess.run(list(argv), cwd=cwd, capture_output=True, text=True,  # nosec B603
+    done = subprocess.run(list(argv), cwd=cwd, capture_output=True, text=True,
                           timeout=TIMEOUT, check=False)
     if done.returncode not in ok:
         tail = (done.stderr or done.stdout).strip().splitlines()[-3:]

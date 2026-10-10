@@ -9,6 +9,8 @@ from pathlib import Path
 
 from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.lizard import Lizard
+from swe_metrics.analyzers.opengrep import Opengrep
+from swe_metrics.analyzers.trivy import Trivy
 from swe_metrics.core.analyzer import Analyzer
 from swe_metrics.core.catalog import families
 from swe_metrics.runner.measure import Options, measure
@@ -16,9 +18,9 @@ from swe_metrics.runner.measure import Options, measure
 USAGE_ERROR = 2  # argparse's own exit code for usage errors; 1 means an internal failure
 
 
-def analyzers() -> list[Analyzer]:
+def analyzers(sast_rules: str | None = None) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Gitleaks()]
+    return [Lizard(), Gitleaks(), Trivy(), Opengrep(sast_rules)]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:
@@ -31,7 +33,7 @@ def cmd_measure(args: argparse.Namespace) -> int:
     try:
         details = Path(args.details) if args.details else None
         options = Options(tuple(args.only), tuple(args.exclude), details)
-        report = measure(Path(args.target), analyzers(), options)
+        report = measure(Path(args.target), analyzers(args.sast_rules), options)
     except FileNotFoundError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return USAGE_ERROR
@@ -67,6 +69,7 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("--exclude", action="append", default=[], help="glob of paths to leave out; repeatable")
     m.add_argument("--out", help="write the report to this file (default: stdout)")
     m.add_argument("--details", help="keep the tools' detailed outputs (e.g. SARIF) in this directory")
+    m.add_argument("--sast-rules", help="rule file or directory for static analysis (opengrep)")
     sub.add_parser("tools", help="list the analyzers and their tools")
     sub.add_parser("schema", help="print the report JSON Schema")
     return p

@@ -1,0 +1,12 @@
+# Two test rules with known findings in app.py (see the opengrep test).
+rules:
+  - id: python-eval
+    languages: [python]
+    severity: ERROR
+    message: eval() runs arbitrary code
+    pattern: eval(...)
+  - id: python-print
+    languages: [python]
+    severity: INFO
+    message: print() in library code
+    pattern: print(...)
