@@ -1,6 +1,6 @@
 # swe-metrics: implementation plan
 
-**Status:** v0.3, 2026-10-10. M0 and M1 are built: lizard, complexipy, jscpd, gitleaks, trivy and opengrep; `measure` (with `--details`, `--sast-rules`), `tools`, `schema`.
+**Status:** v0.4, 2026-10-10. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The container image (`container/`) pins every tool, and the gate measures swe-metrics with itself.
 
 ## 1. Purpose
 
@@ -135,7 +135,11 @@ swe_metrics/
 ## 7. Distribution
 
 - **Python package** `swe-metrics` (Python ≥ 3.12), installable with pip/uv; tools are found on `PATH`.
-- **Container image** with every tier-A tool installed at pinned versions. This is the recommended way to run it, because installing a dozen tools in matching versions is the hardest part of using them. A `tools.lock` file lists the pinned versions; the image build checks them.
+- **Container image** *(built)* with every tool installed at pinned versions. This is the recommended way to run it, because installing a dozen tools in matching versions is the hardest part of using them.
+  - `container/tools.lock` lists each tool's version, architecture, SHA-256 and source; only releases at least two weeks old are pinned.
+  - `container/install-tools.sh` installs exactly the lock and aborts on any checksum mismatch; base images are pinned by digest.
+  - The build's last step (`container/check-tools.py`) compares `swe-metrics tools --json` with the lock.
+  - The image is about 3 GB (JDK for jdeps, Node for jscpd, markdownlint, LikeC4 and dependency-cruiser, checkov, trivy). The trivy database is fetched at the first run (open question 2).
 - `swe-metrics tools` lists every analyzer with its tool, the installed version and whether it is available.
 - `swe-metrics schema` prints the report schema.
 
@@ -166,9 +170,9 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 |---|---|---|
 | **M0 Skeleton** *(done)* | Package layout, report model and schema, runner, CLI (`measure`, `tools`, `schema`), gate script, one analyzer end to end (lizard: size and complexity) | `swe-metrics measure` on a Python and a Java fixture gives schema-valid reports with the expected values; gate passes |
 | **M1 Core code and security** *(done)* | Duplication (jscpd), cognitive complexity for Python (complexipy), secrets (gitleaks), dependencies and vulnerabilities (trivy), SAST (opengrep), SARIF details | Fixture values match; secret matches never appear in output |
-| **M2 Docs, IaC, containers, models, self-measurement** | markdownlint, lychee, terraform validate, tflint, checkov, hadolint, LikeC4; `--changed-since`; container image with `tools.lock`; dogfooding gate | The gate measures swe-metrics with swe-metrics |
-| **M3 Structure and tier B** | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
-| **M4 History** | Change frequency, code age, change coupling from Git history | Values match a fixture repository with scripted history |
+| **M2 Docs, IaC, containers, models, self-measurement** *(done)* | markdownlint, lychee, terraform validate, tflint, checkov, hadolint, LikeC4; `--changed-since`; container image with `tools.lock`; dogfooding gate | The gate measures swe-metrics with swe-metrics |
+| **M3 Structure and tier B** *(done)* | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
+| **M4 History** *(done)* | Change frequency, code age, change coupling from Git history | Values match a fixture repository with scripted history |
 
 Each milestone is a set of small changes (≤ 400 changed code lines each), every one passing the gate.
 
@@ -177,7 +181,8 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
 0. **Recorded decisions (M1).**
    - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
    - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
-   - opengrep is installed from its signed release binary (signature checked with cosign) until the container image (M2) pins it.
+   - opengrep is installed from its signed release binary (signature checked with cosign); the container image pins the same release.
+   - **Merges.** Every analyzer was built on its own branch with a gated commit each (≤ 400 changed lines). The merge commits ran the full gate; only the change-size check doesn't apply to them, because it compares against one parent and so counts the other side's already-gated commits.
    - **M4 history** (`git-history`, tool git): one `git log --no-merges --no-renames` over the full history of HEAD, parsed in `core/history.py`. Renames are not followed: a file's history is that of its current path. Merge commits are left out. Ages count from the HEAD commit's committer date, never the wall clock. Authors are distinct author e-mails (lowercased, after `.mailmap`), counted only and never reported. A subdirectory target keeps its own files, but a commit's size for the bulk-change limit counts all its files, so a pair gets the same coupling whatever the target is. Change coupling follows code-maat: shared commits / mean commits of both files × 100, only with ≥ 2 shared commits and ≥ 2 commits per file, without commits that change > 50 files. These parameters are part of the version string. Files without a commit (untracked) get no history metrics.
    - **M2 containers/models.**
      - Dockerfiles are files named `Dockerfile`, `Dockerfile.*`, `*.Dockerfile` or `Containerfile`.
