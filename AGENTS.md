@@ -12,3 +12,9 @@ swe-metrics measures software (code, IaC, docs, architecture models) and reports
 - **Tests:** every branch of non-trivial logic is tested (pytest). Branch coverage ≥ 85 %.
 - **Never weaken the gate** to make a change pass. Stop and ask instead.
 - **Before you finish a change, run `scripts/gate.sh`.** It must print `GATE PASSED`.
+
+## Setup
+```bash
+uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -e ".[dev]"
+PATH=$PWD/.venv/bin:$PATH scripts/gate.sh     # also needs gitleaks and Node (npx) on the PATH
+```

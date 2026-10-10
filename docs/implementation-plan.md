@@ -1,6 +1,6 @@
 # swe-metrics: implementation plan
 
-**Status:** v0.1, 2026-10-10. Nothing is built yet.
+**Status:** v0.2, 2026-10-10. M0 is built (lizard: size and complexity; `measure`, `tools`, `schema`).
 
 ## 1. Purpose
 
@@ -25,8 +25,8 @@ It is a **measuring instrument, not a judge.** It never decides whether a value 
 7. **Tool-tagged values.** When two tools measure the same thing (e.g. complexity from two analyzers), the report lists both values, each tagged with its tool. swe-metrics never merges them.
 8. **Exit codes.**
    - **0:** measurement succeeded, whatever the findings.
-   - **1:** usage error.
-   - **2:** internal failure.
+   - **1:** internal failure.
+   - **2:** usage error (the argparse convention), e.g. a missing target or an unknown metric family.
    - A failed analyzer does not change the exit code; it is reported in the report.
 
 ## 3. Input
@@ -160,7 +160,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 
 | Milestone | Content | Done when |
 |---|---|---|
-| **M0 Skeleton** | Package layout, report model and schema, runner, CLI (`measure`, `tools`, `schema`), gate script, one analyzer end to end (lizard: size and complexity) | `swe-metrics measure` on a Python and a Java fixture gives schema-valid reports with the expected values; gate passes |
+| **M0 Skeleton** *(done)* | Package layout, report model and schema, runner, CLI (`measure`, `tools`, `schema`), gate script, one analyzer end to end (lizard: size and complexity) | `swe-metrics measure` on a Python and a Java fixture gives schema-valid reports with the expected values; gate passes |
 | **M1 Core code and security** | Duplication (jscpd), cognitive complexity for Python (complexipy), secrets (gitleaks), dependencies and vulnerabilities (trivy), SAST (opengrep), SARIF details | Fixture values match; secret matches never appear in output |
 | **M2 Docs, IaC, containers, models, self-measurement** | markdownlint, lychee, terraform validate, tflint, checkov, hadolint, LikeC4; `--changed-since`; container image with `tools.lock`; dogfooding gate | The gate measures swe-metrics with swe-metrics |
 | **M3 Structure and tier B** | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
