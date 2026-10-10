@@ -1,6 +1,10 @@
 """Tests for the pure core: catalog, statistics, report JSON form and languages."""
+import tomllib
+from pathlib import Path
+
 import pytest
 
+import swe_metrics
 from swe_metrics.core.catalog import CATALOG, DIRECTIONS, families, family
 from swe_metrics.core.report import AnalyzerRun, Metric, Scope, Stats, Subject
 from swe_metrics.core.stats import percentile, rollup, summarize
@@ -58,10 +62,5 @@ def test_languages():
 
 def test_version_matches_pyproject():
     """Built-in analyzers report swe-metrics' version; it must equal the package version."""
-    import tomllib
-    from pathlib import Path
-
-    import swe_metrics
-
     pyproject = tomllib.loads((Path(__file__).resolve().parents[1] / "pyproject.toml").read_text())
     assert swe_metrics.__version__ == pyproject["project"]["version"]
