@@ -1,0 +1,532 @@
+{
+  "_stage": "computed",
+  "projectId": "default",
+  "project": {
+    "id": "default",
+    "title": "default"
+  },
+  "specification": {
+    "tags": {},
+    "elements": {
+      "actor": {
+        "style": {}
+      },
+      "system": {
+        "style": {}
+      },
+      "container": {
+        "style": {}
+      }
+    },
+    "relationships": {},
+    "deployments": {},
+    "customColors": {}
+  },
+  "elements": {
+    "customer": {
+      "style": {},
+      "title": "Customer",
+      "kind": "actor",
+      "id": "customer"
+    },
+    "shop": {
+      "style": {},
+      "title": "Shop",
+      "kind": "system",
+      "id": "shop"
+    },
+    "payments": {
+      "style": {},
+      "title": "Payments",
+      "kind": "system",
+      "id": "payments"
+    },
+    "shop.web": {
+      "style": {},
+      "title": "Web app",
+      "kind": "container",
+      "id": "shop.web"
+    },
+    "shop.api": {
+      "style": {},
+      "title": "API",
+      "kind": "container",
+      "id": "shop.api"
+    },
+    "shop.db": {
+      "style": {},
+      "title": "Database",
+      "kind": "container",
+      "id": "shop.db"
+    }
+  },
+  "relations": {
+    "1dt04jb": {
+      "source": {
+        "model": "customer"
+      },
+      "target": {
+        "model": "shop.web"
+      },
+      "id": "1dt04jb",
+      "title": "browses"
+    },
+    "1o3kew6": {
+      "source": {
+        "model": "shop.web"
+      },
+      "target": {
+        "model": "shop.api"
+      },
+      "id": "1o3kew6",
+      "title": "calls"
+    },
+    "fn9gk1": {
+      "source": {
+        "model": "shop.api"
+      },
+      "target": {
+        "model": "shop.db"
+      },
+      "id": "fn9gk1",
+      "title": "reads and writes"
+    },
+    "1k3ygrb": {
+      "source": {
+        "model": "shop.api"
+      },
+      "target": {
+        "model": "payments"
+      },
+      "id": "1k3ygrb",
+      "title": "charges"
+    }
+  },
+  "globals": {
+    "predicates": {},
+    "dynamicPredicates": {},
+    "styles": {}
+  },
+  "views": {
+    "index": {
+      "_stage": "computed",
+      "_type": "element",
+      "id": "index",
+      "title": "Landscape view",
+      "description": null,
+      "autoLayout": {
+        "direction": "TB"
+      },
+      "edges": [
+        {
+          "id": "m645my",
+          "parent": null,
+          "source": "customer",
+          "target": "shop",
+          "label": "browses",
+          "relations": [
+            "1dt04jb"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        },
+        {
+          "id": "1iwu6fb",
+          "parent": null,
+          "source": "shop",
+          "target": "payments",
+          "label": "charges",
+          "relations": [
+            "1k3ygrb"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "customer",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [],
+          "outEdges": [
+            "m645my"
+          ],
+          "title": "Customer",
+          "modelRef": "customer",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "actor"
+        },
+        {
+          "id": "shop",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [
+            "m645my"
+          ],
+          "outEdges": [
+            "1iwu6fb"
+          ],
+          "title": "Shop",
+          "modelRef": "shop",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "system",
+          "navigateTo": "shop_containers"
+        },
+        {
+          "id": "payments",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [
+            "1iwu6fb"
+          ],
+          "outEdges": [],
+          "title": "Payments",
+          "modelRef": "payments",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "system"
+        }
+      ],
+      "hash": "18XbpQE3Dyhd_Fz_OIe6Q-CUt7O6LlVVGM6a8cvgEVM"
+    },
+    "context": {
+      "_type": "element",
+      "tags": null,
+      "links": null,
+      "_stage": "computed",
+      "sourcePath": "model.c4",
+      "description": null,
+      "title": "System context",
+      "id": "context",
+      "autoLayout": {
+        "direction": "TB"
+      },
+      "edges": [
+        {
+          "id": "m645my",
+          "parent": null,
+          "source": "customer",
+          "target": "shop",
+          "label": "browses",
+          "relations": [
+            "1dt04jb"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        },
+        {
+          "id": "1iwu6fb",
+          "parent": null,
+          "source": "shop",
+          "target": "payments",
+          "label": "charges",
+          "relations": [
+            "1k3ygrb"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "customer",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [],
+          "outEdges": [
+            "m645my"
+          ],
+          "title": "Customer",
+          "modelRef": "customer",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "actor"
+        },
+        {
+          "id": "shop",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [
+            "m645my"
+          ],
+          "outEdges": [
+            "1iwu6fb"
+          ],
+          "title": "Shop",
+          "modelRef": "shop",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "system",
+          "navigateTo": "shop_containers"
+        },
+        {
+          "id": "payments",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [
+            "1iwu6fb"
+          ],
+          "outEdges": [],
+          "title": "Payments",
+          "modelRef": "payments",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "system"
+        }
+      ],
+      "hash": "-OUZvSmhf2FqLXGq8PiiJEFBTf0nvyRNQZ-oZRv_MmU"
+    },
+    "shop_containers": {
+      "_type": "element",
+      "tags": null,
+      "links": null,
+      "viewOf": "shop",
+      "_stage": "computed",
+      "sourcePath": "model.c4",
+      "description": null,
+      "title": "Shop containers",
+      "id": "shop_containers",
+      "autoLayout": {
+        "direction": "TB"
+      },
+      "edges": [
+        {
+          "id": "1j6r8hg",
+          "parent": null,
+          "source": "customer",
+          "target": "shop.web",
+          "label": "browses",
+          "relations": [
+            "1dt04jb"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        },
+        {
+          "id": "9gws0y",
+          "parent": "shop",
+          "source": "shop.web",
+          "target": "shop.api",
+          "label": "calls",
+          "relations": [
+            "1o3kew6"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        },
+        {
+          "id": "w1beic",
+          "parent": "shop",
+          "source": "shop.api",
+          "target": "shop.db",
+          "label": "reads and writes",
+          "relations": [
+            "fn9gk1"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        },
+        {
+          "id": "1ygm6dt",
+          "parent": null,
+          "source": "shop.api",
+          "target": "payments",
+          "label": "charges",
+          "relations": [
+            "1k3ygrb"
+          ],
+          "color": "gray",
+          "line": "dashed",
+          "head": "normal"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "customer",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [],
+          "outEdges": [
+            "1j6r8hg"
+          ],
+          "title": "Customer",
+          "modelRef": "customer",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "actor"
+        },
+        {
+          "id": "shop",
+          "parent": null,
+          "level": 0,
+          "children": [
+            "shop.web",
+            "shop.api",
+            "shop.db"
+          ],
+          "inEdges": [
+            "1j6r8hg"
+          ],
+          "outEdges": [
+            "1ygm6dt"
+          ],
+          "title": "Shop",
+          "modelRef": "shop",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "system",
+          "depth": 1
+        },
+        {
+          "id": "shop.web",
+          "parent": "shop",
+          "level": 1,
+          "children": [],
+          "inEdges": [
+            "1j6r8hg"
+          ],
+          "outEdges": [
+            "9gws0y"
+          ],
+          "title": "Web app",
+          "modelRef": "shop.web",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "container"
+        },
+        {
+          "id": "shop.api",
+          "parent": "shop",
+          "level": 1,
+          "children": [],
+          "inEdges": [
+            "9gws0y"
+          ],
+          "outEdges": [
+            "w1beic",
+            "1ygm6dt"
+          ],
+          "title": "API",
+          "modelRef": "shop.api",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "container"
+        },
+        {
+          "id": "shop.db",
+          "parent": "shop",
+          "level": 1,
+          "children": [],
+          "inEdges": [
+            "w1beic"
+          ],
+          "outEdges": [],
+          "title": "Database",
+          "modelRef": "shop.db",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "container"
+        },
+        {
+          "id": "payments",
+          "parent": null,
+          "level": 0,
+          "children": [],
+          "inEdges": [
+            "1ygm6dt"
+          ],
+          "outEdges": [],
+          "title": "Payments",
+          "modelRef": "payments",
+          "shape": "rectangle",
+          "color": "primary",
+          "style": {
+            "opacity": 15,
+            "size": "md"
+          },
+          "tags": [],
+          "kind": "system"
+        }
+      ],
+      "hash": "dhro2v7GehYEdThQmc1P9fLvB4ur1KBU9gD6l3JvxYI"
+    }
+  },
+  "deployments": {
+    "elements": {},
+    "relations": {}
+  },
+  "imports": {},
+  "manualLayouts": {}
+}

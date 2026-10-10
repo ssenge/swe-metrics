@@ -1,0 +1,86 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "message": "Could not resolve reference to Referenceable named 'nowhere'.",
+      "file": "{workspace}/broken.c4",
+      "line": 1,
+      "range": {
+        "start": {
+          "character": 14,
+          "line": 1
+        },
+        "end": {
+          "character": 21,
+          "line": 1
+        }
+      }
+    },
+    {
+      "message": "Could not resolve reference to ElementKind named 'unknownkind'.",
+      "file": "{workspace}/broken.c4",
+      "line": 2,
+      "range": {
+        "start": {
+          "character": 10,
+          "line": 2
+        },
+        "end": {
+          "character": 21,
+          "line": 2
+        }
+      }
+    },
+    {
+      "message": "Could not resolve reference to Referenceable named 'missing'.",
+      "file": "{workspace}/broken.c4",
+      "line": 6,
+      "range": {
+        "start": {
+          "character": 12,
+          "line": 6
+        },
+        "end": {
+          "character": 19,
+          "line": 6
+        }
+      }
+    },
+    {
+      "message": "Target not resolved",
+      "file": "{workspace}/broken.c4",
+      "line": 1,
+      "range": {
+        "start": {
+          "character": 14,
+          "line": 1
+        },
+        "end": {
+          "character": 21,
+          "line": 1
+        }
+      }
+    },
+    {
+      "message": "Validation failed: Element \"missing\" is not resolved",
+      "file": "{workspace}/broken.c4",
+      "line": 6,
+      "range": {
+        "start": {
+          "character": 12,
+          "line": 6
+        },
+        "end": {
+          "character": 19,
+          "line": 6
+        }
+      }
+    }
+  ],
+  "stats": {
+    "totalFiles": 2,
+    "totalErrors": 5,
+    "filteredFiles": 2,
+    "filteredErrors": 5
+  }
+}
