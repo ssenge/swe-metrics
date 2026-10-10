@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 from importlib.resources import files
 from pathlib import Path
 
+from swe_metrics.analyzers.buildreports import report_analyzers
 from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.jscpd import Jscpd
@@ -36,7 +37,8 @@ NO_SETTINGS = Settings()
 
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules)]
+    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
+            *report_analyzers(settings.reports)]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:

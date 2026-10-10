@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0" name="com.example.CalcTest" time="0.215" tests="4" errors="0" skipped="1" failures="1">
+  <properties>
+    <property name="java.version" value="21.0.4"/>
+    <property name="os.name" value="Linux"/>
+  </properties>
+  <testcase name="add" classname="com.example.CalcTest" time="0.012"/>
+  <testcase name="subtract" classname="com.example.CalcTest" time="0.020">
+    <failure message="expected: &lt;1&gt; but was: &lt;2&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at com.example.CalcTest.subtract(CalcTest.java:18)
+]]></failure>
+    <system-out><![CDATA[subtracting]]></system-out>
+  </testcase>
+  <testcase name="divide" classname="com.example.CalcTest" time="0">
+    <skipped message="not implemented yet"/>
+  </testcase>
+  <testcase name="multiply" classname="com.example.CalcTest" time="0.003"/>
+</testsuite>
