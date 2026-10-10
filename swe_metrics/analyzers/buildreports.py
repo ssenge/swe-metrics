@@ -8,6 +8,7 @@ import swe_metrics
 from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.coverage import coverage_metrics
 from swe_metrics.core.junit import junit_metrics
+from swe_metrics.core.mutation import mutation_metrics
 from swe_metrics.core.report import Metric
 from swe_metrics.core.target import Target
 
@@ -98,7 +99,29 @@ class Lcov(Coverage):
     id = "lcov"
 
 
-KINDS: tuple[type[BuildReport], ...] = (Junit, Jacoco, Cobertura, Lcov)
+class Mutation(BuildReport):
+    """A mutation testing report; the report kind is the format."""
+
+    families = ("mutation",)
+
+    def metrics(self, documents: list[bytes], files: tuple[str, ...]) -> list[Metric]:
+        """Mutant outcomes and mutation score per target file and in total."""
+        return mutation_metrics(self.id, documents, files)
+
+
+class Pit(Mutation):
+    """PIT's mutations.xml."""
+
+    id = "pit"
+
+
+class Stryker(Mutation):
+    """Stryker's mutation-testing JSON report (mutation-testing-report-schema)."""
+
+    id = "stryker"
+
+
+KINDS: tuple[type[BuildReport], ...] = (Junit, Jacoco, Cobertura, Lcov, Pit, Stryker)
 
 
 def report_analyzers(reports: Mapping[str, tuple[str, ...]]) -> list[BuildReport]:
