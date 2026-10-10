@@ -1,0 +1,97 @@
+{
+  "statistics": {
+    "detectionDate": "2026-10-10T10:41:50.750Z",
+    "formats": {
+      "java": {
+        "sources": {
+          "j/B.java": {
+            "lines": 18,
+            "tokens": 301,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 17,
+            "duplicatedTokens": 272,
+            "percentage": 94.44,
+            "percentageTokens": 90.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "j/A.java": {
+            "lines": 18,
+            "tokens": 301,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 17,
+            "duplicatedTokens": 272,
+            "percentage": 94.44,
+            "percentageTokens": 90.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 36,
+          "tokens": 602,
+          "sources": 2,
+          "clones": 1,
+          "duplicatedLines": 17,
+          "duplicatedTokens": 272,
+          "percentage": 47.22,
+          "percentageTokens": 45.18,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 36,
+      "tokens": 602,
+      "sources": 2,
+      "clones": 1,
+      "duplicatedLines": 17,
+      "duplicatedTokens": 272,
+      "percentage": 47.22,
+      "percentageTokens": 45.18,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "java",
+      "lines": 18,
+      "fragment": "; }\n    public int compute(int[] values, int offset) {\n        int total = 0;\n        total += values[0] * 0 + offset;\n        total += values[1] * 1 + offset;\n        total += values[2] * 2 + offset;\n        total += values[3] * 3 + offset;\n        total += values[4] * 4 + offset;\n        total += values[5] * 5 + offset;\n        total += values[6] * 6 + offset;\n        total += values[7] * 7 + offset;\n        total += values[8] * 8 + offset;\n        total += values[9] * 9 + offset;\n        total += values[10] * 10 + offset;\n        total += values[11] * 11 + offset;\n        return total;\n    }\n}",
+      "tokens": 0,
+      "firstFile": {
+        "name": "j/A.java",
+        "start": 2,
+        "end": 19,
+        "startLoc": {
+          "line": 2,
+          "column": 3,
+          "position": 29
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 2,
+          "position": 301
+        }
+      },
+      "secondFile": {
+        "name": "j/B.java",
+        "start": 2,
+        "end": 19,
+        "startLoc": {
+          "line": 2,
+          "column": 3,
+          "position": 29
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 2,
+          "position": 301
+        }
+      }
+    }
+  ]
+}

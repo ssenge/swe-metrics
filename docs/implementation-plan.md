@@ -1,6 +1,6 @@
 # swe-metrics: implementation plan
 
-**Status:** v0.2, 2026-10-10. M0 is built (lizard: size and complexity; `measure`, `tools`, `schema`).
+**Status:** v0.3, 2026-10-10. M0 and M1 are built: lizard, complexipy, jscpd, gitleaks, trivy and opengrep; `measure` (with `--details`, `--sast-rules`), `tools`, `schema`.
 
 ## 1. Purpose
 
@@ -74,7 +74,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 
 - **Metric IDs** are stable and tool-neutral, `<family>.<metric>` (catalog in §5). The `tool` field says who measured it.
 - **Scopes:** `target`, `module`, `file`, `function`. Target-level entries carry distribution statistics (`count`, `sum`, `mean`, `p50`, `p95`, `max`) so consumers don't have to recompute them. They are statistics, not judgments.
-- **Findings** (vulnerabilities, secrets, lint and SAST results) go into SARIF 2.1.0 files under `details/`. The report counts them per severity as metrics, e.g. `security.vulnerabilities` with scope target and a `severity` label.
+- **Findings** (vulnerabilities, secrets, lint and SAST results) go into SARIF 2.1.0 files under `details/`. The report counts them per file, per label and in total as metrics, e.g. `dependencies.vulnerabilities` with scope target and a `severity` label. Every detail file a measurement kept is listed in the report's `details` array.
 - **Secrets are never copied** into the report or the details. Secret findings carry the location and rule only, with the match redacted.
 
 ## 5. Metric catalog (first version)
@@ -88,7 +88,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `duplication` | duplicated lines and %, clone pairs | jscpd |
 | `dependencies` | direct and transitive dependencies; known vulnerabilities per severity; licenses | trivy (SBOM and vulnerabilities), osv-scanner |
 | `secrets` | secret findings per rule | gitleaks |
-| `security` | static analysis findings per severity | opengrep |
+| `security` | static analysis findings per level, for rules the caller gives (`--sast-rules`); without rules the analyzer is skipped, because the findings depend entirely on the rule set | opengrep |
 | `structure` | module dependency graph; afferent and efferent coupling, instability, cycles | grimp (Python), jdeps (Java bytecode, needs tier B), dependency-cruiser (JS/TS) |
 | `docs` | markdown lint findings, broken links, readability statistics | markdownlint, lychee |
 | `doc_coverage` | share of public APIs with a doc comment | interrogate (Python), checkstyle Javadoc check (Java) |
@@ -161,7 +161,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 | Milestone | Content | Done when |
 |---|---|---|
 | **M0 Skeleton** *(done)* | Package layout, report model and schema, runner, CLI (`measure`, `tools`, `schema`), gate script, one analyzer end to end (lizard: size and complexity) | `swe-metrics measure` on a Python and a Java fixture gives schema-valid reports with the expected values; gate passes |
-| **M1 Core code and security** | Duplication (jscpd), cognitive complexity for Python (complexipy), secrets (gitleaks), dependencies and vulnerabilities (trivy), SAST (opengrep), SARIF details | Fixture values match; secret matches never appear in output |
+| **M1 Core code and security** *(done)* | Duplication (jscpd), cognitive complexity for Python (complexipy), secrets (gitleaks), dependencies and vulnerabilities (trivy), SAST (opengrep), SARIF details | Fixture values match; secret matches never appear in output |
 | **M2 Docs, IaC, containers, models, self-measurement** | markdownlint, lychee, terraform validate, tflint, checkov, hadolint, LikeC4; `--changed-since`; container image with `tools.lock`; dogfooding gate | The gate measures swe-metrics with swe-metrics |
 | **M3 Structure and tier B** | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
 | **M4 History** | Change frequency, code age, change coupling from Git history | Values match a fixture repository with scripted history |
@@ -169,6 +169,11 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 Each milestone is a set of small changes (≤ 400 changed code lines each), every one passing the gate.
 
 ## 11. Open questions
+
+0. **Recorded decisions (M1).**
+   - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
+   - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
+   - opengrep is installed from its signed release binary (signature checked with cosign) until the container image (M2) pins it.
 
 1. **Cognitive complexity beyond Python.** No permissive open-source tool covers Java, JS and others the way SonarQube does. Options: implement the published cognitive-complexity rules on top of a parser (tree-sitter), or report the gap. Proposal: report the gap in v1, then decide.
 2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report; offer an offline mode with a database snapshot inside the container image.

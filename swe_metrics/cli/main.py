@@ -7,7 +7,9 @@ import sys
 from importlib.resources import files
 from pathlib import Path
 
+from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.gitleaks import Gitleaks
+from swe_metrics.analyzers.jscpd import Jscpd
 from swe_metrics.analyzers.lizard import Lizard
 from swe_metrics.analyzers.opengrep import Opengrep
 from swe_metrics.analyzers.trivy import Trivy
@@ -20,7 +22,7 @@ USAGE_ERROR = 2  # argparse's own exit code for usage errors; 1 means an interna
 
 def analyzers(sast_rules: str | None = None) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Gitleaks(), Trivy(), Opengrep(sast_rules)]
+    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(sast_rules)]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:

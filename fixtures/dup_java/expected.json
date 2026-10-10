@@ -1,0 +1,6 @@
+{
+  "_comment": "A.java and B.java share the 17-line compute() body: 1 clone; 17 of 36 lines duplicated = 47.22 %.",
+  "duplication.clones": 1,
+  "duplication.duplicated_lines": 17,
+  "duplication.percent": 47.22
+}

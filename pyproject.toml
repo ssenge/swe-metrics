@@ -6,7 +6,7 @@ name = "swe-metrics"
 version = "0.0.1"
 description = "Stateless software metrics: code, IaC, docs and architecture models in, a metric report out"
 requires-python = ">=3.12"
-dependencies = ["lizard==1.24.1"]
+dependencies = ["lizard==1.24.1", "complexipy==8.0.1"]
 
 [project.optional-dependencies]
 dev = ["ruff", "mypy", "complexipy", "interrogate", "pytest", "pytest-cov", "bandit", "pip-audit",
@@ -78,7 +78,7 @@ max-args = 5
 strict = true
 
 [[tool.mypy.overrides]]
-module = ["lizard", "lizard_ext.*"]   # no type stubs published
+module = ["lizard", "lizard_ext.*", "complexipy"]   # no type stubs published
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
