@@ -33,9 +33,11 @@ def test_counts_only_findings_in_target_files(tmp_path, monkeypatch):
 
 @pytest.mark.skipif(not shutil.which("gitleaks"), reason="gitleaks not installed")
 def test_real_secret_is_found_but_never_copied(tmp_path):
-    """A generated token is found, and neither the metrics nor the SARIF contain it."""
+    """A generated token is found despite a target allowlist; neither metrics nor SARIF contain it."""
     token = "ghp_" + "".join(random.choices(string.ascii_letters + string.digits, k=36))
     (tmp_path / "config.py").write_text(f'TOKEN = "{token}"\n')
+    # a target config that allowlists everything must not change the result
+    (tmp_path / ".gitleaks.toml").write_text('[allowlist]\npaths = [\'\'\'.*\'\'\']\n')
     analyzer = Gitleaks()
     assert analyzer.version()
     result = analyzer.measure(Target(str(tmp_path), ("config.py",)), ("config.py",), str(tmp_path))
