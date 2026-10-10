@@ -6,6 +6,7 @@ from pathlib import Path
 
 import swe_metrics
 from swe_metrics.core.analyzer import Measurement
+from swe_metrics.core.coverage import coverage_metrics
 from swe_metrics.core.junit import junit_metrics
 from swe_metrics.core.report import Metric
 from swe_metrics.core.target import Target
@@ -69,7 +70,35 @@ class Junit(BuildReport):
         return junit_metrics(documents)
 
 
-KINDS: tuple[type[BuildReport], ...] = (Junit,)
+class Coverage(BuildReport):
+    """A coverage report; the report kind is the format."""
+
+    families = ("coverage",)
+
+    def metrics(self, documents: list[bytes], files: tuple[str, ...]) -> list[Metric]:
+        """Line and branch coverage per target file and in total."""
+        return coverage_metrics(self.id, documents, files)
+
+
+class Jacoco(Coverage):
+    """JaCoCo XML coverage (jacoco.xml)."""
+
+    id = "jacoco"
+
+
+class Cobertura(Coverage):
+    """Cobertura XML coverage (also coverage.py's `coverage xml`)."""
+
+    id = "cobertura"
+
+
+class Lcov(Coverage):
+    """LCOV coverage trace (lcov.info)."""
+
+    id = "lcov"
+
+
+KINDS: tuple[type[BuildReport], ...] = (Junit, Jacoco, Cobertura, Lcov)
 
 
 def report_analyzers(reports: Mapping[str, tuple[str, ...]]) -> list[BuildReport]:
