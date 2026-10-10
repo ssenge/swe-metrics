@@ -1,0 +1,11 @@
+classes -> java.base
+   com.example.app                                    -> com.example.core                                   classes
+   com.example.app                                    -> com.example.util                                   classes
+   com.example.app                                    -> java.io                                            java.base
+   com.example.app                                    -> java.lang                                          java.base
+   com.example.app                                    -> java.lang.invoke                                   java.base
+   com.example.core                                   -> com.example.util                                   classes
+   com.example.core                                   -> java.lang                                          java.base
+   com.example.util                                   -> com.example.core                                   classes
+   com.example.util                                   -> java.lang                                          java.base
+   com.example.util                                   -> java.lang.invoke                                   java.base

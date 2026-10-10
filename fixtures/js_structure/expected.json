@@ -1,0 +1,7 @@
+{
+  "_comment": "Hand-derived: index.js -> a.js (fs and lodash are outside the target), a.js <-> b.js (one cycle), t.ts -> a.js.",
+  "target": {"structure.modules": 4, "structure.dependencies": 4, "structure.cycles": 1, "structure.modules_in_cycles": 2},
+  "afferent": {"src/index.js": 0, "src/a.js": 3, "src/b.js": 1, "src/t.ts": 0},
+  "efferent": {"src/index.js": 1, "src/a.js": 1, "src/b.js": 1, "src/t.ts": 1},
+  "instability": {"src/index.js": 1.0, "src/a.js": 0.25, "src/b.js": 0.5, "src/t.ts": 1.0}
+}

@@ -1,0 +1,19 @@
+{
+  "_comment": "Hand-derived. Modules (src/ dropped): shop, shop.models, shop.pricing, shop.util, shop._version, shop.api, shop.api.views. Edges: shop->models, models->pricing, pricing->models (TYPE_CHECKING import), pricing->util, api->api.views, views->models, views->pricing, views->util (function-local import). json and typing are outside the target. One cycle: models<->pricing.",
+  "structure": {
+    "target": {"structure.modules": 7, "structure.dependencies": 8, "structure.cycles": 1, "structure.modules_in_cycles": 2},
+    "afferent": {"shop": 0, "shop.models": 3, "shop.pricing": 2, "shop.util": 2, "shop._version": 0, "shop.api": 0, "shop.api.views": 1},
+    "efferent": {"shop": 1, "shop.models": 1, "shop.pricing": 2, "shop.util": 0, "shop._version": 0, "shop.api": 1, "shop.api.views": 3},
+    "instability": {"shop": 1.0, "shop.models": 0.25, "shop.pricing": 0.5, "shop.util": 0.0, "shop.api": 1.0, "shop.api.views": 0.75}
+  },
+  "doc_coverage": {
+    "_comment": "Public = no leading underscore. __init__: module doc. models: module, Order documented; Order.total not; _check, _Hidden (and its methods) private. pricing: module not, price documented, fetch not. util: module documented, slug not, inner is nested in a function. api/__init__: no docstring. views: module and index documented. _version is a private module.",
+    "files": {
+      "src/shop/__init__.py": [1, 0], "src/shop/models.py": [2, 1], "src/shop/pricing.py": [1, 2],
+      "src/shop/util.py": [1, 1], "src/shop/api/__init__.py": [0, 1], "src/shop/api/views.py": [2, 0],
+      "src/shop/_version.py": [0, 0]
+    },
+    "total": [7, 5],
+    "percent": 58.33
+  }
+}

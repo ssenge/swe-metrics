@@ -13,16 +13,20 @@ from typing import Any
 from swe_metrics.analyzers.buildreports import report_analyzers
 from swe_metrics.analyzers.checkov import Checkov
 from swe_metrics.analyzers.complexipy import Complexipy
+from swe_metrics.analyzers.depcruise import Depcruise
+from swe_metrics.analyzers.doc_coverage import DocCoverage
 from swe_metrics.analyzers.dockerfile import Dockerfile
 from swe_metrics.analyzers.git_history import GitHistory
 from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.hadolint import Hadolint
+from swe_metrics.analyzers.jdeps import Jdeps
 from swe_metrics.analyzers.jscpd import Jscpd
 from swe_metrics.analyzers.likec4 import Likec4
 from swe_metrics.analyzers.lizard import Lizard
 from swe_metrics.analyzers.lychee import Lychee
 from swe_metrics.analyzers.markdownlint import Markdownlint
 from swe_metrics.analyzers.opengrep import Opengrep
+from swe_metrics.analyzers.python_imports import PythonImports
 from swe_metrics.analyzers.terraform import Terraform
 from swe_metrics.analyzers.tflint import Tflint
 from swe_metrics.analyzers.trivy import Trivy
@@ -49,6 +53,7 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
     return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
             Markdownlint(), Lychee(), Terraform(), Tflint(), Checkov(), Hadolint(), Dockerfile(), Likec4(),
+            PythonImports(), Depcruise(), Jdeps(settings.reports.get("classes", ())), DocCoverage(),
             GitHistory(), *report_analyzers(settings.reports)]
 
 
