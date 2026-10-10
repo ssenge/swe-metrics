@@ -43,3 +43,14 @@ def test_tools(capsys):
     assert main(["tools", "--json"]) == 0
     rows = json.loads(capsys.readouterr().out)
     assert {"id": "lizard", "tool": "lizard", "version": "1.24.1", "families": ["size", "complexity"]} in rows
+
+
+def test_unusable_output_paths(tmp_path, capsys):
+    """An unwritable --details directory is a usage error before measuring; an unwritable --out exits 1."""
+    root = copy_fixture("python_small", tmp_path)
+    blocked = tmp_path / "file"
+    blocked.write_text("not a directory")
+    assert main(["measure", str(root), "--details", str(blocked / "details")]) == 2
+    assert "--details directory can't be created" in capsys.readouterr().err
+    assert main(["measure", str(root), "--only", "size", "--out", str(blocked / "report.json")]) == 1
+    assert "can't write the report" in capsys.readouterr().err

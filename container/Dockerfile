@@ -23,7 +23,10 @@ COPY swe_metrics /src/swe_metrics
 RUN pip install --no-cache-dir /src && rm -rf /src \
  && python /opt/swe-metrics/check-tools.py /opt/swe-metrics/tools.lock
 
-RUN useradd --create-home swe
+# Targets are mounted from the host and owned by another user; git would refuse them as "dubious
+# ownership". swe-metrics only reads them, so every directory is safe here.
+RUN git config --system --add safe.directory '*' \
+ && useradd --create-home swe
 USER swe
 WORKDIR /work
 ENTRYPOINT ["swe-metrics"]

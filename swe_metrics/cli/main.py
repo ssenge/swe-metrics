@@ -57,26 +57,38 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
             GitHistory(), *report_analyzers(settings.reports)]
 
 
-def cmd_measure(args: argparse.Namespace) -> int:
-    """Measure the target and write the report as JSON."""
+def _inputs(args: argparse.Namespace) -> tuple[Settings, Options]:
+    """Validated settings and options; ValueError for any input the measurement can't use."""
     unknown = set(args.only) - families()
     if unknown:
-        known = sorted(families())
-        print(f"error: unknown metric families: {sorted(unknown)} (known: {known})", file=sys.stderr)
-        return USAGE_ERROR
+        raise ValueError(f"unknown metric families: {sorted(unknown)} (known: {sorted(families())})")
+    details = Path(args.details) if args.details else None
+    if details:
+        try:  # before measuring: a run must not fail at the end on an unusable output directory
+            details.mkdir(parents=True, exist_ok=True)
+        except OSError as exc:
+            raise ValueError(f"--details directory can't be created: {exc}") from exc
+    settings = Settings(args.sast_rules, parse_reports(args.report))
+    return settings, Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "")
+
+
+def cmd_measure(args: argparse.Namespace) -> int:
+    """Measure the target and write the report as JSON."""
     try:
-        settings = Settings(args.sast_rules, parse_reports(args.report))
-        details = Path(args.details) if args.details else None
-        options = Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "")
+        settings, options = _inputs(args)
         report = measure(Path(args.target), analyzers(settings), options)
-    except (FileNotFoundError, ValueError) as exc:
+    except (OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return USAGE_ERROR
     text = json.dumps(report.as_dict(), indent=2) + "\n"
-    if args.out:
-        Path(args.out).write_text(text)
-    else:
+    if not args.out:
         sys.stdout.write(text)
+        return 0
+    try:
+        Path(args.out).write_text(text)
+    except OSError as exc:
+        print(f"error: can't write the report: {exc}", file=sys.stderr)
+        return 1
     return 0
 
 
