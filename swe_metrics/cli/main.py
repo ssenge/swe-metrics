@@ -12,6 +12,7 @@ from typing import Any
 
 from swe_metrics.analyzers.buildreports import report_analyzers
 from swe_metrics.analyzers.checkov import Checkov
+from swe_metrics.analyzers.cognitive import Cognitive
 from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.depcruise import Depcruise
 from swe_metrics.analyzers.doc_coverage import DocCoverage
@@ -52,7 +53,7 @@ NO_SETTINGS = Settings()
 
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
+    return [Lizard(), Cognitive(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
             Markdownlint(), Lychee(), Terraform(), Tflint(), Checkov(), Hadolint(), Dockerfile(), Likec4(),
             PythonImports(), Depcruise(), Jdeps(settings.reports.get("classes", ())), DocCoverage(),
             GitHistory(), *report_analyzers(settings.reports)]

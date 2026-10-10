@@ -4,7 +4,8 @@ Where the thresholds come from:
 - Cyclomatic complexity 10 per function: McCabe, "A Complexity Measure" (IEEE TSE, 1976), and NIST
   SP 500-235 (1996), which recommends 10 as the limit.
 - Cognitive complexity 15 per function: the default threshold of SonarSource's rule S3776, which
-  implements its "Cognitive Complexity" white paper.
+  implements its "Cognitive Complexity" white paper. Measured by swe-metrics' own analyzer for every
+  supported language (tool "swe-metrics"); complexipy's Python-only values stay in the report.
 - Duplicated lines 3 % and coverage 80 %: the conditions on new code in SonarQube's built-in quality
   gate "Sonar way".
 - Mutation score 80 (good) and 60 (bad): Stryker's default `thresholds` (high 80, low 60).
@@ -20,7 +21,7 @@ from swe_metrics.scoring import Definition, gate, linear, per_kloc, regression, 
 P95 = "p95"
 DEFINITION = Definition(
     name="swe-default",
-    version="1",
+    version="2",  # 2: cognitive complexity from the multi-language analyzer (1: complexipy, Python only)
     gates=(
         gate(select("dependencies.vulnerabilities", labels={"severity": ["critical", "high"]}), max=0),
         gate("secrets.findings", max=0),
@@ -33,7 +34,7 @@ DEFINITION = Definition(
     components=(
         linear(select("complexity.cyclomatic", stat=P95), good=5, bad=10, weight=3),
         linear(select("complexity.cyclomatic", stat="max"), good=10, bad=25, weight=1),
-        linear(select("complexity.cognitive", stat=P95), good=5, bad=15, weight=3),
+        linear(select("complexity.cognitive", stat=P95, tool="swe-metrics"), good=5, bad=15, weight=3),
         linear(select("size.function_length", stat=P95), good=20, bad=60, weight=1),
         linear("duplication.percent", good=3, bad=10, weight=2),
         linear("coverage.line_percent", good=80, bad=40, weight=3),
@@ -50,7 +51,7 @@ DEFINITION = Definition(
     ),
     regressions=(
         regression(select("complexity.cyclomatic", stat=P95), tolerance=0.5),
-        regression(select("complexity.cognitive", stat=P95), tolerance=0.5),
+        regression(select("complexity.cognitive", stat=P95, tool="swe-metrics"), tolerance=0.5),
         regression("duplication.percent", tolerance=0.5),
         regression("coverage.line_percent", tolerance=1),
         regression("mutation.score", tolerance=2),

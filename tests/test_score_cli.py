@@ -26,7 +26,7 @@ IDEAL = {
     "analyzers": [{"id": "x", "tool": "t", "status": "ran", "families": ["complexity", "dependencies"]}],
     "metrics": [
         row("complexity.cyclomatic", stats={"p95": 3, "max": 8}),
-        row("complexity.cognitive", stats={"p95": 3}),
+        {**row("complexity.cognitive", stats={"p95": 3}), "tool": "swe-metrics"},
         row("duplication.percent", 1),
         row("dependencies.vulnerabilities", 0),
     ],
@@ -52,7 +52,7 @@ def test_default_definition_rewards_and_gates():
         ],
     }
     assert DEFINITION.score(vulnerable)["score"] == 40.0
-    assert (DEFINITION.name, DEFINITION.version) == ("swe-default", "1")
+    assert (DEFINITION.name, DEFINITION.version) == ("swe-default", "2")
 
 
 def test_score_command_with_baseline_and_schema(tmp_path, capsys):

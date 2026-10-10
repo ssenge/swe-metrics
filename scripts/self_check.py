@@ -42,9 +42,10 @@ def violations(report: dict) -> list[str]:
         if not found:
             problems.append(f"{metric_id}: not measured")
             continue
-        value = found[0]["value"] if stat == "value" else found[0]["stats"][stat]
-        if value > limit:
-            problems.append(f"{metric_id} {stat} = {value} > {limit}")
+        for row in found:  # every tool that measures it (e.g. two cognitive-complexity analyzers)
+            value = row["value"] if stat == "value" else row["stats"][stat]
+            if value > limit:
+                problems.append(f"{metric_id} {stat} ({row['tool']}) = {value} > {limit}")
     return problems
 
 

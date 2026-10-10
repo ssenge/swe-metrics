@@ -1,0 +1,8 @@
+{
+  "_comment": "Per function, hand-computed with SonarSource's rules. Java: sumOfPrimes and getWords are the white paper's own examples (7 and 1). nested = for 1 + if in lambda in loop 3 (nesting 2) + catch 1 + ternary in catch 2. JS arrow = for 1 + for 2 + if 3 + && 1 + continue-to-label 1; n = switch 1 + ternary in arrow in switch 3. Python comprehension = if 1 + comprehension for 2 + filter 1 + and 1; Service.run calls subprocess.run, which is not recursion. Go loops = for 1 + for 2 + if 3 + two operator runs 2 + continue-to-label 1; sw = switch 1 + if in func literal in switch 3 + goto 1 + recursion 1.",
+  "Sample.java": {"sumOfPrimes": 7, "getWords": 1, "chain": 3, "logic": 4, "nested": 7, "recurse": 2},
+  "sample.js": {"chain": 3, "arrow": 8, "m": 2, "n": 4, "tryIt": 2},
+  "sample.ts": {"chain": 3, "arrow": 8, "m": 2, "n": 4, "tryIt": 2},
+  "sample.py": {"chain": 3, "comprehension": 5, "run": 2, "with_lambda": 2, "loops": 3},
+  "sample.go": {"chain": 3, "loops": 9, "sw": 6}
+}
