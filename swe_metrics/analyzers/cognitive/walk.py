@@ -15,7 +15,8 @@ from typing import Any
 from swe_metrics.analyzers.cognitive.grammars import Grammar
 
 Node = Any  # tree_sitter.Node (untyped library)
-SELF = frozenset({"self", "this", "cls", "super"})  # receivers through which a method calls itself
+# receivers through which a method calls itself (PHP: `$this->f()`, `self::f()`, `static::f()`)
+SELF = frozenset({"self", "this", "cls", "super", "$this", "static"})
 
 
 @dataclass(frozen=True)
@@ -76,12 +77,14 @@ class _Walker:
     def if_(self, node: Node, nesting: int, else_if: bool) -> None:
         """if: +1 plus nesting; else if and else: +1 (hybrid); the bodies are one level deeper."""
         self.total += 1 if else_if else 1 + nesting
+        after_else = False  # grammars without an `alternative` field (Kotlin): the branch after `else`
         for i, child in enumerate(node.children):
             field = node.field_name_for_child(i)
-            if field == "alternative" or child.type in self.g.elifs or child.type in self.g.elses:
+            if field == "alternative" or after_else or child.type in self.g.elifs | self.g.elses:
                 self.alternative(child, nesting)
             else:
                 self.walk(child, nesting if field == "condition" else nesting + 1)
+            after_else = child.type == "else" and not child.is_named
 
     def alternative(self, node: Node, nesting: int) -> None:
         """The else branch: another if (else if), an elif clause, or an else body."""
@@ -134,8 +137,13 @@ class _Walker:
         """goto, comprehension filters, and break or continue to a label: +1 (no nesting)."""
         if node.type in self.g.flat:
             return 1
-        labeled = node.type in self.g.labeled and any(c.type in self.g.labels for c in node.named_children)
-        return 1 if labeled else 0
+        if node.type not in self.g.labeled:
+            return 0
+        return 1 if any(self.jump_label(c) for c in node.named_children) else 0
+
+    def jump_label(self, node: Node) -> bool:
+        """Whether a node is the label of a jump (by type, and by text where the grammar needs it)."""
+        return node.type in self.g.labels and (not self.g.jump_labels or _text(node) in self.g.jump_labels)
 
     def recursion(self, node: Node) -> int:
         """A call to the function itself: +1."""
@@ -153,16 +161,23 @@ def _name(node: Node) -> str:
 
 def _callee(call: Node) -> str:
     """The called function's name if the call can be recursive: `f()`, `self.f()`, `this.f()`; else empty."""
-    name, receiver = call.child_by_field_name("name"), call.child_by_field_name("object")
+    name, receiver = call.child_by_field_name("name"), _field(call, ("object", "scope"))
     if name is not None:  # Java-style method invocation: name plus optional receiver
         return _text(name) if receiver is None or _text(receiver) in SELF else ""
     target = call.child_by_field_name("function")
+    if target is None and call.named_child_count > 0:  # grammars without fields (Kotlin): the callee first
+        target = call.named_children[0]
     if target is None:
         return ""
-    if target.named_child_count == 0:
-        return _text(target)
-    owner = _field(target, ("object", "operand", "value"))
-    member = _field(target, ("property", "attribute", "field"))
+    return _text(target) if target.named_child_count == 0 else _own_member(target)
+
+
+def _own_member(target: Node) -> str:
+    """The member name of `self.f`, `this.f` or `this->f`; empty for any other receiver."""
+    owner = _field(target, ("object", "operand", "value", "expression"))
+    member = _field(target, ("property", "attribute", "field", "name"))
+    if owner is None and member is None and target.named_child_count == 2:  # no fields (Kotlin `this.f`)
+        owner, member = target.named_children
     return _text(member) if owner is not None and member is not None and _text(owner) in SELF else ""
 
 
