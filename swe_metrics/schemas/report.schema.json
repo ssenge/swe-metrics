@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "swe-metrics/report/v1",
+  "title": "swe-metrics report",
+  "description": "The metrics of one measurement. Values carry unit and direction; the report never judges them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "subject", "analyzers", "metrics"],
+  "properties": {
+    "schema": { "const": "swe-metrics/report/v1" },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "kind", "commit", "files", "languages"],
+      "properties": {
+        "target": { "type": "string" },
+        "kind": { "enum": ["file", "directory", "repository"] },
+        "commit": { "type": ["string", "null"] },
+        "files": { "type": "integer", "minimum": 0 },
+        "languages": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } }
+      }
+    },
+    "analyzers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "tool", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "tool": { "type": "string" },
+          "status": { "enum": ["ran", "skipped", "failed"] },
+          "version": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "tool", "unit", "direction", "scope"],
+        "oneOf": [ { "required": ["value"] }, { "required": ["stats"] } ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z_]+\\.[a-z_]+$" },
+          "tool": { "type": "string" },
+          "unit": { "type": "string" },
+          "direction": { "enum": ["lower_better", "higher_better", "neutral"] },
+          "scope": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["level"],
+            "properties": {
+              "level": { "enum": ["target", "module", "file", "function"] },
+              "path": { "type": "string" },
+              "symbol": { "type": "string" },
+              "line": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "value": { "type": "number" },
+          "stats": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["count", "sum", "mean", "p50", "p95", "max"],
+            "properties": {
+              "count": { "type": "integer", "minimum": 1 },
+              "sum": { "type": "number" }, "mean": { "type": "number" }, "p50": { "type": "number" },
+              "p95": { "type": "number" }, "max": { "type": "number" }
+            }
+          },
+          "labels": { "type": "object", "additionalProperties": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

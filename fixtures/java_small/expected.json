@@ -1,0 +1,14 @@
+{
+  "_comment": "Hand-computed: CCN max=1+if=2, sum=1+for=2, sign=1+if+&&+else-if+?:=5; file 26 lines - 1 comment - 2 blank = 23.",
+  "functions": {
+    "Calc::max":  { "complexity.cyclomatic": 2, "size.function_length": 6, "size.parameters": 2 },
+    "Calc::sum":  { "complexity.cyclomatic": 2, "size.function_length": 7, "size.parameters": 1 },
+    "Calc::sign": { "complexity.cyclomatic": 5, "size.function_length": 8, "size.parameters": 1 }
+  },
+  "target": {
+    "size.files": 1,
+    "size.functions": 3,
+    "size.lines_of_code": { "sum": 23 },
+    "complexity.cyclomatic": { "count": 3, "sum": 9, "p50": 2, "p95": 5, "max": 5 }
+  }
+}
