@@ -1,0 +1,32 @@
+// A small model with hand-counted values (see expected.json).
+specification {
+  element actor
+  element system
+  element container
+}
+
+model {
+  customer = actor 'Customer'
+  shop = system 'Shop' {
+    web = container 'Web app'
+    api = container 'API'
+    db = container 'Database'
+  }
+  payments = system 'Payments'
+
+  customer -> shop.web 'browses'
+  shop.web -> shop.api 'calls'
+  shop.api -> shop.db 'reads and writes'
+  shop.api -> payments 'charges'
+}
+
+views {
+  view context {
+    title 'System context'
+    include customer, shop, payments
+  }
+  view shop_containers of shop {
+    title 'Shop containers'
+    include *
+  }
+}

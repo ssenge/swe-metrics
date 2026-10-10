@@ -1,0 +1,11 @@
+{
+  "_comment": "Hand-counted. LikeC4's generated 'index' view is not declared in the sources and not counted.",
+  "errors": 0,
+  "elements": 6,
+  "relationships": 4,
+  "views": 2,
+  "per_view": {
+    "context": {"elements": 3, "relationships": 2},
+    "shop_containers": {"elements": 6, "relationships": 4}
+  }
+}
