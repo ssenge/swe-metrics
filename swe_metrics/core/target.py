@@ -9,7 +9,8 @@ from pathlib import PurePath
 LANGUAGES = {
     ".py": "python", ".java": "java", ".kt": "kotlin", ".scala": "scala", ".js": "javascript",
     ".jsx": "javascript", ".ts": "typescript", ".tsx": "typescript", ".go": "go", ".cs": "csharp",
-    ".rb": "ruby", ".php": "php", ".c": "c", ".h": "c", ".cpp": "cpp", ".hpp": "cpp", ".swift": "swift",
+    ".rb": "ruby", ".php": "php", ".c": "c", ".h": "c", ".cpp": "cpp", ".cc": "cpp", ".cxx": "cpp",
+    ".hpp": "cpp", ".hh": "cpp", ".swift": "swift",
     ".rs": "rust", ".tf": "terraform", ".md": "markdown", ".yaml": "yaml", ".yml": "yaml", ".json": "json",
     ".xml": "xml", ".sh": "shell", ".sql": "sql", ".jsp": "jsp", ".html": "html", ".c4": "likec4",
 }

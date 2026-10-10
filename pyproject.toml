@@ -11,6 +11,7 @@ dependencies = [
     # cognitive complexity: the parser library and one pinned grammar per language (all offline)
     "tree-sitter==0.26.0", "tree-sitter-python==0.25.0", "tree-sitter-java==0.23.5",
     "tree-sitter-javascript==0.25.0", "tree-sitter-typescript==0.23.2", "tree-sitter-go==0.25.0",
+    "tree-sitter-c==0.24.2", "tree-sitter-cpp==0.23.4", "tree-sitter-rust==0.24.2", "tree-sitter-ruby==0.23.1",
 ]
 
 [project.optional-dependencies]

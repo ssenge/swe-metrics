@@ -31,6 +31,8 @@ def test_analyzer_contract():
     """Applies to files with a grammar; target statistics; a version naming the parser library."""
     analyzer = Cognitive()
     assert analyzer.applicable(Target(str(ROOT), ("a.java", "b.md", "c.tsx"))) == ("a.java", "c.tsx")
+    assert analyzer.applicable(Target(str(ROOT), ("d.h", "e.HPP", "f.cc", "g.rb", "h.rs", "i.c"))) == (
+        "d.h", "e.HPP", "f.cc", "g.rb", "h.rs", "i.c")
     metrics = analyzer.measure(Target(str(ROOT), FILES), FILES, "/unused").metrics
     rollup = [m for m in metrics if m.scope.level == "target"]
     assert rollup[0].stats is not None and rollup[0].stats.max == 9
