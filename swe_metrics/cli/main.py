@@ -11,9 +11,12 @@ from pathlib import Path
 from typing import Any
 
 from swe_metrics.analyzers.complexipy import Complexipy
+from swe_metrics.analyzers.dockerfile import Dockerfile
 from swe_metrics.analyzers.git_history import GitHistory
 from swe_metrics.analyzers.gitleaks import Gitleaks
+from swe_metrics.analyzers.hadolint import Hadolint
 from swe_metrics.analyzers.jscpd import Jscpd
+from swe_metrics.analyzers.likec4 import Likec4
 from swe_metrics.analyzers.lizard import Lizard
 from swe_metrics.analyzers.opengrep import Opengrep
 from swe_metrics.analyzers.trivy import Trivy
@@ -39,7 +42,7 @@ NO_SETTINGS = Settings()
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
     return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
-            GitHistory()]
+            Hadolint(), Dockerfile(), Likec4(), GitHistory()]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:

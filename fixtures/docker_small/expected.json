@@ -1,0 +1,19 @@
+{
+  "_comment": "Hand-checked. .hadolint.yaml ignores every Dockerfile rule below; swe-metrics must not honor it.",
+  "hadolint": {
+    "Dockerfile": {"DL3008": 1, "DL3015": 1, "DL3003": 1, "DL3025": 1},
+    "web.Dockerfile": {"DL4000": 1, "DL3018": 1, "DL3019": 1},
+    "levels": {"error": 1, "warning": 4, "info": 2},
+    "total": 7
+  },
+  "base_images": [
+    {"path": "Dockerfile", "line": 3, "image": "maven:3.9-eclipse-temurin-21", "stage": "build", "final": "false"},
+    {"path": "Dockerfile", "line": 9, "image": "eclipse-temurin:21-jre", "stage": "1", "final": "true"},
+    {"path": "web.Dockerfile", "line": 1, "image": "node:24-alpine", "stage": "0", "final": "true"}
+  ],
+  "runtime_major": [
+    {"path": "Dockerfile", "line": 3, "runtime": "java", "version": "21", "value": 21},
+    {"path": "Dockerfile", "line": 9, "runtime": "java", "version": "21", "value": 21},
+    {"path": "web.Dockerfile", "line": 1, "runtime": "node", "version": "24", "value": 24}
+  ]
+}
