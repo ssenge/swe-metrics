@@ -1,6 +1,6 @@
 # swe-metrics: implementation plan
 
-**Status:** v0.4, 2026-10-10. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The container image (`container/`) pins every tool, and the gate measures swe-metrics with itself.
+**Status:** v0.4, 2026-10-10. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The gate measures swe-metrics with itself. Next: M5, local tool installation instead of the container image (§7).
 
 ## 1. Purpose
 
@@ -132,16 +132,20 @@ swe_metrics/
 - **Tool timeouts** are robustness measures (a hung tool), set per analyzer and reported when hit.
 - **Python API:** `swe_metrics.measure(target, **options) -> Report`, the same as the CLI.
 
-## 7. Distribution
+## 7. Distribution: local tools, one install script
 
-- **Python package** `swe-metrics` (Python ≥ 3.12), installable with pip/uv; tools are found on `PATH`.
-- **Container image** *(built)* with every tool installed at pinned versions. This is the recommended way to run it, because installing a dozen tools in matching versions is the hardest part of using them.
-  - `container/tools.lock` lists each tool's version, architecture, SHA-256 and source; only releases at least two weeks old are pinned.
-  - `container/install-tools.sh` installs exactly the lock and aborts on any checksum mismatch; base images are pinned by digest.
-  - The build's last step (`container/check-tools.py`) compares `swe-metrics tools --json` with the lock.
-  - The image is about 3 GB (JDK for jdeps, Node for jscpd, markdownlint, LikeC4 and dependency-cruiser, checkov, trivy). The trivy database is fetched at the first run (open question 2).
-- `swe-metrics tools` lists every analyzer with its tool, the installed version and whether it is available.
-- `swe-metrics schema` prints the report schema.
+swe-metrics runs locally and uses the tools installed on the machine. There is no container image. *(M5; the container image built in M2 is removed.)*
+
+- **Python package** `swe-metrics` (Python ≥ 3.12), installed with pip or uv. lizard and complexipy come with it as pinned Python dependencies.
+- **External tools** are found on `PATH`. A missing tool is not an error: its analyzer is reported as `failed` with "… is not installed", and every other analyzer still runs.
+- **`scripts/install-tools.sh`** installs the external tools on a Unix-like system (macOS and Linux, arm64 and x86_64; on Windows inside WSL):
+  - **No root, no package manager.** Everything goes into one user directory, `~/.local/share/swe-metrics/tools` by default (`--prefix` to change it), with links in `~/.local/bin`. The script only prints the `PATH` line to add; it never edits shell profiles. Uninstalling means deleting the directory.
+  - **Pinned and verified.** `tools.lock` (repository root) lists each tool's version, platform, SHA-256 and source. The script downloads exactly those files and aborts on any checksum mismatch. Only releases at least two weeks old are pinned.
+  - **Kinds of tools:** release binaries (gitleaks, trivy, opengrep, tflint, terraform, hadolint, lychee); Node packages (jscpd, markdownlint-cli2, likec4, dependency-cruiser), installed with a pinned Node into the same directory, so they never depend on the system Node version; Python tools with conflicting dependencies (checkov) in their own virtual environment there.
+  - **Not installed:** git (expected on every development machine) and a JDK (needed only for jdeps with `--report classes=PATH`; the script says so if `jdeps` is missing).
+  - **Options:** `--only TOOL` (repeatable), `--check` (compare the installed versions with `tools.lock` and install nothing), `--prefix DIR`.
+- **Versions:** swe-metrics doesn't require the pinned versions. It uses whatever is on `PATH` and records each tool's version in the report, so two reports are comparable when their versions match. `tools.lock` is the recommended, tested set.
+- `swe-metrics tools [--json]` lists every analyzer with its tool and installed version; `swe-metrics schema` prints the report schema.
 
 ## 8. Quality bar: swe-metrics measures itself
 
@@ -161,7 +165,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 
 - **Fixtures with known values:** a tiny project per language and file kind (Python, Java, JavaScript/TypeScript, Terraform, Markdown, C4 model, Dockerfile), each with expected metric values written down in the fixture.
 - **Unit tests** parse recorded tool outputs. They are fast and need no tools installed.
-- **Integration tests** run the real tools in the container image against the fixtures and compare with golden reports. They are skipped unless enabled.
+- **Integration tests** run the real, locally installed tools against the fixtures and compare with golden reports (M5). A test whose tool isn't installed is skipped and says so.
 - **Schema tests:** every report validates against the published schema.
 
 ## 10. Milestones
@@ -173,6 +177,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 | **M2 Docs, IaC, containers, models, self-measurement** *(done)* | markdownlint, lychee, terraform validate, tflint, checkov, hadolint, LikeC4; `--changed-since`; container image with `tools.lock`; dogfooding gate | The gate measures swe-metrics with swe-metrics |
 | **M3 Structure and tier B** *(done)* | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
 | **M4 History** *(done)* | Change frequency, code age, change coupling from Git history | Values match a fixture repository with scripted history |
+| **M5 Local tools** | Remove the container image (`container/`, `.dockerignore`, references). `tools.lock` at the repository root with entries for macOS and Linux on arm64 and x86_64. `scripts/install-tools.sh` (`--only`, `--check`, `--prefix`). Golden-report integration tests with the local tools. README: install in two commands | On a clean macOS user account and in a Linux shell, `pip install -e .` plus `scripts/install-tools.sh` makes `swe-metrics tools` report every analyzer as installed at the pinned version, and the integration tests pass |
 
 Each milestone is a set of small changes (≤ 400 changed code lines each), every one passing the gate.
 
@@ -181,7 +186,7 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
 0. **Recorded decisions (M1).**
    - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
    - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
-   - opengrep is installed from its signed release binary (signature checked with cosign); the container image pins the same release.
+   - opengrep is installed from its signed release binary (signature checked with cosign); `tools.lock` pins the same release.
    - **Merges.** Every analyzer was built on its own branch with a gated commit each (≤ 400 changed lines). The merge commits ran the full gate; only the change-size check doesn't apply to them, because it compares against one parent and so counts the other side's already-gated commits.
    - **M4 history** (`git-history`, tool git): one `git log --no-merges --no-renames` over the full history of HEAD, parsed in `core/history.py`. Renames are not followed: a file's history is that of its current path. Merge commits are left out. Ages count from the HEAD commit's committer date, never the wall clock. Authors are distinct author e-mails (lowercased, after `.mailmap`), counted only and never reported. A subdirectory target keeps its own files, but a commit's size for the bulk-change limit counts all its files, so a pair gets the same coupling whatever the target is. Change coupling follows code-maat: shared commits / mean commits of both files × 100, only with ≥ 2 shared commits and ≥ 2 commits per file, without commits that change > 50 files. These parameters are part of the version string. Files without a commit (untracked) get no history metrics.
    - **M2 containers/models.**
@@ -210,6 +215,6 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
        - The output has per-file values, totals per language (label `language`) and an unlabeled total. A file without public APIs gets counts but no percentage.
 
 1. **Cognitive complexity beyond Python.** No permissive open-source tool covers Java, JS and others the way SonarQube does. Options: implement the published cognitive-complexity rules on top of a parser (tree-sitter), or report the gap. Proposal: report the gap in v1, then decide.
-2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report; offer an offline mode with a database snapshot inside the container image.
+2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report (done); later an option to point trivy at a database the caller provides.
 3. **Monorepos.** Should `module` scopes come from build files (Maven modules, npm workspaces) or from directories? Proposal: from build files when present, otherwise top-level directories.
 4. **Very large repositories.** Is there a need for streaming output or sharding by directory? Proposal: not before a real case needs it.
