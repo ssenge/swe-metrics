@@ -1,6 +1,6 @@
 # swe-metrics: implementation plan
 
-**Status:** v0.4, 2026-10-10. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The gate measures swe-metrics with itself. Next: M5, local tool installation instead of the container image (§7).
+**Status:** v0.5, 2026-10-10. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The gate measures swe-metrics with itself. M5 is built: no container image; `scripts/install-tools.sh` installs the pinned tools locally on macOS and Linux, and the golden report (`scripts/integration.sh`) gives identical results on both.
 
 ## 1. Purpose
 
@@ -177,7 +177,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 | **M2 Docs, IaC, containers, models, self-measurement** *(done)* | markdownlint, lychee, terraform validate, tflint, checkov, hadolint, LikeC4; `--changed-since`; container image with `tools.lock`; dogfooding gate | The gate measures swe-metrics with swe-metrics |
 | **M3 Structure and tier B** *(done)* | Coupling, instability and cycles (grimp, dependency-cruiser, jdeps); doc coverage; `--report` for tests, coverage and mutation | Fixture graphs and coupling values match |
 | **M4 History** *(done)* | Change frequency, code age, change coupling from Git history | Values match a fixture repository with scripted history |
-| **M5 Local tools** | Remove the container image (`container/`, `.dockerignore`, references). `tools.lock` at the repository root with entries for macOS and Linux on arm64 and x86_64. `scripts/install-tools.sh` (`--only`, `--check`, `--prefix`). Golden-report integration tests with the local tools. README: install in two commands | On a clean macOS user account and in a Linux shell, `pip install -e .` plus `scripts/install-tools.sh` makes `swe-metrics tools` report every analyzer as installed at the pinned version, and the integration tests pass |
+| **M5 Local tools** *(done)* | Remove the container image (`container/`, `.dockerignore`, references). `tools.lock` at the repository root with entries for macOS and Linux on arm64 and x86_64. `scripts/install-tools.sh` (`--only`, `--check`, `--prefix`). Golden-report integration tests with the local tools. README: install in two commands | On a clean macOS user account and in a Linux shell, `pip install -e .` plus `scripts/install-tools.sh` makes `swe-metrics tools` report every analyzer as installed at the pinned version, and the integration tests pass |
 
 Each milestone is a set of small changes (≤ 400 changed code lines each), every one passing the gate.
 

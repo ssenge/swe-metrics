@@ -1,6 +1,23 @@
 # swe-metrics
 
-Measures software (code, infrastructure as code, documentation, architecture models) and reports the metrics as JSON, with the tools' detailed findings as SARIF. Stateless and read-only; it never judges the values.
+Measures software (code, infrastructure as code, documentation, architecture models) and reports the metrics as JSON, with the tools' detailed findings as SARIF. Stateless and read-only; it never judges the values. It runs locally and uses the tools installed on the machine.
+
+## Install (macOS, Linux; Windows via WSL)
+
+```bash
+pip install -e .              # swe-metrics with lizard and complexipy (Python ≥ 3.12)
+scripts/install-tools.sh      # every external tool, pinned in tools.lock, into ~/.local/share/swe-metrics/tools
+export PATH="$HOME/.local/bin:$PATH"
+swe-metrics tools             # every analyzer with its installed version
+```
+
+`install-tools.sh` needs `curl`, `tar`, `unzip`, `python3` with `venv`, and on Linux `xz`:
+- Debian/Ubuntu: `sudo apt-get install -y curl unzip xz-utils python3-venv`
+- Amazon Linux / Fedora: `sudo dnf install -y curl unzip xz python3`
+
+It never needs root, verifies every download against `tools.lock`, and only prints the `PATH` line. `--check` compares the installed versions with the lock; `--only TOOL` installs one tool. git is expected on the machine; a JDK is needed only for Java class files (`--report classes=PATH`). Without a tool, its analyzer is reported as not installed and the others still run.
+
+## Use
 
 ```bash
 swe-metrics measure <file|directory|repository> [--only FAMILY] [--exclude GLOB] [--changed-since REF]
@@ -8,8 +25,5 @@ swe-metrics measure <file|directory|repository> [--only FAMILY] [--exclude GLOB]
 swe-metrics tools [--json]     # analyzers, their tools and installed versions
 swe-metrics schema             # the report JSON Schema
 ```
-
-All tools at pinned versions: `docker build -f container/Dockerfile -t swe-metrics .`, then
-`docker run --rm -v "$PWD:/work:ro" swe-metrics measure /work`.
 
 Plan and design decisions: `docs/implementation-plan.md`. Rules for contributors and agents: `AGENTS.md`.

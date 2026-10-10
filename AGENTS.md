@@ -16,5 +16,7 @@ swe-metrics measures software (code, IaC, docs, architecture models) and reports
 ## Setup
 ```bash
 uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -e ".[dev]"
-PATH=$PWD/.venv/bin:$PATH scripts/gate.sh     # also needs gitleaks and Node (npx) on the PATH
+scripts/install-tools.sh                      # external tools from tools.lock into ~/.local/bin
+PATH=$PWD/.venv/bin:$HOME/.local/bin:$PATH scripts/gate.sh   # gate (also needs npx for its jscpd check)
+scripts/integration.sh                        # golden report with the real tools (after tool updates)
 ```

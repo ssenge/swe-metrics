@@ -1,0 +1,4346 @@
+{
+ "checkov": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV2_AWS_6"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV2_AWS_61"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV2_AWS_62"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_144"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_145"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_18"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_21"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "file",
+     "path": "terraform/storage/main.tf"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "neutral",
+    "id": "iac.passed_checks",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "iac.resources",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 3.0
+   }
+  ],
+  "version": "3.3.19 (terraform framework, built-in checks)"
+ },
+ "complexipy": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "Order::_check"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "fetch"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "_Hidden::visible"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "python_small/calc.py",
+     "symbol": "add"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "sast/app.py",
+     "symbol": "run"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_small/calc.py",
+     "symbol": "classify"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_structure/src/shop/api/views.py",
+     "symbol": "index"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 8,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "Order::total"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "price"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 10,
+     "max": 5.0,
+     "mean": 0.5,
+     "p50": 0.0,
+     "p95": 5.0,
+     "sum": 5.0
+    },
+    "tool": "complexipy",
+    "unit": "count"
+   }
+  ],
+  "version": "8.0.1"
+ },
+ "dependency-cruiser": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "structure.cycles",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/a.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/b.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/index.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/t.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 4,
+     "max": 1.0,
+     "mean": 1.0,
+     "p50": 1.0,
+     "p95": 1.0,
+     "sum": 4.0
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.modules_in_cycles",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/a.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/b.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/index.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/t.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 4,
+     "max": 3.0,
+     "mean": 1.0,
+     "p50": 0.0,
+     "p95": 3.0,
+     "sum": 4.0
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count"
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.dependencies",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/a.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "ratio",
+    "value": 0.25
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/b.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "ratio",
+    "value": 0.5
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/index.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "ratio",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "scope": {
+     "level": "module",
+     "path": "js_structure/src/t.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "ratio",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 4,
+     "max": 1.0,
+     "mean": 0.6875,
+     "p50": 0.5,
+     "p95": 1.0,
+     "sum": 2.75
+    },
+    "tool": "dependency-cruiser",
+    "unit": "ratio"
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.modules",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 4.0
+   }
+  ],
+  "version": "18.4.0 (no target config)"
+ },
+ "gitleaks": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "secrets.findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "gitleaks",
+    "unit": "count",
+    "value": 0.0
+   }
+  ],
+  "version": "8.30.1 (default rules, target config ignored)"
+ },
+ "hadolint": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "level": "error"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "level": "info"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "level": "warning"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL3003"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL3008"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL3015"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL3018"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL3019"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL3025"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "labels": {
+     "rule": "DL4000"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "docker_small/Dockerfile"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "docker_small/web.Dockerfile"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "container.lint_findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "hadolint",
+    "unit": "count",
+    "value": 7.0
+   }
+  ],
+  "version": "2.15.1 (default rules, target config ignored)"
+ },
+ "jscpd": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "duplication.clones",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "jscpd",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "duplication.duplicated_lines",
+    "scope": {
+     "level": "file",
+     "path": "dup_java/A.java"
+    },
+    "tool": "jscpd",
+    "unit": "lines",
+    "value": 17.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "duplication.duplicated_lines",
+    "scope": {
+     "level": "file",
+     "path": "dup_java/B.java"
+    },
+    "tool": "jscpd",
+    "unit": "lines",
+    "value": 17.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "duplication.duplicated_lines",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "jscpd",
+    "unit": "lines",
+    "value": 17.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "duplication.percent",
+    "scope": {
+     "level": "file",
+     "path": "dup_java/A.java"
+    },
+    "tool": "jscpd",
+    "unit": "percent",
+    "value": 94.44
+   },
+   {
+    "direction": "lower_better",
+    "id": "duplication.percent",
+    "scope": {
+     "level": "file",
+     "path": "dup_java/B.java"
+    },
+    "tool": "jscpd",
+    "unit": "percent",
+    "value": 94.44
+   },
+   {
+    "direction": "lower_better",
+    "id": "duplication.percent",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "jscpd",
+    "unit": "percent",
+    "value": 8.59
+   }
+  ],
+  "version": "4.0.5 (min-tokens 50, min-lines 5)"
+ },
+ "likec4": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.errors",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_elements",
+    "scope": {
+     "level": "file",
+     "path": "likec4_small/model.c4",
+     "symbol": "context"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_elements",
+    "scope": {
+     "level": "file",
+     "path": "likec4_small/model.c4",
+     "symbol": "shop_containers"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_elements",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 2,
+     "max": 6.0,
+     "mean": 4.5,
+     "p50": 3.0,
+     "p95": 6.0,
+     "sum": 9.0
+    },
+    "tool": "likec4",
+    "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_relationships",
+    "scope": {
+     "level": "file",
+     "path": "likec4_small/model.c4",
+     "symbol": "context"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_relationships",
+    "scope": {
+     "level": "file",
+     "path": "likec4_small/model.c4",
+     "symbol": "shop_containers"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_relationships",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 2,
+     "max": 4.0,
+     "mean": 3.0,
+     "p50": 2.0,
+     "p95": 4.0,
+     "sum": 6.0
+    },
+    "tool": "likec4",
+    "unit": "count"
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.elements",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.relationships",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.views",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "likec4",
+    "unit": "count",
+    "value": 2.0
+   }
+  ],
+  "version": "1.59.4 (no layout)"
+ },
+ "lizard": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::sum"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::shout"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::trim"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::greet"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::service"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::name"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::hidden"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::sign"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "(anonymous)::run"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/A.java",
+     "symbol": "A::uniqueA"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/B.java",
+     "symbol": "B::uniqueB"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::toString"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/A.java",
+     "symbol": "A::compute"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/B.java",
+     "symbol": "B::compute"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::max"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "java_structure/src/com/example/core/Repo.java",
+     "symbol": "Repo::find"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::Strings"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::main"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::Service"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "js_structure/src/a.js",
+     "symbol": "a"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "_check"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "fetch"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "visible"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "python_small/calc.py",
+     "symbol": "add"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "sast/app.py",
+     "symbol": "run"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug.inner"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_small/calc.py",
+     "symbol": "classify"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_structure/src/shop/api/views.py",
+     "symbol": "index"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 8,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "total"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "price"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 31,
+     "max": 5.0,
+     "mean": 1.3225806451612903,
+     "p50": 1.0,
+     "p95": 5.0,
+     "sum": 41.0
+    },
+    "tool": "lizard",
+    "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::sum"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::shout"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::trim"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::greet"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::service"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::name"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::hidden"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::sign"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 8.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "(anonymous)::run"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/A.java",
+     "symbol": "A::uniqueA"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/B.java",
+     "symbol": "B::uniqueB"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::toString"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/A.java",
+     "symbol": "A::compute"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 16.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/B.java",
+     "symbol": "B::compute"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 16.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::max"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "java_structure/src/com/example/core/Repo.java",
+     "symbol": "Repo::find"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::Strings"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::main"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::Service"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "js_structure/src/a.js",
+     "symbol": "a"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "_check"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "fetch"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "visible"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "python_small/calc.py",
+     "symbol": "add"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "sast/app.py",
+     "symbol": "run"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug.inner"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_small/calc.py",
+     "symbol": "classify"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_structure/src/shop/api/views.py",
+     "symbol": "index"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 8,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "total"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "price"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 31,
+     "max": 16.0,
+     "mean": 3.5483870967741935,
+     "p50": 2.0,
+     "p95": 16.0,
+     "sum": 110.0
+    },
+    "tool": "lizard",
+    "unit": "lines"
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::sum"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::shout"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::trim"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::greet"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::service"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::name"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::hidden"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::sign"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "(anonymous)::run"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/A.java",
+     "symbol": "A::uniqueA"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/B.java",
+     "symbol": "B::uniqueB"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::toString"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/A.java",
+     "symbol": "A::compute"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/B.java",
+     "symbol": "B::compute"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "java_small/src/Calc.java",
+     "symbol": "Calc::max"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "java_structure/src/com/example/core/Repo.java",
+     "symbol": "Repo::find"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings::Strings"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "App::main"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service::Service"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "js_structure/src/a.js",
+     "symbol": "a"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "_check"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "fetch"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "visible"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "python_small/calc.py",
+     "symbol": "add"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "sast/app.py",
+     "symbol": "run"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug.inner"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_small/calc.py",
+     "symbol": "classify"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_structure/src/shop/api/views.py",
+     "symbol": "index"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 8,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "total"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "price"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 31,
+     "max": 2.0,
+     "mean": 0.7741935483870968,
+     "p50": 1.0,
+     "p95": 2.0,
+     "sum": 24.0
+    },
+    "tool": "lizard",
+    "unit": "count"
+   },
+   {
+    "direction": "neutral",
+    "id": "size.files",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 20.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.functions",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 31.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/A.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 19.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/B.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 19.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_small/src/Calc.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 23.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/app/App.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Repo.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Service.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 19.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/util/Strings.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "js_structure/src/a.js"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "js_structure/src/b.js"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "js_structure/src/index.js"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_small/calc.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 11.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/__init__.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/_version.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/__init__.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/views.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/models.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/pricing.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/util.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "sast/app.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "js_structure/src/t.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 20,
+     "max": 23.0,
+     "mean": 8.05,
+     "p50": 4.0,
+     "p95": 19.0,
+     "sum": 161.0
+    },
+    "tool": "lizard",
+    "unit": "lines"
+   }
+  ],
+  "version": "1.24.1"
+ },
+ "lychee": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "docs.broken_links",
+    "scope": {
+     "level": "file",
+     "path": "docs/README.md"
+    },
+    "tool": "lychee",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.broken_links",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "lychee",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "docs.links",
+    "scope": {
+     "level": "file",
+     "path": "docs/README.md"
+    },
+    "tool": "lychee",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "docs.links",
+    "scope": {
+     "level": "file",
+     "path": "docs/guide/setup.md"
+    },
+    "tool": "lychee",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "docs.links",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "lychee",
+    "unit": "count",
+    "value": 4.0
+   }
+  ],
+  "version": "0.24.2 (offline, anchor fragments)"
+ },
+ "markdownlint": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "labels": {
+     "rule": "MD013"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "labels": {
+     "rule": "MD022"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "labels": {
+     "rule": "MD032"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "docs/README.md"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "python_small/notes.md"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 3.0
+   }
+  ],
+  "version": "0.23.3 (default rules, inline config ignored)"
+ },
+ "opengrep": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "security.findings",
+    "labels": {
+     "level": "error"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "opengrep",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "security.findings",
+    "labels": {
+     "level": "note"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "opengrep",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "security.findings",
+    "scope": {
+     "level": "file",
+     "path": "sast/app.py"
+    },
+    "tool": "opengrep",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "security.findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "opengrep",
+    "unit": "count",
+    "value": 2.0
+   }
+  ],
+  "version": "1.30.1"
+ },
+ "swe-metrics": {
+  "metrics": [
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/A.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/B.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_small/src/Calc.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/app/App.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Repo.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Service.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/util/Strings.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_small/calc.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/__init__.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/_version.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/__init__.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/views.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/models.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/pricing.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/util.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "sast/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 14.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/A.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/B.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_small/src/Calc.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/app/App.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 66.67
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Service.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 60.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/util/Strings.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 40.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 30.43
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_small/calc.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/__init__.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 100.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/__init__.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/views.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 100.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/models.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 66.67
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/pricing.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 33.33
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/util.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 50.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "sast/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 41.18
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 35.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/A.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_java/B.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_small/src/Calc.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/app/App.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Repo.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/core/Service.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "java_structure/src/com/example/util/Strings.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 16.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_small/calc.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/__init__.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/_version.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/__init__.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/api/views.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/models.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/pricing.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "python_structure/src/shop/util.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "sast/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 10.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 26.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.cycles",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "python_small.calc"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "sast.app"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop._version"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.api"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.api.views"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.models"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.pricing"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.util"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 9,
+     "max": 3.0,
+     "mean": 0.8888888888888888,
+     "p50": 1.0,
+     "p95": 3.0,
+     "sum": 8.0
+    },
+    "tool": "swe-metrics",
+    "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.modules_in_cycles",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "container.base_images",
+    "labels": {
+     "final": "false",
+     "image": "maven:3.9-eclipse-temurin-21",
+     "stage": "build"
+    },
+    "scope": {
+     "level": "file",
+     "line": 3,
+     "path": "docker_small/Dockerfile"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "container.base_images",
+    "labels": {
+     "final": "true",
+     "image": "eclipse-temurin:21-jre",
+     "stage": "1"
+    },
+    "scope": {
+     "level": "file",
+     "line": 9,
+     "path": "docker_small/Dockerfile"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "container.base_images",
+    "labels": {
+     "final": "true",
+     "image": "node:24-alpine",
+     "stage": "0"
+    },
+    "scope": {
+     "level": "file",
+     "line": 1,
+     "path": "docker_small/web.Dockerfile"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "container.runtime_major",
+    "labels": {
+     "final": "false",
+     "runtime": "java",
+     "stage": "build",
+     "version": "21"
+    },
+    "scope": {
+     "level": "file",
+     "line": 3,
+     "path": "docker_small/Dockerfile"
+    },
+    "tool": "swe-metrics",
+    "unit": "version",
+    "value": 21.0
+   },
+   {
+    "direction": "neutral",
+    "id": "container.runtime_major",
+    "labels": {
+     "final": "true",
+     "runtime": "java",
+     "stage": "1",
+     "version": "21"
+    },
+    "scope": {
+     "level": "file",
+     "line": 9,
+     "path": "docker_small/Dockerfile"
+    },
+    "tool": "swe-metrics",
+    "unit": "version",
+    "value": 21.0
+   },
+   {
+    "direction": "neutral",
+    "id": "container.runtime_major",
+    "labels": {
+     "final": "true",
+     "runtime": "node",
+     "stage": "0",
+     "version": "24"
+    },
+    "scope": {
+     "level": "file",
+     "line": 1,
+     "path": "docker_small/web.Dockerfile"
+    },
+    "tool": "swe-metrics",
+    "unit": "version",
+    "value": 24.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "python_small.calc"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "sast.app"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop._version"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.api"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.api.views"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.models"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.pricing"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.util"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 9,
+     "max": 3.0,
+     "mean": 0.8888888888888888,
+     "p50": 0.0,
+     "p95": 3.0,
+     "sum": 8.0
+    },
+    "tool": "swe-metrics",
+    "unit": "count"
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.dependencies",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 8.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop"
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.api"
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.api.views"
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio",
+    "value": 0.75
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.models"
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio",
+    "value": 0.25
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.pricing"
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio",
+    "value": 0.5
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "shop.util"
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.instability",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 6,
+     "max": 1.0,
+     "mean": 0.5833333333333334,
+     "p50": 0.5,
+     "p95": 1.0,
+     "sum": 3.5
+    },
+    "tool": "swe-metrics",
+    "unit": "ratio"
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.modules",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 9.0
+   }
+  ],
+  "version": "0.0.1"
+ },
+ "tflint": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "iac.lint_findings",
+    "labels": {
+     "rule": "terraform_required_version"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "tflint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.lint_findings",
+    "labels": {
+     "rule": "terraform_unused_declarations"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "tflint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "terraform/storage/main.tf"
+    },
+    "tool": "tflint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.lint_findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "tflint",
+    "unit": "count",
+    "value": 2.0
+   }
+  ],
+  "version": "0.64.0 (ruleset terraform 0.15.0-bundled, recommended preset)"
+ }
+}
