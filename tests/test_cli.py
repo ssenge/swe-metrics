@@ -40,3 +40,6 @@ def test_tools(capsys):
     """`tools` lists each analyzer with its version and families."""
     assert main(["tools"]) == 0
     assert "lizard" in capsys.readouterr().out
+    assert main(["tools", "--json"]) == 0
+    rows = json.loads(capsys.readouterr().out)
+    assert {"id": "lizard", "tool": "lizard", "version": "1.24.1", "families": ["size", "complexity"]} in rows

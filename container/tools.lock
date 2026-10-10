@@ -1,0 +1,29 @@
+# swe-metrics container image: every tool, pinned. container/install-tools.sh installs exactly these.
+# Columns (tab-separated): tool  version  arch  kind  sha256  source
+#   arch: arm64 | amd64 | any.  kind: tar:<member> | zip:<member> | bin:<name> | jar:<name> | node | npm | pip
+#   sha256: from the upstream checksum file; opengrep: computed after its cosign signature verified;
+#           checkstyle: computed from the release asset (no upstream checksum file); npm/pip: "-" (registry
+#           integrity; pinned by exact version).
+# Rule: only releases at least two weeks old when pinned (supply-chain hygiene).
+gitleaks	8.30.1	arm64	tar:gitleaks	e4a487ee7ccd7d3a7f7ec08657610aa3606637dab924210b3aee62570fb4b080	https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_arm64.tar.gz
+trivy	0.74.0	arm64	tar:trivy	b94ce1976bbf3c15b514b605ee88be7c6d94a29be2302847ff01cb794d47aad5	https://github.com/aquasecurity/trivy/releases/download/v0.74.0/trivy_0.74.0_Linux-ARM64.tar.gz
+tflint	0.64.0	arm64	zip:tflint	560da89aacf59389d4eb029730dd5b109b7288096c32f2726a0d9e783a5ea8eb	https://github.com/terraform-linters/tflint/releases/download/v0.64.0/tflint_linux_arm64.zip
+terraform	1.16.4	arm64	zip:terraform	8263f301cb1a24489a4adeed147bf28504053f77237b3ea97a0ef2972659de30	https://releases.hashicorp.com/terraform/1.16.4/terraform_1.16.4_linux_arm64.zip
+hadolint	2.15.1	arm64	bin:hadolint	f6198ef8090f404dbb771abfee086eb8c48ac177f30da7fd3510aca35b344b5d	https://github.com/hadolint/hadolint/releases/download/v2.15.1/hadolint-linux-arm64
+lychee	0.24.2	arm64	tar:lychee	91a7bd65685da41b90ccb9bc867a3d649a7818042dae04ff405e55a25bddee4c	https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-aarch64-unknown-linux-gnu.tar.gz
+node	24.21.0	arm64	node	6ad1325edbdb5649c379b75a237147a666c95d4f9ae8d340fef2d1575d289ad2	https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-arm64.tar.xz
+opengrep	1.30.1	arm64	bin:opengrep	a730f6fdce1e978ea29e610a2e0503bfe1ec31fce08979a9a84e3699f03e16ee	https://github.com/opengrep/opengrep/releases/download/v1.30.1/opengrep_manylinux_aarch64
+gitleaks	8.30.1	amd64	tar:gitleaks	551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb	https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+trivy	0.74.0	amd64	tar:trivy	2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a	https://github.com/aquasecurity/trivy/releases/download/v0.74.0/trivy_0.74.0_Linux-64bit.tar.gz
+tflint	0.64.0	amd64	zip:tflint	cca9d13e2e1d7a2c627af60ff899a3c9b74212899416aeb96ec764d2ef954537	https://github.com/terraform-linters/tflint/releases/download/v0.64.0/tflint_linux_amd64.zip
+terraform	1.16.4	amd64	zip:terraform	dc94af0eef1147718ad7c8daea792ed199e3e0492eec180d0adafa2a65a879df	https://releases.hashicorp.com/terraform/1.16.4/terraform_1.16.4_linux_amd64.zip
+hadolint	2.15.1	amd64	bin:hadolint	c7187db94eeeeca956519a6af171adc31453941a1e777961f6e680f697c8c507	https://github.com/hadolint/hadolint/releases/download/v2.15.1/hadolint-linux-x86_64
+lychee	0.24.2	amd64	tar:lychee	1f4e0ef7f6554a6ed33dd7ac144fb2e1bbed98598e7af973042fc5cd43951c9a	https://github.com/lycheeverse/lychee/releases/download/lychee-v0.24.2/lychee-x86_64-unknown-linux-gnu.tar.gz
+node	24.21.0	amd64	node	fd8e59d5a511510f6a298afb548f18c7d2b1be404d8b4a27d94fbe49f56cb2d6	https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.xz
+opengrep	1.30.1	amd64	bin:opengrep	d3195b9d8d5ae93179f6aa5f5daaba6a920a5a09d38c5d5ae5e60924050210c4	https://github.com/opengrep/opengrep/releases/download/v1.30.1/opengrep_manylinux_x86
+checkstyle	14.1.0	any	jar:checkstyle	51e2bc7fed1bb56808aa39045f655a316194997acd24bac5195253dcf342b380	https://github.com/checkstyle/checkstyle/releases/download/checkstyle-14.1.0/checkstyle-14.1.0-all.jar
+jscpd	4.0.5	any	npm	-	jscpd
+markdownlint-cli2	0.23.3	any	npm	-	markdownlint-cli2
+likec4	1.59.4	any	npm	-	likec4
+dependency-cruiser	18.4.0	any	npm	-	dependency-cruiser
+checkov	3.3.19	any	pip	-	checkov

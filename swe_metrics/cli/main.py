@@ -8,6 +8,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass, field
 from importlib.resources import files
 from pathlib import Path
+from typing import Any
 
 from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.gitleaks import Gitleaks
@@ -63,10 +64,15 @@ def cmd_measure(args: argparse.Namespace) -> int:
 
 
 def cmd_tools(args: argparse.Namespace) -> int:
-    """List every analyzer with its tool, families and installed version."""
-    for analyzer in analyzers():
-        version = analyzer.version() or "not installed"
-        print(f"{analyzer.id:<12} {analyzer.tool:<12} {version:<14} {','.join(analyzer.families)}")
+    """List every analyzer with its tool, families and installed version (as a table or JSON)."""
+    rows: list[dict[str, Any]] = [{"id": a.id, "tool": a.tool, "version": a.version(),
+                                   "families": list(a.families)} for a in analyzers()]
+    if args.json:
+        sys.stdout.write(json.dumps(rows, indent=2) + "\n")
+        return 0
+    for row in rows:
+        version = row["version"] or "not installed"
+        print(f"{row['id']:<12} {row['tool']:<12} {version:<14} {','.join(row['families'])}")
     return 0
 
 
@@ -90,7 +96,8 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("--changed-since", help="Git targets: measure only files changed since this ref")
     m.add_argument("--report", action="append", default=[], metavar="KIND=PATH",
                    help=f"build report to read; repeatable. Kinds: {', '.join(sorted(REPORT_KINDS))}")
-    sub.add_parser("tools", help="list the analyzers and their tools")
+    tools = sub.add_parser("tools", help="list the analyzers and their tools")
+    tools.add_argument("--json", action="store_true", help="print JSON instead of a table")
     sub.add_parser("schema", help="print the report JSON Schema")
     return p
 
