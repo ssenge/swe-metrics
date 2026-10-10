@@ -1,9 +1,52 @@
 {
   "_comment": "Hand-derived. Packages: app uses core and util; core (Service) uses util (Strings); util (Strings.service) uses core: one cycle. Doc coverage: see doc_coverage.",
   "structure": {
-    "target": {"structure.modules": 3, "structure.dependencies": 4, "structure.cycles": 1, "structure.modules_in_cycles": 2},
-    "afferent": {"com.example.app": 0, "com.example.core": 2, "com.example.util": 2},
-    "efferent": {"com.example.app": 2, "com.example.core": 1, "com.example.util": 1},
-    "instability": {"com.example.app": 1.0, "com.example.core": 0.3333333333333333, "com.example.util": 0.3333333333333333}
+    "target": {
+      "structure.modules": 3,
+      "structure.dependencies": 4,
+      "structure.cycles": 1,
+      "structure.modules_in_cycles": 2
+    },
+    "afferent": {
+      "com.example.app": 0,
+      "com.example.core": 2,
+      "com.example.util": 2
+    },
+    "efferent": {
+      "com.example.app": 2,
+      "com.example.core": 1,
+      "com.example.util": 1
+    },
+    "instability": {
+      "com.example.app": 1.0,
+      "com.example.core": 0.3333333333333333,
+      "com.example.util": 0.3333333333333333
+    }
+  },
+  "doc_coverage": {
+    "_comment": "Public types, methods and constructors with a /** */ comment. App: App, main documented; greet not; hidden private. Service: class not, constructor, name (annotation between) and Listener documented; Listener.changed (implicitly public) not; toString is @Override; the anonymous class's run is inside a method. Repo: package-private class, nothing public. Strings: class and shout documented; trim, service (line comment), Mode (block comment) not.",
+    "files": {
+      "src/com/example/app/App.java": [
+        2,
+        1
+      ],
+      "src/com/example/core/Service.java": [
+        3,
+        2
+      ],
+      "src/com/example/core/Repo.java": [
+        0,
+        0
+      ],
+      "src/com/example/util/Strings.java": [
+        2,
+        3
+      ]
+    },
+    "total": [
+      7,
+      6
+    ],
+    "percent": 53.85
   }
 }

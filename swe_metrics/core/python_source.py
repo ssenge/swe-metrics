@@ -45,3 +45,24 @@ def resolve(name: str, modules: Container[str]) -> str | None:
         if candidate in modules:
             return candidate
     return None
+
+
+def doc_flags(source: bytes, module: str, filename: str = "<source>") -> list[bool]:
+    """Whether each public API (the module, its classes, functions and methods) has a docstring.
+
+    Public means no leading underscore in the name, nor in any enclosing module or class.
+    """
+    tree = ast.parse(source, filename)
+    public = not any(part.startswith("_") for part in module.split("."))
+    return [bool(ast.get_docstring(tree)), *_definition_flags(tree.body)] if public else []
+
+
+def _definition_flags(body: list[ast.stmt]) -> list[bool]:
+    """Docstring flags of the public classes and functions in a module or class body, and their members."""
+    flags = []
+    for node in body:
+        if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef) and node.name[:1] != "_":
+            flags.append(bool(ast.get_docstring(node)))
+            if isinstance(node, ast.ClassDef):
+                flags += _definition_flags(node.body)
+    return flags

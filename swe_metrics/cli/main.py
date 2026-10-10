@@ -11,6 +11,7 @@ from pathlib import Path
 
 from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.depcruise import Depcruise
+from swe_metrics.analyzers.doc_coverage import DocCoverage
 from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.jdeps import Jdeps
 from swe_metrics.analyzers.jscpd import Jscpd
@@ -40,7 +41,8 @@ NO_SETTINGS = Settings()
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
     return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
-            PythonImports(), Depcruise(), Jdeps(settings.reports.get("classes", ()))]
+            PythonImports(), Depcruise(), Jdeps(settings.reports.get("classes", ())),
+            DocCoverage()]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:
