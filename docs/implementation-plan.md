@@ -98,9 +98,9 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `history` (Git targets) | commits, distinct authors (counted only) and age in days since HEAD per file; change coupling between files | git log (code-maat method) |
 
 **Tier B: needs a build or test run that the caller performs.** swe-metrics doesn't build projects; build systems are too varied and too slow for a measuring tool. The caller passes the reports with `--report`:
-- `tests`: passed, failed, skipped (JUnit XML);
-- `coverage`: line and branch coverage per file (JaCoCo, Cobertura, lcov, coverage.py);
-- `mutation`: mutation score per file (PIT, Stryker, mutmut);
+- `tests`: passed, failed, errors, skipped and duration per test suite and in total (`--report junit=`, a file or a directory of `*.xml`);
+- `coverage`: line and branch coverage per file and in total (`jacoco`, `cobertura`, `lcov`; coverage.py through `coverage xml`, which writes Cobertura);
+- `mutation`: killed, survived and uncovered mutants and the mutation score per file and in total (`pit`, `stryker`). mutmut has no report file format of its own and is not read;
 - `structure` for compiled languages: class files for jdeps.
 
 **Later (not in v1):**
@@ -189,6 +189,7 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
    - A tool that couldn't read part of the input fails the analyzer instead of reporting partial counts: tflint's own errors (e.g. a syntax error) and checkov's parsing errors.
    - Inline suppressions in the target still apply for tflint (`tflint-ignore`) and checkov (`checkov:skip`); neither tool can switch them off. checkov counts them as skipped, which isn't reported.
    - checkov's open-source checks carry no severity, so misconfigurations are counted per check ID (label `check`), not per severity.
+   - **M3 build reports.** One analyzer per report kind (`junit`, `jacoco`, `cobertura`, `lcov`, `pit`, `stryker`); it runs no tool: its tool and every metric's `tool` is the report format (plus a `format` label), its version is swe-metrics' own. Parsing is pure (`core/junit.py`, `core/coverage.py`, `core/mutation.py`); XML goes through defusedxml, so entity declarations and external references fail the run. Report paths (Java packages, absolute paths, `SF:` lines, paths relative to a Cobertura `<source>` or Stryker `projectRoot`) map to target files by suffix: a path containing target files picks the longest, a path that is a suffix of target files needs a unique match. Unmatched entries count only in the totals. Several reports of a kind are combined: coverage line by line (a line any report covers is covered; per line the larger branch counts), tests per suite name, mutants added up. `mutation.score` = killed / (killed + survived + no_coverage) × 100, where killed follows each tool's reading: PIT KILLED, TIMED_OUT, MEMORY_ERROR, RUN_ERROR; Stryker Killed, Timeout. PIT NON_VIABLE and Stryker CompileError, RuntimeError, Ignored and Pending are not counted. A test suite's duration is its own `time` (it includes set-up), or the sum of its cases' times when it has none or nests other suites. Percentages are rounded to 2 decimals and omitted when there is nothing to divide by.
 
 1. **Cognitive complexity beyond Python.** No permissive open-source tool covers Java, JS and others the way SonarQube does. Options: implement the published cognitive-complexity rules on top of a parser (tree-sitter), or report the gap. Proposal: report the gap in v1, then decide.
 2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report; offer an offline mode with a database snapshot inside the container image.

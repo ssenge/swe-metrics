@@ -6,11 +6,11 @@ name = "swe-metrics"
 version = "0.0.1"
 description = "Stateless software metrics: code, IaC, docs and architecture models in, a metric report out"
 requires-python = ">=3.12"
-dependencies = ["lizard==1.24.1", "complexipy==8.0.1"]
+dependencies = ["lizard==1.24.1", "complexipy==8.0.1", "defusedxml==0.7.1"]
 
 [project.optional-dependencies]
 dev = ["ruff", "mypy", "complexipy", "interrogate", "pytest", "pytest-cov", "bandit", "pip-audit",
-       "import-linter", "jsonschema", "types-jsonschema"]   # plus gitleaks and Node (jscpd) on the PATH
+       "import-linter", "jsonschema", "types-jsonschema", "types-defusedxml"]   # plus gitleaks and Node (jscpd) on the PATH
 
 [project.scripts]
 swe-metrics = "swe_metrics.cli.main:main"
