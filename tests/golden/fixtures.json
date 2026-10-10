@@ -163,6 +163,22 @@
     "scope": {
      "level": "function",
      "line": 14,
+     "path": "cognitive/sample.py",
+     "symbol": "comprehension"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
      "path": "python_structure/src/shop/pricing.py",
      "symbol": "fetch"
     },
@@ -226,6 +242,54 @@
     },
     "scope": {
      "level": "function",
+     "line": 21,
+     "path": "cognitive/sample.py",
+     "symbol": "Service::run"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.py",
+     "symbol": "with_lambda"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.py",
+     "symbol": "loops"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
      "line": 4,
      "path": "python_structure/src/shop/util.py",
      "symbol": "slug"
@@ -233,6 +297,22 @@
     "tool": "complexipy",
     "unit": "count",
     "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.py",
+     "symbol": "chain"
+    },
+    "tool": "complexipy",
+    "unit": "count",
+    "value": 3.0
    },
    {
     "direction": "lower_better",
@@ -305,12 +385,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 10,
+     "count": 15,
      "max": 5.0,
-     "mean": 0.5,
+     "mean": 1.1333333333333333,
      "p50": 0.0,
      "p95": 5.0,
-     "sum": 5.0
+     "sum": 17.0
     },
     "tool": "complexipy",
     "unit": "count"
@@ -329,6 +409,28 @@
     "tool": "dependency-cruiser",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "cognitive/sample.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "cognitive/sample.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "lower_better",
@@ -381,9 +483,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 4,
+     "count": 6,
      "max": 1.0,
-     "mean": 1.0,
+     "mean": 0.6666666666666666,
      "p50": 1.0,
      "p95": 1.0,
      "sum": 4.0
@@ -400,6 +502,28 @@
     "tool": "dependency-cruiser",
     "unit": "count",
     "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "cognitive/sample.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "cognitive/sample.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "neutral",
@@ -452,9 +576,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 4,
+     "count": 6,
      "max": 3.0,
-     "mean": 1.0,
+     "mean": 0.6666666666666666,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 4.0
@@ -541,7 +665,7 @@
     },
     "tool": "dependency-cruiser",
     "unit": "count",
-    "value": 4.0
+    "value": 6.0
    }
   ],
   "version": "18.4.0 (no target config)"
@@ -802,7 +926,7 @@
     },
     "tool": "jscpd",
     "unit": "percent",
-    "value": 8.59
+    "value": 2.28
    }
   ],
   "version": "4.0.5 (min-tokens 50, min-lines 5)"
@@ -940,6 +1064,325 @@
     "direction": "lower_better",
     "id": "complexity.cyclomatic",
     "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.c",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.c",
+     "symbol": "sw"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.c",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/sample.c",
+     "symbol": "pick"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 47,
+     "path": "cognitive/sample.c",
+     "symbol": "drain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::~Tree"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 20,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::sum"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 36,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::depth"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 44,
+     "path": "cognitive/sample.cpp",
+     "symbol": "parse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.cpp",
+     "symbol": "power"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Switches"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 46,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 61,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Sample"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.go",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.go",
+     "symbol": "sw"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.go"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.go",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
      "language": "java"
     },
     "scope": {
@@ -1015,6 +1458,22 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::getWords"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
    },
    {
     "direction": "lower_better",
@@ -1120,6 +1579,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 24,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 25,
      "path": "java_structure/src/com/example/core/Service.java",
      "symbol": "Service::toString"
@@ -1127,6 +1602,38 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::logic"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::sumOfPrimes"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
    },
    {
     "direction": "lower_better",
@@ -1171,6 +1678,38 @@
      "line": 3,
      "path": "java_small/src/Calc.java",
      "symbol": "Calc::max"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 32,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::recurse"
     },
     "tool": "lizard",
     "unit": "count",
@@ -1248,6 +1787,70 @@
     },
     "scope": {
      "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.js",
+     "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
+     "symbol": "n"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.js",
+     "symbol": "tryIt"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.js",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
      "line": 2,
      "path": "js_structure/src/a.js",
      "symbol": "a"
@@ -1255,6 +1858,198 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.js",
+     "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.kt",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.kt",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.kt",
+     "symbol": "nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 31,
+     "path": "cognitive/sample.kt",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 41,
+     "path": "cognitive/sample.kt",
+     "symbol": "recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "cognitive/sample.kt",
+     "symbol": "expr"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.php",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.php",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.php",
+     "symbol": "branches"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 45,
+     "path": "cognitive/sample.php",
+     "symbol": "Sample::nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 58,
+     "path": "cognitive/sample.php",
+     "symbol": "Sample::recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
    },
    {
     "direction": "lower_better",
@@ -1271,6 +2066,22 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.py",
+     "symbol": "comprehension"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
    },
    {
     "direction": "lower_better",
@@ -1344,6 +2155,54 @@
     },
     "scope": {
      "level": "function",
+     "line": 21,
+     "path": "cognitive/sample.py",
+     "symbol": "run"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.py",
+     "symbol": "with_lambda"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.py",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
      "line": 4,
      "path": "python_structure/src/shop/util.py",
      "symbol": "slug"
@@ -1351,6 +2210,22 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.py",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
    },
    {
     "direction": "lower_better",
@@ -1435,19 +2310,610 @@
    {
     "direction": "lower_better",
     "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.rb",
+     "symbol": "guards"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 19,
+     "path": "cognitive/sample.rb",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.rb",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 33,
+     "path": "cognitive/sample.rb",
+     "symbol": "kind"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 40,
+     "path": "cognitive/sample.rb",
+     "symbol": "shape"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rb",
+     "symbol": "self.build"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/sample.rs",
+     "symbol": "count"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "cognitive/sample.rs",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 39,
+     "path": "cognitive/sample.rs",
+     "symbol": "retry"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rs",
+     "symbol": "drain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.rs",
+     "symbol": "depth"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/sample.rs",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.ts",
+     "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "n"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.ts",
+     "symbol": "tryIt"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.ts",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.ts",
+     "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 31,
-     "max": 5.0,
-     "mean": 1.3225806451612903,
-     "p50": 1.0,
-     "p95": 5.0,
-     "sum": 41.0
+     "count": 95,
+     "max": 6.0,
+     "mean": 2.789473684210526,
+     "p50": 3.0,
+     "p95": 6.0,
+     "sum": 265.0
     },
     "tool": "lizard",
     "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.c",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 14.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.c",
+     "symbol": "sw"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 11.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.c",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 10.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/sample.c",
+     "symbol": "pick"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 47,
+     "path": "cognitive/sample.c",
+     "symbol": "drain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::~Tree"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 20,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::sum"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 14.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 36,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::depth"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 44,
+     "path": "cognitive/sample.cpp",
+     "symbol": "parse"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 13.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.cpp",
+     "symbol": "power"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 10.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 16.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Switches"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 11.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 46,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Nested"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 14.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 61,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Recurse"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Sample"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.go",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 11.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.go",
+     "symbol": "sw"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 11.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.go"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.go",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
    },
    {
     "direction": "lower_better",
@@ -1528,6 +2994,22 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::getWords"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
    },
    {
     "direction": "lower_better",
@@ -1633,6 +3115,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 24,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 25,
      "path": "java_structure/src/com/example/core/Service.java",
      "symbol": "Service::toString"
@@ -1640,6 +3138,38 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::logic"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::sumOfPrimes"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
    },
    {
     "direction": "lower_better",
@@ -1688,6 +3218,38 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 32,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::nested"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::recurse"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -1761,6 +3323,70 @@
     },
     "scope": {
      "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.js",
+     "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
+     "symbol": "n"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.js",
+     "symbol": "tryIt"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.js",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
      "line": 2,
      "path": "js_structure/src/a.js",
      "symbol": "a"
@@ -1768,6 +3394,198 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.js",
+     "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.kt",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.kt",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.kt",
+     "symbol": "nested"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 11.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 31,
+     "path": "cognitive/sample.kt",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 41,
+     "path": "cognitive/sample.kt",
+     "symbol": "recurse"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "cognitive/sample.kt",
+     "symbol": "expr"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 8.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.php",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 13.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.php",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.php",
+     "symbol": "branches"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 45,
+     "path": "cognitive/sample.php",
+     "symbol": "Sample::nested"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 58,
+     "path": "cognitive/sample.php",
+     "symbol": "Sample::recurse"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
    },
    {
     "direction": "lower_better",
@@ -1784,6 +3602,22 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.py",
+     "symbol": "comprehension"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
    },
    {
     "direction": "lower_better",
@@ -1857,6 +3691,54 @@
     },
     "scope": {
      "level": "function",
+     "line": 21,
+     "path": "cognitive/sample.py",
+     "symbol": "run"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.py",
+     "symbol": "with_lambda"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.py",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
      "line": 4,
      "path": "python_structure/src/shop/util.py",
      "symbol": "slug"
@@ -1864,6 +3746,22 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.py",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
    },
    {
     "direction": "lower_better",
@@ -1948,19 +3846,610 @@
    {
     "direction": "lower_better",
     "id": "size.function_length",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.rb",
+     "symbol": "guards"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 19,
+     "path": "cognitive/sample.rb",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 13.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.rb",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 33,
+     "path": "cognitive/sample.rb",
+     "symbol": "kind"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 40,
+     "path": "cognitive/sample.rb",
+     "symbol": "shape"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rb",
+     "symbol": "self.build"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/sample.rs",
+     "symbol": "count"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "cognitive/sample.rs",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 13.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 39,
+     "path": "cognitive/sample.rs",
+     "symbol": "retry"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rs",
+     "symbol": "drain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.rs",
+     "symbol": "depth"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/sample.rs",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.ts",
+     "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "n"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.ts",
+     "symbol": "tryIt"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.ts",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.ts",
+     "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 31,
+     "count": 95,
      "max": 16.0,
-     "mean": 3.5483870967741935,
-     "p50": 2.0,
-     "p95": 16.0,
-     "sum": 110.0
+     "mean": 5.957894736842105,
+     "p50": 5.0,
+     "p95": 14.0,
+     "sum": 566.0
     },
     "tool": "lizard",
     "unit": "lines"
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.c",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.c",
+     "symbol": "sw"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.c",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/sample.c",
+     "symbol": "pick"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 47,
+     "path": "cognitive/sample.c",
+     "symbol": "drain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::~Tree"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 20,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::sum"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 36,
+     "path": "cognitive/sample.cpp",
+     "symbol": "Tree::depth"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 44,
+     "path": "cognitive/sample.cpp",
+     "symbol": "parse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.cpp",
+     "symbol": "power"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Switches"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 46,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 61,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample::Sample"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.go",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.go",
+     "symbol": "sw"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.go"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.go",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -2041,6 +4530,22 @@
     "tool": "lizard",
     "unit": "count",
     "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::getWords"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -2146,6 +4651,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 24,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 25,
      "path": "java_structure/src/com/example/core/Service.java",
      "symbol": "Service::toString"
@@ -2153,6 +4674,38 @@
     "tool": "lizard",
     "unit": "count",
     "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::logic"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::sumOfPrimes"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -2201,6 +4754,38 @@
     "tool": "lizard",
     "unit": "count",
     "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 32,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/Sample.java",
+     "symbol": "Sample::recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -2274,6 +4859,70 @@
     },
     "scope": {
      "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.js",
+     "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
+     "symbol": "n"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.js",
+     "symbol": "tryIt"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.js",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
      "line": 2,
      "path": "js_structure/src/a.js",
      "symbol": "a"
@@ -2281,6 +4930,198 @@
     "tool": "lizard",
     "unit": "count",
     "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.js",
+     "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.kt",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.kt",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.kt",
+     "symbol": "nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 31,
+     "path": "cognitive/sample.kt",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 41,
+     "path": "cognitive/sample.kt",
+     "symbol": "recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "cognitive/sample.kt",
+     "symbol": "expr"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.php",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.php",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.php",
+     "symbol": "branches"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 45,
+     "path": "cognitive/sample.php",
+     "symbol": "Sample::nested"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 58,
+     "path": "cognitive/sample.php",
+     "symbol": "Sample::recurse"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -2297,6 +5138,22 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.py",
+     "symbol": "comprehension"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -2370,9 +5227,73 @@
     },
     "scope": {
      "level": "function",
+     "line": 21,
+     "path": "cognitive/sample.py",
+     "symbol": "run"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.py",
+     "symbol": "with_lambda"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.py",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
      "line": 4,
      "path": "python_structure/src/shop/util.py",
      "symbol": "slug"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.py",
+     "symbol": "chain"
     },
     "tool": "lizard",
     "unit": "count",
@@ -2461,16 +5382,288 @@
    {
     "direction": "lower_better",
     "id": "size.parameters",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.rb",
+     "symbol": "guards"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 19,
+     "path": "cognitive/sample.rb",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.rb",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 33,
+     "path": "cognitive/sample.rb",
+     "symbol": "kind"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 40,
+     "path": "cognitive/sample.rb",
+     "symbol": "shape"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rb",
+     "symbol": "self.build"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/sample.rs",
+     "symbol": "count"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "cognitive/sample.rs",
+     "symbol": "loops"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 39,
+     "path": "cognitive/sample.rs",
+     "symbol": "retry"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rs",
+     "symbol": "drain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.rs",
+     "symbol": "depth"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/sample.rs",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.ts",
+     "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "n"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.ts",
+     "symbol": "tryIt"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.ts",
+     "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.ts",
+     "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 31,
-     "max": 2.0,
-     "mean": 0.7741935483870968,
+     "count": 95,
+     "max": 4.0,
+     "mean": 1.0526315789473684,
      "p50": 1.0,
      "p95": 2.0,
-     "sum": 24.0
+     "sum": 100.0
     },
     "tool": "lizard",
     "unit": "count"
@@ -2483,7 +5676,7 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 20.0
+    "value": 32.0
    },
    {
     "direction": "neutral",
@@ -2493,7 +5686,77 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 31.0
+    "value": 95.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.c"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 47.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.cpp"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 60.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/Sample.cs"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 58.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.go"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 37.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/Sample.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 37.0
    },
    {
     "direction": "neutral",
@@ -2601,6 +5864,20 @@
     },
     "scope": {
      "level": "file",
+     "path": "cognitive/sample.js"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 15.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "file",
      "path": "js_structure/src/a.js"
     },
     "tool": "lizard",
@@ -2634,6 +5911,48 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.kt"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 38.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.php"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 58.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 27.0
    },
    {
     "direction": "neutral",
@@ -2765,6 +6084,48 @@
     "direction": "neutral",
     "id": "size.lines_of_code",
     "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.rb"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 47.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.rs"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 54.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 15.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
      "language": "typescript"
     },
     "scope": {
@@ -2782,12 +6143,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 20,
-     "max": 23.0,
-     "mean": 8.05,
-     "p50": 4.0,
-     "p95": 19.0,
-     "sum": 161.0
+     "count": 32,
+     "max": 60.0,
+     "mean": 20.4375,
+     "p50": 12.0,
+     "p95": 58.0,
+     "sum": 654.0
     },
     "tool": "lizard",
     "unit": "lines"
@@ -2991,6 +6352,20 @@
     },
     "scope": {
      "level": "file",
+     "path": "cognitive/Sample.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
      "path": "dup_java/A.java"
     },
     "tool": "swe-metrics",
@@ -3093,6 +6468,20 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 7.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "higher_better",
@@ -3348,6 +6737,20 @@
     },
     "scope": {
      "level": "file",
+     "path": "cognitive/sample.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
      "path": "python_small/calc.py"
     },
     "tool": "swe-metrics",
@@ -3463,7 +6866,7 @@
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 41.18
+    "value": 29.17
    },
    {
     "direction": "higher_better",
@@ -3473,7 +6876,1526 @@
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 35.0
+    "value": 29.79
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.c",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 8.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.c",
+     "symbol": "sw"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.c",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/sample.c",
+     "symbol": "pick"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "c"
+    },
+    "scope": {
+     "level": "function",
+     "line": 47,
+     "path": "cognitive/sample.c",
+     "symbol": "drain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.cpp",
+     "symbol": "~Tree"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 20,
+     "path": "cognitive/sample.cpp",
+     "symbol": "sum"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 36,
+     "path": "cognitive/sample.cpp",
+     "symbol": "depth"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 44,
+     "path": "cognitive/sample.cpp",
+     "symbol": "parse"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.cpp",
+     "symbol": "power"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "cpp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "cognitive/sample.cpp",
+     "symbol": "twice"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Switches"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 46,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Nested"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 61,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Recurse"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "csharp"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/Sample.cs",
+     "symbol": "Sample"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.go",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.go",
+     "symbol": "sw"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "cognitive/sample.go",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_small/src/Calc.java",
+     "symbol": "sum"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "shout"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "trim"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "greet"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "name"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "service"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/Sample.java",
+     "symbol": "getWords"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "hidden"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 18,
+     "path": "java_small/src/Calc.java",
+     "symbol": "sign"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/A.java",
+     "symbol": "uniqueA"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "dup_java/B.java",
+     "symbol": "uniqueB"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 24,
+     "path": "cognitive/Sample.java",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 24,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "toString"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "cognitive/Sample.java",
+     "symbol": "logic"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "changed"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/Sample.java",
+     "symbol": "sumOfPrimes"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/A.java",
+     "symbol": "compute"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "dup_java/B.java",
+     "symbol": "compute"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "java_small/src/Calc.java",
+     "symbol": "max"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 32,
+     "path": "cognitive/Sample.java",
+     "symbol": "nested"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 42,
+     "path": "cognitive/Sample.java",
+     "symbol": "recurse"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "java_structure/src/com/example/core/Repo.java",
+     "symbol": "find"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "java_structure/src/com/example/util/Strings.java",
+     "symbol": "Strings"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/app/App.java",
+     "symbol": "main"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "java_structure/src/com/example/core/Service.java",
+     "symbol": "Service"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.js",
+     "symbol": "m"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
+     "symbol": "n"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.js",
+     "symbol": "tryIt"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.js",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "js_structure/src/a.js",
+     "symbol": "a"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.js",
+     "symbol": "arrow"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 8.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "cognitive/sample.kt",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 8.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.kt",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 29,
+     "path": "cognitive/sample.kt",
+     "symbol": "nested"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 41,
+     "path": "cognitive/sample.kt",
+     "symbol": "recurse"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "kotlin"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "cognitive/sample.kt",
+     "symbol": "expr"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.php",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.php",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.php",
+     "symbol": "branches"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 45,
+     "path": "cognitive/sample.php",
+     "symbol": "nested"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "php"
+    },
+    "scope": {
+     "level": "function",
+     "line": 58,
+     "path": "cognitive/sample.php",
+     "symbol": "recurse"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "_check"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.py",
+     "symbol": "comprehension"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "fetch"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "visible"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "python_small/calc.py",
+     "symbol": "add"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "sast/app.py",
+     "symbol": "run"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 21,
+     "path": "cognitive/sample.py",
+     "symbol": "run"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 26,
+     "path": "cognitive/sample.py",
+     "symbol": "with_lambda"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "cognitive/sample.py",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "python_structure/src/shop/util.py",
+     "symbol": "slug"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.py",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_small/calc.py",
+     "symbol": "classify"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "python_structure/src/shop/api/views.py",
+     "symbol": "index"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 8,
+     "path": "python_structure/src/shop/models.py",
+     "symbol": "total"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "python_structure/src/shop/pricing.py",
+     "symbol": "price"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.rb",
+     "symbol": "guards"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 19,
+     "path": "cognitive/sample.rb",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "cognitive/sample.rb",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 33,
+     "path": "cognitive/sample.rb",
+     "symbol": "kind"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 40,
+     "path": "cognitive/sample.rb",
+     "symbol": "shape"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "ruby"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rb",
+     "symbol": "build"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 17,
+     "path": "cognitive/sample.rs",
+     "symbol": "count"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 25,
+     "path": "cognitive/sample.rs",
+     "symbol": "loops"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 39,
+     "path": "cognitive/sample.rs",
+     "symbol": "retry"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 49,
+     "path": "cognitive/sample.rs",
+     "symbol": "drain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 59,
+     "path": "cognitive/sample.rs",
+     "symbol": "depth"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "rust"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "cognitive/sample.rs",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 13,
+     "path": "cognitive/sample.ts",
+     "symbol": "m"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "n"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 16,
+     "path": "cognitive/sample.ts",
+     "symbol": "tryIt"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "cognitive/sample.ts",
+     "symbol": "chain"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "cognitive/sample.ts",
+     "symbol": "arrow"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 8.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 93,
+     "max": 9.0,
+     "mean": 3.10752688172043,
+     "p50": 3.0,
+     "p95": 8.0,
+     "sum": 289.0
+    },
+    "tool": "swe-metrics",
+    "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/Sample.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "lower_better",
@@ -3585,6 +8507,20 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 16.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "cognitive/sample.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
    },
    {
     "direction": "lower_better",
@@ -3723,7 +8659,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 10.0
+    "value": 17.0
    },
    {
     "direction": "lower_better",
@@ -3733,7 +8669,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 26.0
+    "value": 33.0
    },
    {
     "direction": "lower_better",
@@ -3747,6 +8683,20 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "cognitive.sample"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "lower_better",
@@ -3884,10 +8834,10 @@
      "level": "target"
     },
     "stats": {
-     "count": 9,
+     "count": 10,
      "max": 3.0,
-     "mean": 0.8888888888888888,
-     "p50": 1.0,
+     "mean": 0.8,
+     "p50": 0.0,
      "p95": 3.0,
      "sum": 8.0
     },
@@ -4020,6 +8970,20 @@
     },
     "scope": {
      "level": "module",
+     "path": "cognitive.sample"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
      "path": "python_small.calc"
     },
     "tool": "swe-metrics",
@@ -4148,9 +9112,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 9,
+     "count": 10,
      "max": 3.0,
-     "mean": 0.8888888888888888,
+     "mean": 0.8,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 8.0
@@ -4286,7 +9250,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 9.0
+    "value": 10.0
    }
   ],
   "version": "0.0.1"
