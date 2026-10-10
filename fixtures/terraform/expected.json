@@ -1,0 +1,11 @@
+{
+  "_comment": "Hand-checked. storage/: aws_s3_bucket without encryption, logging, versioning etc., an unused variable, no required_version. broken/: a reference to an undeclared variable. valid/: no findings. Validation runs on broken/ and valid/ only (storage/ needs the aws provider from the network).",
+  "iac.validation_errors": {"broken": 1, "valid": 0, "total": 1},
+  "iac.lint_findings": {"storage/main.tf": 2,
+                        "rule": {"terraform_required_version": 1, "terraform_unused_declarations": 1}, "total": 2},
+  "iac.misconfigurations": {"storage/main.tf": 7,
+                            "check": {"CKV2_AWS_6": 1, "CKV2_AWS_61": 1, "CKV2_AWS_62": 1, "CKV_AWS_144": 1,
+                                      "CKV_AWS_145": 1, "CKV_AWS_18": 1, "CKV_AWS_21": 1}, "total": 7},
+  "iac.passed_checks": {"total": 4},
+  "iac.resources": {"total": 3}
+}
