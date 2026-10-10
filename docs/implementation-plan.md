@@ -147,7 +147,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 - import-linter layer contracts;
 - ≤ 400 changed code lines per commit.
 
-**Dogfooding.** From milestone M2, the gate runs `swe-metrics measure .` on its own repository. A small script in `scripts/` holds the thresholds and compares the report against them. The interpretation stays in the gate script, outside the package, true to principle 2. Until then, the gate calls the tools directly.
+**Dogfooding** *(in place)*. The gate runs `scripts/self_check.py`: it measures the package with `swe-metrics measure` (size, complexity, duplication, secrets) and compares the report with the same limits as the gate's own tools. The limits live in that script, outside the package, true to principle 2. An analyzer that fails, or a metric that is missing, fails the check (fail closed). The gate keeps calling the tools directly as well, so a regression in swe-metrics can't hide a regression in its own code.
 
 ## 9. Testing
 

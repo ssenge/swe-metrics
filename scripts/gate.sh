@@ -25,6 +25,7 @@ run pip-audit --progress-spinner off .
 run gitleaks git --no-banner --redact .
 run npx -y jscpd@4.0.5 --silent --threshold 3 --min-lines 5 "${SRC[@]}"
 run lint-imports                  # layer contracts in pyproject.toml [tool.importlinter]
+run python scripts/self_check.py  # dogfooding: swe-metrics measures itself against the same limits
 
 echo "== module length <= 400 lines"
 for f in $(find "${SRC[@]}" -name '*.py'); do
