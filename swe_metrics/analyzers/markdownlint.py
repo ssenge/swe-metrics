@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import json
 import re
-import shutil
 import subprocess  # nosec B404
 from pathlib import Path
 from typing import Any
@@ -12,6 +11,7 @@ from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.report import Metric
 from swe_metrics.core.sarif import Finding, count_metrics
 from swe_metrics.core.target import Target, language
+from swe_metrics.tools.files import copy_files
 from swe_metrics.tools.process import ToolError, read_json, run
 
 TOOL = "markdownlint"
@@ -47,9 +47,7 @@ class Markdownlint:
     def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
         """Lint a copy of the files, so configuration files in the target can't change the rules."""
         copy, report = Path(scratch) / "docs", str(Path(scratch) / "markdownlint.json")
-        for path in files:
-            (copy / path).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(Path(target.root) / path, copy / path)
+        copy_files(target.root, files, copy)
         (copy / ".swe-metrics-formatter.cjs").write_text(FORMATTER)
         config = {"config": {"default": True}, "noInlineConfig": True,
                   "outputFormatters": [["./.swe-metrics-formatter.cjs", {"path": report}]]}

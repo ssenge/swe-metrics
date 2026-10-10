@@ -90,9 +90,9 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `secrets` | secret findings per rule | gitleaks |
 | `security` | static analysis findings per level, for rules the caller gives (`--sast-rules`); without rules the analyzer is skipped, because the findings depend entirely on the rule set | opengrep |
 | `structure` | module dependency graph; afferent and efferent coupling, instability, cycles | grimp (Python), jdeps (Java bytecode, needs tier B), dependency-cruiser (JS/TS) |
-| `docs` | markdown lint findings, broken links, readability statistics | markdownlint, lychee |
+| `docs` | markdown lint findings per rule; links and broken links, checked offline (local links and anchors); readability statistics later | markdownlint, lychee |
 | `doc_coverage` | share of public APIs with a doc comment | interrogate (Python), checkstyle Javadoc check (Java) |
-| `iac` | validation errors, lint findings, misconfiguration findings per severity, resources without tags | terraform validate, tflint, checkov, trivy config |
+| `iac` | validation errors per module, lint findings per rule, failed and passed misconfiguration checks per check, resources; later: resources without tags | terraform validate, tflint, checkov; later trivy config |
 | `container` | Dockerfile lint findings, base image and its runtime version | hadolint, Dockerfile parser |
 | `architecture_model` | model validity, elements, relationships, views, elements per view | LikeC4, Structurizr CLI |
 | `history` (Git targets) | change frequency and code age per file, change coupling between files | git log (code-maat method) |
@@ -174,6 +174,12 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
    - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
    - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
    - opengrep is installed from its signed release binary (signature checked with cosign) until the container image (M2) pins it.
+   - **M2 docs/IaC.** Tools that read configuration from the target or write next to it run on a copy in the scratch directory, with swe-metrics' own fixed configuration, so a target can't change what is measured: markdownlint (default rules, inline `markdownlint-disable` comments ignored; a small formatter writes its results as JSON, as markdownlint-cli2 has no machine-readable output of its own), terraform validate (`init -backend=false` per module copy), checkov (a `.checkov.yaml` next to the modules would otherwise skip checks). lychee and tflint only read: lychee runs in the scratch directory (no `lychee.toml` or `.lycheeignore` of the target applies), tflint gets a fixed `--config` (bundled terraform ruleset, recommended preset, local modules).
+   - lychee checks offline (local links and anchors only): remote links depend on the network and on time, so they are excluded and not counted as checked. A remote mode can come as an explicit option later.
+   - A module is a directory with `.tf` files. terraform validate copies the whole directory, so a module stays complete under `--changed-since`. Provider downloads during `init` need the network; a failed init fails the analyzer, naming the module, rather than reporting the module as valid.
+   - A tool that couldn't read part of the input fails the analyzer instead of reporting partial counts: tflint's own errors (e.g. a syntax error) and checkov's parsing errors.
+   - Inline suppressions in the target still apply for tflint (`tflint-ignore`) and checkov (`checkov:skip`); neither tool can switch them off. checkov counts them as skipped, which isn't reported.
+   - checkov's open-source checks carry no severity, so misconfigurations are counted per check ID (label `check`), not per severity.
 
 1. **Cognitive complexity beyond Python.** No permissive open-source tool covers Java, JS and others the way SonarQube does. Options: implement the published cognitive-complexity rules on top of a parser (tree-sitter), or report the gap. Proposal: report the gap in v1, then decide.
 2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report; offer an offline mode with a database snapshot inside the container image.
