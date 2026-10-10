@@ -10,6 +10,7 @@ from importlib.resources import files
 from pathlib import Path
 
 from swe_metrics.analyzers.complexipy import Complexipy
+from swe_metrics.analyzers.git_history import GitHistory
 from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.jscpd import Jscpd
 from swe_metrics.analyzers.lizard import Lizard
@@ -36,7 +37,8 @@ NO_SETTINGS = Settings()
 
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules)]
+    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
+            GitHistory()]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:
