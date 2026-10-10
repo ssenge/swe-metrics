@@ -84,7 +84,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | Family | Metrics | Tools (first binding) |
 |---|---|---|
 | `size` | lines of code, comment lines, files, functions per language | lizard, tokei |
-| `complexity` | cyclomatic per function; cognitive per function | lizard (cyclomatic, all languages); complexipy (cognitive, Python). A gap for cognitive complexity in other languages is reported as "not measured". |
+| `complexity` | cyclomatic per function; cognitive per function | lizard (cyclomatic, all languages); built-in `cognitive` analyzer (SonarSource's rules on tree-sitter, one implementation for every supported language; pinned grammar packages, offline); complexipy (cognitive, Python) as an independent second value |
 | `duplication` | duplicated lines and %, clone pairs | jscpd |
 | `dependencies` | direct and transitive dependencies; known vulnerabilities per severity; licenses | trivy (SBOM and vulnerabilities), osv-scanner |
 | `secrets` | secret findings per rule | gitleaks |
@@ -215,7 +215,7 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
        - Java: a lexer drops comments and literals and cuts the code at `{ ; }` outside parentheses. It counts public types, methods and constructors (interface members are implicitly public) inside public types, with a `/** */` before the declaration. `@Override` methods are left out, as in checkstyle's default.
        - The output has per-file values, totals per language (label `language`) and an unlabeled total. A file without public APIs gets counts but no percentage.
 
-1. **Cognitive complexity beyond Python.** No permissive open-source tool covers Java, JS and others the way SonarQube does. Options: implement the published cognitive-complexity rules on top of a parser (tree-sitter), or report the gap. Proposal: report the gap in v1, then decide.
+1. **Cognitive complexity beyond Python** *(decided)*. No maintained open-source tool covers many languages (rust-code-analysis hasn't released since 2023, eslint-plugin-sonarjs is archived, PMD and gocognit cover one language each). swe-metrics implements the white paper's rules once (`analyzers/cognitive/walk.py`) on tree-sitter, with a small table of node types per language (`grammars.py`). Checked against hand-computed fixtures (including the white paper's own examples), and cross-checked with complexipy on 646 real Python functions (81 % identical). The rest are cases where complexipy deviates from the specification, each confirmed with a minimal example: it ignores logic inside lambdas, doesn't raise nesting for nested functions, and skips comprehensions and boolean operators inside keyword arguments, `*` arguments and binary operands. Comprehensions count as loops (their `for`) plus +1 per filter, as complexipy does.
 2. **Vulnerability database freshness.** trivy and osv-scanner need a database, which breaks strict reproducibility. Proposal: record the database date in the report (done); later an option to point trivy at a database the caller provides.
 3. **Monorepos.** Should `module` scopes come from build files (Maven modules, npm workspaces) or from directories? Proposal: from build files when present, otherwise top-level directories.
 4. **Very large repositories.** Is there a need for streaming output or sharding by directory? Proposal: not before a real case needs it.
