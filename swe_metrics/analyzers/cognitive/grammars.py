@@ -33,6 +33,7 @@ class Grammar:
     operators: frozenset[str] = AND_OR          # the logical operator tokens
     implicit: dict[str, str] = field(default_factory=dict)  # node type -> operator, where there's no token
     calls: frozenset[str] = frozenset()         # call nodes, for recursion
+    generics: frozenset[str] = frozenset()      # a generic function in a call (`f<T>()`), for recursion
     parens: frozenset[str] = frozenset({"parenthesized_expression"})
 
 
@@ -143,9 +144,63 @@ PHP = Grammar(
     calls=frozenset({"function_call_expression", "member_call_expression", "scoped_call_expression"}),
 )
 
-# file suffix -> grammar
+C = Grammar(
+    "tree_sitter_c", "language",
+    functions=frozenset({"function_definition"}),  # the name sits in its declarator (walk._declared)
+    ifs=frozenset({"if_statement"}),
+    loops=frozenset({"for_statement", "while_statement", "do_statement"}),
+    switches=frozenset({"switch_statement"}),
+    ternaries=frozenset({"conditional_expression"}),
+    elses=frozenset({"else_clause"}),
+    flat=frozenset({"goto_statement"}),
+    logical=frozenset({"binary_expression"}),
+    calls=frozenset({"call_expression"}),
+)
+
+CPP = replace(
+    C, module="tree_sitter_cpp",
+    loops=C.loops | {"for_range_loop"},
+    catches=frozenset({"catch_clause"}),
+    nested=frozenset({"lambda_expression"}),
+    generics=frozenset({"template_function"}),
+)
+
+RUST = Grammar(
+    "tree_sitter_rust", "language",
+    functions=frozenset({"function_item"}),
+    ifs=frozenset({"if_expression"}),  # `if let` too: its let_condition is the condition
+    loops=frozenset({"loop_expression", "while_expression", "for_expression"}),
+    switches=frozenset({"match_expression"}),
+    nested=frozenset({"closure_expression"}),
+    elses=frozenset({"else_clause"}),
+    labeled=frozenset({"break_expression", "continue_expression"}), labels=frozenset({"label"}),
+    logical=frozenset({"binary_expression", "let_chain"}),
+    calls=frozenset({"call_expression"}),
+    generics=frozenset({"generic_function"}),
+)
+
+RUBY = Grammar(
+    "tree_sitter_ruby", "language",
+    functions=frozenset({"method", "singleton_method"}),
+    # unless is a negated if; the modifier forms (`x if y`) are ifs too: a condition with a body
+    ifs=frozenset({"if", "unless", "if_modifier", "unless_modifier"}),
+    loops=frozenset({"while", "until", "for", "while_modifier", "until_modifier"}),
+    switches=frozenset({"case", "case_match"}),
+    catches=frozenset({"rescue", "rescue_modifier"}),
+    ternaries=frozenset({"conditional"}),
+    # blocks; a lambda's body is one of these, so `->(x) { }` and `lambda { }` nest once
+    nested=frozenset({"block", "do_block"}),
+    elifs=frozenset({"elsif"}), elses=frozenset({"else"}),
+    logical=frozenset({"binary"}), operators=frozenset({"&&", "||", "and", "or"}),
+    calls=frozenset({"call"}),
+    parens=frozenset({"parenthesized_statements"}),
+)
+
+# file suffix -> grammar; .h is C or C++: the C++ grammar parses C headers too (unless they use C++
+# keywords such as `new` or `class` as names), the C grammar can't parse classes, namespaces or templates
 GRAMMARS: dict[str, Grammar] = {
     ".java": JAVA, ".js": JAVASCRIPT, ".jsx": JAVASCRIPT, ".mjs": JAVASCRIPT, ".cjs": JAVASCRIPT,
-    ".ts": TYPESCRIPT, ".tsx": TSX, ".py": PYTHON, ".go": GO, ".cs": CSHARP, ".kt": KOTLIN, ".kts": KOTLIN,
-    ".php": PHP,
+    ".ts": TYPESCRIPT, ".tsx": TSX, ".py": PYTHON, ".go": GO, ".c": C, ".h": CPP,
+    ".cpp": CPP, ".cc": CPP, ".cxx": CPP, ".hpp": CPP, ".hh": CPP, ".rs": RUST, ".rb": RUBY,
+    ".cs": CSHARP, ".kt": KOTLIN, ".kts": KOTLIN, ".php": PHP,
 }

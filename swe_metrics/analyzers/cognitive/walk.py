@@ -15,8 +15,10 @@ from typing import Any
 from swe_metrics.analyzers.cognitive.grammars import Grammar
 
 Node = Any  # tree_sitter.Node (untyped library)
-# receivers through which a method calls itself (PHP: `$this->f()`, `self::f()`, `static::f()`)
-SELF = frozenset({"self", "this", "cls", "super", "$this", "static"})
+# receivers through which a method calls itself (PHP `$this->f()`, `static::f()`; Rust `Self::f()`)
+SELF = frozenset({"self", "this", "cls", "super", "Self", "$this", "static"})
+OWNERS = ("object", "operand", "value", "argument", "scope", "path", "expression")  # `x` in `x.f`, `x::f`
+MEMBERS = ("property", "attribute", "field", "name")                   # `f` there
 
 
 @dataclass(frozen=True)
@@ -36,7 +38,7 @@ def score_functions(root: Node, grammar: Grammar) -> list[Scored]:
         node = stack.pop()
         # a lambda outside any function (e.g. `const f = () => ...`) is a function of its own
         if node.type in grammar.functions or node.type in grammar.nested:
-            walker = _Walker(grammar, _name(node))
+            walker = _Walker(grammar, _name(node, node.type in grammar.functions))
             walker.children(node, 0)
             found.append(Scored(walker.name, node.start_point[0] + 1, walker.total))
         else:
@@ -52,7 +54,12 @@ class _Walker:
         self.g, self.name, self.total = grammar, name, 0
 
     def walk(self, node: Node, nesting: int) -> None:
-        """Score a node and everything below it."""
+        """Score a node and everything below it; a keyword token scores nothing (Ruby's `if` in an `if`)."""
+        if node.is_named:
+            self.named(node, nesting)
+
+    def named(self, node: Node, nesting: int) -> None:
+        """Score a syntax node by its role and walk its children."""
         kind, g = node.type, self.g
         if kind in g.ifs:
             self.if_(node, nesting, else_if=False)
@@ -80,11 +87,15 @@ class _Walker:
         after_else = False  # grammars without an `alternative` field (Kotlin): the branch after `else`
         for i, child in enumerate(node.children):
             field = node.field_name_for_child(i)
-            if field == "alternative" or after_else or child.type in self.g.elifs | self.g.elses:
+            if field == "alternative" or after_else or self.branch(child):
                 self.alternative(child, nesting)
             else:
                 self.walk(child, nesting if field == "condition" else nesting + 1)
             after_else = child.type == "else" and not child.is_named
+
+    def branch(self, node: Node) -> bool:
+        """Whether a child of an if is an else-if or else clause (not the keyword token of one)."""
+        return bool(node.is_named) and (node.type in self.g.elifs or node.type in self.g.elses)
 
     def alternative(self, node: Node, nesting: int) -> None:
         """The else branch: another if (else if), an elif clause, or an else body."""
@@ -129,9 +140,12 @@ class _Walker:
         operator = self.logical_operator(node)
         if not operator:
             return []
+        # binary nodes have two operands; n-ary ones (Rust let chains) more, all joined by the operator
         operands = [c for c in node.named_children if c.type != "comment"]
-        left, right = operands[0], operands[-1]
-        return [*self.flatten(left), operator, *self.flatten(right)]
+        found = self.flatten(operands[0])
+        for operand in operands[1:]:
+            found += [operator, *self.flatten(operand)]
+        return found
 
     def jump(self, node: Node) -> int:
         """goto, comprehension filters, and break or continue to a label: +1 (no nesting)."""
@@ -147,38 +161,55 @@ class _Walker:
 
     def recursion(self, node: Node) -> int:
         """A call to the function itself: +1."""
-        return 1 if node.type in self.g.calls and _callee(node) == self.name else 0
+        return 1 if node.type in self.g.calls and _callee(node, self.g.generics) == self.name else 0
 
 
-def _name(node: Node) -> str:
-    """A function's name, the name it is assigned to (`const f = () => ...`), or `<anonymous>`."""
-    for owner in (node, node.parent):
-        name = owner.child_by_field_name("name") if owner is not None else None
-        if name is not None and name.named_child_count == 0:
-            return str(name.text.decode())
-    return "<anonymous>"
+def _name(node: Node, declared: bool) -> str:
+    """A function's name (`~A`, `x=` too), the plain name a lambda is assigned to, or `<anonymous>`."""
+    name = _declared(node) if declared else None
+    if name is None and node.parent is not None:
+        name = _declared(node.parent)
+        name = name if name is not None and name.named_child_count == 0 else None  # not `{a, b} = ...`
+    return _text(name) if name is not None else "<anonymous>"
 
 
-def _callee(call: Node) -> str:
-    """The called function's name if the call can be recursive: `f()`, `self.f()`, `this.f()`; else empty."""
-    name, receiver = call.child_by_field_name("name"), _field(call, ("object", "scope"))
-    if name is not None:  # Java-style method invocation: name plus optional receiver
+def _declared(node: Node) -> Node | None:
+    """The innermost name a node declares; C and C++ nest it in declarators (`int *A::f(int)` is `f`)."""
+    name = _field(node, ("name", "declarator"))
+    while name is not None and _field(name, ("name", "declarator")) is not None:
+        name = _field(name, ("name", "declarator"))
+    return name
+
+
+def _callee(call: Node, generics: frozenset[str]) -> str:
+    """The called function's name if the call can be recursive: `f()`, `self.f()`, `Self::f()`; else empty."""
+    name, receiver = _field(call, ("name", "method")), _field(call, ("object", "receiver", "scope"))
+    if name is not None:  # a method invocation (Java, Ruby, PHP static): name plus optional receiver
         return _text(name) if receiver is None or _text(receiver) in SELF else ""
     target = call.child_by_field_name("function")
     if target is None and call.named_child_count > 0:  # grammars without fields (Kotlin): the callee first
         target = call.named_children[0]
+    return _function_name(target, generics)
+
+
+def _function_name(target: Node | None, generics: frozenset[str]) -> str:
+    """The name of a called function expression: `f`, `self.f`, `this->f`, `Self::f`; else empty."""
+    if target is not None and target.type in generics:  # `f<T>()`, `f::<T>()`: the function inside
+        target = _field(target, ("function", "name"))
     if target is None:
         return ""
-    return _text(target) if target.named_child_count == 0 else _own_member(target)
-
-
-def _own_member(target: Node) -> str:
-    """The member name of `self.f`, `this.f` or `this->f`; empty for any other receiver."""
-    owner = _field(target, ("object", "operand", "value", "expression"))
-    member = _field(target, ("property", "attribute", "field", "name"))
-    if owner is None and member is None and target.named_child_count == 2:  # no fields (Kotlin `this.f`)
-        owner, member = target.named_children
+    if target.named_child_count == 0:
+        return _text(target)
+    owner, member = _owner_member(target)
     return _text(member) if owner is not None and member is not None and _text(owner) in SELF else ""
+
+
+def _owner_member(target: Node) -> tuple[Node | None, Node | None]:
+    """The receiver and member of `x.f`, by field name, or by position where a grammar has none (Kotlin)."""
+    owner, member = _field(target, OWNERS), _field(target, MEMBERS)
+    if owner is None and member is None and target.named_child_count == 2:
+        return target.named_children[0], target.named_children[1]
+    return owner, member
 
 
 def _field(node: Node, names: tuple[str, ...]) -> Node | None:
