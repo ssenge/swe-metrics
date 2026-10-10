@@ -35,3 +35,14 @@ def test_analyzer_contract():
     rollup = [m for m in metrics if m.scope.level == "target"]
     assert rollup[0].stats is not None and rollup[0].stats.max == 9
     assert "tree-sitter" in analyzer.version() and analyzer.prerequisites() == ""
+
+
+@pytest.mark.parametrize(("name", "source"), [
+    ("plain.kt", "fun f(x: Int) { val y = foo@ x + 1; for (i in 0..x) { break } }"),
+    ("plain.php", "<?php function f($x) { foreach ($x as $y) { break; } }"),
+])
+def test_only_jumps_to_a_label_count(name, source, tmp_path):
+    """A Kotlin label on a plain expression and a PHP break without a level add nothing; the loop is 1."""
+    (tmp_path / name).write_text(source)
+    metrics = Cognitive().measure(Target(str(tmp_path), (name,)), (name,), "/unused").metrics
+    assert [m.value for m in metrics if m.scope.level == "function"] == [1.0]
