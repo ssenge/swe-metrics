@@ -1,0 +1,110 @@
+{
+  "total": 5,
+  "unique": 4,
+  "successful": 3,
+  "unknown": 0,
+  "unsupported": 0,
+  "timeouts": 0,
+  "redirects": 0,
+  "remaps": 0,
+  "excludes": 1,
+  "errors": 1,
+  "cached": 0,
+  "success_map": {
+    "/work/docs/README.md": [
+      {
+        "url": "file:///work/docs/README.md#usage",
+        "status": {
+          "text": "200 OK",
+          "code": 200
+        },
+        "span": {
+          "line": 6,
+          "column": 44
+        },
+        "duration": {
+          "secs": 0,
+          "nanos": 142542
+        }
+      },
+      {
+        "url": "file:///work/docs/guide/setup.md",
+        "status": {
+          "text": "200 OK",
+          "code": 200
+        },
+        "span": {
+          "line": 6,
+          "column": 9
+        },
+        "duration": {
+          "secs": 0,
+          "nanos": 4584
+        }
+      }
+    ],
+    "/work/docs/guide/setup.md": [
+      {
+        "url": "file:///work/docs/README.md#usage",
+        "status": {
+          "text": "200 OK",
+          "code": 200
+        },
+        "span": {
+          "line": 3,
+          "column": 13
+        },
+        "duration": {
+          "secs": 0,
+          "nanos": 1160958
+        }
+      }
+    ]
+  },
+  "error_map": {
+    "/work/docs/README.md": [
+      {
+        "url": "file:///work/docs/guide/missing.md",
+        "status": {
+          "text": "File not found. Check if file exists and path is correct",
+          "details": "File not found. Check if file exists and path is correct"
+        },
+        "span": {
+          "line": 7,
+          "column": 5
+        },
+        "duration": {
+          "secs": 0,
+          "nanos": 5625
+        }
+      }
+    ]
+  },
+  "timeout_map": {},
+  "suggestion_map": {},
+  "redirect_map": {},
+  "excluded_map": {
+    "/work/docs/README.md": [
+      {
+        "url": "https://example.com/",
+        "status": {
+          "text": "Excluded",
+          "details": "This is due to your 'exclude' values"
+        },
+        "span": {
+          "line": 7,
+          "column": 42
+        },
+        "duration": {
+          "secs": 0,
+          "nanos": 84
+        }
+      }
+    ]
+  },
+  "duration": {
+    "secs": 0,
+    "nanos": 2238000
+  },
+  "detailed_stats": true
+}

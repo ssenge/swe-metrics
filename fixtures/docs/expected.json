@@ -1,0 +1,6 @@
+{
+  "_comment": "Hand-checked. README.md: heading without blank line below (MD022, line 1), list without blank line above (MD032, line 8); links guide/setup.md, #usage, guide/missing.md (broken), https://example.com (remote, not checked offline). guide/setup.md: clean, one link ../README.md#usage.",
+  "docs.lint_findings": {"README.md": 2, "rule": {"MD022": 1, "MD032": 1}, "total": 2},
+  "docs.links": {"README.md": 3, "guide/setup.md": 1, "total": 4},
+  "docs.broken_links": {"README.md": 1, "total": 1}
+}
