@@ -99,11 +99,13 @@ class Subject:
     files: int
     languages: tuple[tuple[str, int], ...] = ()
     commit: str = ""
+    changed_since: str = ""
 
     def as_dict(self) -> dict[str, Any]:
         """The JSON form."""
         return {"target": self.target, "kind": self.kind, "commit": self.commit or None,
-                "files": self.files, "languages": dict(self.languages)}
+                "changed_since": self.changed_since or None, "files": self.files,
+                "languages": dict(self.languages)}
 
 
 @dataclass(frozen=True)

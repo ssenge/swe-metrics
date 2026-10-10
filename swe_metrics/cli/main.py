@@ -4,6 +4,8 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from collections.abc import Mapping
+from dataclasses import dataclass, field
 from importlib.resources import files
 from pathlib import Path
 
@@ -15,14 +17,26 @@ from swe_metrics.analyzers.opengrep import Opengrep
 from swe_metrics.analyzers.trivy import Trivy
 from swe_metrics.core.analyzer import Analyzer
 from swe_metrics.core.catalog import families
+from swe_metrics.core.reports import REPORT_KINDS, parse_reports
 from swe_metrics.runner.measure import Options, measure
 
 USAGE_ERROR = 2  # argparse's own exit code for usage errors; 1 means an internal failure
 
 
-def analyzers(sast_rules: str | None = None) -> list[Analyzer]:
+@dataclass(frozen=True)
+class Settings:
+    """Caller choices that analyzers need: SAST rules and build reports by kind."""
+
+    sast_rules: str | None = None
+    reports: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+
+
+NO_SETTINGS = Settings()
+
+
+def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(sast_rules)]
+    return [Lizard(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules)]
 
 
 def cmd_measure(args: argparse.Namespace) -> int:
@@ -33,10 +47,11 @@ def cmd_measure(args: argparse.Namespace) -> int:
         print(f"error: unknown metric families: {sorted(unknown)} (known: {known})", file=sys.stderr)
         return USAGE_ERROR
     try:
+        settings = Settings(args.sast_rules, parse_reports(args.report))
         details = Path(args.details) if args.details else None
-        options = Options(tuple(args.only), tuple(args.exclude), details)
-        report = measure(Path(args.target), analyzers(args.sast_rules), options)
-    except FileNotFoundError as exc:
+        options = Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "")
+        report = measure(Path(args.target), analyzers(settings), options)
+    except (FileNotFoundError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return USAGE_ERROR
     text = json.dumps(report.as_dict(), indent=2) + "\n"
@@ -72,6 +87,9 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("--out", help="write the report to this file (default: stdout)")
     m.add_argument("--details", help="keep the tools' detailed outputs (e.g. SARIF) in this directory")
     m.add_argument("--sast-rules", help="rule file or directory for static analysis (opengrep)")
+    m.add_argument("--changed-since", help="Git targets: measure only files changed since this ref")
+    m.add_argument("--report", action="append", default=[], metavar="KIND=PATH",
+                   help=f"build report to read; repeatable. Kinds: {', '.join(sorted(REPORT_KINDS))}")
     sub.add_parser("tools", help="list the analyzers and their tools")
     sub.add_parser("schema", help="print the report JSON Schema")
     return p

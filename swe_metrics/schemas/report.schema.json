@@ -11,11 +11,12 @@
     "subject": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["target", "kind", "commit", "files", "languages"],
+      "required": ["target", "kind", "commit", "changed_since", "files", "languages"],
       "properties": {
         "target": { "type": "string" },
         "kind": { "enum": ["file", "directory", "repository"] },
         "commit": { "type": ["string", "null"] },
+        "changed_since": { "type": ["string", "null"], "description": "Only files changed since this Git ref" },
         "files": { "type": "integer", "minimum": 0 },
         "languages": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } }
       }

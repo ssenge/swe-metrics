@@ -21,6 +21,7 @@ class Options:
     only: tuple[str, ...] = ()
     exclude: tuple[str, ...] = ()
     details: Path | None = None
+    changed_since: str = ""
 
 
 DEFAULTS = Options()
@@ -28,7 +29,7 @@ DEFAULTS = Options()
 
 def measure(path: Path, analyzers: Sequence[Analyzer], options: Options = DEFAULTS) -> Report:
     """Measure a file, directory or repository with every analyzer, each in its own scratch directory."""
-    target, subject = discover(path, options.exclude)
+    target, subject = discover(path, options.exclude, options.changed_since)
     runs, metrics, details = [], [], []
     for analyzer in analyzers:
         with tempfile.TemporaryDirectory(prefix=f"swe-metrics-{analyzer.id}-") as scratch:
