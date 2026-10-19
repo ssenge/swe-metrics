@@ -26,6 +26,7 @@ class Target:
 
     root: str
     files: tuple[str, ...]
+    partial: bool = False  # only some of root's files (its changes): what lies outside counts nowhere
 
 
 def language(path: str) -> str | None:

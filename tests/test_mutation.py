@@ -33,6 +33,14 @@ def test_pit_per_file_and_total(tmp_path):
         ("mutation.score", ""): 55.56}
 
 
+def test_a_partial_target_totals_only_its_files(tmp_path):
+    """A target of changes: Main.java's mutants count nowhere, not even in the total."""
+    target = Target(str(tmp_path), (CALC, STRINGS), partial=True)
+    metrics = Pit([str(REPORTS / "mutations.xml")]).measure(target, (CALC, STRINGS), str(tmp_path)).metrics
+    totals = {m.id: m.value for m in metrics if m.scope.level == "target"}
+    outcomes = (totals["mutation.killed"], totals["mutation.survived"], totals["mutation.no_coverage"])
+    assert outcomes == (5, 2, 1)
+
 def test_stryker_per_file_and_total(tmp_path):
     """Timeouts count as killed; compile and runtime errors, ignored and pending mutants are left out."""
     values = measured(Stryker([str(REPORTS / "mutation.json")]), ("src/calc.js", "src/util.js"), tmp_path)

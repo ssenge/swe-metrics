@@ -126,8 +126,10 @@ def _lcov_data(record: FileCoverage, branches: dict[int, list[int]], key: str, f
 PARSERS = {"jacoco": parse_jacoco, "cobertura": parse_cobertura, "lcov": parse_lcov}
 
 
-def coverage_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str]) -> list[Metric]:
-    """Coverage per target file and in total; files the target lacks count only in the total."""
+def coverage_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str],
+                     partial: bool = False) -> list[Metric]:
+    """Coverage per target file and in total; files the target lacks count only in the total, and not at all
+    when the target is `partial` (its changes: the rest of the code is no part of it)."""
     index = PathIndex(files)
     matched: dict[str, FileCoverage] = {}
     unmatched: dict[str, FileCoverage] = {}
@@ -137,7 +139,8 @@ def coverage_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str])
             group, key = (matched, path) if path else (unmatched, record.names[-1])
             group.setdefault(key, FileCoverage(record.names)).merge(record)
     metrics = [m for path in sorted(matched) for m in _metrics(fmt, [matched[path]], Scope("file", path))]
-    return metrics + _metrics(fmt, [*matched.values(), *unmatched.values()], Scope("target"))
+    counted = [*matched.values(), *([] if partial else unmatched.values())]
+    return metrics + _metrics(fmt, counted, Scope("target"))
 
 
 def _metrics(fmt: str, records: Sequence[FileCoverage], scope: Scope) -> list[Metric]:

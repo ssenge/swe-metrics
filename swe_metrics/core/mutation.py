@@ -54,15 +54,17 @@ def parse_stryker(data: bytes) -> list[Mutant]:
 PARSERS = {"pit": parse_pit, "stryker": parse_stryker}
 
 
-def mutation_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str]) -> list[Metric]:
-    """Mutant outcomes and score per target file and in total; files the target lacks count only in total."""
+def mutation_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str],
+                     partial: bool = False) -> list[Metric]:
+    """Mutant outcomes and score per target file and in total; files the target lacks count only in total, and
+    not at all when the target is `partial` (its changes)."""
     index = PathIndex(files)
     per_file: dict[str, Counter[str]] = {}
     total: Counter[str] = Counter()
     for data in documents:
         for names, outcome in PARSERS[fmt](data):
-            total[outcome] += 1
             path = next((p for p in map(index.resolve, names) if p), None)
+            total[outcome] += bool(path) or not partial
             if path:
                 per_file.setdefault(path, Counter())[outcome] += 1
     metrics = [m for path in sorted(per_file) for m in _metrics(fmt, per_file[path], Scope("file", path))]

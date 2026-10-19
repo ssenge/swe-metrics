@@ -34,6 +34,13 @@ def test_jacoco_per_file_and_total(tmp_path):
         ("coverage.line_percent", ""): 70.0, ("coverage.branch_percent", ""): 62.5}
 
 
+def test_a_partial_target_totals_only_its_files(tmp_path):
+    """A target of changes: the report's other files (Gen.java) count nowhere, not even in the total."""
+    target = Target(str(tmp_path), JAVA, partial=True)
+    metrics = Jacoco([str(REPORTS / "jacoco.xml")]).measure(target, JAVA, str(tmp_path)).metrics
+    totals = {m.id: m.value for m in metrics if m.scope.level == "target"}
+    assert (totals["coverage.lines_total"], totals["coverage.lines_covered"]) == (8, 6)
+
 def test_cobertura_from_coverage_py(tmp_path):
     """Paths relative to the <source> map to src/...; a file without branches has no branch percent."""
     init, calc = "src/app/__init__.py", "src/app/calc.py"

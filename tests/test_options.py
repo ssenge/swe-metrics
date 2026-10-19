@@ -35,6 +35,7 @@ def test_changed_since_keeps_changed_and_untracked_files(tmp_path):
     (root / "new.py").write_text("x = 1\n")
     target, subject = discover(root, changed_since="HEAD")
     assert target.files == ("calc.py", "new.py") and subject.changed_since == "HEAD"
+    assert target.partial and not discover(root)[0].partial
     with pytest.raises(ValueError, match="unknown Git ref"):
         discover(root, changed_since="no-such-ref")
 

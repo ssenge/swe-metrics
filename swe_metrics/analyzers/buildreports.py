@@ -42,10 +42,10 @@ class BuildReport:
 
     def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
         """Read every report file and turn its contents into metrics."""
-        return Measurement(self.metrics([path.read_bytes() for path in self._files()], files))
+        return Measurement(self.metrics([path.read_bytes() for path in self._files()], files, target.partial))
 
-    def metrics(self, documents: list[bytes], files: tuple[str, ...]) -> list[Metric]:
-        """The metrics of the report contents; each kind implements it."""
+    def metrics(self, documents: list[bytes], files: tuple[str, ...], partial: bool = False) -> list[Metric]:
+        """The report contents as metrics (`partial`: totals only of `files`); each kind implements it."""
         raise NotImplementedError
 
     def _files(self) -> list[Path]:
@@ -66,8 +66,8 @@ class Junit(BuildReport):
     families = ("tests",)
     directory_glob = "*.xml"
 
-    def metrics(self, documents: list[bytes], files: tuple[str, ...]) -> list[Metric]:
-        """Test outcomes and duration per suite and in total."""
+    def metrics(self, documents: list[bytes], files: tuple[str, ...], partial: bool = False) -> list[Metric]:
+        """Test outcomes and duration per suite and in total: the build's tests, whatever the target."""
         return junit_metrics(documents)
 
 
@@ -76,9 +76,9 @@ class Coverage(BuildReport):
 
     families = ("coverage",)
 
-    def metrics(self, documents: list[bytes], files: tuple[str, ...]) -> list[Metric]:
+    def metrics(self, documents: list[bytes], files: tuple[str, ...], partial: bool = False) -> list[Metric]:
         """Line and branch coverage per target file and in total."""
-        return coverage_metrics(self.id, documents, files)
+        return coverage_metrics(self.id, documents, files, partial)
 
 
 class Jacoco(Coverage):
@@ -104,9 +104,9 @@ class Mutation(BuildReport):
 
     families = ("mutation",)
 
-    def metrics(self, documents: list[bytes], files: tuple[str, ...]) -> list[Metric]:
+    def metrics(self, documents: list[bytes], files: tuple[str, ...], partial: bool = False) -> list[Metric]:
         """Mutant outcomes and mutation score per target file and in total."""
-        return mutation_metrics(self.id, documents, files)
+        return mutation_metrics(self.id, documents, files, partial)
 
 
 class Pit(Mutation):

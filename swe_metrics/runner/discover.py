@@ -24,7 +24,7 @@ def discover(path: Path, exclude: tuple[str, ...] = (), changed_since: str = "")
     kept = tuple(sorted(f for f in files if not _excluded(f, exclude) and (root / f).is_file()))
     commit = (_git(root, "rev-parse", "HEAD") or "").strip() if kind == "repository" else ""
     subject = Subject(str(path), kind, len(kept), languages(kept), commit, changed_since)
-    return Target(str(root), kept), subject
+    return Target(str(root), kept, partial=bool(changed_since)), subject
 
 
 def _listing(path: Path) -> tuple[Path, list[str], str]:
