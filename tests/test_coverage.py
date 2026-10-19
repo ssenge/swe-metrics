@@ -4,6 +4,8 @@ import pytest
 from swe_metrics.analyzers.buildreports import Cobertura, Jacoco, Lcov
 from swe_metrics.core.coverage import coverage_metrics
 from swe_metrics.core.target import Target
+from swe_metrics.scoring import select
+from swe_metrics.scoring.values import OK, lookup
 from tests.helpers import FIXTURES
 
 REPORTS = FIXTURES / "reports"
@@ -16,7 +18,7 @@ def measured(analyzer, files, tmp_path):
     target = Target(str(tmp_path), files)
     metrics = analyzer.measure(target, files, str(tmp_path)).metrics
     assert {m.tool for m in metrics} == {analyzer.id}
-    assert all(m.labels == (("format", analyzer.id),) for m in metrics)
+    assert all(m.labels == () for m in metrics)
     return {(m.id, m.scope.path): m.value for m in metrics}
 
 
@@ -101,3 +103,12 @@ def test_missing_report_file_raises(tmp_path):
     target = Target(str(tmp_path), ("a.js",))
     with pytest.raises(FileNotFoundError):
         Lcov([str(tmp_path / "lcov.info")]).measure(target, target.files, str(tmp_path))
+
+
+def test_a_score_reads_the_measured_totals(tmp_path):
+    """The totals a report yields are what a score's selector finds (no label hides them from it)."""
+    target = Target(str(tmp_path), JAVA)
+    metrics = Jacoco([str(REPORTS / "jacoco.xml")]).measure(target, JAVA, str(tmp_path)).metrics
+    report = {"metrics": [m.as_dict() for m in metrics], "analyzers": []}
+    found = lookup(report, select("coverage.line_percent"))
+    assert found.status == OK and found.value is not None

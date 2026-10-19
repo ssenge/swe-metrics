@@ -17,7 +17,7 @@ def measured(analyzer, files, tmp_path):
     target = Target(str(tmp_path), files)
     metrics = analyzer.measure(target, files, str(tmp_path)).metrics
     assert {m.tool for m in metrics} == {analyzer.id}
-    assert all(m.labels == (("format", analyzer.id),) for m in metrics)
+    assert all(m.labels == () for m in metrics)
     return {(m.id, m.scope.path): m.value for m in metrics}
 
 

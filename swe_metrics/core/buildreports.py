@@ -18,8 +18,9 @@ def parse_xml(data: bytes) -> Element:
 
 
 def tagged(metric_id: str, fmt: str, scope: Scope, value: float) -> Metric:
-    """A metric measured by reading a report: the tool is the report format, also given as a label."""
-    return Metric(metric_id, fmt, scope, value, labels=(("format", fmt),))
+    """A metric measured by reading a report: the tool is the report format. No label: a score selects the
+    unlabeled totals."""
+    return Metric(metric_id, fmt, scope, value)
 
 
 def percent(part: float, whole: float) -> float | None:

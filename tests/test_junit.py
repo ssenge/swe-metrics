@@ -31,7 +31,7 @@ def test_junit_directory_per_suite_and_total(tmp_path):
     assert suites[("tests.duration", "com.example.CalcTest")] == 0.215
     assert suites[("tests.errors", "pytest")] == 1 and suites[("tests.passed", "pytest")] == 2
     assert {m.tool for m in result.metrics} == {"junit"}
-    assert all(m.labels == (("format", "junit"),) for m in result.metrics)
+    assert all(m.labels == () for m in result.metrics)
 
 
 def test_junit_nested_suites_missing_times_and_repeated_suites():
