@@ -62,3 +62,46 @@ runs language-model judges with rubrics. swe-metrics only supplies the evidence,
   written for them (Python, Java, TypeScript), each with file, line and the literals or types involved.
 - They report zero sites on equivalent fixtures that use one interface with registered implementations.
 - The golden-report tests cover the new family; `swe-metrics schema` describes the per-site detail.
+
+## FR-2: Analyzers for recognized file types that nothing measures
+
+**Status:** open.
+
+### Problem
+
+`core/target.py` recognizes more file types than the analyzers read. A change that touches only such files gets
+no quality score: every component of `swe-default` is `not_applicable` (shell scripts had this gap until
+`swe-default@3` and the `shellcheck` analyzer). Audit of 2026-10-22, by type; gitleaks (`secrets`) and git-history
+(`history`) read every file and are left out of the table:
+
+| Type (extensions) | Read by (families) | `swe-default@3` score for a change of only this type | Gap → standard open-source tool |
+|---|---|---|---|
+| `sql` (`.sql`) | lizard's PL/SQL reader (`size`, `complexity`) | yes (complexity, function length) | no lint findings, no duplication → **SQLFluff** (`sqlfluff lint --format json`, fixed dialect and config); jscpd also reads SQL, but `code_files` leaves it out |
+| `jsp` (`.jsp`) | jscpd (`duplication`), opengrep (`security`, only with rules that match JSP) | only duplication, when jscpd finds enough tokens | no size, complexity or lint findings → **PMD** (its JSP rules, e.g. `NoScriptlets`, `NoInlineJavaScript`, `NoUnsanitizedJSPExpression`; needs a JRE) |
+| `html` (`.html`) | lychee (`docs`: links, broken links) | yes (broken links) | no markup lint or validity → **HTMLHint** (`htmlhint --format json`) or **html-validate** |
+| `xml` (`.xml`) | trivy, for `pom.xml` only (`dependencies`) | no | no well-formedness or lint → **xmllint** (libxml2, `--noout`) for parse errors |
+| `yaml` (`.yaml`, `.yml`) | trivy, for `pnpm-lock.yaml` only (`dependencies`) | no | no lint → **yamllint** (`-f parsable`); Kubernetes manifests and CI files have no misconfiguration checks → **checkov** (already installed; its Kubernetes and GitHub Actions frameworks) |
+| `json` (`.json`) | trivy, for lock files only (`dependencies`); likec4 reads its project configs | no | no parse validity → a built-in parse check (no tool needed) |
+| `make` (`Makefile`) | none | no | no lint → **checkmake** |
+| code languages | lizard, cognitive (all but Scala and Swift), jscpd, opengrep; Python, JS/TS and Java (with a classes report) also structure, Python and Java doc coverage | yes | cognitive complexity for Scala and Swift (no grammar); structure only for Python, Java, JS/TS |
+
+Covered: Python, Java and the other code languages, Terraform (`iac`), Markdown (`docs`), Dockerfiles
+(`container`), LikeC4 (`architecture_model`), shell scripts (`shell`).
+
+### Request
+
+One analyzer per gap, each following the pattern of `hadolint` and `shellcheck` (a linter whose findings become
+`<family>.lint_findings` per file, rule and level; fixed configuration, so a config file in the target can't
+change the rules; skipped with "no applicable files" when the target has none), the tool pinned in `tools.lock`,
+and a component in a new `swe-default` version. Priority by how often the type changes alone in a modernization:
+SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, Makefiles, JSON.
+
+### How it fits swe-metrics' principles
+
+- **Measure, never judge:** the analyzers only count findings; the score definition judges them.
+- **Reproducible:** pinned tools with fixed settings in the version string, like every other analyzer.
+
+### Acceptance
+
+- Each analyzer finds the known findings in a fixture written for it, ignoring a config file in the fixture.
+- A change of only that file type gets a real score under the new `swe-default` version.
