@@ -13,7 +13,7 @@ LANGUAGES = {
     ".hpp": "cpp", ".hh": "cpp", ".swift": "swift",
     ".rs": "rust", ".tf": "terraform", ".md": "markdown", ".yaml": "yaml", ".yml": "yaml", ".json": "json",
     ".xml": "xml", ".sh": "shell", ".sql": "sql", ".jsp": "jsp", ".html": "html", ".c4": "likec4",
-    ".kts": "kotlin",
+    ".kts": "kotlin", ".bash": "shell",
 }
 SPECIAL_NAMES = {"Dockerfile": "dockerfile", "Makefile": "make"}
 CODE_LANGUAGES = frozenset({"python", "java", "kotlin", "scala", "javascript", "typescript", "go", "csharp",

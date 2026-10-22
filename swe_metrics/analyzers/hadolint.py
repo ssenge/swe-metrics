@@ -6,8 +6,7 @@ from pathlib import Path
 
 from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.dockerfile import is_dockerfile
-from swe_metrics.core.report import Metric
-from swe_metrics.core.sarif import Finding, count_metrics
+from swe_metrics.core.sarif import Finding, lint_metrics
 from swe_metrics.core.target import Target
 from swe_metrics.tools.process import run, version
 
@@ -44,11 +43,5 @@ class Hadolint:
         report = json.loads(run([*argv, "--format", "json", *files], cwd=target.root) or "[]")
         sarif.write_text(run([*argv, "--format", "sarif", *files], cwd=target.root))
         found = [Finding(r["code"], r["level"], r["file"], int(r.get("line", 0))) for r in report]
-        return Measurement(lint_metrics(found), (("sarif", str(sarif)),))
-
-
-def lint_metrics(found: list[Finding]) -> list[Metric]:
-    """container.lint_findings per file, per rule, per level and in total."""
-    metrics = count_metrics("container.lint_findings", TOOL, found, ("rule", lambda f: f.rule))
-    by_level = count_metrics("container.lint_findings", TOOL, found, ("level", lambda f: f.level))
-    return metrics[:-1] + [m for m in by_level if m.labels] + metrics[-1:]
+        metrics = lint_metrics("container.lint_findings", TOOL, found)
+        return Measurement(metrics, (("sarif", str(sarif)),))

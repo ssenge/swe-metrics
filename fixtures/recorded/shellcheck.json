@@ -1,0 +1,177 @@
+{
+ "comments": [
+  {
+   "file": "deploy.sh",
+   "line": 4,
+   "endLine": 4,
+   "column": 7,
+   "endColumn": 19,
+   "level": "style",
+   "code": 2006,
+   "message": "Use $(...) notation instead of legacy backticks `...`.",
+   "fix": {
+    "replacements": [
+     {
+      "column": 7,
+      "endColumn": 8,
+      "endLine": 4,
+      "insertionPoint": "afterEnd",
+      "line": 4,
+      "precedence": 8,
+      "replacement": "$("
+     },
+     {
+      "column": 18,
+      "endColumn": 19,
+      "endLine": 4,
+      "insertionPoint": "beforeStart",
+      "line": 4,
+      "precedence": 8,
+      "replacement": ")"
+     }
+    ]
+   }
+  },
+  {
+   "file": "deploy.sh",
+   "line": 4,
+   "endLine": 4,
+   "column": 11,
+   "endColumn": 18,
+   "level": "info",
+   "code": 2086,
+   "message": "Double quote to prevent globbing and word splitting.",
+   "fix": {
+    "replacements": [
+     {
+      "column": 11,
+      "endColumn": 11,
+      "endLine": 4,
+      "insertionPoint": "afterEnd",
+      "line": 4,
+      "precedence": 13,
+      "replacement": "\""
+     },
+     {
+      "column": 18,
+      "endColumn": 18,
+      "endLine": 4,
+      "insertionPoint": "beforeStart",
+      "line": 4,
+      "precedence": 13,
+      "replacement": "\""
+     }
+    ]
+   }
+  },
+  {
+   "file": "deploy.sh",
+   "line": 5,
+   "endLine": 5,
+   "column": 1,
+   "endColumn": 11,
+   "level": "warning",
+   "code": 2164,
+   "message": "Use 'cd ... || exit' or 'cd ... || return' in case cd fails.",
+   "fix": {
+    "replacements": [
+     {
+      "column": 11,
+      "endColumn": 11,
+      "endLine": 5,
+      "insertionPoint": "beforeStart",
+      "line": 5,
+      "precedence": 5,
+      "replacement": " || exit"
+     }
+    ]
+   }
+  },
+  {
+   "file": "deploy.sh",
+   "line": 5,
+   "endLine": 5,
+   "column": 4,
+   "endColumn": 11,
+   "level": "info",
+   "code": 2086,
+   "message": "Double quote to prevent globbing and word splitting.",
+   "fix": {
+    "replacements": [
+     {
+      "column": 4,
+      "endColumn": 4,
+      "endLine": 5,
+      "insertionPoint": "afterEnd",
+      "line": 5,
+      "precedence": 7,
+      "replacement": "\""
+     },
+     {
+      "column": 11,
+      "endColumn": 11,
+      "endLine": 5,
+      "insertionPoint": "beforeStart",
+      "line": 5,
+      "precedence": 7,
+      "replacement": "\""
+     }
+    ]
+   }
+  },
+  {
+   "file": "deploy.sh",
+   "line": 9,
+   "endLine": 9,
+   "column": 6,
+   "endColumn": 13,
+   "level": "info",
+   "code": 2086,
+   "message": "Double quote to prevent globbing and word splitting.",
+   "fix": {
+    "replacements": [
+     {
+      "column": 6,
+      "endColumn": 6,
+      "endLine": 9,
+      "insertionPoint": "afterEnd",
+      "line": 9,
+      "precedence": 11,
+      "replacement": "\""
+     },
+     {
+      "column": 13,
+      "endColumn": 13,
+      "endLine": 9,
+      "insertionPoint": "beforeStart",
+      "line": 9,
+      "precedence": 11,
+      "replacement": "\""
+     }
+    ]
+   }
+  },
+  {
+   "file": "clean.sh",
+   "line": 1,
+   "endLine": 1,
+   "column": 1,
+   "endColumn": 1,
+   "level": "error",
+   "code": 2148,
+   "message": "Tips depend on target shell and yours is unknown. Add a shebang or a 'shell' directive.",
+   "fix": null
+  },
+  {
+   "file": "clean.sh",
+   "line": 2,
+   "endLine": 2,
+   "column": 8,
+   "endColumn": 22,
+   "level": "warning",
+   "code": 2115,
+   "message": "Use \"${var:?}\" to ensure this never expands to /* .",
+   "fix": null
+  }
+ ]
+}

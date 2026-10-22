@@ -53,3 +53,11 @@ def test_run_tolerates_invalid_utf8():
     """Output that isn't valid UTF-8 is decoded with replacement characters, not an exception."""
     out = run([sys.executable, "-c", "import sys; sys.stdout.buffer.write(b'caf\\xe9\\n')"], ".")
     assert out == "caf�\n"
+
+
+def test_run_with_an_environment(monkeypatch):
+    """A given environment replaces the inherited one."""
+    monkeypatch.setenv("SWE_METRICS_PROBE", "inherited")
+    probe = [sys.executable, "-c", "import os; print(os.environ.get('SWE_METRICS_PROBE', 'unset'))"]
+    assert run(probe, ".") == "inherited\n"
+    assert run(probe, ".", env={"PATH": "/usr/bin:/bin"}) == "unset\n"

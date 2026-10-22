@@ -55,3 +55,10 @@ def count_metrics(metric_id: str, tool: str, items: Sequence[Finding],
     metrics += [Metric(metric_id, tool, Scope("target"), float(n), labels=((key, value),))
                 for value, n in sorted(per_label.items())]
     return [*metrics, Metric(metric_id, tool, Scope("target"), float(len(items)))]
+
+
+def lint_metrics(metric_id: str, tool: str, items: Sequence[Finding]) -> list[Metric]:
+    """Lint finding counts per file, per rule, per level and in total (0 when nothing was found)."""
+    by_rule = count_metrics(metric_id, tool, items, ("rule", lambda f: f.rule))
+    by_level = count_metrics(metric_id, tool, items, ("level", lambda f: f.level))
+    return by_rule[:-1] + [m for m in by_level if m.labels] + by_rule[-1:]

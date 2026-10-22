@@ -1,0 +1,9 @@
+{
+  "_comment": "Hand-checked. .shellcheckrc disables every check; swe-metrics must not honor it.",
+  "shellcheck": {
+    "clean.sh": {"SC2148": 1, "SC2115": 1},
+    "deploy.sh": {"SC2006": 1, "SC2086": 3, "SC2164": 1},
+    "levels": {"error": 1, "warning": 2, "info": 3, "style": 1},
+    "total": 7
+  }
+}

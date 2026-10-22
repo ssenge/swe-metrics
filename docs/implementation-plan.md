@@ -98,6 +98,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `doc_coverage` | share of public APIs with a doc comment | built in: Python's `ast`, a small Java lexer |
 | `iac` | validation errors, lint findings, misconfiguration findings per severity, resources without tags | terraform validate, tflint, checkov, trivy config |
 | `container` | Dockerfile lint findings, base image and its runtime version | hadolint, Dockerfile parser |
+| `shell` | shell script lint findings per rule and level | ShellCheck |
 | `architecture_model` | model validity, elements, relationships, views, elements per view | LikeC4, Structurizr CLI |
 | `history` (Git targets) | commits, distinct authors (counted only) and age in days since HEAD per file; change coupling between files | git log (code-maat method) |
 
@@ -163,7 +164,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 
 ## 9. Testing
 
-- **Fixtures with known values:** a tiny project per language and file kind (Python, Java, JavaScript/TypeScript, Terraform, Markdown, C4 model, Dockerfile), each with expected metric values written down in the fixture.
+- **Fixtures with known values:** a tiny project per language and file kind (Python, Java, JavaScript/TypeScript, Terraform, Markdown, C4 model, Dockerfile, shell scripts), each with expected metric values written down in the fixture.
 - **Unit tests** parse recorded tool outputs. They are fast and need no tools installed.
 - **Integration tests** run the real, locally installed tools against the fixtures and compare with golden reports (M5). A test whose tool isn't installed is skipped and says so.
 - **Schema tests:** every report validates against the published schema.
@@ -200,6 +201,7 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
      - LikeC4 counts only views declared in the sources; the `index` view that LikeC4 generates isn't counted. Model elements and relationships are counted, deployment nodes aren't. With several projects the totals add up across them. Per-view values have scope `file` (the view's source file) with `symbol` = view id.
      - Structurizr CLI isn't bound yet (it isn't installed); `architecture_model` is measured for LikeC4 only.
    - **M2 docs/IaC.** Tools that read configuration from the target or write next to it run on a copy in the scratch directory, with swe-metrics' own fixed configuration, so a target can't change what is measured: markdownlint (default rules, inline `markdownlint-disable` comments ignored; a small formatter writes its results as JSON, as markdownlint-cli2 has no machine-readable output of its own), terraform validate (`init -backend=false` per module copy), checkov (a `.checkov.yaml` next to the modules would otherwise skip checks). lychee and tflint only read: lychee runs in the scratch directory (no `lychee.toml` or `.lycheeignore` of the target applies), tflint gets a fixed `--config` (bundled terraform ruleset, recommended preset, local modules).
+   - **Shell scripts** (`shellcheck`). A shell script is a file named `*.sh` or `*.bash` (`core/target.py`); like every other kind, it is recognized by its name only, so an extension-less script with a `#!/bin/sh` shebang isn't measured (`core` does no I/O, and reading every file's first line would make a file's kind depend on its content). ShellCheck runs with `--norc` and without the `SHELLCHECK_OPTS` environment variable, so neither a `.shellcheckrc` in the target or the user's home nor the caller's environment changes the checks; inline `# shellcheck disable=` directives are part of the source and are honored. Sourced files aren't followed (no `-x`): what they contain may lie outside the target. A script without a shebang is checked with ShellCheck's own rule for that (SC2148, an error). Levels are ShellCheck's own (`error`, `warning`, `info`, `style`); rules are the SC codes. The json1 output is kept as the detail (ShellCheck writes no SARIF). A file ShellCheck can't read fails the analyzer.
    - lychee checks offline (local links and anchors only): remote links depend on the network and on time, so they are excluded and not counted as checked. A remote mode can come as an explicit option later.
    - A module is a directory with `.tf` files. terraform validate copies the whole directory, so a module stays complete under `--changed-since`. Provider downloads during `init` need the network; a failed init fails the analyzer, naming the module, rather than reporting the module as valid.
    - A tool that couldn't read part of the input fails the analyzer instead of reporting partial counts: tflint's own errors (e.g. a syntax error) and checkov's parsing errors.
