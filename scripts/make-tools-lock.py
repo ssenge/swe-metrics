@@ -1,12 +1,15 @@
 """Regenerate tools.lock: the pinned tool versions, per platform, with SHA-256 checksums.
 
 Checksums come from each project's published checksum file. opengrep publishes none: its binaries are
-downloaded, their cosign signatures verified (cosign must be installed), and the hashes computed.
+downloaded, their cosign signatures verified (cosign must be installed), and the hashes computed. ShellCheck
+publishes none either: its checksums are the SHA-256 digests GitHub records for each release asset.
 Usage: python scripts/make-tools-lock.py > tools.lock     (edit PINS to update a version)
 """
 from __future__ import annotations
 
 import hashlib
+import json
+import re
 import subprocess  # nosec B404
 import sys
 import tempfile
@@ -14,8 +17,9 @@ import urllib.request
 from pathlib import Path
 
 GH = "https://github.com"
+GITHUB_DIGEST = "github-digest"  # no checksum file: GitHub's own SHA-256 digest of each release asset
 PLATFORMS = ("darwin-arm64", "darwin-amd64", "linux-arm64", "linux-amd64")
-# tool: (version, kind, {platform: asset}, release URL, checksum file name or None)
+# tool: (version, kind, {platform: asset}, release URL, checksum file name, GITHUB_DIGEST or None)
 PINS = {
     "gitleaks": ("8.30.1", "tar:gitleaks", {
         "darwin-arm64": "gitleaks_8.30.1_darwin_arm64.tar.gz", "darwin-amd64": "gitleaks_8.30.1_darwin_x64.tar.gz",
@@ -42,6 +46,12 @@ PINS = {
         "darwin-arm64": "opengrep_osx_arm64", "darwin-amd64": "opengrep_osx_x86",
         "linux-arm64": "opengrep_manylinux_aarch64", "linux-amd64": "opengrep_manylinux_x86"},
         f"{GH}/opengrep/opengrep/releases/download/v1.30.1", None),
+    "shellcheck": ("0.11.0", "tar:shellcheck", {
+        "darwin-arm64": "shellcheck-v0.11.0.darwin.aarch64.tar.gz",
+        "darwin-amd64": "shellcheck-v0.11.0.darwin.x86_64.tar.gz",
+        "linux-arm64": "shellcheck-v0.11.0.linux.aarch64.tar.gz",
+        "linux-amd64": "shellcheck-v0.11.0.linux.x86_64.tar.gz"},
+        f"{GH}/koalaman/shellcheck/releases/download/v0.11.0", GITHUB_DIGEST),
     "node": ("24.21.0", "node", {
         "darwin-arm64": "node-v24.21.0-darwin-arm64.tar.xz", "darwin-amd64": "node-v24.21.0-darwin-x64.tar.xz",
         "linux-arm64": "node-v24.21.0-linux-arm64.tar.xz", "linux-amd64": "node-v24.21.0-linux-x64.tar.xz"},
@@ -54,7 +64,8 @@ HEADER = """\
 # Columns (tab-separated): tool  version  platform  kind  sha256  source
 #   platform: darwin-arm64 | darwin-amd64 | linux-arm64 | linux-amd64 | any
 #   kind: tar:<binary> | zip:<binary> | bin:<binary> | node | npm | pip
-#   sha256: from the project's checksum file (opengrep: computed after its cosign signature verified);
+#   sha256: from the project's checksum file (opengrep: computed after its cosign signature verified;
+#           shellcheck: GitHub's recorded digest of the release asset);
 #           npm and pip packages: "-", pinned by exact version and checked by the registry.
 # Only releases at least two weeks old are pinned.
 """
@@ -91,19 +102,35 @@ def verified_opengrep(base: str, asset: str) -> str:
         return hashlib.sha256(files[""].read_bytes()).hexdigest()
 
 
+def github_digests(base: str) -> dict[str, str]:
+    """The SHA-256 digest GitHub records for each asset of the release at a download URL."""
+    found = re.fullmatch(f"{GH}/([^/]+)/([^/]+)/releases/download/(.+)", base)
+    if not found:
+        raise SystemExit(f"{base}: not a GitHub release download URL")
+    owner, repo, tag = found.groups()
+    release = json.loads(fetch(f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{tag}"))
+    return {a["name"]: a["digest"].removeprefix("sha256:") for a in release["assets"] if a.get("digest")}
+
+
+def checksums(base: str, sums: str | None, assets: dict[str, str]) -> dict[str, str]:
+    """The SHA-256 of every platform's asset, by the tool's way of publishing them."""
+    if sums is None:
+        return {p: verified_opengrep(base, asset) for p, asset in assets.items()}
+    if sums == GITHUB_DIGEST:
+        digests = github_digests(base)
+        return {p: digests[asset] for p, asset in assets.items()}
+    shared = fetch(f"{base}/{sums}").decode() if "{asset}" not in sums else None
+    return {p: from_checksum_file(shared if shared is not None else
+                                  fetch(f"{base}/{sums.format(asset=asset)}").decode(), asset)
+            for p, asset in assets.items()}
+
+
 def main() -> int:
     """Print the lock file."""
     rows = []
     for tool, (version, kind, assets, base, sums) in PINS.items():
-        shared = fetch(f"{base}/{sums}").decode() if sums and "{asset}" not in sums else None
-        for platform in PLATFORMS:
-            asset = assets[platform]
-            if sums is None:
-                sha = verified_opengrep(base, asset)
-            else:
-                text = shared if shared is not None else fetch(f"{base}/{sums.format(asset=asset)}").decode()
-                sha = from_checksum_file(text, asset)
-            rows.append((tool, version, platform, kind, sha, f"{base}/{asset}"))
+        sha = checksums(base, sums, assets)
+        rows += [(tool, version, p, kind, sha[p], f"{base}/{assets[p]}") for p in PLATFORMS]
     rows += [(tool, version, "any", kind, "-", tool) for tool, version, kind in PACKAGES]
     sys.stdout.write(HEADER + "".join("\t".join(row) + "\n" for row in rows))
     return 0

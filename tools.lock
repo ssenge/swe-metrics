@@ -2,7 +2,8 @@
 # Columns (tab-separated): tool  version  platform  kind  sha256  source
 #   platform: darwin-arm64 | darwin-amd64 | linux-arm64 | linux-amd64 | any
 #   kind: tar:<binary> | zip:<binary> | bin:<binary> | node | npm | pip
-#   sha256: from the project's checksum file (opengrep: computed after its cosign signature verified);
+#   sha256: from the project's checksum file (opengrep: computed after its cosign signature verified;
+#           shellcheck: GitHub's recorded digest of the release asset);
 #           npm and pip packages: "-", pinned by exact version and checked by the registry.
 # Only releases at least two weeks old are pinned.
 gitleaks	8.30.1	darwin-arm64	tar:gitleaks	b40ab0ae55c505963e365f271a8d3846efbc170aa17f2607f13df610a9aeb6a5	https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_darwin_arm64.tar.gz
@@ -33,6 +34,10 @@ opengrep	1.30.1	darwin-arm64	bin:opengrep	7b788794e111ce3fb83f0aa52c100a3b85d37d
 opengrep	1.30.1	darwin-amd64	bin:opengrep	a8c6d5f51bb38253b48e9a80fca63684aa2a0f9abfeacea27b8d8b5778476bae	https://github.com/opengrep/opengrep/releases/download/v1.30.1/opengrep_osx_x86
 opengrep	1.30.1	linux-arm64	bin:opengrep	a730f6fdce1e978ea29e610a2e0503bfe1ec31fce08979a9a84e3699f03e16ee	https://github.com/opengrep/opengrep/releases/download/v1.30.1/opengrep_manylinux_aarch64
 opengrep	1.30.1	linux-amd64	bin:opengrep	d3195b9d8d5ae93179f6aa5f5daaba6a920a5a09d38c5d5ae5e60924050210c4	https://github.com/opengrep/opengrep/releases/download/v1.30.1/opengrep_manylinux_x86
+shellcheck	0.11.0	darwin-arm64	tar:shellcheck	339b930feb1ea764467013cc1f72d09cd6b869ebf1013296ba9055ab2ffbd26f	https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.darwin.aarch64.tar.gz
+shellcheck	0.11.0	darwin-amd64	tar:shellcheck	c2c15e08df0e8fbc374c335b230a7ee958c313fa5714817a59aa59f1aa594f51	https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.darwin.x86_64.tar.gz
+shellcheck	0.11.0	linux-arm64	tar:shellcheck	68a8133197a50beb8803f8d42f9908d1af1c5540d4bb05fdfca8c1fa47decefc	https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.aarch64.tar.gz
+shellcheck	0.11.0	linux-amd64	tar:shellcheck	b7af85e41cc99489dcc21d66c6d5f3685138f06d34651e6d34b42ec6d54fe6f6	https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.x86_64.tar.gz
 node	24.21.0	darwin-arm64	node	6239d4cf92d864487ec8cd3615038f7b67e7f58b77b21cd2f09ea9fbd68065fe	https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-arm64.tar.xz
 node	24.21.0	darwin-amd64	node	0ae5a24c24bb7d015cd816c5036b3f90f2945aa872fcf54e58da054753b3a299	https://nodejs.org/dist/v24.21.0/node-v24.21.0-darwin-x64.tar.xz
 node	24.21.0	linux-arm64	node	6ad1325edbdb5649c379b75a237147a666c95d4f9ae8d340fef2d1575d289ad2	https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-arm64.tar.xz
