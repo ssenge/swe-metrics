@@ -6,7 +6,7 @@ import jsonschema
 import pytest
 
 from swe_metrics.cli.main import main
-from swe_metrics.scoring.default import DEFINITION
+from swe_metrics.scoring.default import DEFINITION, VERSION_2
 
 
 def row(metric_id, value=None, stats=None, labels=None):
@@ -52,7 +52,21 @@ def test_default_definition_rewards_and_gates():
         ],
     }
     assert DEFINITION.score(vulnerable)["score"] == 40.0
-    assert (DEFINITION.name, DEFINITION.version) == ("swe-default", "2")
+    assert (DEFINITION.name, DEFINITION.version) == ("swe-default", "3")
+
+
+def test_shell_scripts_alone_get_a_score():
+    """A change of shell scripts only: version 3 scores its lint findings, version 2 had nothing to score."""
+    shell_only = {
+        "analyzers": [
+            {"id": "shellcheck", "tool": "shellcheck", "status": "ran", "families": ["shell"]},
+            {"id": "lizard", "tool": "lizard", "status": "skipped", "families": ["size", "complexity"]},
+        ],
+        "metrics": [row("shell.lint_findings", 4), row("shell.lint_findings", 3, labels={"level": "info"})],
+    }
+    assert DEFINITION.score(shell_only)["score"] == 60.0
+    assert VERSION_2.score(shell_only)["score"] is None and VERSION_2.version == "2"
+    assert DEFINITION.components[:-1] == VERSION_2.components and DEFINITION.gates == VERSION_2.gates
 
 
 def test_score_command_with_baseline_and_schema(tmp_path, capsys):

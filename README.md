@@ -32,7 +32,7 @@ swe-metrics schema             # the report JSON Schema
 swe-metrics score report.json [--baseline earlier.json] [--definition my_scoring.py | package.module:NAME]
 ```
 
-One quality score (0–100) from a report, with its breakdown. The shipped definition `swe-default@1` (`swe_metrics/scoring/default.py`) has gates for hard limits (critical or high vulnerabilities, secrets, error-level SAST findings, failing tests, invalid IaC): while one fails, the score stays at most 40. The rest is a weighted mean of quality components, each scored 0–100 between a "bad" and a "good" threshold, with the sources of the thresholds cited in the code. With `--baseline`, a metric that got worse costs points. A tool that failed or isn't installed makes its gates fail; parts that don't apply to the target are left out. Every score names its definition and version.
+One quality score (0–100) from a report, with its breakdown. The shipped definition `swe-default@3` (`swe_metrics/scoring/default.py`) has gates for hard limits (critical or high vulnerabilities, secrets, error-level SAST findings, failing tests, invalid IaC): while one fails, the score stays at most 40. The rest is a weighted mean of quality components, each scored 0–100 between a "bad" and a "good" threshold, with the sources of the thresholds cited in the code. With `--baseline`, a metric that got worse costs points. A tool that failed or isn't installed makes its gates fail; parts that don't apply to the target are left out. Every score names its definition and version; consumers that check it configure name `swe-default`, version `3`. Version 2 (without the shell script component) stays available as `--definition swe_metrics.scoring.default:VERSION_2`.
 
 Your own definition is Python:
 
