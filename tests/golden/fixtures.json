@@ -926,7 +926,7 @@
     },
     "tool": "jscpd",
     "unit": "percent",
-    "value": 2.28
+    "value": 2.27
    }
   ],
   "version": "4.0.5 (min-tokens 50, min-lines 5)"
@@ -5676,7 +5676,7 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 32.0
+    "value": 35.0
    },
    {
     "direction": "neutral",
@@ -5962,6 +5962,48 @@
     },
     "scope": {
      "level": "file",
+     "path": "dup_tiny/edge.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/short.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/tiny.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
      "path": "python_small/calc.py"
     },
     "tool": "lizard",
@@ -6143,12 +6185,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 32,
+     "count": 35,
      "max": 60.0,
-     "mean": 20.4375,
-     "p50": 12.0,
+     "mean": 18.914285714285715,
+     "p50": 11.0,
      "p95": 58.0,
-     "sum": 654.0
+     "sum": 662.0
     },
     "tool": "lizard",
     "unit": "lines"
@@ -6316,6 +6358,17 @@
     },
     "tool": "opengrep",
     "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "security.findings",
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/tiny.py"
+    },
+    "tool": "opengrep",
+    "unit": "count",
     "value": 1.0
    },
    {
@@ -6337,7 +6390,7 @@
     },
     "tool": "opengrep",
     "unit": "count",
-    "value": 2.0
+    "value": 3.0
    }
   ],
   "version": "1.30.1"
@@ -6645,6 +6698,48 @@
     },
     "scope": {
      "level": "file",
+     "path": "dup_tiny/edge.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/short.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/tiny.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
      "path": "python_small/calc.py"
     },
     "tool": "swe-metrics",
@@ -6905,6 +7000,48 @@
     },
     "scope": {
      "level": "file",
+     "path": "dup_tiny/edge.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/short.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/tiny.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
      "path": "python_small/calc.py"
     },
     "tool": "swe-metrics",
@@ -7020,7 +7157,7 @@
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 29.17
+    "value": 25.93
    },
    {
     "direction": "higher_better",
@@ -7030,7 +7167,7 @@
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 29.79
+    "value": 28.0
    },
    {
     "direction": "lower_better",
@@ -8684,6 +8821,48 @@
     },
     "scope": {
      "level": "file",
+     "path": "dup_tiny/edge.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/short.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "dup_tiny/tiny.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
      "path": "python_small/calc.py"
     },
     "tool": "swe-metrics",
@@ -8813,7 +8992,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 17.0
+    "value": 20.0
    },
    {
     "direction": "lower_better",
@@ -8823,7 +9002,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 33.0
+    "value": 36.0
    },
    {
     "direction": "lower_better",
@@ -8847,6 +9026,48 @@
     "scope": {
      "level": "module",
      "path": "cognitive.sample"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "dup_tiny.edge"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "dup_tiny.short"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "dup_tiny.tiny"
     },
     "tool": "swe-metrics",
     "unit": "count",
@@ -8988,9 +9209,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 10,
+     "count": 13,
      "max": 3.0,
-     "mean": 0.8,
+     "mean": 0.6153846153846154,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 8.0
@@ -9138,6 +9359,48 @@
     },
     "scope": {
      "level": "module",
+     "path": "dup_tiny.edge"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "dup_tiny.short"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
+     "path": "dup_tiny.tiny"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "module",
      "path": "python_small.calc"
     },
     "tool": "swe-metrics",
@@ -9266,9 +9529,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 10,
+     "count": 13,
      "max": 3.0,
-     "mean": 0.8,
+     "mean": 0.6153846153846154,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 8.0
@@ -9404,7 +9667,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 10.0
+    "value": 13.0
    }
   ],
   "version": "0.0.1"

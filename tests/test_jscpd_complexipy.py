@@ -11,6 +11,8 @@ from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.jscpd import Jscpd
 from swe_metrics.core.target import Target
 from swe_metrics.runner.discover import discover
+from swe_metrics.runner.measure import measure
+from swe_metrics.tools.process import ToolError
 from tests.helpers import FIXTURES
 
 EXPECTED = json.loads((FIXTURES / "dup_java" / "expected.json").read_text())
@@ -67,3 +69,41 @@ def test_complexipy_not_installed(monkeypatch):
         raise PackageNotFoundError(name)
     monkeypatch.setattr(complexipy_module, "package_version", missing)
     assert Complexipy().version() is None
+
+
+TINY = FIXTURES / "dup_tiny"  # tiny.py: 2 lines and short.py: 4 lines as jscpd counts them; edge.py: 5
+
+
+def test_jscpd_applies_only_to_files_it_considers(tmp_path):
+    """Files under jscpd's minimum lines are left out; an unreadable file is left to jscpd to report."""
+    target = Target(str(TINY), ("edge.py", "notes.md", "short.py", "tiny.py"))
+    assert Jscpd().applicable(target) == ("edge.py",)
+    assert Jscpd().applicable(Target(str(tmp_path), ("gone.py",))) == ("gone.py",)
+
+
+def test_jscpd_without_a_report_measured_nothing(tmp_path, monkeypatch):
+    """jscpd ran but skipped every file, so it wrote no report: no metrics and no detail, not a failure."""
+    monkeypatch.setattr(jscpd_module, "run", lambda argv, cwd, ok=(0,): "")
+    result = Jscpd().measure(Target(str(TINY), ("edge.py",)), ("edge.py",), str(tmp_path))
+    assert result.metrics == [] and result.details == ()
+
+
+def test_jscpd_errors_still_fail(tmp_path, monkeypatch):
+    """A jscpd that exits with an error still fails the analyzer."""
+    def broken(argv, cwd, ok=(0,)):
+        raise ToolError("jscpd exited with 1: boom")
+    monkeypatch.setattr(jscpd_module, "run", broken)
+    with pytest.raises(ToolError):
+        Jscpd().measure(Target(str(TINY), ("edge.py",)), ("edge.py",), str(tmp_path))
+
+
+@pytest.mark.skipif(not shutil.which("jscpd"), reason="jscpd not installed")
+def test_real_jscpd_on_tiny_and_edge_files(tmp_path):
+    """Only tiny files: skipped as not applicable; a file at the line limit: measured, 0 % duplication."""
+    tiny = tmp_path / "tiny"
+    tiny.mkdir()
+    shutil.copy(TINY / "tiny.py", tiny)
+    run = measure(tiny, [Jscpd()]).analyzers[0]
+    assert (run.status, run.reason) == ("skipped", "no applicable files")
+    edge = Jscpd().measure(Target(str(TINY), ("edge.py",)), ("edge.py",), str(tmp_path / "scratch"))
+    assert targets(edge.metrics)["duplication.percent"] == 0.0

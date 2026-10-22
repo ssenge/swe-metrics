@@ -187,6 +187,7 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
 
 0. **Recorded decisions (M1).**
    - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
+   - jscpd ignores files with fewer than its minimum lines (5, counted as the content split at newlines) and writes no report when it ignores every file. Those files aren't applicable to the analyzer, so a change of tiny files only is `skipped` ("no applicable files"), not `failed`. If jscpd still writes no report (it also skips files by format and size), the analyzer ran and measured nothing; an error exit still fails it.
    - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
    - opengrep is installed from its signed release binary (signature checked with cosign); `tools.lock` pins the same release.
    - ShellCheck publishes no checksum file; `tools.lock` takes the SHA-256 digest GitHub records for each release asset.

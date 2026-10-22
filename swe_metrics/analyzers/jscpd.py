@@ -30,16 +30,26 @@ class Jscpd:
         return ""
 
     def applicable(self, target: Target) -> tuple[str, ...]:
-        """The code files of the target."""
-        return code_files(target.files)
+        """The code files jscpd considers: those with at least MIN_LINES lines (it ignores shorter ones)."""
+        return tuple(p for p in code_files(target.files) if _lines(Path(target.root) / p) >= MIN_LINES)
 
     def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
         """Detect clones across the code files; report totals and per-file values."""
         # ponytail: files on the command line; a file list if a target ever exceeds the argv limit
         run(["jscpd", *files, "--reporters", "json", "--output", scratch, "--silent",
              "--min-tokens", str(MIN_TOKENS), "--min-lines", str(MIN_LINES)], cwd=target.root)
-        report = str(Path(scratch) / "jscpd-report.json")
-        return Measurement(_metrics(read_json(report)), (("jscpd-json", report),))
+        report = Path(scratch) / "jscpd-report.json"
+        if not report.exists():  # jscpd skipped every file (format, size), so it wrote no report
+            return Measurement([])
+        return Measurement(_metrics(read_json(report)), (("jscpd-json", str(report)),))
+
+
+def _lines(path: Path) -> int:
+    """A file's lines as jscpd counts them (its content split at newlines); unreadable: left to jscpd."""
+    try:
+        return path.read_bytes().count(b"\n") + 1
+    except OSError:
+        return MIN_LINES  # jscpd then reports the error itself, and the analyzer fails
 
 
 def _metrics(report: dict[str, Any]) -> list[Metric]:
