@@ -1,0 +1,7 @@
+broken.yaml:3:6: [error] syntax error: expected ',' or ']', but got ':' (syntax)
+ci.yml:2:1: [warning] truthy value should be one of [false, true] (truthy)
+ci.yml:7:23: [error] trailing spaces (trailing-spaces)
+deployment.yaml:2:1: [warning] missing document start "---" (document-start)
+deployment.yaml:6:23: [error] too many spaces inside braces (braces)
+deployment.yaml:12:7: [error] wrong indentation: expected 8 but found 6 (indentation)
+deployment.yaml:16:20: [warning] truthy value should be one of [false, true] (truthy)

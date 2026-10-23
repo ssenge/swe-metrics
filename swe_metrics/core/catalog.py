@@ -46,6 +46,8 @@ CATALOG: dict[str, MetricDef] = {
     "container.runtime_major": MetricDef("version", "neutral", "Major runtime version in a base image tag"),
     # shell
     "shell.lint_findings": MetricDef("count", "lower_better", "Shell script lint findings"),
+    # yaml
+    "yaml.lint_findings": MetricDef("count", "lower_better", "YAML lint findings, syntax errors included"),
     # architecture_model (M2)
     "architecture_model.errors": MetricDef("count", "lower_better", "Errors when the model is parsed"),
     "architecture_model.elements": MetricDef("count", "neutral", "Elements in the model"),

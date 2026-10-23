@@ -9723,5 +9723,179 @@
    }
   ],
   "version": "0.64.0 (ruleset terraform 0.15.0-bundled, recommended preset)"
+ },
+ "yamllint": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "level": "error"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "level": "warning"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "rule": "braces"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "rule": "document-start"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "rule": "indentation"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "rule": "syntax"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "rule": "trailing-spaces"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "labels": {
+     "rule": "truthy"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "docker_small/.hadolint.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "sast/rules.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "yaml_small/broken.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "yaml_small/ci.yml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "yaml_small/deployment.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 9.0
+   }
+  ],
+  "version": "1.38.0 (default rules without line-length, target config ignored)"
  }
 }

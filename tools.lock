@@ -47,3 +47,4 @@ markdownlint-cli2	0.23.3	any	npm	-	markdownlint-cli2
 likec4	1.59.4	any	npm	-	likec4
 dependency-cruiser	18.4.0	any	npm	-	dependency-cruiser
 checkov	3.3.19	any	pip	-	checkov
+yamllint	1.38.0	any	pip	-	yamllint

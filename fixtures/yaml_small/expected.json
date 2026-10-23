@@ -1,0 +1,10 @@
+{
+  "_comment": "Hand-checked. .yamllint ignores every file; swe-metrics must not honor it. deployment.yaml line 15 is longer than 80 characters: line length is not checked.",
+  "yamllint": {
+    "broken.yaml": {"syntax": 1},
+    "ci.yml": {"truthy": 1, "trailing-spaces": 1},
+    "deployment.yaml": {"document-start": 1, "braces": 1, "indentation": 1, "truthy": 1},
+    "levels": {"error": 4, "warning": 3},
+    "total": 7
+  }
+}

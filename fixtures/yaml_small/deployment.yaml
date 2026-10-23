@@ -1,0 +1,16 @@
+# A Kubernetes manifest with known yamllint findings (see expected.json).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders
+  labels: {app: orders }
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: orders
+        image: registry.example.com/orders:1.4.2
+        env:
+          - name: A_VERY_LONG_VARIABLE_NAME_THAT_MAKES_THIS_LINE_LONGER_THAN_EIGHTY_CHARACTERS
+            value: yes
