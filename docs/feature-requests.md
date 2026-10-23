@@ -65,7 +65,8 @@ runs language-model judges with rubrics. swe-metrics only supplies the evidence,
 
 ## FR-2: Analyzers for recognized file types that nothing measures
 
-**Status:** open.
+**Status:** partly done (2026-10-23). YAML, JSON and XML are covered and scored by `swe-default@4`; SQL, JSP,
+HTML, Makefiles and YAML misconfiguration checks stay open (see *Done and open* at the end).
 
 ### Problem
 
@@ -86,7 +87,8 @@ no quality score: every component of `swe-default` is `not_applicable` (shell sc
 | code languages | lizard, cognitive (all but Scala and Swift), jscpd, opengrep; Python, JS/TS and Java (with a classes report) also structure, Python and Java doc coverage | yes | cognitive complexity for Scala and Swift (no grammar); structure only for Python, Java, JS/TS |
 
 Covered: Python, Java and the other code languages, Terraform (`iac`), Markdown (`docs`), Dockerfiles
-(`container`), LikeC4 (`architecture_model`), shell scripts (`shell`).
+(`container`), LikeC4 (`architecture_model`), shell scripts (`shell`); since 2026-10-23 also YAML (`yaml`), JSON
+and XML (`syntax`).
 
 ### Request
 
@@ -105,3 +107,16 @@ SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, M
 
 - Each analyzer finds the known findings in a fixture written for it, ignoring a config file in the fixture.
 - A change of only that file type gets a real score under the new `swe-default` version.
+
+### Done and open (2026-10-23)
+
+| Type | State | Why |
+|---|---|---|
+| `yaml` | **done:** `yamllint` 1.38.0 → `yaml.lint_findings`, component in `swe-default@4` | default rules without `line-length` (a style choice of the code base), fixed config |
+| `json` | **done:** built-in `wellformed` → `syntax.parse_errors`, component in `swe-default@4` | a parse needs no tool; JSON-with-comments files (`tsconfig*.json`, `.vscode/`, …) are skipped |
+| `xml` | **done:** built-in `wellformed` (defusedxml) → `syntax.parse_errors` | well-formedness only, no DTD loaded; xmllint would add a native dependency for the same answer |
+| `sql` | open | SQLFluff 4.4.0 installs fine (a 42 MB virtual environment) but is too slow for a measuring tool: about 6 s for a 20 KB file and 63 s for an 85 KB one (superlinear), so a schema dump or a migration history takes minutes per file. Its default skips files over 20 KB "to avoid parser lock" without linting them, which would leave exactly the large scripts a modernization changes unmeasured while reporting them clean. Open until a faster SQL linter or a per-file size policy is decided. |
+| `yaml` misconfigurations | open | checkov's Kubernetes and GitHub Actions frameworks: a second, separate decision (which frameworks, how a manifest is recognized) |
+| `jsp` | open | PMD needs a Java runtime and a large distribution rather than one pinned binary, for a handful of JSP rules |
+| `html` | open | no single standard linter (HTMLHint and html-validate differ in rules); lychee already reads HTML for links; much HTML in the apps measured is server-side templates that a markup linter misreads |
+| `make` | open | checkmake isn't a de-facto standard and has only a few style rules; Makefiles rarely change alone in a modernization |
