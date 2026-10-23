@@ -9954,6 +9954,6 @@
     "value": 9.0
    }
   ],
-  "version": "1.38.0 (default rules without line-length, target config ignored)"
+  "version": "1.38.0 (default rules without line-length, target config ignored, lock files skipped)"
  }
 }

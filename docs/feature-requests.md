@@ -112,7 +112,7 @@ SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, M
 
 | Type | State | Why |
 |---|---|---|
-| `yaml` | **done:** `yamllint` 1.38.0 → `yaml.lint_findings`, component in `swe-default@4` | default rules without `line-length` (a style choice of the code base), fixed config |
+| `yaml` | **done:** `yamllint` 1.38.0 → `yaml.lint_findings`, component in `swe-default@4` | default rules without `line-length` (a style choice of the code base), fixed config; generated lock files (`pnpm-lock.yaml`, `conda-lock.yml`/`.yaml`) skipped |
 | `json` | **done:** built-in `wellformed` → `syntax.parse_errors`, gate (max 0) and component in `swe-default@4` | a parse needs no tool; JSON-with-comments files (`tsconfig*.json`, `.vscode/`, …) are skipped |
 | `xml` | **done:** built-in `wellformed` (defusedxml) → `syntax.parse_errors` | well-formedness only, no DTD loaded; xmllint would add a native dependency for the same answer |
 | `sql` | open | SQLFluff 4.4.0 installs fine (a 42 MB virtual environment) but is too slow for a measuring tool: about 6 s for a 20 KB file and 63 s for an 85 KB one (superlinear), so a schema dump or a migration history takes minutes per file. Its default skips files over 20 KB "to avoid parser lock" without linting them, which would leave exactly the large scripts a modernization changes unmeasured while reporting them clean. Open until a faster SQL linter or a per-file size policy is decided. |

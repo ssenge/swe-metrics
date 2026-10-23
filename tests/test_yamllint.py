@@ -38,7 +38,8 @@ def test_metrics_from_recorded_output(tmp_path, monkeypatch):
         calls.append((argv, cwd, ok))
         return (FIXTURES / "recorded" / "yamllint.txt").read_text()
     monkeypatch.setattr(module, "run", fake_run)
-    target = Target(str(YAML), (*FILES, "expected.json", "k8s/service.yml", "notes.md"))
+    locks = ("pnpm-lock.yaml", "web/pnpm-lock.yaml", "conda-lock.yml", "env/conda-lock.yaml")
+    target = Target(str(YAML), (*FILES, "expected.json", "k8s/service.yml", "notes.md", *locks))
     analyzer = Yamllint()
     assert analyzer.applicable(target) == (*FILES, "k8s/service.yml") and analyzer.prerequisites() == ""
     check(analyzer.measure(target, FILES, str(tmp_path)))

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import re
-from pathlib import Path
+from pathlib import Path, PurePath
 
 from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.sarif import Finding, lint_metrics
@@ -12,8 +12,10 @@ from swe_metrics.tools.process import run, version
 TOOL = "yamllint"
 # Line length is a style choice of the code base, not a quality signal; every other rule is the default.
 CONFIG = "{extends: default, rules: {line-length: disable}}"
-SETTINGS = "default rules without line-length, target config ignored"
+SETTINGS = "default rules without line-length, target config ignored, lock files skipped"
 FINDINGS = 1  # yamllint's exit code when it found an error; a file it can't read exits with another code
+# Lock files that package managers generate and rewrite on every dependency update; nobody edits them.
+LOCK_FILES = frozenset({"pnpm-lock.yaml", "conda-lock.yml", "conda-lock.yaml"})
 LINE = re.compile(r"^(?P<path>.+):(?P<line>\d+):\d+: \[(?P<level>\w+)\] .* \((?P<rule>[\w-]+)\)$")
 
 
@@ -34,8 +36,8 @@ class Yamllint:
         return ""
 
     def applicable(self, target: Target) -> tuple[str, ...]:
-        """The YAML files of the target, by file name (see core.target)."""
-        return tuple(p for p in target.files if language(p) == "yaml")
+        """The YAML files of the target, by file name (see core.target), without generated lock files."""
+        return tuple(p for p in target.files if language(p) == "yaml" and PurePath(p).name not in LOCK_FILES)
 
     def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
         """Lint the files; count findings per file, rule and level (yamllint's own: error, warning)."""
