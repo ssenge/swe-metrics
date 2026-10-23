@@ -14,8 +14,11 @@ Where the thresholds come from:
   and 10 (bad), as absolute counts: lint rules are written to report nothing on clean code. Shell, YAML
   and parse findings aren't per kloc: no analyzer counts those lines, so a density would leave a change
   of only such files without a score.
-- No critical or high vulnerabilities, no secrets, no error-level SAST findings, no failing tests: the
-  usual release blockers; here they are gates, so no weighted improvement elsewhere can hide them.
+- No critical or high vulnerabilities, no secrets, no error-level SAST findings, no failing tests, no
+  JSON or XML file that doesn't parse: the usual release blockers (a file that doesn't parse is broken,
+  not a style matter); here they are gates, so no weighted improvement elsewhere can hide them. Parse
+  errors are also a component: a gate alone gives no score, so a change of only JSON or XML files would
+  have none.
 Any change to a threshold, weight or part means a new version: scores compare only under one version.
 Earlier versions stay importable for comparisons (`--definition swe_metrics.scoring.default:VERSION_3`).
 """
@@ -75,6 +78,7 @@ VERSION_3 = replace(
 DEFINITION = replace(
     VERSION_3,
     version="4",  # 4: YAML lint findings, JSON and XML parse errors (3 left such changes without a score)
+    gates=(*VERSION_3.gates, gate("syntax.parse_errors", max=0)),
     components=(*VERSION_3.components, linear("yaml.lint_findings", good=0, bad=10, weight=1),
                 linear("syntax.parse_errors", good=0, bad=10, weight=1)),
 )

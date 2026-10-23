@@ -81,13 +81,15 @@ def only(analyzer, family, *metrics):
           row("yaml.lint_findings", 3, labels={"level": "warning"})), 70.0),
     (only("wellformed", "syntax", row("syntax.parse_errors", 0)), 100.0),
     (only("wellformed", "syntax", row("syntax.parse_errors", 1),
-          row("syntax.parse_errors", 1, labels={"language": "xml"})), 90.0),
+          row("syntax.parse_errors", 1, labels={"language": "xml"})), 40.0),
 ])
 def test_yaml_json_and_xml_alone_get_a_score(report, score):
-    """A change of YAML, JSON or XML files only: version 4 scores it, version 3 had nothing to score."""
+    """A change of YAML, JSON or XML files only: version 4 scores it (a file that doesn't parse fails a gate,
+    capping the score at 40), version 3 had nothing to score."""
     assert DEFINITION.score(report)["score"] == score
     assert VERSION_3.score(report)["score"] is None and VERSION_3.version == "3"
-    assert DEFINITION.components[:-2] == VERSION_3.components and DEFINITION.gates == VERSION_3.gates
+    assert DEFINITION.components[:-2] == VERSION_3.components and DEFINITION.gates[:-1] == VERSION_3.gates
+    assert DEFINITION.gates[-1].max == 0 and DEFINITION.gates[-1].cap == DEFINITION.gates[1].cap  # as secrets
 
 
 def test_score_command_with_baseline_and_schema(tmp_path, capsys):
