@@ -65,17 +65,17 @@ runs language-model judges with rubrics. swe-metrics only supplies the evidence,
 
 ## FR-2: Analyzers for recognized file types that nothing measures
 
-**Status:** partly done (2026-10-23). YAML, JSON and XML are covered and scored by `swe-default@4`; SQL, JSP,
+**Status:** partly done (2026-10-23). YAML, JSON and XML are covered and scored by `swe-default@0.4`; SQL, JSP,
 HTML, Makefiles and YAML misconfiguration checks stay open (see *Done and open* at the end).
 
 ### Problem
 
 `core/target.py` recognizes more file types than the analyzers read. A change that touches only such files gets
 no quality score: every component of `swe-default` is `not_applicable` (shell scripts had this gap until
-`swe-default@3` and the `shellcheck` analyzer). Audit of 2026-10-22, by type; gitleaks (`secrets`) and git-history
+`swe-default@0.3` and the `shellcheck` analyzer). Audit of 2026-10-22, by type; gitleaks (`secrets`) and git-history
 (`history`) read every file and are left out of the table:
 
-| Type (extensions) | Read by (families) | `swe-default@3` score for a change of only this type | Gap → standard open-source tool |
+| Type (extensions) | Read by (families) | `swe-default@0.3` score for a change of only this type | Gap → standard open-source tool |
 |---|---|---|---|
 | `sql` (`.sql`) | lizard's PL/SQL reader (`size`, `complexity`) | yes (complexity, function length) | no lint findings, no duplication → **SQLFluff** (`sqlfluff lint --format json`, fixed dialect and config); jscpd also reads SQL, but `code_files` leaves it out |
 | `jsp` (`.jsp`) | jscpd (`duplication`), opengrep (`security`, only with rules that match JSP) | only duplication, when jscpd finds enough tokens | no size, complexity or lint findings → **PMD** (its JSP rules, e.g. `NoScriptlets`, `NoInlineJavaScript`, `NoUnsanitizedJSPExpression`; needs a JRE) |
@@ -112,8 +112,8 @@ SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, M
 
 | Type | State | Why |
 |---|---|---|
-| `yaml` | **done:** `yamllint` 1.38.0 → `yaml.lint_findings`, component in `swe-default@4` | default rules without `line-length` (a style choice of the code base), fixed config; generated lock files (`pnpm-lock.yaml`, `conda-lock.yml`/`.yaml`) skipped |
-| `json` | **done:** built-in `wellformed` → `syntax.parse_errors`, gate (max 0) and component in `swe-default@4` | a parse needs no tool; JSON-with-comments files (`tsconfig*.json`, `.vscode/`, …) are skipped |
+| `yaml` | **done:** `yamllint` 1.38.0 → `yaml.lint_findings`, component in `swe-default@0.4` | default rules without `line-length` (a style choice of the code base), fixed config; generated lock files (`pnpm-lock.yaml`, `conda-lock.yml`/`.yaml`) skipped |
+| `json` | **done:** built-in `wellformed` → `syntax.parse_errors`, gate (max 0) and component in `swe-default@0.4` | a parse needs no tool; JSON-with-comments files (`tsconfig*.json`, `.vscode/`, …) are skipped |
 | `xml` | **done:** built-in `wellformed` (defusedxml) → `syntax.parse_errors` | well-formedness only, no DTD loaded; xmllint would add a native dependency for the same answer |
 | `sql` | open | SQLFluff 4.4.0 installs fine (a 42 MB virtual environment) but is too slow for a measuring tool: about 6 s for a 20 KB file and 63 s for an 85 KB one (superlinear), so a schema dump or a migration history takes minutes per file. Its default skips files over 20 KB "to avoid parser lock" without linting them, which would leave exactly the large scripts a modernization changes unmeasured while reporting them clean. Open until a faster SQL linter or a per-file size policy is decided. |
 | `yaml` misconfigurations | open | checkov's Kubernetes and GitHub Actions frameworks: a second, separate decision (which frameworks, how a manifest is recognized) |

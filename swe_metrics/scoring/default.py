@@ -1,4 +1,4 @@
-"""The default scoring definition `swe-default@4`: hard limits as gates, weighted quality components.
+"""The default scoring definition `swe-default@0.4`: hard limits as gates, weighted quality components.
 
 Where the thresholds come from:
 - Cyclomatic complexity 10 per function: McCabe, "A Complexity Measure" (IEEE TSE, 1976), and NIST
@@ -20,7 +20,7 @@ Where the thresholds come from:
   errors are also a component: a gate alone gives no score, so a change of only JSON or XML files would
   have none.
 Any change to a threshold, weight or part means a new version: scores compare only under one version.
-Earlier versions stay importable for comparisons (`--definition swe_metrics.scoring.default:VERSION_3`).
+Earlier versions stay importable for comparisons (`--definition swe_metrics.scoring.default:VERSION_0_3`).
 """
 from __future__ import annotations
 
@@ -29,9 +29,9 @@ from dataclasses import replace
 from swe_metrics.scoring import Definition, gate, linear, per_kloc, regression, select
 
 P95 = "p95"
-VERSION_2 = Definition(
+VERSION_0_2 = Definition(
     name="swe-default",
-    version="2",  # 2: cognitive complexity from the multi-language analyzer (1: complexipy, Python only)
+    version="0.2",  # 0.2: cognitive complexity from the multi-language analyzer (0.1: complexipy, Python)
     gates=(
         gate(select("dependencies.vulnerabilities", labels={"severity": ["critical", "high"]}), max=0),
         gate("secrets.findings", max=0),
@@ -70,15 +70,15 @@ VERSION_2 = Definition(
         regression("dependencies.vulnerabilities"),
     ),
 )
-VERSION_3 = replace(
-    VERSION_2,
-    version="3",  # 3: shell script lint findings (2 left changes of shell scripts only without a score)
-    components=(*VERSION_2.components, linear("shell.lint_findings", good=0, bad=10, weight=1)),
+VERSION_0_3 = replace(
+    VERSION_0_2,
+    version="0.3",  # 0.3: shell script lint findings (0.2 left changes of shell scripts only without a score)
+    components=(*VERSION_0_2.components, linear("shell.lint_findings", good=0, bad=10, weight=1)),
 )
 DEFINITION = replace(
-    VERSION_3,
-    version="4",  # 4: YAML lint findings, JSON and XML parse errors (3 left such changes without a score)
-    gates=(*VERSION_3.gates, gate("syntax.parse_errors", max=0)),
-    components=(*VERSION_3.components, linear("yaml.lint_findings", good=0, bad=10, weight=1),
+    VERSION_0_3,
+    version="0.4",  # 0.4: YAML lint findings, JSON and XML parse errors (0.3 left them without a score)
+    gates=(*VERSION_0_3.gates, gate("syntax.parse_errors", max=0)),
+    components=(*VERSION_0_3.components, linear("yaml.lint_findings", good=0, bad=10, weight=1),
                 linear("syntax.parse_errors", good=0, bad=10, weight=1)),
 )

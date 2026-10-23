@@ -6,7 +6,7 @@ import jsonschema
 import pytest
 
 from swe_metrics.cli.main import main
-from swe_metrics.scoring.default import DEFINITION, VERSION_2, VERSION_3
+from swe_metrics.scoring.default import DEFINITION, VERSION_0_2, VERSION_0_3
 
 
 def row(metric_id, value=None, stats=None, labels=None):
@@ -52,11 +52,11 @@ def test_default_definition_rewards_and_gates():
         ],
     }
     assert DEFINITION.score(vulnerable)["score"] == 40.0
-    assert (DEFINITION.name, DEFINITION.version) == ("swe-default", "4")
+    assert (DEFINITION.name, DEFINITION.version) == ("swe-default", "0.4")
 
 
 def test_shell_scripts_alone_get_a_score():
-    """A change of shell scripts only: version 3 scores its lint findings, version 2 had nothing to score."""
+    """A change of shell scripts only: version 0.3 scores its lint findings, 0.2 had nothing to score."""
     shell_only = {
         "analyzers": [
             {"id": "shellcheck", "tool": "shellcheck", "status": "ran", "families": ["shell"]},
@@ -64,9 +64,9 @@ def test_shell_scripts_alone_get_a_score():
         ],
         "metrics": [row("shell.lint_findings", 4), row("shell.lint_findings", 3, labels={"level": "info"})],
     }
-    assert DEFINITION.score(shell_only)["score"] == VERSION_3.score(shell_only)["score"] == 60.0
-    assert VERSION_2.score(shell_only)["score"] is None and VERSION_2.version == "2"
-    assert VERSION_3.components[:-1] == VERSION_2.components and VERSION_3.gates == VERSION_2.gates
+    assert DEFINITION.score(shell_only)["score"] == VERSION_0_3.score(shell_only)["score"] == 60.0
+    assert VERSION_0_2.score(shell_only)["score"] is None and VERSION_0_2.version == "0.2"
+    assert VERSION_0_3.components[:-1] == VERSION_0_2.components and VERSION_0_3.gates == VERSION_0_2.gates
 
 
 def only(analyzer, family, *metrics):
@@ -84,11 +84,11 @@ def only(analyzer, family, *metrics):
           row("syntax.parse_errors", 1, labels={"language": "xml"})), 40.0),
 ])
 def test_yaml_json_and_xml_alone_get_a_score(report, score):
-    """A change of YAML, JSON or XML files only: version 4 scores it (a file that doesn't parse fails a gate,
-    capping the score at 40), version 3 had nothing to score."""
+    """A change of YAML, JSON or XML files only: version 0.4 scores it (a file that doesn't parse fails a
+    gate, capping the score at 40), version 0.3 had nothing to score."""
     assert DEFINITION.score(report)["score"] == score
-    assert VERSION_3.score(report)["score"] is None and VERSION_3.version == "3"
-    assert DEFINITION.components[:-2] == VERSION_3.components and DEFINITION.gates[:-1] == VERSION_3.gates
+    assert VERSION_0_3.score(report)["score"] is None and VERSION_0_3.version == "0.3"
+    assert DEFINITION.components[:-2] == VERSION_0_3.components and DEFINITION.gates[:-1] == VERSION_0_3.gates
     assert DEFINITION.gates[-1].max == 0 and DEFINITION.gates[-1].cap == DEFINITION.gates[1].cap  # as secrets
 
 
