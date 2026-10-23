@@ -9233,6 +9233,64 @@
     "value": 2.0
    },
    {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "labels": {
+     "language": "json"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "labels": {
+     "language": "xml"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/broken.json"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/broken.xml"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
     "direction": "neutral",
     "id": "container.base_images",
     "labels": {

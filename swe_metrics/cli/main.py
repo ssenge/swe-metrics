@@ -32,6 +32,7 @@ from swe_metrics.analyzers.shellcheck import Shellcheck
 from swe_metrics.analyzers.terraform import Terraform
 from swe_metrics.analyzers.tflint import Tflint
 from swe_metrics.analyzers.trivy import Trivy
+from swe_metrics.analyzers.wellformed import Wellformed
 from swe_metrics.analyzers.yamllint import Yamllint
 from swe_metrics.cli.definitions import load_definition
 from swe_metrics.core.analyzer import Analyzer
@@ -57,7 +58,7 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
     return [Lizard(), Cognitive(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
             Markdownlint(), Lychee(), Terraform(), Tflint(), Checkov(), Hadolint(), Dockerfile(), Likec4(),
-            Shellcheck(), Yamllint(), PythonImports(), Depcruise(),
+            Shellcheck(), Yamllint(), Wellformed(), PythonImports(), Depcruise(),
             Jdeps(settings.reports.get("classes", ())), DocCoverage(), GitHistory(),
             *report_analyzers(settings.reports)]
 

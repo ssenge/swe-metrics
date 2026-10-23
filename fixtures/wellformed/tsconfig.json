@@ -1,0 +1,4 @@
+{
+  // TypeScript reads its config with comments: not checked as strict JSON.
+  "compilerOptions": { "strict": true },
+}

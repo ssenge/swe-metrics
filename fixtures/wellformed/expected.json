@@ -1,0 +1,9 @@
+{
+  "_comment": "Hand-checked. tsconfig.json has comments and is skipped (JSON with comments); mapping.xml's external DTD is not loaded.",
+  "wellformed": {
+    "broken.json": {"line": 4},
+    "broken.xml": {"line": 4},
+    "languages": {"json": 1, "xml": 1},
+    "total": 2
+  }
+}

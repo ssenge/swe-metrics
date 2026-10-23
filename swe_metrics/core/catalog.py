@@ -48,6 +48,8 @@ CATALOG: dict[str, MetricDef] = {
     "shell.lint_findings": MetricDef("count", "lower_better", "Shell script lint findings"),
     # yaml
     "yaml.lint_findings": MetricDef("count", "lower_better", "YAML lint findings, syntax errors included"),
+    # syntax: data files that don't parse
+    "syntax.parse_errors": MetricDef("count", "lower_better", "JSON and XML files that don't parse"),
     # architecture_model (M2)
     "architecture_model.errors": MetricDef("count", "lower_better", "Errors when the model is parsed"),
     "architecture_model.elements": MetricDef("count", "neutral", "Elements in the model"),
