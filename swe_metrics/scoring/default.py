@@ -1,4 +1,4 @@
-"""The default scoring definition `swe-default@3`: hard limits as gates, weighted quality components.
+"""The default scoring definition `swe-default@4`: hard limits as gates, weighted quality components.
 
 Where the thresholds come from:
 - Cyclomatic complexity 10 per function: McCabe, "A Complexity Measure" (IEEE TSE, 1976), and NIST
@@ -10,13 +10,14 @@ Where the thresholds come from:
   gate "Sonar way".
 - Mutation score 80 (good) and 60 (bad): Stryker's default `thresholds` (high 80, low 60).
 - Doc coverage 80 %: interrogate's default `fail-under`.
-- Lint findings (IaC, Dockerfiles, shell scripts) 0 (good) and 10 (bad), as absolute counts: lint rules
-  are written to report nothing on clean code. Shell findings aren't per kloc: no analyzer counts shell
-  lines, so a density would leave a change of shell scripts only without a score.
+- Lint findings (IaC, Dockerfiles, shell scripts, YAML) and JSON and XML files that don't parse: 0 (good)
+  and 10 (bad), as absolute counts: lint rules are written to report nothing on clean code. Shell, YAML
+  and parse findings aren't per kloc: no analyzer counts those lines, so a density would leave a change
+  of only such files without a score.
 - No critical or high vulnerabilities, no secrets, no error-level SAST findings, no failing tests: the
   usual release blockers; here they are gates, so no weighted improvement elsewhere can hide them.
 Any change to a threshold, weight or part means a new version: scores compare only under one version.
-The previous version stays importable for comparisons (`--definition swe_metrics.scoring.default:VERSION_2`).
+Earlier versions stay importable for comparisons (`--definition swe_metrics.scoring.default:VERSION_3`).
 """
 from __future__ import annotations
 
@@ -66,8 +67,14 @@ VERSION_2 = Definition(
         regression("dependencies.vulnerabilities"),
     ),
 )
-DEFINITION = replace(
+VERSION_3 = replace(
     VERSION_2,
     version="3",  # 3: shell script lint findings (2 left changes of shell scripts only without a score)
     components=(*VERSION_2.components, linear("shell.lint_findings", good=0, bad=10, weight=1)),
+)
+DEFINITION = replace(
+    VERSION_3,
+    version="4",  # 4: YAML lint findings, JSON and XML parse errors (3 left such changes without a score)
+    components=(*VERSION_3.components, linear("yaml.lint_findings", good=0, bad=10, weight=1),
+                linear("syntax.parse_errors", good=0, bad=10, weight=1)),
 )
