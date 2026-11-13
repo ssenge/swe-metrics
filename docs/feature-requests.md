@@ -248,7 +248,7 @@ counted in total and listed in the details, one per line, so a caller can show o
 
 ## FR-11: GitLab security reports as build reports
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13). Report kind `gitlab-security`; the metric's `tool` is the report's analyzer id; findings of a partial target are those in its files; a secret's text is never copied (the SARIF detail carries rule, level and place).
 
 Projects on GitLab run its security scanners in CI (SAST, secret detection, dependency scanning, container
 scanning), each writing a report in GitLab's security report schema (`gl-sast-report.json`,

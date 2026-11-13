@@ -1,0 +1,131 @@
+{
+ "version": "15.2.4",
+ "vulnerabilities": [
+  {
+   "name": "Server-side request forgery (SSRF)",
+   "severity": "High",
+   "identifiers": [
+    {
+     "type": "semgrep_id",
+     "name": "nodejs_scan.javascript-ssrf-rule-node_ssrf",
+     "value": "nodejs_scan.javascript-ssrf-rule-node_ssrf"
+    },
+    {
+     "type": "cwe",
+     "name": "CWE-918",
+     "value": "918",
+     "url": "https://cwe.mitre.org/data/definitions/918.html"
+    },
+    {
+     "type": "owasp",
+     "name": "A01:2025 - Broken Access Control",
+     "value": "A01:2025"
+    },
+    {
+     "type": "owasp",
+     "name": "A10:2021 - Server-Side Request Forgery",
+     "value": "A10:2021"
+    },
+    {
+     "type": "owasp",
+     "name": "A1:2017 - Injection",
+     "value": "A1:2017"
+    },
+    {
+     "type": "njsscan_rule_type",
+     "name": "NodeJS Scan ID javascript-ssrf-rule-node_ssrf",
+     "value": "User controlled URL in http client libraries can result in Server Side Request Forgery (SSRF)."
+    }
+   ],
+   "location": {
+    "file": "src/server.js",
+    "start_line": 8
+   },
+   "category": "sast"
+  },
+  {
+   "name": "Regular expression with non-literal value",
+   "severity": "Medium",
+   "identifiers": [
+    {
+     "type": "semgrep_id",
+     "name": "eslint.detect-non-literal-regexp",
+     "value": "eslint.detect-non-literal-regexp",
+     "url": "https://semgrep.dev/r/gitlab.eslint.detect-non-literal-regexp"
+    },
+    {
+     "type": "cwe",
+     "name": "CWE-185",
+     "value": "185",
+     "url": "https://cwe.mitre.org/data/definitions/185.html"
+    },
+    {
+     "type": "owasp",
+     "name": "A03:2021 - Injection",
+     "value": "A03:2021"
+    },
+    {
+     "type": "owasp",
+     "name": "A1:2017 - Injection",
+     "value": "A1:2017"
+    },
+    {
+     "type": "eslint_rule_id",
+     "name": "ESLint rule ID/detect-non-literal-regexp",
+     "value": "detect-non-literal-regexp"
+    }
+   ],
+   "location": {
+    "file": "src/server.js",
+    "start_line": 13
+   },
+   "category": "sast"
+  },
+  {
+   "name": "Incorrect regular expression",
+   "severity": "Medium",
+   "identifiers": [
+    {
+     "type": "semgrep_id",
+     "name": "nodejs_scan.javascript-dos-rule-regex_dos",
+     "value": "nodejs_scan.javascript-dos-rule-regex_dos"
+    },
+    {
+     "type": "cwe",
+     "name": "CWE-185",
+     "value": "185",
+     "url": "https://cwe.mitre.org/data/definitions/185.html"
+    },
+    {
+     "type": "owasp",
+     "name": "A05:2021 - Security Misconfiguration",
+     "value": "A05:2021"
+    },
+    {
+     "type": "owasp",
+     "name": "A6:2017 - Security Misconfiguration",
+     "value": "A6:2017"
+    },
+    {
+     "type": "njsscan_rule_type",
+     "name": "NodeJS Scan ID javascript-dos-rule-regex_dos",
+     "value": "Ensure that the regex used to compare with user supplied input is safe from regular expression denial of service."
+    }
+   ],
+   "location": {
+    "file": "src/server.js",
+    "start_line": 21
+   },
+   "category": "sast"
+  }
+ ],
+ "scan": {
+  "type": "sast",
+  "analyzer": {
+   "id": "semgrep",
+   "name": "Semgrep",
+   "version": "6.33.0"
+  },
+  "status": "success"
+ }
+}

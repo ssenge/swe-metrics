@@ -1,0 +1,33 @@
+{
+ "version": "15.2.4",
+ "scan": {
+  "type": "container_scanning",
+  "analyzer": {
+   "id": "trivy"
+  }
+ },
+ "vulnerabilities": [
+  {
+   "name": "openssl overflow",
+   "severity": "Unknown",
+   "category": "container_scanning",
+   "location": {
+    "image": "registry.example/orders:1.0",
+    "operating_system": "debian 12",
+    "dependency": {
+     "package": {
+      "name": "openssl"
+     },
+     "version": "3.0.1"
+    }
+   },
+   "identifiers": [
+    {
+     "type": "cve",
+     "name": "CVE-2024-0001",
+     "value": "CVE-2024-0001"
+    }
+   ]
+  }
+ ]
+}

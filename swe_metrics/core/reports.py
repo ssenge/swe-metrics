@@ -11,6 +11,7 @@ REPORT_KINDS = {
     "pit": "PIT mutations.xml",
     "stryker": "Stryker mutation-testing JSON report",
     "classes": "Directory of compiled classes or a JAR (Java dependency structure)",
+    "gitlab-security": "GitLab security report (SAST, secret detection, dependency or container scanning)",
 }
 
 

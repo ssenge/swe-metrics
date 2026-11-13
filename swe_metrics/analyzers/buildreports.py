@@ -1,12 +1,14 @@
 """Build reports the caller passes in (--report kind=path): tests, coverage and mutation, read, not run."""
 from __future__ import annotations
 
+import json
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
 import swe_metrics
 from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.coverage import coverage_metrics, coverage_units
+from swe_metrics.core.gitlab import Scan, gitlab_metrics, gitlab_sarif, only_in, parse
 from swe_metrics.core.junit import junit_metrics
 from swe_metrics.core.mutation import mutation_metrics
 from swe_metrics.core.report import Metric
@@ -129,7 +131,31 @@ class Stryker(Mutation):
     id = "stryker"
 
 
-KINDS: tuple[type[BuildReport], ...] = (Junit, Jacoco, Cobertura, Lcov, Pit, Stryker)
+class GitlabSecurity(BuildReport):
+    """GitLab security reports (gl-sast-report.json and its siblings): findings by scan kind and analyzer."""
+
+    id = "gitlab-security"
+    families = ("security", "secrets", "dependencies", "container")
+
+    def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
+        """The findings as metrics and as a SARIF detail (a partial target keeps those in its own files)."""
+        scans = self._scans([path.read_bytes() for path in self._files()], files, target.partial)
+        detail = Path(scratch) / "gitlab-security.sarif"
+        detail.write_text(json.dumps(gitlab_sarif(scans), indent=1))
+        return Measurement(gitlab_metrics(scans), (("sarif", str(detail)),))
+
+    def metrics(self, documents: list[bytes], files: tuple[str, ...], partial: bool = False) -> list[Metric]:
+        """Findings per scan kind, analyzer, file, rule and severity."""
+        return gitlab_metrics(self._scans(documents, files, partial))
+
+    @staticmethod
+    def _scans(documents: list[bytes], files: tuple[str, ...], partial: bool) -> list[Scan]:
+        """Every report's scan; of a partial target (its changes) only the findings in its files."""
+        scans = [parse(data) for data in documents]
+        return [only_in(s, files) for s in scans] if partial else scans
+
+
+KINDS: tuple[type[BuildReport], ...] = (Junit, Jacoco, Cobertura, Lcov, Pit, Stryker, GitlabSecurity)
 
 
 def report_analyzers(reports: Mapping[str, tuple[str, ...]]) -> list[BuildReport]:

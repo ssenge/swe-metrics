@@ -26,6 +26,7 @@ CATALOG: dict[str, MetricDef] = {
     "duplication.percent": MetricDef("percent", "lower_better", "Share of lines inside a code clone"),
     "duplication.duplicated_lines": MetricDef("lines", "lower_better", "Lines inside a code clone"),
     "duplication.clones": MetricDef("count", "lower_better", "Code clones (pairs of duplicated fragments)"),
+    "container.vulnerabilities": MetricDef("count", "lower_better", "Known vulnerabilities of an image"),
     "secrets.findings": MetricDef("count", "lower_better", "Secrets found (location and rule only)"),
     "dependencies.packages": MetricDef("count", "neutral", "Packages a manifest or lock file declares"),
     "dependencies.vulnerabilities": MetricDef("count", "lower_better", "Known vulnerabilities of packages"),

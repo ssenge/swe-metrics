@@ -113,6 +113,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 - `coverage`: line and branch coverage per file and in total, and the number of files no test reached, listed in the detail `uncovered-txt` (`jacoco`, `cobertura`, `lcov`; coverage.py through `coverage xml`, which writes Cobertura);
 - `mutation`: killed, survived and uncovered mutants and the mutation score per file and in total (`pit`, `stryker`). mutmut has no report file format of its own and is not read;
 - `structure` for compiled languages: class files for jdeps.
+- `gitlab-security`: GitLab's security reports (SAST, secret detection, dependency and container scanning) as `security.findings`, `secrets.findings`, `dependencies.vulnerabilities` and `container.vulnerabilities` by file, rule and severity, the analyzer that wrote the report as the tool (`--report gitlab-security=PATH`).
 
 **Later (not in v1):**
 - cloud-readiness rules (Konveyor kantra), which are heavy and rule-set-dependent;
