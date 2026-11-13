@@ -1,9 +1,12 @@
 {
-  "_comment": "Hand-checked. tsconfig.json has comments and is skipped (JSON with comments); mapping.xml's external DTD is not loaded.",
+  "_comment": "Hand-checked. tsconfig.json has comments and is skipped (JSON with comments); mapping.xml's external DTD is not loaded. multi.yaml holds two documents and an alias; plain.md has a --- rule that is no front matter; post.md's front matter breaks on its line 3 (the file's line).",
   "wellformed": {
     "broken.json": {"line": 4},
     "broken.xml": {"line": 4},
-    "languages": {"json": 1, "xml": 1},
-    "total": 2
+    "broken.yaml": {"line": 3},
+    "data.jsonl": {"line": 3},
+    "post.md": {"line": 3},
+    "languages": {"json": 1, "xml": 1, "yaml": 1, "jsonl": 1, "front-matter": 1},
+    "total": 5
   }
 }

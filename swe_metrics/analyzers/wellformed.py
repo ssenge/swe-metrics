@@ -1,4 +1,5 @@
-"""Well-formedness (built in): JSON and XML files that don't parse, per file and language."""
+"""Well-formedness (built in): JSON, XML, YAML, JSON lines and Markdown front matter that don't parse, per
+file and kind."""
 from __future__ import annotations
 
 import json
@@ -11,7 +12,8 @@ from swe_metrics.core.target import Target, language
 from swe_metrics.core.wellformed import UnsafeXmlError, is_jsonc, parse_error
 
 TOOL = "swe-metrics"
-KINDS = ("json", "xml")
+KINDS = ("json", "xml", "yaml", "jsonl", "markdown")
+RULES = {"markdown": "front-matter"}   # a Markdown file's finding is labelled by what fails: its front matter
 
 
 class Wellformed:
@@ -30,7 +32,8 @@ class Wellformed:
         return ""
 
     def applicable(self, target: Target) -> tuple[str, ...]:
-        """The JSON and XML files, without the JSON files their tools read with comments (core.wellformed)."""
+        """The JSON, XML, YAML, JSON lines and Markdown files, without the JSON files their tools read with
+        comments (core.wellformed)."""
         return tuple(p for p in target.files if language(p) in KINDS and not is_jsonc(p))
 
     def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
@@ -43,7 +46,7 @@ class Wellformed:
             except UnsafeXmlError as exc:  # unsafe to parse: not counted as well-formed or malformed
                 raise UnsafeXmlError(f"{path} was not parsed: it declares entities ({exc})") from exc
             if failure:
-                found.append(Finding(kind, "error", path, failure.line))  # rule: the file's language
+                found.append(Finding(RULES.get(kind, kind), "error", path, failure.line))  # rule: the kind
                 errors.append({"path": path, "line": failure.line, "message": failure.message})
         detail = Path(scratch) / "wellformed.json"
         detail.write_text(json.dumps(errors, indent=1))

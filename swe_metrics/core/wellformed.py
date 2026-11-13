@@ -1,4 +1,5 @@
-"""Well-formedness of data files: whether a JSON or XML document parses, and where it doesn't."""
+"""Well-formedness of data files: whether a JSON, XML, YAML, JSON lines or Markdown front matter document
+parses, and where it doesn't."""
 from __future__ import annotations
 
 import json
@@ -6,6 +7,7 @@ from dataclasses import dataclass
 from pathlib import PurePath
 from xml.etree.ElementTree import ParseError  # the error type only: parsing goes through defusedxml
 
+import yaml
 from defusedxml import DefusedXmlException
 from defusedxml.ElementTree import fromstring
 
@@ -34,8 +36,51 @@ def is_jsonc(path: str) -> bool:
 
 
 def parse_error(kind: str, data: bytes) -> ParseFailure | None:
-    """The first parse error of a `json` or `xml` document, None if well-formed; UnsafeXmlError if refused."""
-    return _json_error(data) if kind == "json" else _xml_error(data)
+    """The first parse error of a document of this kind (`json`, `xml`, `yaml`, `jsonl`, or `markdown` for
+    its front matter), None if well-formed; UnsafeXmlError if refused."""
+    checks = {"json": _json_error, "xml": _xml_error, "yaml": _yaml_error, "jsonl": _jsonl_error,
+              "markdown": _front_matter_error}
+    return checks[kind](data)
+
+
+def _yaml_error(data: bytes, first_line: int = 1) -> ParseFailure | None:
+    """The first syntax error of a YAML stream (every document), or None. The documents are composed, not
+    constructed, so no alias can expand and no tag runs code; the first line is where the text starts."""
+    try:
+        for _ in yaml.compose_all(data, Loader=yaml.SafeLoader):
+            pass
+    except yaml.YAMLError as exc:
+        mark = getattr(exc, "problem_mark", None)
+        line = (mark.line + 1 if mark else 1) + first_line - 1
+        return ParseFailure(line, " ".join(str(getattr(exc, "problem", None) or exc).split()))
+    return None
+
+
+def _jsonl_error(data: bytes) -> ParseFailure | None:
+    """The first line of a JSON lines file that isn't a JSON value (blank lines are allowed), or None."""
+    try:
+        lines = data.decode().splitlines()
+    except UnicodeDecodeError as exc:
+        return ParseFailure(data[:exc.start].count(b"\n") + 1, "not valid UTF-8")
+    for number, line in enumerate(lines, 1):
+        if line.strip():
+            try:
+                json.loads(line)
+            except json.JSONDecodeError as exc:
+                return ParseFailure(number, exc.msg)
+    return None
+
+
+def _front_matter_error(data: bytes) -> ParseFailure | None:
+    """The first syntax error of a Markdown file's YAML front matter (between a leading `---` line and the
+    next `---` line), or None; a file without a closed front matter has none."""
+    lines = data.decode(errors="replace").splitlines()
+    if not lines or lines[0].rstrip() != "---":
+        return None
+    end = next((n for n, line in enumerate(lines[1:], 1) if line.rstrip() in ("---", "...")), None)
+    if end is None:
+        return None
+    return _yaml_error("\n".join(lines[1:end]).encode(), first_line=2)
 
 
 def _json_error(data: bytes) -> ParseFailure | None:

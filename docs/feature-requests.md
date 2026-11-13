@@ -229,7 +229,7 @@ and relations in one view); use the same metric ids so a caller reads both the s
 
 ## FR-9: `wellformed` for YAML, JSON lines and Markdown front matter
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13).
 
 `syntax.parse_errors` covers JSON and XML. Two common structured formats are left out: JSON lines (`.jsonl`,
 one JSON value per non-empty line: logs, records, datasets) and the YAML front matter of Markdown files (between

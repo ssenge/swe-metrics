@@ -100,7 +100,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `container` | Dockerfile lint findings, base image and its runtime version | hadolint, Dockerfile parser |
 | `shell` | shell script lint findings per rule and level | ShellCheck |
 | `yaml` | YAML lint findings (syntax errors included) per rule and level | yamllint |
-| `syntax` | JSON and XML files that don't parse, per file and language | built-in `wellformed` analyzer (Python's `json`, defusedxml) |
+| `syntax` | JSON, XML, YAML, JSON lines files and Markdown front matter that don't parse, per file and kind | built-in `wellformed` analyzer (Python's `json`, defusedxml, PyYAML composing without constructing) |
 | `architecture_model` | model validity, elements, relationships, views, elements per view | LikeC4, Structurizr CLI |
 | `history` (Git targets) | commits, distinct authors (counted only) and age in days since HEAD per file; change coupling between files | git log (code-maat method) |
 

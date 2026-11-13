@@ -13,22 +13,25 @@ from tests.helpers import FIXTURES, values
 WELLFORMED = FIXTURES / "wellformed"
 EXPECTED = json.loads((WELLFORMED / "expected.json").read_text())["wellformed"]
 FILES = ("broken.json", "broken.xml", "expected.json", "mapping.xml", "package.json", "pom.xml",
-         "tsconfig.json")
+         "tsconfig.json", "broken.yaml", "multi.yaml", "data.jsonl", "good.jsonl", "post.md", "fine.md",
+         "plain.md")
 
 
 def test_fixture_parse_errors_per_file_and_language(tmp_path):
     """One error per malformed file, per language and in total; the detail names line and message."""
     analyzer = Wellformed()
-    target = Target(str(WELLFORMED), (*FILES, "notes.md", "ci.yml"))
+    target = Target(str(WELLFORMED), (*FILES, "notes.txt"))
     files = analyzer.applicable(target)
     assert "tsconfig.json" not in files and files == tuple(f for f in FILES if f != "tsconfig.json")
     result = analyzer.measure(target, files, str(tmp_path))
     assert values(result.metrics, "syntax.parse_errors") == {
-        "broken.json": 1, "broken.xml": 1, "language": EXPECTED["languages"], "total": EXPECTED["total"]}
+        "broken.json": 1, "broken.xml": 1, "broken.yaml": 1, "data.jsonl": 1, "post.md": 1,
+        "language": EXPECTED["languages"], "total": EXPECTED["total"]}
     kind, path = result.details[0]
     errors = json.loads(Path(path).read_text())
+    broken = ("broken.json", "broken.xml", "broken.yaml", "data.jsonl", "post.md")
     assert kind == "wellformed-json" and [(e["path"], e["line"]) for e in errors] == [
-        ("broken.json", EXPECTED["broken.json"]["line"]), ("broken.xml", EXPECTED["broken.xml"]["line"])]
+        (name, EXPECTED[name]["line"]) for name in broken]
     assert analyzer.version() == __version__ and analyzer.prerequisites() == ""
 
 
@@ -76,3 +79,38 @@ def test_external_entities_are_refused():
 def test_is_jsonc(path, jsonc):
     """Only the files their tools read with comments are JSONC."""
     assert is_jsonc(path) is jsonc
+
+
+@pytest.mark.parametrize(("kind", "text", "line"), [
+    ("yaml", "a: 1\n", None),
+    ("yaml", "a: 1\n---\nb: &x 2\nc: *x\n", None),
+    ("yaml", "", None),
+    ("yaml", "a: [1\nb: 2\n", 2),
+    ("yaml", "a: *nowhere\n", 1),
+    ("yaml", "a: &x 1\nb: *x\n", None),
+    ("jsonl", '{"a": 1}\n\n[2]\n', None),
+    ("jsonl", '{"a": 1}\nnot json\n', 2),
+    ("markdown", "# Title\n", None),
+    ("markdown", "---\na: 1\n---\n# T\n", None),
+    ("markdown", "---\na: [1\n---\n# T\n", 2),
+    ("markdown", "---\nnever closed: [\n", None),
+    ("markdown", "", None),
+])
+def test_parse_error_of_yaml_jsonl_and_front_matter(kind, text, line):
+    """YAML (every document), JSON lines and a Markdown file's closed front matter; the line is the file's."""
+    failure = parse_error(kind, text.encode())
+    assert (failure.line if failure else None) == line
+
+
+def test_bytes_that_are_not_text_fail_with_their_line():
+    """A YAML or JSON lines file that isn't UTF-8 text fails on the line of its first bad byte."""
+    assert parse_error("jsonl", b'{"a": 1}\n\xff\n') == ParseFailure(2, "not valid UTF-8")
+    failure = parse_error("yaml", b"a: 1\nb: \xff\xfe\n")
+    assert failure is not None and failure.line >= 1
+
+
+def test_a_yaml_alias_bomb_is_not_expanded():
+    """Composing (not constructing) the document keeps nested aliases from multiplying."""
+    levels = ["a: &a0 [x, x, x, x, x, x, x, x, x]"] + [
+        f"b{n}: &a{n} [" + ", ".join([f"*a{n - 1}"] * 9) + "]" for n in range(1, 9)]
+    assert parse_error("yaml", "\n".join(levels).encode()) is None
