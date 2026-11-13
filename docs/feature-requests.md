@@ -120,3 +120,129 @@ SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, M
 | `jsp` | open | PMD needs a Java runtime and a large distribution rather than one pinned binary, for a handful of JSP rules |
 | `html` | open | no single standard linter (HTMLHint and html-validate differ in rules); lychee already reads HTML for links; much HTML in the apps measured is server-side templates that a markup linter misreads |
 | `make` | open | checkmake isn't a de-facto standard and has only a few style rules; Makefiles rarely change alone in a modernization |
+
+## FR-3: Citations and quotes in documents
+
+**Status:** open (2026-11-13).
+
+### Problem
+
+Documents written about code (architecture notes, analyses, reviews, many of them written by agents) back their
+claims with citations such as `src/orders/Api.java:120`, often with the deciding statement quoted in backticks.
+Nothing measures whether those citations hold: a citation to a file that doesn't exist, to a line past its end,
+or a quote that isn't in the cited code reads exactly like a correct one. lychee does this for links; nothing does
+it for code citations.
+
+### Request: analyzer `citations`, new family `citations`
+
+For every Markdown file of the target:
+- a **citation** is `<path>:<line>` where `<path>` has a file extension (regex `([\w./-]+\.\w+):(\d+)`), outside
+  fenced code blocks; it is resolved against the target root and then against each folder given with
+  `--cite-root DIR` (repeatable, relative to the target), the first existing file winning;
+- a **quote** is a backtick span in the same list item or paragraph as a citation; it **holds** when its text,
+  whitespace folded, occurs in the cited file within 15 lines around the cited line (also whitespace folded, so
+  a quote may span the code's line breaks).
+
+| Metric | What it counts | direction |
+|---|---|---|
+| `citations.citations` | citations found | none |
+| `citations.broken` | citations whose file doesn't exist under any root, or whose line is past its end | lower_better |
+| `citations.quotes` | quotes next to a citation | none |
+| `citations.quotes_not_found` | quotes not found near any citation of their item or paragraph | lower_better |
+
+Per file and in total, with each broken citation and each quote not found as a SARIF finding (file, line, the
+citation or quote) in the details, so a caller can map them to its own structure.
+
+### How it fits
+
+Measures, never judges: it counts what holds and what doesn't; a caller decides how many may fail. Stateless:
+the target and the roots are its only input. No tool needed (built-in, like `wellformed`).
+
+### Acceptance
+
+A fixture with a correct citation and quote, a citation to a missing file, one past the file's end, a quote that
+is a paraphrase, a quote spanning two code lines, and a citation inside a fenced block (not counted).
+
+## FR-4: `--only` by analyzer id
+
+**Status:** open (2026-11-13).
+
+`--only` takes metric families. A family can hold several analyzers (`docs`: markdownlint and lychee; `iac`:
+terraform, tflint and checkov), so a caller that wants one tool's numbers runs the others too. Request: `--only`
+also accepts an analyzer id (`swe-metrics tools`' first column); a value that is both is the family. An unknown
+value stays an error that lists families and ids.
+
+## FR-5: checkov beyond Terraform, and its inline skips
+
+**Status:** open (2026-11-13).
+
+checkov runs with `--framework terraform` only. Infrastructure is also CloudFormation (incl. what CDK and SAM
+synthesize), Kubernetes manifests, ARM, Bicep and Serverless files, which checkov checks with built-in rules too.
+And an inline skip (`#checkov:skip=CKV_AWS_20:reason`) silences a check without anyone seeing it.
+
+Request:
+- checkov runs every framework that applies to the target's files (FR-2's YAML misconfiguration item, decided
+  here: the frameworks `cloudformation`, `kubernetes`, `arm`, `bicep`, `serverless`, `terraform`; a YAML or JSON
+  file is CloudFormation when it has `AWSTemplateFormatVersion` or a resource type starting `AWS::`, Kubernetes
+  when it has `apiVersion` and `kind`).
+- Metrics: `iac.resources` (scanned), `iac.failed_checks` (per framework, check id and severity label),
+  `iac.skipped_checks` (inline skips), `iac.skips_without_reason`, `iac.parse_errors` (files checkov couldn't
+  parse). Each skip goes into the details with its check id, file, line and reason, so a caller can compare
+  them with its own list of approved exceptions.
+- A new `swe-default` version only if the score should change; otherwise the definition stays.
+
+## FR-6: The caller's rule files for more analyzers
+
+**Status:** open (2026-11-13).
+
+`--sast-rules` lets a caller measure against its own opengrep rules (a client's or a team's coding rules). The
+same need exists for Java and TypeScript coding rules, and for several rule sets at once.
+
+Request: `--rules KIND=PATH`, repeatable; `--sast-rules PATH` stays as the same as `--rules opengrep=PATH`.
+- `opengrep=PATH` (repeatable): every rule set is scanned; besides the totals, `security.findings` gets a label
+  `rules` with the set's file stem, so each set's count is visible.
+- `checkstyle=PATH` (new analyzer `checkstyle`, family `lint`): a Checkstyle configuration; metric
+  `lint.violations` per file, rule and severity. Runs only when given (no default rules: Checkstyle has no
+  neutral default).
+- `eslint=PATH` (new analyzer `eslint-rules`, family `lint`): an ESLint flat config; it may import
+  `typescript-eslint` and `@eslint/js`, which the analyzer provides; inline `eslint-disable` comments are
+  ignored (`--no-inline-config`); metrics `lint.violations` and `lint.unparsed_files`.
+- Rules come only from the caller, never from the target (a config file in the target is ignored, as everywhere).
+- The rule file's path and its sha256 go into the analyzer's version string, so a report says what it measured.
+
+## FR-7: Analyzer `cfn-lint`
+
+**Status:** open (2026-11-13).
+
+CloudFormation templates have a validator, cfn-lint, that finds what checkov doesn't (invalid properties,
+wrong references, unsupported resource types). Request: analyzer `cfn-lint` in family `iac` on the
+CloudFormation files (recognized as in FR-5), fixed settings (all regions off, the default rules), metrics
+`iac.validation_findings` per file, rule and level (error, warning, informational). Pinned in `tools.lock` (pip).
+
+## FR-8: Analyzer `structurizr`
+
+**Status:** open (2026-11-13).
+
+Like `likec4` for Structurizr DSL workspaces (`*.dsl`): `structurizr-cli validate` and an export of the views.
+Metrics as `likec4` has them (`architecture_model.models`, `.invalid_models`, views per type, the most elements
+and relations in one view); use the same metric ids so a caller reads both the same way. Needs a JRE; pinned.
+
+## FR-9: `wellformed` for YAML, JSON lines and Markdown front matter
+
+**Status:** open (2026-11-13).
+
+`syntax.parse_errors` covers JSON and XML. Two common structured formats are left out: JSON lines (`.jsonl`,
+one JSON value per non-empty line: logs, records, datasets) and the YAML front matter of Markdown files (between
+a leading `---` line and the next `---` line: docs sites, knowledge bases). Request: `wellformed` parses both, and YAML
+files too (every document of a multi-document file; yamllint's findings mix style with syntax, so a caller
+can't tell a broken file from an untidy one); each failure is a finding with its file, line and the parser's
+message.
+
+## FR-10: The units a coverage report shows untested
+
+**Status:** open (2026-11-13). Check first: if the `coverage` family already reports per file, only the count
+is missing.
+
+A coverage percentage hides which units no test reached at all. Request: from each coverage report (jacoco,
+cobertura, lcov), `coverage.units_uncovered`: classes (jacoco), files (cobertura, lcov) with no covered line,
+counted in total and listed in the details, one per line, so a caller can show or compare the list.
