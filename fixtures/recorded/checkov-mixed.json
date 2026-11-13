@@ -1,0 +1,1704 @@
+[
+ {
+  "check_type": "cloudformation",
+  "results": {
+   "passed_checks": [
+    {
+     "check_id": "CKV_AWS_19",
+     "check_name": "Ensure the S3 bucket has server-side-encryption enabled",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": [
+       "Properties/BucketEncryption/ServerSideEncryptionConfiguration/[0]/ServerSideEncryptionByDefault/SSEAlgorithm"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3Encryption"
+    },
+    {
+     "check_id": "CKV_AWS_20",
+     "check_name": "Ensure the S3 bucket does not allow READ permissions to everyone",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": [
+       "Properties/AccessControl"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3PublicACLRead"
+    },
+    {
+     "check_id": "CKV_AWS_57",
+     "check_name": "Ensure the S3 bucket does not allow WRITE permissions to everyone",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": [
+       "Properties/AccessControl"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3PublicACLWrite"
+    },
+    {
+     "check_id": "CKV_AWS_19",
+     "check_name": "Ensure the S3 bucket has server-side-encryption enabled",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": [
+       "Properties/BucketEncryption/ServerSideEncryptionConfiguration/[0]/ServerSideEncryptionByDefault/SSEAlgorithm"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3Encryption"
+    },
+    {
+     "check_id": "CKV_AWS_20",
+     "check_name": "Ensure the S3 bucket does not allow READ permissions to everyone",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": [
+       "Properties/AccessControl"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3PublicACLRead"
+    },
+    {
+     "check_id": "CKV_AWS_57",
+     "check_name": "Ensure the S3 bucket does not allow WRITE permissions to everyone",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": [
+       "Properties/AccessControl"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3PublicACLWrite"
+    }
+   ],
+   "failed_checks": [
+    {
+     "check_id": "CKV_AWS_53",
+     "check_name": "Ensure S3 bucket has block public ACLs enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/BlockPublicAcls"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3BlockPublicACLs"
+    },
+    {
+     "check_id": "CKV_AWS_54",
+     "check_name": "Ensure S3 bucket has block public policy enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/BlockPublicPolicy"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3BlockPublicPolicy"
+    },
+    {
+     "check_id": "CKV_AWS_21",
+     "check_name": "Ensure the S3 bucket has versioning enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/VersioningConfiguration/Status"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3Versioning"
+    },
+    {
+     "check_id": "CKV_AWS_55",
+     "check_name": "Ensure S3 bucket has ignore public ACLs enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/IgnorePublicAcls"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3IgnorePublicACLs"
+    },
+    {
+     "check_id": "CKV_AWS_56",
+     "check_name": "Ensure S3 bucket has RestrictPublicBuckets enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/RestrictPublicBuckets"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3RestrictPublicBuckets"
+    },
+    {
+     "check_id": "CKV_AWS_18",
+     "check_name": "Ensure the S3 bucket has access logging enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/LoggingConfiguration"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3AccessLogs"
+    },
+    {
+     "check_id": "CKV_AWS_53",
+     "check_name": "Ensure S3 bucket has block public ACLs enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/BlockPublicAcls"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3BlockPublicACLs"
+    },
+    {
+     "check_id": "CKV_AWS_54",
+     "check_name": "Ensure S3 bucket has block public policy enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/BlockPublicPolicy"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3BlockPublicPolicy"
+    },
+    {
+     "check_id": "CKV_AWS_55",
+     "check_name": "Ensure S3 bucket has ignore public ACLs enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/IgnorePublicAcls"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3IgnorePublicACLs"
+    },
+    {
+     "check_id": "CKV_AWS_56",
+     "check_name": "Ensure S3 bucket has RestrictPublicBuckets enabled",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "Properties/PublicAccessBlockConfiguration/RestrictPublicBuckets"
+      ]
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3RestrictPublicBuckets"
+    }
+   ],
+   "skipped_checks": [
+    {
+     "check_id": "CKV_AWS_18",
+     "check_name": "Ensure the S3 bucket has access logging enabled",
+     "check_result": {
+      "result": "SKIPPED",
+      "suppress_comment": "access logs go to the central log account"
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      3,
+      9
+     ],
+     "resource": "AWS::S3::Bucket.Logs",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3AccessLogs"
+    },
+    {
+     "check_id": "CKV_AWS_21",
+     "check_name": "Ensure the S3 bucket has versioning enabled",
+     "check_result": {
+      "result": "SKIPPED",
+      "suppress_comment": "No comment provided"
+     },
+     "file_path": "/template.yaml",
+     "file_line_range": [
+      10,
+      15
+     ],
+     "resource": "AWS::S3::Bucket.Data",
+     "check_class": "checkov.cloudformation.checks.resource.aws.S3Versioning"
+    }
+   ],
+   "parsing_errors": []
+  },
+  "summary": {
+   "passed": 6,
+   "failed": 10,
+   "skipped": 2,
+   "parsing_errors": 0,
+   "resource_count": 2
+  }
+ },
+ {
+  "check_type": "kubernetes",
+  "results": {
+   "passed_checks": [
+    {
+     "check_id": "CKV_K8S_80",
+     "check_name": "Ensure that the admission control plugin AlwaysPullImages is set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAlwaysPullImagesPlugin"
+    },
+    {
+     "check_id": "CKV_K8S_113",
+     "check_name": "Ensure that the --bind-address argument is set to 127.0.0.1",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ControllerManagerBindAddress"
+    },
+    {
+     "check_id": "CKV_K8S_34",
+     "check_name": "Ensure that Tiller (Helm v2) is not deployed",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.Tiller"
+    },
+    {
+     "check_id": "CKV_K8S_33",
+     "check_name": "Ensure the Kubernetes dashboard is not deployed",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubernetesDashboard"
+    },
+    {
+     "check_id": "CKV_K8S_104",
+     "check_name": "Ensure that encryption providers are appropriately configured",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerEncryptionProviders"
+    },
+    {
+     "check_id": "CKV_K8S_77",
+     "check_name": "Ensure that the --authorization-mode argument includes RBAC",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuthorizationModeRBAC"
+    },
+    {
+     "check_id": "CKV_K8S_82",
+     "check_name": "Ensure that the admission control plugin ServiceAccount is set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerServiceAccountPlugin"
+    },
+    {
+     "check_id": "CKV_K8S_74",
+     "check_name": "Ensure that the --authorization-mode argument is not set to AlwaysAllow",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuthorizationModeNotAlwaysAllow"
+    },
+    {
+     "check_id": "CKV_K8S_26",
+     "check_name": "Do not specify hostPort unless absolutely necessary",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.HostPort"
+    },
+    {
+     "check_id": "CKV_K8S_97",
+     "check_name": "Ensure that the --service-account-key-file argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerServiceAccountKeyFile"
+    },
+    {
+     "check_id": "CKV_K8S_114",
+     "check_name": "Ensure that the --profiling argument is set to false",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.SchedulerProfiling"
+    },
+    {
+     "check_id": "CKV_K8S_108",
+     "check_name": "Ensure that the --use-service-account-credentials argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeControllerManagerServiceAccountCredentials"
+    },
+    {
+     "check_id": "CKV_K8S_146",
+     "check_name": "Ensure that the --hostname-override argument is not set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletHostnameOverride"
+    },
+    {
+     "check_id": "CKV_K8S_112",
+     "check_name": "Ensure that the RotateKubeletServerCertificate argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.RotateKubeletServerCertificate"
+    },
+    {
+     "check_id": "CKV_K8S_15",
+     "check_name": "Image Pull Policy should be Always",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ImagePullPolicyAlways"
+    },
+    {
+     "check_id": "CKV_K8S_148",
+     "check_name": "Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletKeyFilesSetAppropriate"
+    },
+    {
+     "check_id": "CKV_K8S_27",
+     "check_name": "Do not expose the docker daemon socket to containers",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.DockerSocketVolume"
+    },
+    {
+     "check_id": "CKV_K8S_89",
+     "check_name": "Ensure that the --secure-port argument is not set to 0",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerSecurePort"
+    },
+    {
+     "check_id": "CKV_K8S_70",
+     "check_name": "Ensure that the --token-auth-file argument is not set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerTokenAuthFile"
+    },
+    {
+     "check_id": "CKV_K8S_68",
+     "check_name": "Ensure that the --anonymous-auth argument is set to false",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAnonymousAuth"
+    },
+    {
+     "check_id": "CKV_K8S_151",
+     "check_name": "Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletCryptographicCiphers"
+    },
+    {
+     "check_id": "CKV_K8S_141",
+     "check_name": "Ensure that the --read-only-port argument is set to 0",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletReadOnlyPort"
+    },
+    {
+     "check_id": "CKV_K8S_119",
+     "check_name": "Ensure that the --peer-cert-file and --peer-key-file arguments are set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.EtcdPeerFiles"
+    },
+    {
+     "check_id": "CKV_K8S_106",
+     "check_name": "Ensure that the --terminated-pod-gc-threshold argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeControllerManagerTerminatedPods"
+    },
+    {
+     "check_id": "CKV_K8S_143",
+     "check_name": "Ensure that the --streaming-connection-idle-timeout argument is not set to 0",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletStreamingConnectionIdleTimeout"
+    },
+    {
+     "check_id": "CKV_K8S_79",
+     "check_name": "Ensure that the admission control plugin AlwaysAdmit is not set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAdmissionControlAlwaysAdmit"
+    },
+    {
+     "check_id": "CKV_K8S_39",
+     "check_name": "Do not use the CAP_SYS_ADMIN linux capability",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.AllowedCapabilitiesSysAdmin"
+    },
+    {
+     "check_id": "CKV_K8S_115",
+     "check_name": "Ensure that the --bind-address argument is set to 127.0.0.1",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.SchedulerBindAddress"
+    },
+    {
+     "check_id": "CKV_K8S_16",
+     "check_name": "Container should not be privileged",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.PrivilegedContainers"
+    },
+    {
+     "check_id": "CKV_K8S_88",
+     "check_name": "Ensure that the --insecure-port argument is set to 0",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerInsecurePort"
+    },
+    {
+     "check_id": "CKV_K8S_111",
+     "check_name": "Ensure that the --root-ca-file argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeControllerManagerRootCAFile"
+    },
+    {
+     "check_id": "CKV_K8S_19",
+     "check_name": "Containers should not share the host network namespace",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.SharedHostNetworkNamespace"
+    },
+    {
+     "check_id": "CKV_K8S_84",
+     "check_name": "Ensure that the admission control plugin PodSecurityPolicy is set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerPodSecurityPolicyPlugin"
+    },
+    {
+     "check_id": "CKV_K8S_116",
+     "check_name": "Ensure that the --cert-file and --key-file arguments are set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.EtcdCertAndKey"
+    },
+    {
+     "check_id": "CKV_K8S_91",
+     "check_name": "Ensure that the --audit-log-path argument is set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuditLog"
+    },
+    {
+     "check_id": "CKV_K8S_95",
+     "check_name": "Ensure that the --request-timeout argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerRequestTimeout"
+    },
+    {
+     "check_id": "CKV_K8S_93",
+     "check_name": "Ensure that the --audit-log-maxbackup argument is set to 10 or as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuditLogMaxBackup"
+    },
+    {
+     "check_id": "CKV_K8S_145",
+     "check_name": "Ensure that the --make-iptables-util-chains argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletMakeIptablesUtilChains"
+    },
+    {
+     "check_id": "CKV_K8S_110",
+     "check_name": "Ensure that the --service-account-private-key-file argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeControllerManagerServiceAccountPrivateKeyFile"
+    },
+    {
+     "check_id": "CKV_K8S_105",
+     "check_name": "Ensure that the API Server only makes use of Strong Cryptographic Ciphers",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerStrongCryptographicCiphers"
+    },
+    {
+     "check_id": "CKV_K8S_144",
+     "check_name": "Ensure that the --protect-kernel-defaults argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletProtectKernelDefaults"
+    },
+    {
+     "check_id": "CKV_K8S_69",
+     "check_name": "Ensure that the --basic-auth-file argument is not set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerBasicAuthFile"
+    },
+    {
+     "check_id": "CKV_K8S_100",
+     "check_name": "Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerTlsCertAndKey"
+    },
+    {
+     "check_id": "CKV_K8S_159",
+     "check_name": "Limit the use of git-sync to prevent code injection",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.DangerousGitSync"
+    },
+    {
+     "check_id": "CKV_K8S_72",
+     "check_name": "Ensure that the --kubelet-client-certificate and --kubelet-client-key arguments are set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerKubeletClientCertAndKey"
+    },
+    {
+     "check_id": "CKV_K8S_35",
+     "check_name": "Prefer using secrets as files over secrets as environment variables",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.Secrets"
+    },
+    {
+     "check_id": "CKV_K8S_75",
+     "check_name": "Ensure that the --authorization-mode argument includes Node",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuthorizationModeNode"
+    },
+    {
+     "check_id": "CKV_K8S_17",
+     "check_name": "Containers should not share the host process ID namespace",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ShareHostPID"
+    },
+    {
+     "check_id": "CKV_K8S_18",
+     "check_name": "Containers should not share the host IPC namespace",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ShareHostIPC"
+    },
+    {
+     "check_id": "CKV_K8S_138",
+     "check_name": "Ensure that the --anonymous-auth argument is set to false",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletAnonymousAuth"
+    },
+    {
+     "check_id": "CKV_K8S_117",
+     "check_name": "Ensure that the --client-cert-auth argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.EtcdClientCertAuth"
+    },
+    {
+     "check_id": "CKV_K8S_25",
+     "check_name": "Minimize the admission of containers with added capability",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.AllowedCapabilities"
+    },
+    {
+     "check_id": "CKV_K8S_81",
+     "check_name": "Ensure that the admission control plugin SecurityContextDeny is set if PodSecurityPolicy is not used",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerSecurityContextDenyPlugin"
+    },
+    {
+     "check_id": "CKV_K8S_102",
+     "check_name": "Ensure that the --etcd-cafile argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerEtcdCaFile"
+    },
+    {
+     "check_id": "CKV_K8S_73",
+     "check_name": "Ensure that the --kubelet-certificate-authority argument is set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerkubeletCertificateAuthority"
+    },
+    {
+     "check_id": "CKV_K8S_86",
+     "check_name": "Ensure that the --insecure-bind-address argument is not set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerInsecureBindAddress"
+    },
+    {
+     "check_id": "CKV_K8S_85",
+     "check_name": "Ensure that the admission control plugin NodeRestriction is set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerNodeRestrictionPlugin"
+    },
+    {
+     "check_id": "CKV_K8S_99",
+     "check_name": "Ensure that the --etcd-certfile and --etcd-keyfile arguments are set as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerEtcdCertAndKey"
+    },
+    {
+     "check_id": "CKV_K8S_90",
+     "check_name": "Ensure that the --profiling argument is set to false",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerProfiling"
+    },
+    {
+     "check_id": "CKV_K8S_92",
+     "check_name": "Ensure that the --audit-log-maxage argument is set to 30 or as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuditLogMaxAge"
+    },
+    {
+     "check_id": "CKV_K8S_71",
+     "check_name": "Ensure that the --kubelet-https argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerKubeletHttps"
+    },
+    {
+     "check_id": "CKV_K8S_147",
+     "check_name": "Ensure that the --event-qps argument is set to 0 or a level which ensures appropriate event capture",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubletEventCapture"
+    },
+    {
+     "check_id": "CKV_K8S_94",
+     "check_name": "Ensure that the --audit-log-maxsize argument is set to 100 or as appropriate",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerAuditLogMaxSize"
+    },
+    {
+     "check_id": "CKV_K8S_107",
+     "check_name": "Ensure that the --profiling argument is set to false",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeControllerManagerBlockProfiles"
+    },
+    {
+     "check_id": "CKV_K8S_139",
+     "check_name": "Ensure that the --authorization-mode argument is not set to AlwaysAllow",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubeletAuthorizationModeNotAlwaysAllow"
+    },
+    {
+     "check_id": "CKV_K8S_149",
+     "check_name": "Ensure that the --rotate-certificates argument is not set to false",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.KubletRotateCertificates"
+    },
+    {
+     "check_id": "CKV_K8S_118",
+     "check_name": "Ensure that the --auto-tls argument is not set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.EtcdAutoTls"
+    },
+    {
+     "check_id": "CKV_K8S_83",
+     "check_name": "Ensure that the admission control plugin NamespaceLifecycle is set",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerNamespaceLifecyclePlugin"
+    },
+    {
+     "check_id": "CKV_K8S_96",
+     "check_name": "Ensure that the --service-account-lookup argument is set to true",
+     "check_result": {
+      "result": "PASSED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ApiServerServiceAccountLookup"
+    }
+   ],
+   "failed_checks": [
+    {
+     "check_id": "CKV_K8S_37",
+     "check_name": "Minimize the admission of containers with capabilities assigned",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/securityContext/capabilities/drop"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.MinimizeCapabilities"
+    },
+    {
+     "check_id": "CKV_K8S_31",
+     "check_name": "Ensure that the seccomp profile is set to docker/default or runtime/default",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.Seccomp"
+    },
+    {
+     "check_id": "CKV_K8S_8",
+     "check_name": "Liveness Probe Should be Configured",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/livenessProbe"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.LivenessProbe"
+    },
+    {
+     "check_id": "CKV_K8S_12",
+     "check_name": "Memory requests should be set",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/resources/requests/memory"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.MemoryRequests"
+    },
+    {
+     "check_id": "CKV_K8S_20",
+     "check_name": "Containers should not run with allowPrivilegeEscalation",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/securityContext/allowPrivilegeEscalation"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.AllowPrivilegeEscalation"
+    },
+    {
+     "check_id": "CKV_K8S_13",
+     "check_name": "Memory limits should be set",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/resources/limits/memory"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.MemoryLimits"
+    },
+    {
+     "check_id": "CKV_K8S_40",
+     "check_name": "Containers should run as a high UID to avoid host conflict",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.RootContainersHighUID"
+    },
+    {
+     "check_id": "CKV_K8S_10",
+     "check_name": "CPU requests should be set",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/resources/requests/cpu"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.CPURequests"
+    },
+    {
+     "check_id": "CKV_K8S_22",
+     "check_name": "Use read-only filesystem for containers where possible",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/securityContext/readOnlyRootFilesystem"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ReadOnlyFilesystem"
+    },
+    {
+     "check_id": "CKV_K8S_9",
+     "check_name": "Readiness Probe Should be Configured",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/readinessProbe"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ReadinessProbe"
+    },
+    {
+     "check_id": "CKV_K8S_28",
+     "check_name": "Minimize the admission of containers with the NET_RAW capability",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/securityContext/capabilities/drop"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.DropCapabilities"
+    },
+    {
+     "check_id": "CKV_K8S_29",
+     "check_name": "Apply security context to your pods and containers",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.PodSecurityContext"
+    },
+    {
+     "check_id": "CKV_K8S_30",
+     "check_name": "Apply security context to your containers",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/securityContext"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ContainerSecurityContext"
+    },
+    {
+     "check_id": "CKV_K8S_14",
+     "check_name": "Image Tag should be fixed - not latest or blank",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/image"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ImageTagFixed"
+    },
+    {
+     "check_id": "CKV_K8S_38",
+     "check_name": "Ensure that Service Account Tokens are only mounted where necessary",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ServiceAccountTokens"
+    },
+    {
+     "check_id": "CKV_K8S_21",
+     "check_name": "The default namespace should not be used",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.DefaultNamespace"
+    },
+    {
+     "check_id": "CKV_K8S_23",
+     "check_name": "Minimize the admission of root containers",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": []
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.RootContainers"
+    },
+    {
+     "check_id": "CKV_K8S_43",
+     "check_name": "Image should use digest",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/image"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.ImageDigest"
+    },
+    {
+     "check_id": "CKV_K8S_11",
+     "check_name": "CPU limits should be set",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "spec/template/spec/containers/[0]/resources/limits/cpu"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Deployment.default.orders",
+     "check_class": "checkov.kubernetes.checks.resource.k8s.CPULimits"
+    },
+    {
+     "check_id": "CKV2_K8S_6",
+     "check_name": "Minimize the admission of pods which lack an associated NetworkPolicy",
+     "check_result": {
+      "result": "FAILED",
+      "evaluated_keys": [
+       "resource_type"
+      ]
+     },
+     "file_path": "/deploy.yaml",
+     "file_line_range": [
+      1,
+      17
+     ],
+     "resource": "Pod.default.orders.app-orders",
+     "check_class": "checkov.common.graph.checks_infra.base_check"
+    }
+   ],
+   "skipped_checks": [],
+   "parsing_errors": []
+  },
+  "summary": {
+   "passed": 69,
+   "failed": 20,
+   "skipped": 0,
+   "parsing_errors": 0,
+   "resource_count": 2
+  }
+ }
+]

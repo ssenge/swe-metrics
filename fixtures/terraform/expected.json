@@ -5,7 +5,10 @@
                         "rule": {"terraform_required_version": 1, "terraform_unused_declarations": 1}, "total": 2},
   "iac.misconfigurations": {"storage/main.tf": 7,
                             "check": {"CKV2_AWS_6": 1, "CKV2_AWS_61": 1, "CKV2_AWS_62": 1, "CKV_AWS_144": 1,
-                                      "CKV_AWS_145": 1, "CKV_AWS_18": 1, "CKV_AWS_21": 1}, "total": 7},
+                                      "CKV_AWS_145": 1, "CKV_AWS_18": 1, "CKV_AWS_21": 1}, "framework": {"terraform": 7},
+                            "total": 7},
+  "iac.skipped_checks": {"total": 0},
+  "iac.skips_without_reason": {"total": 0},
   "iac.passed_checks": {"total": 4},
   "iac.resources": {"total": 3}
 }

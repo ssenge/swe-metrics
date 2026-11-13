@@ -20,6 +20,9 @@ from tests.helpers import FIXTURES, values
 TERRAFORM = FIXTURES / "terraform"
 EXPECTED = json.loads((TERRAFORM / "expected.json").read_text())
 ALL = ("broken/main.tf", "expected.json", "storage/main.tf", "valid/main.tf")
+CHECKOV_METRICS = ("iac.misconfigurations", "iac.skipped_checks", "iac.skips_without_reason",
+                   "iac.passed_checks", "iac.resources")
+MIXED = FIXTURES / "iac_mixed"
 OFFLINE = ("broken/main.tf", "valid/main.tf")  # modules that validate without downloading a provider
 
 
@@ -155,10 +158,10 @@ def test_checkov_counts_failed_checks_per_file_and_check(tmp_path, monkeypatch):
     assert analyzer.applicable(target) == ("broken/main.tf", "storage/main.tf", "valid/main.tf")
     assert analyzer.prerequisites() == ""
     result = analyzer.measure(target, analyzer.applicable(target), str(tmp_path))
-    for metric_id in ("iac.misconfigurations", "iac.passed_checks", "iac.resources"):
+    for metric_id in CHECKOV_METRICS:
         assert values(result.metrics, metric_id) == EXPECTED[metric_id]
     assert (tmp_path / "modules" / "storage" / "main.tf").exists()
-    assert [fmt for fmt, _ in result.details] == ["sarif", "checkov-json"]
+    assert [fmt for fmt, _ in result.details] == ["sarif", "checkov-json", "checkov-skips-json"]
 
 
 def test_checkov_without_resources_and_with_parsing_errors(tmp_path, monkeypatch):
@@ -167,7 +170,8 @@ def test_checkov_without_resources_and_with_parsing_errors(tmp_path, monkeypatch
     monkeypatch.setattr(checkov_module, "run", recorded_checkov(summary))
     result = Checkov().measure(Target(str(TERRAFORM), ALL), ("valid/main.tf",), str(tmp_path / "a"))
     assert {m.id: m.value for m in result.metrics} == {
-        "iac.misconfigurations": 0, "iac.passed_checks": 0, "iac.resources": 0}
+        "iac.misconfigurations": 0, "iac.skipped_checks": 0, "iac.skips_without_reason": 0,
+        "iac.passed_checks": 0, "iac.resources": 0}
     broken = {"summary": {**summary, "parsing_errors": 1},
               "results": {"parsing_errors": ["/tmp/x/modules/valid/main.tf"]}}
     monkeypatch.setattr(checkov_module, "run", recorded_checkov(broken))
@@ -178,7 +182,8 @@ def test_checkov_without_resources_and_with_parsing_errors(tmp_path, monkeypatch
 def test_checkov_version_records_settings(monkeypatch):
     """The framework and check set are part of the version string."""
     monkeypatch.setattr(checkov_module, "version", lambda argv: "3.3.26")
-    assert Checkov().version() == "3.3.26 (terraform framework, built-in checks)"
+    assert Checkov().version() == f"3.3.26 ({checkov_module.SETTINGS})"
+    assert "cloudformation" in checkov_module.SETTINGS and "kubernetes" in checkov_module.SETTINGS
     monkeypatch.setattr(checkov_module, "version", lambda argv: None)
     assert Checkov().version() is None
 
@@ -193,5 +198,56 @@ def test_checkov_real_tool_ignores_target_config(tmp_path):
     assert analyzer.version()
     files = ("broken/main.tf", "storage/main.tf", "valid/main.tf")
     result = analyzer.measure(Target(str(copy), ALL), files, str(tmp_path / "scratch"))
-    for metric_id in ("iac.misconfigurations", "iac.passed_checks", "iac.resources"):
+    for metric_id in CHECKOV_METRICS:
         assert values(result.metrics, metric_id) == EXPECTED[metric_id]
+
+
+def test_checkov_applies_to_templates_and_manifests_but_not_to_other_json():
+    """Terraform files, YAML or JSON that says it is CloudFormation, Kubernetes or ARM, Bicep files and
+    serverless.yml; a package.json and a Markdown file are none."""
+    names = ("template.yaml", "deploy.yaml", "package.json", "main.bicep", "serverless.yml", "notes.md",
+             "a/b.tf")
+    found = Checkov().applicable(Target(str(MIXED), names))
+    assert found == ("template.yaml", "deploy.yaml", "main.bicep", "serverless.yml", "a/b.tf")
+
+
+def test_checkov_runs_every_framework_and_lists_each_skip(tmp_path, monkeypatch):
+    """A recorded run over a CloudFormation template and a Kubernetes manifest: failed checks per framework,
+    two inline skips (one without a reason) and the skips with their reasons as a detail."""
+    report = json.loads((FIXTURES / "recorded" / "checkov-mixed.json").read_text())
+
+    def fake_run(argv, cwd, ok=(0,)):
+        assert argv[argv.index("--framework") + 1:argv.index("--output")] == list(checkov_module.FRAMEWORKS)
+        output = Path(argv[argv.index("--output-file-path") + 1])
+        output.mkdir()
+        (output / "results_json.json").write_text(json.dumps(report))
+        (output / "results_sarif.sarif").write_text("{}")
+        return ""
+    monkeypatch.setattr(checkov_module, "run", fake_run)
+    files = ("template.yaml", "deploy.yaml")
+    result = Checkov().measure(Target(str(MIXED), files), files, str(tmp_path))
+    assert (tmp_path / "modules/template.yaml").exists() and (tmp_path / "modules/deploy.yaml").exists()
+    failed = values(result.metrics, "iac.misconfigurations")
+    assert failed["framework"] == {"cloudformation": 10, "kubernetes": 20} and failed["total"] == 30
+    assert values(result.metrics, "iac.skipped_checks") == {
+        "template.yaml": 2, "check": {"CKV_AWS_18": 1, "CKV_AWS_21": 1}, "total": 2}
+    assert values(result.metrics, "iac.skips_without_reason") == {"total": 1}
+    assert values(result.metrics, "iac.resources") == {"total": 4}
+    skips = json.loads(Path(result.details[2][1]).read_text())
+    assert [(s["check_id"], s["file"], s["line"], s["reason"], s["framework"]) for s in skips] == [
+        ("CKV_AWS_18", "template.yaml", 3, "access logs go to the central log account", "cloudformation"),
+        ("CKV_AWS_21", "template.yaml", 10, "", "cloudformation")]
+
+
+@pytest.mark.skipif(not shutil.which("checkov"), reason="checkov not installed")
+def test_checkov_real_tool_on_a_template_and_a_manifest(tmp_path):
+    """The real tool: the same two skips and both frameworks' findings, and the JSON file is no template."""
+    (tmp_path / "scratch").mkdir()
+    analyzer = Checkov()
+    files = analyzer.applicable(Target(str(MIXED), ("template.yaml", "deploy.yaml", "package.json")))
+    result = analyzer.measure(Target(str(MIXED), files), files, str(tmp_path / "scratch"))
+    assert files == ("template.yaml", "deploy.yaml")
+    assert values(result.metrics, "iac.skipped_checks")["total"] == 2
+    assert values(result.metrics, "iac.skips_without_reason") == {"total": 1}
+    frameworks = values(result.metrics, "iac.misconfigurations")["framework"]
+    assert set(frameworks) == {"cloudformation", "kubernetes"}

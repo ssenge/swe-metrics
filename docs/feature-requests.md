@@ -174,7 +174,7 @@ value stays an error that lists families and ids.
 
 ## FR-5: checkov beyond Terraform, and its inline skips
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13). As built: the failed checks keep the metric `iac.misconfigurations` (what the score reads), now of every framework and with a `framework` label; new `iac.skipped_checks` and `iac.skips_without_reason`; each skip is in the detail `checkov-skips-json` (check id, file, line, reason, framework). A file checkov can't parse still fails the analyzer (fail closed), so there is no `iac.parse_errors` metric.
 
 checkov runs with `--framework terraform` only. Infrastructure is also CloudFormation (incl. what CDK and SAM
 synthesize), Kubernetes manifests, ARM, Bicep and Serverless files, which checkov checks with built-in rules too.
