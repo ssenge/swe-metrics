@@ -34,6 +34,7 @@ from swe_metrics.analyzers.opengrep import Opengrep
 from swe_metrics.analyzers.python_imports import PythonImports
 from swe_metrics.analyzers.shellcheck import Shellcheck
 from swe_metrics.analyzers.structurizr import Structurizr
+from swe_metrics.analyzers.suppressions import Suppressions
 from swe_metrics.analyzers.terraform import Terraform
 from swe_metrics.analyzers.tflint import Tflint
 from swe_metrics.analyzers.trivy import Trivy
@@ -75,7 +76,7 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
         Terraform(), Tflint(), Checkov(), CfnLint(),
         Hadolint(), Dockerfile(), Likec4(), Structurizr(), Shellcheck(), Yamllint(), Wellformed(),
         PythonImports(), Depcruise(), Jdeps(settings.reports.get("classes", ())),
-        DocCoverage(), GitHistory(),
+        DocCoverage(), GitHistory(), Suppressions(),
         Checkstyle(settings.rules.get("checkstyle", ())), EslintRules(settings.rules.get("eslint", ())),
         *report_analyzers(settings.reports),
     ]

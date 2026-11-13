@@ -89,6 +89,9 @@ CATALOG: dict[str, MetricDef] = {
     "mutation.killed": MetricDef("count", "higher_better", "Mutants the tests killed"),
     "mutation.survived": MetricDef("count", "lower_better", "Mutants the tests let survive"),
     "mutation.no_coverage": MetricDef("count", "lower_better", "Mutants in code no test runs"),
+    # suppressions: marks in the code that silence a checker
+    "suppressions.marks": MetricDef("count", "neutral",
+                                    "Inline marks that silence a checker (labels: kind, has_reason)"),
     # lint: violations of the caller's own coding rules
     "lint.violations": MetricDef("count", "lower_better", "Violations of the coding rules the caller gave"),
     "lint.unparsed_files": MetricDef("count", "lower_better", "Files the linter's parser couldn't read"),

@@ -268,7 +268,7 @@ Acceptance: a recorded report of each scan type with findings of every severity;
 
 ## FR-12: Inline suppression marks
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13). Built in, family `suppressions`: `suppressions.marks` per file with labels `kind` and `has_reason`; marks of nosemgrep, nosec, NOSONAR, eslint-disable, noqa, type: ignore, pylint disable, checkov skip, shellcheck disable, gitleaks:allow, NOLINT and @SuppressWarnings, in comments of code, shell, Terraform, YAML and Dockerfiles (not Markdown prose; a marker inside a string isn't a mark). `has_reason` is true when text follows the rule ids; `@SuppressWarnings` has no slot for one. The detail `suppressions-json` lists every mark with file, line, kind, rule ids and reason.
 
 A finding can be silenced in the code instead of fixed: `nosemgrep`, `nosec` (Bandit, gosec), `NOSONAR`,
 `eslint-disable…`, `# noqa`, `# type: ignore`, `#checkov:skip=`, `gitleaks:allow`, `@SuppressWarnings`,
