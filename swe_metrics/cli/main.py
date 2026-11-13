@@ -65,9 +65,11 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
 
 def _inputs(args: argparse.Namespace) -> tuple[Settings, Options]:
     """Validated settings and options; ValueError for any input the measurement can't use."""
-    unknown = set(args.only) - families()
+    ids = {a.id for a in analyzers()}
+    unknown = set(args.only) - families() - ids
     if unknown:
-        raise ValueError(f"unknown metric families: {sorted(unknown)} (known: {sorted(families())})")
+        raise ValueError(f"unknown metric families or analyzers: {sorted(unknown)} "
+                         f"(families: {sorted(families())}; analyzers: {sorted(ids)})")
     details = Path(args.details) if args.details else None
     if details:
         try:  # before measuring: a run must not fail at the end on an unusable output directory
@@ -143,7 +145,8 @@ def parser() -> argparse.ArgumentParser:
     sub = p.add_subparsers(dest="command", required=True)
     m = sub.add_parser("measure", help="measure a file, directory or repository")
     m.add_argument("target")
-    m.add_argument("--only", action="append", default=[], help="metric family; repeatable (default: all)")
+    m.add_argument("--only", action="append", default=[],
+                   help="metric family or analyzer id (see `tools`); repeatable (default: all)")
     m.add_argument("--exclude", action="append", default=[], help="glob of paths to leave out; repeatable")
     m.add_argument("--out", help="write the report to this file (default: stdout)")
     m.add_argument("--details", help="keep the tools' detailed outputs (e.g. SARIF) in this directory")

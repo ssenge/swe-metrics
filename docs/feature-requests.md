@@ -165,7 +165,7 @@ is a paraphrase, a quote spanning two code lines, and a citation inside a fenced
 
 ## FR-4: `--only` by analyzer id
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13).
 
 `--only` takes metric families. A family can hold several analyzers (`docs`: markdownlint and lychee; `iac`:
 terraform, tflint and checkov), so a caller that wants one tool's numbers runs the others too. Request: `--only`

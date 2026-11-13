@@ -20,7 +20,7 @@ It never needs root, verifies every download against `tools.lock`, and only prin
 ## Use
 
 ```bash
-swe-metrics measure <file|directory|repository> [--only FAMILY] [--exclude GLOB] [--changed-since REF]
+swe-metrics measure <file|directory|repository> [--only FAMILY|ANALYZER] [--exclude GLOB] [--changed-since REF]
                     [--report KIND=PATH] [--sast-rules PATH] [--details DIR] [--out FILE]
 swe-metrics tools [--json]     # analyzers, their tools and installed versions
 swe-metrics schema             # the report JSON Schema

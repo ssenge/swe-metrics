@@ -38,7 +38,7 @@ swe-metrics measure <target> [options]
 | Option | Meaning |
 |---|---|
 | `<target>` | A file, a directory or a Git repository (local path) |
-| `--only <families>` | Measure only these metric families (default: all that apply) |
+| `--only <families or analyzer ids>` | Measure only these metric families or analyzers (`tools` lists the ids; a name that is both is the family; default: all that apply) |
 | `--exclude <glob>` | Leave paths out (e.g. `vendor/**`); `.gitignore` is honored by default |
 | `--changed-since <ref>` | Git targets: measure only files changed since this ref (scope for "new code" metrics) |
 | `--report <kind>=<path>` | Results of a build the caller ran: test results, coverage, mutation (see §5, tier B) |

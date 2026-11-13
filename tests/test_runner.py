@@ -55,6 +55,21 @@ def test_only_filters_metric_families(tmp_path):
     assert report.details == ()
 
 
+def test_only_names_an_analyzer_by_its_id_but_a_family_wins(tmp_path):
+    """--only fake keeps all of that analyzer's metrics, also those of families nobody named; a name that is
+    a family too selects the family."""
+    root = copy_fixture("python_small", tmp_path)
+    fake = FakeAnalyzer(families=("size", "complexity"))
+    by_id = measure(root, [fake], Options(only=("fake",)))
+    assert [m.id for m in by_id.metrics] == ["size.files", "complexity.cyclomatic"]
+    assert by_id.analyzers[0].status == "ran"
+    other = FakeAnalyzer(families=("docs",))
+    assert measure(root, [other], Options(only=("size",))).analyzers[0].reason == "not selected"
+    named = FakeAnalyzer(families=("docs",))
+    named.id = "size"
+    assert measure(root, [named], Options(only=("size",))).analyzers[0].reason == "not selected", "the family"
+
+
 def test_details_are_kept_only_on_request(tmp_path):
     """Detailed outputs are copied out of the scratch directory, named after the analyzer."""
     details = tmp_path / "details"

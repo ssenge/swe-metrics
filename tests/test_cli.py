@@ -33,7 +33,13 @@ def test_usage_errors(tmp_path, capsys):
     assert main(["measure", str(tmp_path / "missing")]) == 2
     assert "does not exist" in capsys.readouterr().err
     assert main(["measure", str(tmp_path), "--only", "nonsense"]) == 2
-    assert "unknown metric families" in capsys.readouterr().err
+    err = capsys.readouterr().err
+    assert "unknown metric families or analyzers" in err and "yamllint" in err
+    root = tmp_path / "x"
+    root.mkdir()
+    (root / "a.yaml").write_text("a: 1\n")
+    out = tmp_path / "r.json"
+    assert main(["measure", str(root), "--only", "yamllint", "--out", str(out)]) == 0
 
 
 def test_tools(capsys):

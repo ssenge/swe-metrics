@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from swe_metrics.core.analyzer import Analyzer, Measurement
-from swe_metrics.core.catalog import family
+from swe_metrics.core.catalog import families, family
 from swe_metrics.core.report import AnalyzerRun, Detail, Report
 from swe_metrics.core.target import Target
 from swe_metrics.runner.discover import discover
@@ -16,7 +16,8 @@ from swe_metrics.runner.discover import discover
 
 @dataclass(frozen=True)
 class Options:
-    """What to measure and where detailed outputs go (None: detailed outputs are discarded)."""
+    """What to measure and where detailed outputs go (None: detailed outputs are discarded). `only` names
+    metric families or analyzer ids; a name that is both is the family."""
 
     only: tuple[str, ...] = ()
     exclude: tuple[str, ...] = ()
@@ -36,8 +37,18 @@ def measure(path: Path, analyzers: Sequence[Analyzer], options: Options = DEFAUL
             run, found = _run(analyzer, target, options.only, scratch)
             details += _keep(analyzer.id, found.details, options.details)
         runs.append(run)
-        metrics += [m for m in found.metrics if not options.only or family(m.id) in options.only]
+        metrics += [m for m in found.metrics if not options.only or _selects(options.only, analyzer, m.id)]
     return Report(subject, tuple(runs), tuple(metrics), tuple(details))
+
+
+def _by_id(only: tuple[str, ...], analyzer: Analyzer) -> bool:
+    """Whether `only` names the analyzer by its id (a name that is also a metric family is the family)."""
+    return analyzer.id in only and analyzer.id not in families()
+
+
+def _selects(only: tuple[str, ...], analyzer: Analyzer, metric_id: str) -> bool:
+    """Whether `only` keeps a metric of the analyzer: its family is named, or the analyzer itself is."""
+    return family(metric_id) in only or _by_id(only, analyzer)
 
 
 def _run(analyzer: Analyzer, target: Target, only: tuple[str, ...],
@@ -47,7 +58,7 @@ def _run(analyzer: Analyzer, target: Target, only: tuple[str, ...],
         return AnalyzerRun(analyzer.id, analyzer.tool, state, version, reason, tuple(analyzer.families))
 
     nothing = Measurement([])
-    if only and not set(analyzer.families) & set(only):
+    if only and not set(analyzer.families) & set(only) and not _by_id(only, analyzer):
         return status("skipped", "not selected"), nothing
     version = analyzer.version()
     if version is None:
