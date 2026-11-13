@@ -6,6 +6,7 @@ from pathlib import Path
 
 from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.iac import is_cloudformation
+from swe_metrics.core.report import Metric, Scope
 from swe_metrics.core.sarif import Finding, lint_metrics
 from swe_metrics.core.target import Target, language
 from swe_metrics.tools.files import copy_files
@@ -50,6 +51,7 @@ class CfnLint:
         found = [Finding(f["Rule"]["Id"], str(f["Level"]).lower(), f["Filename"],
                          int(f["Location"]["Start"]["LineNumber"])) for f in read_json(report)]
         metrics = lint_metrics("iac.validation_findings", TOOL, found)
+        metrics.append(Metric("iac.templates", TOOL, Scope("target"), float(len(files))))
         return Measurement(metrics, (("cfn-lint-json", str(report)),))
 
 

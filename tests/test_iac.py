@@ -277,6 +277,7 @@ def test_cfn_lint_counts_findings_per_file_rule_and_level(tmp_path, monkeypatch)
     files = ("bad.yaml", "good.yaml")
     result = CfnLint().measure(Target(str(CFN), files), files, str(tmp_path))
     assert values(result.metrics, "iac.validation_findings") == CFN_WANT
+    assert values(result.metrics, "iac.templates") == {"total": 2}
     argv, folder, ok, home = calls[0]
     assert argv == ["cfn-lint", "--format", "json", "bad.yaml", "good.yaml"] and folder == "templates"
     assert 6 in ok and 1 not in ok and home == str(tmp_path)
@@ -287,7 +288,7 @@ def test_cfn_lint_without_findings_prints_nothing(tmp_path, monkeypatch):
     """No output at all is no findings: only a total of 0."""
     monkeypatch.setattr(cfn_module, "run", lambda argv, cwd, ok=(0,), env=None: "")
     result = CfnLint().measure(Target(str(CFN), ("good.yaml",)), ("good.yaml",), str(tmp_path))
-    assert [(m.scope.level, m.value) for m in result.metrics] == [("target", 0.0)]
+    assert {m.id: m.value for m in result.metrics} == {"iac.validation_findings": 0.0, "iac.templates": 1.0}
 
 
 def test_cfn_lint_version_records_settings(monkeypatch):
