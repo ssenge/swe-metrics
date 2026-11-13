@@ -126,10 +126,9 @@ def _lcov_data(record: FileCoverage, branches: dict[int, list[int]], key: str, f
 PARSERS = {"jacoco": parse_jacoco, "cobertura": parse_cobertura, "lcov": parse_lcov}
 
 
-def coverage_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str],
-                     partial: bool = False) -> list[Metric]:
-    """Coverage per target file and in total; files the target lacks count only in the total, and not at all
-    when the target is `partial` (its changes: the rest of the code is no part of it)."""
+def _grouped(fmt: str, documents: Iterable[bytes],
+             files: Sequence[str]) -> tuple[dict[str, FileCoverage], dict[str, FileCoverage]]:
+    """The report's files that are target files by their path, and those the target lacks by the report's."""
     index = PathIndex(files)
     matched: dict[str, FileCoverage] = {}
     unmatched: dict[str, FileCoverage] = {}
@@ -138,9 +137,32 @@ def coverage_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str],
             path = next((p for p in map(index.resolve, record.names) if p), None)
             group, key = (matched, path) if path else (unmatched, record.names[-1])
             group.setdefault(key, FileCoverage(record.names)).merge(record)
+    return matched, unmatched
+
+
+def coverage_metrics(fmt: str, documents: Iterable[bytes], files: Sequence[str],
+                     partial: bool = False) -> list[Metric]:
+    """Coverage per target file and in total; files the target lacks count only in the total, and not at all
+    when the target is `partial` (its changes: the rest of the code is no part of it)."""
+    matched, unmatched = _grouped(fmt, documents, files)
     metrics = [m for path in sorted(matched) for m in _metrics(fmt, [matched[path]], Scope("file", path))]
     counted = [*matched.values(), *([] if partial else unmatched.values())]
-    return metrics + _metrics(fmt, counted, Scope("target"))
+    uncovered = float(len(_uncovered(matched, unmatched, partial)))
+    return [*metrics, *_metrics(fmt, counted, Scope("target")),
+            tagged("coverage.units_uncovered", fmt, Scope("target"), uncovered)]
+
+
+def coverage_units(fmt: str, documents: Iterable[bytes], files: Sequence[str],
+                   partial: bool = False) -> list[str]:
+    """The source files with executable lines none of which a test ran, sorted, counted as the metrics are."""
+    return _uncovered(*_grouped(fmt, documents, files), partial)
+
+
+def _uncovered(matched: dict[str, FileCoverage], unmatched: dict[str, FileCoverage],
+               partial: bool) -> list[str]:
+    """The paths of the counted files that have lines and no covered one."""
+    counted = {**matched, **({} if partial else unmatched)}
+    return sorted(path for path, record in counted.items() if record.lines and not any(record.lines.values()))
 
 
 def _metrics(fmt: str, records: Sequence[FileCoverage], scope: Scope) -> list[Metric]:

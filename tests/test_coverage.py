@@ -1,8 +1,10 @@
 """Coverage reports: JaCoCo XML, Cobertura XML and LCOV, per target file and in total."""
+from pathlib import Path
+
 import pytest
 
 from swe_metrics.analyzers.buildreports import Cobertura, Jacoco, Lcov
-from swe_metrics.core.coverage import coverage_metrics
+from swe_metrics.core.coverage import coverage_metrics, coverage_units
 from swe_metrics.core.target import Target
 from swe_metrics.scoring import select
 from swe_metrics.scoring.values import OK, lookup
@@ -31,7 +33,8 @@ def test_jacoco_per_file_and_total(tmp_path):
         ("coverage.lines_total", STRINGS): 2, ("coverage.lines_covered", STRINGS): 2,
         ("coverage.line_percent", STRINGS): 100.0, ("coverage.branch_percent", STRINGS): 100.0,
         ("coverage.lines_total", ""): 10, ("coverage.lines_covered", ""): 7,
-        ("coverage.line_percent", ""): 70.0, ("coverage.branch_percent", ""): 62.5}
+        ("coverage.line_percent", ""): 70.0, ("coverage.branch_percent", ""): 62.5,
+        ("coverage.units_uncovered", ""): 0}
 
 
 def test_a_partial_target_totals_only_its_files(tmp_path):
@@ -51,7 +54,8 @@ def test_cobertura_from_coverage_py(tmp_path):
         ("coverage.lines_total", calc): 8, ("coverage.lines_covered", calc): 6,
         ("coverage.line_percent", calc): 75.0, ("coverage.branch_percent", calc): 50.0,
         ("coverage.lines_total", ""): 9, ("coverage.lines_covered", ""): 7,
-        ("coverage.line_percent", ""): 77.78, ("coverage.branch_percent", ""): 50.0}
+        ("coverage.line_percent", ""): 77.78, ("coverage.branch_percent", ""): 50.0,
+        ("coverage.units_uncovered", ""): 0}
 
 
 def test_lcov_per_file_and_total(tmp_path):
@@ -63,7 +67,8 @@ def test_lcov_per_file_and_total(tmp_path):
         ("coverage.lines_total", "src/util.js"): 3, ("coverage.lines_covered", "src/util.js"): 3,
         ("coverage.line_percent", "src/util.js"): 100.0, ("coverage.branch_percent", "src/util.js"): 75.0,
         ("coverage.lines_total", ""): 10, ("coverage.lines_covered", ""): 7,
-        ("coverage.line_percent", ""): 70.0, ("coverage.branch_percent", ""): 66.67}
+        ("coverage.line_percent", ""): 70.0, ("coverage.branch_percent", ""): 66.67,
+        ("coverage.units_uncovered", ""): 1}   # the report's third file: no test ran it, the target lacks it
 
 
 def test_reports_of_the_same_file_are_merged():
@@ -88,7 +93,8 @@ def test_reports_of_the_same_file_are_merged():
 def test_no_lines_means_no_percent():
     """An empty report gives line counts of 0 and no percentages (nothing was measured)."""
     metrics = coverage_metrics("jacoco", [b"<report name='x'/>"], ("a.java",))
-    assert {(m.id, m.value) for m in metrics} == {("coverage.lines_total", 0), ("coverage.lines_covered", 0)}
+    assert {(m.id, m.value) for m in metrics} == {("coverage.lines_total", 0), ("coverage.lines_covered", 0),
+                                                  ("coverage.units_uncovered", 0)}
 
 
 @pytest.mark.parametrize(("fmt", "data", "error"), [
@@ -119,3 +125,31 @@ def test_a_score_reads_the_measured_totals(tmp_path):
     report = {"metrics": [m.as_dict() for m in metrics], "analyzers": []}
     found = lookup(report, select("coverage.line_percent"))
     assert found.status == OK and found.value is not None
+
+
+LCOV_UNITS = (b"SF:src/a.js\nDA:1,0\nDA:2,0\nend_of_record\n"      # nothing ran
+              b"SF:src/b.js\nDA:1,0\nDA:2,3\nend_of_record\n"      # part ran
+              b"SF:src/c.js\nend_of_record\n"                        # no executable lines: no unit
+              b"SF:/ci/other.js\nDA:1,0\nend_of_record\n")          # not a file of the target
+
+
+def test_files_no_test_reached_are_counted_and_listed():
+    """A unit is a file with executable lines of which none ran; a file with no lines, or with one run, is
+    not; a file the target lacks counts as in the totals, and not at all in a partial target."""
+    files = ("src/a.js", "src/b.js", "src/c.js")
+    assert coverage_units("lcov", [LCOV_UNITS], files) == ["/ci/other.js", "src/a.js"]
+    assert coverage_units("lcov", [LCOV_UNITS], files, partial=True) == ["src/a.js"]
+    count = {m.id: m.value for m in coverage_metrics("lcov", [LCOV_UNITS], files)}["coverage.units_uncovered"]
+    assert count == 2
+    partial = coverage_metrics("lcov", [LCOV_UNITS], files, partial=True)
+    assert {m.id: m.value for m in partial}["coverage.units_uncovered"] == 1
+
+
+def test_the_detail_lists_one_unit_per_line(tmp_path):
+    """The analyzer keeps the list as a text detail, in the order the metric counts it."""
+    report = tmp_path / "lcov.info"
+    report.write_bytes(LCOV_UNITS)
+    files = ("src/a.js", "src/b.js", "src/c.js")
+    result = Lcov([str(report)]).measure(Target(str(tmp_path), files), files, str(tmp_path))
+    kind, path = result.details[0]
+    assert kind == "uncovered-txt" and Path(path).read_text() == "/ci/other.js\nsrc/a.js\n"

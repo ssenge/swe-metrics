@@ -110,7 +110,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 
 **Tier B: needs a build or test run that the caller performs.** swe-metrics doesn't build projects; build systems are too varied and too slow for a measuring tool. The caller passes the reports with `--report`:
 - `tests`: passed, failed, errors, skipped and duration per test suite and in total (`--report junit=`, a file or a directory of `*.xml`);
-- `coverage`: line and branch coverage per file and in total (`jacoco`, `cobertura`, `lcov`; coverage.py through `coverage xml`, which writes Cobertura);
+- `coverage`: line and branch coverage per file and in total, and the number of files no test reached, listed in the detail `uncovered-txt` (`jacoco`, `cobertura`, `lcov`; coverage.py through `coverage xml`, which writes Cobertura);
 - `mutation`: killed, survived and uncovered mutants and the mutation score per file and in total (`pit`, `stryker`). mutmut has no report file format of its own and is not read;
 - `structure` for compiled languages: class files for jdeps.
 

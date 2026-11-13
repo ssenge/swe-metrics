@@ -240,8 +240,7 @@ message.
 
 ## FR-10: The units a coverage report shows untested
 
-**Status:** open (2026-11-13). Check first: if the `coverage` family already reports per file, only the count
-is missing.
+**Status:** done (2026-11-13). The family reported per file already; added `coverage.units_uncovered` (target scope) and the detail `uncovered-txt`. A unit is a source file: JaCoCo's per-line data is per source file, so a class is a unit only in as far as it is its file. A report's file the target lacks counts as in the totals (not at all in a partial target).
 
 A coverage percentage hides which units no test reached at all. Request: from each coverage report (jacoco,
 cobertura, lcov), `coverage.units_uncovered`: classes (jacoco), files (cobertura, lcov) with no covered line,

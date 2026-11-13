@@ -80,6 +80,8 @@ CATALOG: dict[str, MetricDef] = {
     "tests.duration": MetricDef("seconds", "neutral", "Time the tests took"),
     "coverage.line_percent": MetricDef("percent", "higher_better", "Share of lines executed by the tests"),
     "coverage.branch_percent": MetricDef("percent", "higher_better", "Share of branches the tests took"),
+    "coverage.units_uncovered": MetricDef("count", "lower_better",
+                                          "Source files with executable lines none of which a test ran"),
     "coverage.lines_total": MetricDef("lines", "neutral", "Coverable lines"),
     "coverage.lines_covered": MetricDef("lines", "higher_better", "Lines executed by the tests"),
     "mutation.score": MetricDef("percent", "higher_better", "Share of mutants the tests killed"),

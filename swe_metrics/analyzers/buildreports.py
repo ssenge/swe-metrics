@@ -6,7 +6,7 @@ from pathlib import Path
 
 import swe_metrics
 from swe_metrics.core.analyzer import Measurement
-from swe_metrics.core.coverage import coverage_metrics
+from swe_metrics.core.coverage import coverage_metrics, coverage_units
 from swe_metrics.core.junit import junit_metrics
 from swe_metrics.core.mutation import mutation_metrics
 from swe_metrics.core.report import Metric
@@ -77,8 +77,16 @@ class Coverage(BuildReport):
     families = ("coverage",)
 
     def metrics(self, documents: list[bytes], files: tuple[str, ...], partial: bool = False) -> list[Metric]:
-        """Line and branch coverage per target file and in total."""
+        """Line and branch coverage per target file and in total, and the files no test reached."""
         return coverage_metrics(self.id, documents, files, partial)
+
+    def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
+        """The metrics, and the files no test reached, one per line, as the detail."""
+        documents = [path.read_bytes() for path in self._files()]
+        listing = Path(scratch) / "uncovered.txt"
+        units = coverage_units(self.id, documents, files, target.partial)
+        listing.write_text("".join(f"{unit}\n" for unit in units))
+        return Measurement(self.metrics(documents, files, target.partial), (("uncovered-txt", str(listing)),))
 
 
 class Jacoco(Coverage):
