@@ -38,3 +38,15 @@ class Definition:
         """The score document for a report (and, for regressions, a baseline report)."""
         parts = (self.gates, self.components, self.regressions)
         return evaluate(self.name, self.version, parts, report, baseline)
+
+    def describe(self) -> dict[str, Any]:
+        """The definition's parts as data, for a caller that explains the score: each gate's and component's
+        selector (readable, with its tool) and its limits."""
+        def what(selector: Selector) -> dict[str, str]:
+            return {"what": selector.describe(), "tool": selector.tool}
+        return {"name": self.name, "version": self.version,
+                "gates": [{**what(g.selector), "max": g.max, "min": g.min, "cap": g.cap} for g in self.gates],
+                "components": [{**what(c.selector), "good": c.good, "bad": c.bad, "weight": c.weight,
+                                "required": c.required} for c in self.components],
+                "regressions": [{**what(r.selector), "tolerance": r.tolerance, "penalty": r.penalty}
+                                for r in self.regressions]}

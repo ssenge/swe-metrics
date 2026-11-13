@@ -144,9 +144,17 @@ def cmd_schema(args: argparse.Namespace) -> int:
 
 
 def cmd_score(args: argparse.Namespace) -> int:
-    """Score a report with a scoring definition (default: swe-default) and write the score as JSON."""
+    """Score a report with a scoring definition (default: swe-default) and write the score as JSON; with
+    `--describe`, write the definition's parts instead (no report needed)."""
     try:
         definition = load_definition(args.definition)
+        if args.describe:
+            describe = getattr(definition, "describe", None)
+            if describe is None:
+                raise ValueError("the definition has no describe(): it is not built from the scoring blocks")
+            return _write(json.dumps(describe(), indent=2) + "\n", args.out)
+        if not args.report:
+            raise ValueError("a report is required (or --describe)")
         report = json.loads(Path(args.report).read_text())
         baseline = json.loads(Path(args.baseline).read_text()) if args.baseline else None
         result = definition.score(report, baseline)
@@ -183,7 +191,9 @@ def parser() -> argparse.ArgumentParser:
     schema = sub.add_parser("schema", help="print the JSON Schema of the report or the score")
     schema.add_argument("document", nargs="?", choices=["report", "score"], default="report")
     score = sub.add_parser("score", help="one quality score from a report, by a scoring definition")
-    score.add_argument("report", help="a report written by `swe-metrics measure`")
+    score.add_argument("report", nargs="?", help="a report written by `swe-metrics measure`")
+    score.add_argument("--describe", action="store_true",
+                       help="print the definition's gates and components as JSON instead of scoring a report")
     score.add_argument("--baseline", help="an earlier report; worse values cost points (regressions)")
     score.add_argument("--definition", help="swe-default (default), FILE.py or package.module:NAME")
     score.add_argument("--out", help="write the score to this file (default: stdout)")
