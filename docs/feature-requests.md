@@ -221,7 +221,7 @@ CloudFormation files (recognized as in FR-5), fixed settings (all regions off, t
 
 ## FR-8: Analyzer `structurizr`
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13). Family `architecture_model` with LikeC4's metric ids; a workspace is a `.dsl` file that says `workspace` (a file it includes is only copied); an invalid workspace is one error of its file; views also by `type` label; `architecture_model.models` counts the workspaces; implied relationships aren't counted again. Not in `tools.lock` (it needs a JDK): it must be on the PATH, like Checkstyle.
 
 Like `likec4` for Structurizr DSL workspaces (`*.dsl`): `structurizr-cli validate` and an export of the views.
 Metrics as `likec4` has them (`architecture_model.models`, `.invalid_models`, views per type, the most elements

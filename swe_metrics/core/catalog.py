@@ -54,6 +54,7 @@ CATALOG: dict[str, MetricDef] = {
         "count", "lower_better", "JSON, XML, YAML, JSON lines and Markdown front matter that don't parse"),
     # architecture_model (M2)
     "architecture_model.errors": MetricDef("count", "lower_better", "Errors when the model is parsed"),
+    "architecture_model.models": MetricDef("count", "neutral", "Workspaces a Structurizr DSL declares"),
     "architecture_model.elements": MetricDef("count", "neutral", "Elements in the model"),
     "architecture_model.relationships": MetricDef("count", "neutral", "Relationships in the model"),
     "architecture_model.views": MetricDef("count", "neutral", "Views in the model"),

@@ -1,0 +1,149 @@
+{
+ "description": "Description",
+ "id": 0,
+ "model": {
+  "people": [
+   {
+    "id": "1",
+    "name": "User",
+    "properties": {
+     "structurizr.dsl.identifier": "user"
+    },
+    "relationships": [
+     {
+      "description": "uses",
+      "destinationId": "3",
+      "id": "5",
+      "sourceId": "1",
+      "tags": "Relationship"
+     },
+     {
+      "description": "uses",
+      "destinationId": "2",
+      "id": "6",
+      "linkedRelationshipId": "5",
+      "sourceId": "1"
+     }
+    ],
+    "tags": "Element,Person"
+   }
+  ],
+  "softwareSystems": [
+   {
+    "containers": [
+     {
+      "documentation": {},
+      "id": "3",
+      "name": "Web",
+      "properties": {
+       "structurizr.dsl.identifier": "web"
+      },
+      "relationships": [
+       {
+        "description": "reads",
+        "destinationId": "4",
+        "id": "7",
+        "sourceId": "3",
+        "tags": "Relationship"
+       }
+      ],
+      "tags": "Element,Container"
+     },
+     {
+      "documentation": {},
+      "id": "4",
+      "name": "Store",
+      "properties": {
+       "structurizr.dsl.identifier": "db"
+      },
+      "tags": "Element,Container"
+     }
+    ],
+    "documentation": {},
+    "id": "2",
+    "name": "App",
+    "properties": {
+     "structurizr.dsl.identifier": "app"
+    },
+    "tags": "Element,Software System"
+   }
+  ]
+ },
+ "name": "Name",
+ "properties": {
+  "structurizr.inspection.error": "16",
+  "structurizr.dsl": "d29ya3NwYWNlIHsKICAgIG1vZGVsIHsKICAgICAgICB1c2VyID0gcGVyc29uICJVc2VyIgogICAgICAgIGFwcCA9IHNvZnR3YXJlU3lzdGVtICJBcHAiIHsKICAgICAgICAgICAgd2ViID0gY29udGFpbmVyICJXZWIiCiAgICAgICAgICAgIGRiID0gY29udGFpbmVyICJTdG9yZSIKICAgICAgICB9CiAgICAgICAgdXNlciAtPiB3ZWIgInVzZXMiCiAgICAgICAgd2ViIC0+IGRiICJyZWFkcyIKICAgIH0KICAgIHZpZXdzIHsKICAgICAgICBzeXN0ZW1Db250ZXh0IGFwcCB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgIH0KICAgICAgICBjb250YWluZXIgYXBwIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgfQogICAgfQp9",
+  "structurizr.inspection.info": "0",
+  "structurizr.inspection.ignore": "0",
+  "structurizr.inspection.warning": "0"
+ },
+ "views": {
+  "configuration": {
+   "branding": {},
+   "styles": {},
+   "terminology": {}
+  },
+  "containerViews": [
+   {
+    "elements": [
+     {
+      "id": "1",
+      "x": 0,
+      "y": 0
+     },
+     {
+      "id": "3",
+      "x": 0,
+      "y": 0
+     },
+     {
+      "id": "4",
+      "x": 0,
+      "y": 0
+     }
+    ],
+    "externalSoftwareSystemBoundariesVisible": false,
+    "generatedKey": true,
+    "key": "Container-001",
+    "name": "Container View: App",
+    "order": 2,
+    "relationships": [
+     {
+      "id": "5"
+     },
+     {
+      "id": "7"
+     }
+    ],
+    "softwareSystemId": "2"
+   }
+  ],
+  "systemContextViews": [
+   {
+    "elements": [
+     {
+      "id": "1",
+      "x": 0,
+      "y": 0
+     },
+     {
+      "id": "2",
+      "x": 0,
+      "y": 0
+     }
+    ],
+    "enterpriseBoundaryVisible": true,
+    "generatedKey": true,
+    "key": "SystemContext-001",
+    "name": "System Context View: App",
+    "order": 1,
+    "relationships": [
+     {
+      "id": "6"
+     }
+    ],
+    "softwareSystemId": "2"
+   }
+  ]
+ }
+}

@@ -15,7 +15,7 @@ swe-metrics tools             # every analyzer with its installed version
 - Debian/Ubuntu: `sudo apt-get install -y curl unzip xz-utils python3-venv`
 - Amazon Linux / Fedora: `sudo dnf install -y curl unzip xz python3`
 
-It never needs root, verifies every download against `tools.lock`, and only prints the `PATH` line. `--check` compares the installed versions with the lock; `--only TOOL` installs one tool. Checkstyle (for `--rules checkstyle=`) is not in the lock: it must be on the PATH, with a JDK. git is expected on the machine; a JDK is needed only for Java class files (`--report classes=PATH`). Without a tool, its analyzer is reported as not installed and the others still run.
+It never needs root, verifies every download against `tools.lock`, and only prints the `PATH` line. `--check` compares the installed versions with the lock; `--only TOOL` installs one tool. Checkstyle (for `--rules checkstyle=`) and structurizr-cli are not in the lock: they must be on the PATH, with a JDK. git is expected on the machine; a JDK is needed only for Java class files (`--report classes=PATH`). Without a tool, its analyzer is reported as not installed and the others still run.
 
 ## Use
 

@@ -33,6 +33,7 @@ from swe_metrics.analyzers.markdownlint import Markdownlint
 from swe_metrics.analyzers.opengrep import Opengrep
 from swe_metrics.analyzers.python_imports import PythonImports
 from swe_metrics.analyzers.shellcheck import Shellcheck
+from swe_metrics.analyzers.structurizr import Structurizr
 from swe_metrics.analyzers.terraform import Terraform
 from swe_metrics.analyzers.tflint import Tflint
 from swe_metrics.analyzers.trivy import Trivy
@@ -72,7 +73,7 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
         Lizard(), Cognitive(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(sast_sets(settings)),
         Markdownlint(), Lychee(), Citations(settings.cite_roots),
         Terraform(), Tflint(), Checkov(), CfnLint(),
-        Hadolint(), Dockerfile(), Likec4(), Shellcheck(), Yamllint(), Wellformed(),
+        Hadolint(), Dockerfile(), Likec4(), Structurizr(), Shellcheck(), Yamllint(), Wellformed(),
         PythonImports(), Depcruise(), Jdeps(settings.reports.get("classes", ())),
         DocCoverage(), GitHistory(),
         Checkstyle(settings.rules.get("checkstyle", ())), EslintRules(settings.rules.get("eslint", ())),

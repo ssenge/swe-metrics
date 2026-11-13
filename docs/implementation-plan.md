@@ -105,7 +105,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `syntax` | JSON, XML, YAML, JSON lines files and Markdown front matter that don't parse, per file and kind | built-in `wellformed` analyzer (Python's `json`, defusedxml, PyYAML composing without constructing) |
 | `citations` | `path:line` citations in Markdown that resolve (against the target and `--cite-root` folders), quotes found within 15 lines of their citation | built-in `citations` analyzer |
 | `lint` | violations of the caller's coding rules (`--rules checkstyle=` Java, `--rules eslint=` JavaScript and TypeScript), per file, rule and level; files ESLint's parser can't read | Checkstyle (on the PATH, needs a JDK), ESLint with typescript-eslint |
-| `architecture_model` | model validity, elements, relationships, views, elements per view | LikeC4, Structurizr CLI |
+| `architecture_model` | model validity, workspaces, elements, relationships, views (by type), elements per view | LikeC4, Structurizr CLI (on the PATH, needs a JDK) |
 | `history` (Git targets) | commits, distinct authors (counted only) and age in days since HEAD per file; change coupling between files | git log (code-maat method) |
 
 **Tier B: needs a build or test run that the caller performs.** swe-metrics doesn't build projects; build systems are too varied and too slow for a measuring tool. The caller passes the reports with `--report`:
