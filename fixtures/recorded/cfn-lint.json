@@ -1,0 +1,58 @@
+[
+    {
+        "Filename": "bad.yaml",
+        "Id": "a354a8a2-aa2b-5f17-8faa-5cec4c5a6729",
+        "Level": "Warning",
+        "Location": {
+            "End": {
+                "ColumnNumber": 9,
+                "LineNumber": 3
+            },
+            "Path": [
+                "Parameters",
+                "Unused"
+            ],
+            "Start": {
+                "ColumnNumber": 3,
+                "LineNumber": 3
+            }
+        },
+        "Message": "Parameter Unused not used.",
+        "ParentId": null,
+        "Rule": {
+            "Description": "Making sure the parameters defined are used",
+            "Id": "W2001",
+            "ShortDescription": "Check if Parameters are Used",
+            "Source": "https://github.com/aws-cloudformation/cfn-lint"
+        }
+    },
+    {
+        "Filename": "bad.yaml",
+        "Id": "382f6d34-24fc-d934-b741-9ea24f7d77e0",
+        "Level": "Error",
+        "Location": {
+            "End": {
+                "ColumnNumber": 18,
+                "LineNumber": 9
+            },
+            "Path": [
+                "Resources",
+                "Data",
+                "Properties",
+                "BucketNameX"
+            ],
+            "Start": {
+                "ColumnNumber": 7,
+                "LineNumber": 9
+            }
+        },
+        "Message": "Additional properties are not allowed ('BucketNameX' was unexpected. Did you mean 'BucketName'?)",
+        "ParentId": null,
+        "Rule": {
+            "Description": "Making sure that resources properties are properly configured",
+            "Id": "E3002",
+            "ShortDescription": "Resource properties are invalid",
+            "Source": "https://github.com/aws-cloudformation/cfn-lint/blob/main/docs/cfn-schema-specification.md#properties"
+        }
+    }
+]

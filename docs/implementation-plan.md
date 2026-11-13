@@ -94,7 +94,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `structure` | module dependency graph; afferent and efferent coupling, instability, cycles | grimp (Python), jdeps (Java bytecode, needs tier B), dependency-cruiser (JS/TS) |
 | `docs` | markdown lint findings per rule; links and broken links, checked offline (local links and anchors); readability statistics later | markdownlint, lychee |
 | `doc_coverage` | share of public APIs with a doc comment | interrogate (Python), checkstyle Javadoc check (Java) |
-| `iac` | validation errors per module, lint findings per rule, failed and passed misconfiguration checks per check and framework (Terraform, CloudFormation, Kubernetes, ARM, Bicep, serverless), inline skips and those without a reason, resources; later: resources without tags | terraform validate, tflint, checkov; later trivy config |
+| `iac` | validation errors per module, lint findings per rule, failed and passed misconfiguration checks per check and framework (Terraform, CloudFormation, Kubernetes, ARM, Bicep, serverless), inline skips and those without a reason, resources; CloudFormation validation findings per rule and level (cfn-lint); later: resources without tags | terraform validate, tflint, checkov; later trivy config |
 | `structure` | module dependency graph; afferent and efferent coupling, instability, cycles | built-in `ast` import parser (Python), jdeps (Java bytecode, needs tier B), dependency-cruiser (JS/TS) |
 | `docs` | markdown lint findings, broken links, readability statistics | markdownlint, lychee |
 | `doc_coverage` | share of public APIs with a doc comment | built in: Python's `ast`, a small Java lexer |

@@ -5,9 +5,11 @@ from pathlib import Path
 
 import pytest
 
+from swe_metrics.analyzers import cfn_lint as cfn_module
 from swe_metrics.analyzers import checkov as checkov_module
 from swe_metrics.analyzers import terraform as terraform_module
 from swe_metrics.analyzers import tflint as tflint_module
+from swe_metrics.analyzers.cfn_lint import CfnLint
 from swe_metrics.analyzers.checkov import Checkov
 from swe_metrics.analyzers.terraform import Terraform
 from swe_metrics.analyzers.tflint import Tflint
@@ -251,3 +253,57 @@ def test_checkov_real_tool_on_a_template_and_a_manifest(tmp_path):
     assert values(result.metrics, "iac.skips_without_reason") == {"total": 1}
     frameworks = values(result.metrics, "iac.misconfigurations")["framework"]
     assert set(frameworks) == {"cloudformation", "kubernetes"}
+
+
+CFN = FIXTURES / "iac_cfn"
+CFN_WANT = {"bad.yaml": 2, "rule": {"E3002": 1, "W2001": 1}, "level": {"error": 1, "warning": 1}, "total": 2}
+
+
+def test_cfn_lint_applies_only_to_templates():
+    """YAML and JSON that say they are CloudFormation; other JSON, Markdown and Terraform are not."""
+    target = Target(str(CFN), ("bad.yaml", "good.yaml", "package.json", "notes.md", "main.tf"))
+    assert CfnLint().applicable(target) == ("bad.yaml", "good.yaml") and CfnLint().prerequisites() == ""
+
+
+def test_cfn_lint_counts_findings_per_file_rule_and_level(tmp_path, monkeypatch):
+    """A recorded run (exit 6: errors and warnings): findings per file, rule and level; no config applies."""
+    calls = []
+
+    def fake_run(argv, cwd, ok=(0,), env=None):
+        calls.append((argv, Path(cwd).name, ok, env["HOME"]))
+        assert (Path(cwd) / "bad.yaml").exists(), "the templates are copied below the working folder"
+        return (FIXTURES / "recorded" / "cfn-lint.json").read_text()
+    monkeypatch.setattr(cfn_module, "run", fake_run)
+    files = ("bad.yaml", "good.yaml")
+    result = CfnLint().measure(Target(str(CFN), files), files, str(tmp_path))
+    assert values(result.metrics, "iac.validation_findings") == CFN_WANT
+    argv, folder, ok, home = calls[0]
+    assert argv == ["cfn-lint", "--format", "json", "bad.yaml", "good.yaml"] and folder == "templates"
+    assert 6 in ok and 1 not in ok and home == str(tmp_path)
+    assert result.details[0][0] == "cfn-lint-json"
+
+
+def test_cfn_lint_without_findings_prints_nothing(tmp_path, monkeypatch):
+    """No output at all is no findings: only a total of 0."""
+    monkeypatch.setattr(cfn_module, "run", lambda argv, cwd, ok=(0,), env=None: "")
+    result = CfnLint().measure(Target(str(CFN), ("good.yaml",)), ("good.yaml",), str(tmp_path))
+    assert [(m.scope.level, m.value) for m in result.metrics] == [("target", 0.0)]
+
+
+def test_cfn_lint_version_records_settings(monkeypatch):
+    """The fixed settings are part of the version string."""
+    monkeypatch.setattr(cfn_module, "version", lambda argv: "1.58.0")
+    assert CfnLint().version() == "1.58.0 (default rules, target config ignored)"
+    monkeypatch.setattr(cfn_module, "version", lambda argv: None)
+    assert CfnLint().version() is None
+
+
+@pytest.mark.skipif(not shutil.which("cfn-lint"), reason="cfn-lint not installed")
+def test_cfn_lint_real_tool_ignores_target_config(tmp_path):
+    """The real tool: a .cfnlintrc in the target that ignores the error doesn't change what is measured."""
+    copy = shutil.copytree(CFN, tmp_path / "cfn")
+    (copy / ".cfnlintrc").write_text("ignore_checks: [E3002, W2001]\n")
+    (tmp_path / "scratch").mkdir()
+    result = CfnLint().measure(Target(str(copy), ("bad.yaml", "good.yaml")), ("bad.yaml", "good.yaml"),
+                               str(tmp_path / "scratch"))
+    assert values(result.metrics, "iac.validation_findings") == CFN_WANT

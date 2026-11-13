@@ -212,7 +212,7 @@ Request: `--rules KIND=PATH`, repeatable; `--sast-rules PATH` stays as the same 
 
 ## FR-7: Analyzer `cfn-lint`
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13). Pinned 1.58.0 (pip).
 
 CloudFormation templates have a validator, cfn-lint, that finds what checkov doesn't (invalid properties,
 wrong references, unsupported resource types). Request: analyzer `cfn-lint` in family `iac` on the

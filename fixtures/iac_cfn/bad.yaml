@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Parameters:
+  Unused:
+    Type: String
+Resources:
+  Data:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketNameX: orders
