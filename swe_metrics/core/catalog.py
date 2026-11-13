@@ -37,6 +37,8 @@ CATALOG: dict[str, MetricDef] = {
     "docs.broken_links": MetricDef("count", "lower_better", "Links that don't resolve"),
     # iac (M2)
     "iac.validation_errors": MetricDef("count", "lower_better", "Errors of the IaC engine's own validation"),
+    "iac.skipped_checks": MetricDef("count", "lower_better", "IaC checks skipped by an inline comment"),
+    "iac.skips_without_reason": MetricDef("count", "lower_better", "Inline IaC check skips without a reason"),
     "iac.templates": MetricDef("count", "neutral", "CloudFormation templates validated"),
     "iac.validation_findings": MetricDef("count", "lower_better", "CloudFormation validation findings"),
     "iac.lint_findings": MetricDef("count", "lower_better", "IaC lint findings"),
