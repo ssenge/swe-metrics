@@ -1,0 +1,7 @@
+# One of the two rules of rules.yaml, as a rule set of its own (the opengrep test of two sets).
+rules:
+  - id: python-eval-again
+    languages: [python]
+    severity: ERROR
+    message: eval() runs arbitrary code
+    pattern: eval(...)

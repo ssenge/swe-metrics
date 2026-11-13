@@ -1,7 +1,7 @@
 """Build reports the caller passes in (`--report kind=path`): the known kinds and how the option is parsed."""
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 
 REPORT_KINDS = {
     "junit": "JUnit XML test results (file or directory of files)",
@@ -14,14 +14,20 @@ REPORT_KINDS = {
 }
 
 
-def parse_reports(values: Iterable[str]) -> dict[str, tuple[str, ...]]:
+def parse_pairs(values: Iterable[str], kinds: Mapping[str, str], option: str,
+                noun: str) -> dict[str, tuple[str, ...]]:
     """`kind=path` options grouped by kind; ValueError for a malformed option or an unknown kind."""
-    reports: dict[str, list[str]] = {}
+    found: dict[str, list[str]] = {}
     for value in values:
         kind, separator, path = value.partition("=")
         if not separator or not path:
-            raise ValueError(f"--report expects kind=path, got '{value}'")
-        if kind not in REPORT_KINDS:
-            raise ValueError(f"unknown report kind '{kind}' (known: {sorted(REPORT_KINDS)})")
-        reports.setdefault(kind, []).append(path)
-    return {kind: tuple(paths) for kind, paths in reports.items()}
+            raise ValueError(f"{option} expects kind=path, got '{value}'")
+        if kind not in kinds:
+            raise ValueError(f"unknown {noun} '{kind}' (known: {sorted(kinds)})")
+        found.setdefault(kind, []).append(path)
+    return {kind: tuple(paths) for kind, paths in found.items()}
+
+
+def parse_reports(values: Iterable[str]) -> dict[str, tuple[str, ...]]:
+    """`--report kind=path` options grouped by kind."""
+    return parse_pairs(values, REPORT_KINDS, "--report", "report kind")

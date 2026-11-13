@@ -39,6 +39,7 @@ from swe_metrics.cli.definitions import load_definition
 from swe_metrics.core.analyzer import Analyzer
 from swe_metrics.core.catalog import families
 from swe_metrics.core.reports import REPORT_KINDS, parse_reports
+from swe_metrics.core.rules import RULE_KINDS, parse_rules
 from swe_metrics.runner.measure import Options, measure
 
 USAGE_ERROR = 2  # argparse's own exit code for usage errors; 1 means an internal failure
@@ -51,14 +52,20 @@ class Settings:
     sast_rules: str | None = None
     reports: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
     cite_roots: tuple[str, ...] = ()
+    rules: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
 
 
 NO_SETTINGS = Settings()
 
 
+def sast_sets(settings: Settings) -> list[str]:
+    """The opengrep rule sets: `--sast-rules` first, then every `--rules opengrep=`."""
+    return [*([settings.sast_rules] if settings.sast_rules else []), *settings.rules.get("opengrep", ())]
+
+
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
-    return [Lizard(), Cognitive(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
+    return [Lizard(), Cognitive(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(sast_sets(settings)),
             Markdownlint(), Lychee(), Citations(settings.cite_roots), Terraform(), Tflint(), Checkov(),
             Hadolint(), Dockerfile(), Likec4(), Shellcheck(), Yamllint(), Wellformed(), PythonImports(),
             Depcruise(), Jdeps(settings.reports.get("classes", ())), DocCoverage(), GitHistory(),
@@ -78,7 +85,8 @@ def _inputs(args: argparse.Namespace) -> tuple[Settings, Options]:
             details.mkdir(parents=True, exist_ok=True)
         except OSError as exc:
             raise ValueError(f"--details directory can't be created: {exc}") from exc
-    settings = Settings(args.sast_rules, parse_reports(args.report), tuple(args.cite_root))
+    settings = Settings(args.sast_rules, parse_reports(args.report), tuple(args.cite_root),
+                         parse_rules(args.rules))
     return settings, Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "")
 
 
@@ -153,6 +161,8 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("--out", help="write the report to this file (default: stdout)")
     m.add_argument("--details", help="keep the tools' detailed outputs (e.g. SARIF) in this directory")
     m.add_argument("--sast-rules", help="rule file or directory for static analysis (opengrep)")
+    m.add_argument("--rules", action="append", default=[], metavar="KIND=PATH",
+                   help=f"rule file of the caller; repeatable. Kinds: {', '.join(sorted(RULE_KINDS))}")
     m.add_argument("--cite-root", action="append", default=[], metavar="DIR",
                    help="folder (relative to the target) searched for the files documents cite; repeatable")
     m.add_argument("--changed-since", help="Git targets: measure only files changed since this ref")

@@ -9,6 +9,7 @@ from swe_metrics.analyzers import trivy as trivy_module
 from swe_metrics.analyzers.opengrep import Opengrep
 from swe_metrics.analyzers.trivy import Trivy
 from swe_metrics.core.target import Target
+from swe_metrics.tools.files import digest
 from tests.helpers import FIXTURES
 
 
@@ -54,7 +55,7 @@ def test_trivy_version_includes_database_date(monkeypatch, output, expected):
 
 def test_opengrep_prerequisites(tmp_path):
     """Without rules, or with missing rules, opengrep is skipped with the reason."""
-    assert Opengrep().prerequisites() == "no SAST rules given (--sast-rules)"
+    assert Opengrep().prerequisites() == "no SAST rules given (--sast-rules or --rules opengrep=PATH)"
     assert Opengrep(str(tmp_path / "none.yaml")).prerequisites().startswith("SAST rules not found")
     assert Opengrep(str(FIXTURES / "sast" / "rules.yaml")).prerequisites() == ""
     assert Opengrep().applicable(Target(".", ("a.py", "b.md"))) == ("a.py",)
@@ -67,5 +68,30 @@ def test_opengrep_finds_fixture_rules(tmp_path):
     target = Target(str(FIXTURES / "sast"), ("app.py",))
     result = analyzer.measure(target, ("app.py",), str(tmp_path))
     at_target = {tuple(m.labels): m.value for m in result.metrics if m.scope.level == "target"}
-    assert at_target == {(("level", "error"),): 1, (("level", "note"),): 1, (): 2}
-    assert analyzer.version()
+    assert at_target == {(("level", "error"),): 1, (("level", "note"),): 1, (("rules", "rules"),): 2, (): 2}
+    shown = analyzer.version() or ""
+    assert shown.endswith(")") and "rules: rules sha256:" in shown
+
+
+@pytest.mark.skipif(not shutil.which("opengrep"), reason="opengrep not installed")
+def test_opengrep_scans_every_rule_set_and_labels_each(tmp_path):
+    """Two rule sets: each is scanned on its own, counted under its file stem, and kept as a detail."""
+    sets = [str(FIXTURES / "sast" / "rules.yaml"), str(FIXTURES / "sast" / "rules-eval.yaml")]
+    analyzer = Opengrep(sets)
+    result = analyzer.measure(Target(str(FIXTURES / "sast"), ("app.py",)), ("app.py",), str(tmp_path))
+    per_set = {m.labels[0][1]: m.value for m in result.metrics if m.labels and m.labels[0][0] == "rules"}
+    assert per_set == {"rules": 2, "rules-eval": 1}
+    assert [kind for kind, _ in result.details] == ["sarif", "sarif"]
+    shown = analyzer.version() or ""
+    assert "rules: rules sha256:" in shown and "; rules-eval sha256:" in shown
+
+
+def test_rule_set_digests_name_what_ran(tmp_path):
+    """A file's digest is its content's; a directory's covers its files' names and contents."""
+    (tmp_path / "d").mkdir()
+    (tmp_path / "d" / "a.yaml").write_text("a")
+    (tmp_path / "f.yaml").write_text("a")
+    before = digest(str(tmp_path / "d"))
+    (tmp_path / "d" / "b.yaml").write_text("b")
+    assert digest(str(tmp_path / "f.yaml")) == digest(str(tmp_path / "f.yaml")) != before
+    assert digest(str(tmp_path / "d")) != before

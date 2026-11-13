@@ -1,6 +1,7 @@
 """Copies of target files in scratch, for tools that write next to their input or read config there."""
 from __future__ import annotations
 
+import hashlib
 import shutil
 from collections.abc import Iterable
 from pathlib import Path, PurePath
@@ -24,3 +25,13 @@ def copy_directories(root: str, paths: Iterable[str], destination: Path) -> list
         files = [p for p in Path(root, directory).iterdir() if p.is_file()]
         copy_files(root, (str(PurePath(directory) / p.name) for p in files), destination)
     return directories
+
+
+def digest(path: str) -> str:
+    """The SHA-256 of a file, or of a directory's files (their relative names and contents, in order)."""
+    root, sha = Path(path), hashlib.sha256()
+    for file in sorted(p for p in root.rglob("*") if p.is_file()) if root.is_dir() else [root]:
+        if root.is_dir():
+            sha.update(str(file.relative_to(root)).encode())
+        sha.update(file.read_bytes())
+    return sha.hexdigest()

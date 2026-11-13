@@ -3,8 +3,9 @@ import subprocess
 
 import pytest
 
-from swe_metrics.cli.main import main
+from swe_metrics.cli.main import Settings, main, sast_sets
 from swe_metrics.core.reports import parse_reports
+from swe_metrics.core.rules import parse_rules
 from swe_metrics.runner.discover import discover
 from tests.helpers import copy_fixture
 
@@ -49,3 +50,15 @@ def test_changed_since_needs_a_repository(tmp_path, capsys):
     assert "needs a Git repository" in capsys.readouterr().err
     assert main(["measure", str(root), "--report", "bogus"]) == 2
     assert "expects kind=path" in capsys.readouterr().err
+
+
+def test_parse_rules_and_the_sast_alias():
+    """`kind=path` rule options grouped by kind; --sast-rules is the first opengrep set."""
+    assert parse_rules(["opengrep=a.yaml", "checkstyle=c.xml", "opengrep=b"]) == {
+        "opengrep": ("a.yaml", "b"), "checkstyle": ("c.xml",)}
+    with pytest.raises(ValueError, match="--rules expects kind=path"):
+        parse_rules(["nothing"])
+    with pytest.raises(ValueError, match="unknown rule kind 'pmd'"):
+        parse_rules(["pmd=x"])
+    assert sast_sets(Settings("one.yaml", rules={"opengrep": ("two.yaml",)})) == ["one.yaml", "two.yaml"]
+    assert sast_sets(Settings()) == []

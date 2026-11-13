@@ -38,6 +38,7 @@ swe-metrics measure <target> [options]
 | Option | Meaning |
 |---|---|
 | `<target>` | A file, a directory or a Git repository (local path) |
+| `--rules KIND=PATH` | A rule file of the caller, repeatable: `opengrep` (several sets, each counted under its file stem; same as `--sast-rules`), `checkstyle`, `eslint`. Rules never come from the target; a report's version string names each rule file's digest |
 | `--cite-root DIR` | Folder (relative to the target) searched for the files documents cite; repeatable |
 | `--only <families or analyzer ids>` | Measure only these metric families or analyzers (`tools` lists the ids; a name that is both is the family; default: all that apply) |
 | `--exclude <glob>` | Leave paths out (e.g. `vendor/**`); `.gitignore` is honored by default |
