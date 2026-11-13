@@ -246,3 +246,42 @@ is missing.
 A coverage percentage hides which units no test reached at all. Request: from each coverage report (jacoco,
 cobertura, lcov), `coverage.units_uncovered`: classes (jacoco), files (cobertura, lcov) with no covered line,
 counted in total and listed in the details, one per line, so a caller can show or compare the list.
+
+## FR-11: GitLab security reports as build reports
+
+**Status:** open (2026-11-13).
+
+Projects on GitLab run its security scanners in CI (SAST, secret detection, dependency scanning, container
+scanning), each writing a report in GitLab's security report schema (`gl-sast-report.json`,
+`gl-secret-detection-report.json`, `gl-dependency-scanning-report.json`, `gl-container-scanning-report.json`;
+`version` and `vulnerabilities[]` with `severity`, `identifiers`, `location`). They find things the open-source
+analyzers here don't (the SAST analyzer runs GitLab's own rule set), and a caller that ran the scan, in CI or
+with GitLab's image, wants the numbers in the same report as everything else.
+
+Request: report kind `gitlab-security` for `--report` (repeatable, like `junit`): metric `security.findings` for
+SAST reports, `secrets.findings`, `dependencies.vulnerabilities` and `container.vulnerabilities` for the others
+(the scan type is the report's `scan.type`), each per file and with labels `severity` (`critical`, `high`,
+`medium`, `low`, `info`, `unknown`) and `rule` (the first identifier's value), `tool` the report's
+`scan.analyzer.id`. The findings go into a SARIF detail as for every reader. A report of an unknown schema
+version is read when its `vulnerabilities[]` has the fields above, else the reader is `failed` with the reason.
+
+Acceptance: a recorded report of each scan type with findings of every severity; a report without findings.
+
+## FR-12: Inline suppression marks
+
+**Status:** open (2026-11-13).
+
+A finding can be silenced in the code instead of fixed: `nosemgrep`, `nosec` (Bandit, gosec), `NOSONAR`,
+`eslint-disable…`, `# noqa`, `# type: ignore`, `#checkov:skip=`, `gitleaks:allow`, `@SuppressWarnings`,
+`// NOLINT`. Each is legitimate one at a time; their number and growth say whether a code base is fixed or
+merely
+quiet, and nothing reports them.
+
+Request: analyzer `suppressions`, new family `suppressions`, built in (a comment scan per language, no tool):
+metric `suppressions.marks` per file with labels `kind` (the marker) and `has_reason` (`true` when the mark
+carries text after its rule id or a reason separator, as each tool's syntax allows). Each mark goes into the
+details with file, line, kind, the rule id it names (if any) and its reason text. Measures only: whether a mark is
+justified is the caller's decision.
+
+Acceptance: a fixture per language family (Python, JavaScript/TypeScript, Java, Go, Terraform/YAML) with marks
+with and without reasons, and look-alikes that aren't marks (in strings, in prose).
