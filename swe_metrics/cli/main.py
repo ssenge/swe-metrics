@@ -19,6 +19,7 @@ from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.depcruise import Depcruise
 from swe_metrics.analyzers.doc_coverage import DocCoverage
 from swe_metrics.analyzers.dockerfile import Dockerfile
+from swe_metrics.analyzers.eslint_rules import EslintRules
 from swe_metrics.analyzers.git_history import GitHistory
 from swe_metrics.analyzers.gitleaks import Gitleaks
 from swe_metrics.analyzers.hadolint import Hadolint
@@ -70,7 +71,7 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
             Markdownlint(), Lychee(), Citations(settings.cite_roots), Terraform(), Tflint(), Checkov(),
             Hadolint(), Dockerfile(), Likec4(), Shellcheck(), Yamllint(), Wellformed(), PythonImports(),
             Depcruise(), Jdeps(settings.reports.get("classes", ())), DocCoverage(), GitHistory(),
-            Checkstyle(settings.rules.get("checkstyle", ())),
+            Checkstyle(settings.rules.get("checkstyle", ())), EslintRules(settings.rules.get("eslint", ())),
             *report_analyzers(settings.reports)]
 
 

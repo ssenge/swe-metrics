@@ -43,6 +43,8 @@ installed_version() {  # the version a tool on PATH reports, or empty
     terraform) out=$(terraform version 2>/dev/null | head -1) ;;
     node) out=$("$PREFIX/node/bin/node" --version 2>/dev/null) ;;
     dependency-cruiser) out=$(depcruise --version 2>/dev/null) ;;
+    typescript|typescript-eslint|@eslint/js)   # libraries with no command: the version in their package.json
+      out=$(sed -n 's/.*"version": *"\([^"]*\)".*/\1/p' "$PREFIX/npm/lib/node_modules/$1/package.json" 2>/dev/null | head -1) ;;
     *) out=$("$1" --version 2>&1 | head -3) ;;
   esac
   printf '%s' "$out" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true

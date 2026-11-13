@@ -193,7 +193,7 @@ Request:
 
 ## FR-6: The caller's rule files for more analyzers
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13). As built: family `lint` (`lint.violations` per file, rule and level; `lint.unparsed_files` for ESLint). `checkstyle` is the analyzer `checkstyle`, ESLint `eslint-rules`. Checkstyle isn't in `tools.lock` (it needs a JDK): it must be on the PATH. ESLint is pinned with `typescript-eslint`, `@eslint/js` and `typescript`, which a config imports from the packages beside eslint; a config that imports local files of its own is not supported.
 
 `--sast-rules` lets a caller measure against its own opengrep rules (a client's or a team's coding rules). The
 same need exists for Java and TypeScript coding rules, and for several rule sets at once.

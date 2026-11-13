@@ -1,0 +1,86 @@
+[
+ {
+  "filePath": "/work/src/broken.ts",
+  "messages": [
+   {
+    "ruleId": null,
+    "nodeType": null,
+    "fatal": true,
+    "severity": 2,
+    "message": "Parsing error: Variable declaration expected.",
+    "line": 1,
+    "column": 13
+   }
+  ],
+  "suppressedMessages": [],
+  "errorCount": 1,
+  "fatalErrorCount": 1,
+  "warningCount": 0,
+  "fixableErrorCount": 0,
+  "fixableWarningCount": 0
+ },
+ {
+  "filePath": "/work/src/order.ts",
+  "messages": [
+   {
+    "ruleId": "prefer-const",
+    "severity": 2,
+    "message": "'total' is never reassigned. Use 'const' instead.",
+    "line": 2,
+    "column": 5,
+    "nodeType": "Identifier",
+    "messageId": "useConst",
+    "endLine": 2,
+    "endColumn": 15,
+    "fix": {
+     "range": [
+      63,
+      83
+     ],
+     "text": "const total: any = 42;"
+    }
+   },
+   {
+    "ruleId": "@typescript-eslint/no-explicit-any",
+    "severity": 2,
+    "message": "Unexpected any. Specify a different type.",
+    "line": 2,
+    "column": 12,
+    "nodeType": "TSAnyKeyword",
+    "messageId": "unexpectedAny",
+    "endLine": 2,
+    "endColumn": 15,
+    "suggestions": [
+     {
+      "messageId": "suggestUnknown",
+      "fix": {
+       "range": [
+        74,
+        77
+       ],
+       "text": "unknown"
+      },
+      "desc": "Use `unknown` instead, this will force you to explicitly, and safely assert the type is correct."
+     },
+     {
+      "messageId": "suggestNever",
+      "fix": {
+       "range": [
+        74,
+        77
+       ],
+       "text": "never"
+      },
+      "desc": "Use `never` instead, this is useful when instantiating generic type parameters that you don't need to know the type of."
+     }
+    ]
+   }
+  ],
+  "suppressedMessages": [],
+  "errorCount": 2,
+  "fatalErrorCount": 0,
+  "warningCount": 0,
+  "fixableErrorCount": 1,
+  "fixableWarningCount": 0
+ }
+]

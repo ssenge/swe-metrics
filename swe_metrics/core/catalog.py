@@ -86,6 +86,7 @@ CATALOG: dict[str, MetricDef] = {
     "mutation.no_coverage": MetricDef("count", "lower_better", "Mutants in code no test runs"),
     # lint: violations of the caller's own coding rules
     "lint.violations": MetricDef("count", "lower_better", "Violations of the coding rules the caller gave"),
+    "lint.unparsed_files": MetricDef("count", "lower_better", "Files the linter's parser couldn't read"),
     # citations: references to code in documents
     "citations.citations": MetricDef("count", "neutral", "Citations (`path:line`) in documents"),
     "citations.broken": MetricDef("count", "lower_better", "Citations of a missing file or a line past it"),
