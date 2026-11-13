@@ -123,7 +123,7 @@ SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, M
 
 ## FR-3: Citations and quotes in documents
 
-**Status:** open (2026-11-13).
+**Status:** done (2026-11-13).
 
 ### Problem
 

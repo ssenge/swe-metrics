@@ -38,6 +38,7 @@ swe-metrics measure <target> [options]
 | Option | Meaning |
 |---|---|
 | `<target>` | A file, a directory or a Git repository (local path) |
+| `--cite-root DIR` | Folder (relative to the target) searched for the files documents cite; repeatable |
 | `--only <families or analyzer ids>` | Measure only these metric families or analyzers (`tools` lists the ids; a name that is both is the family; default: all that apply) |
 | `--exclude <glob>` | Leave paths out (e.g. `vendor/**`); `.gitignore` is honored by default |
 | `--changed-since <ref>` | Git targets: measure only files changed since this ref (scope for "new code" metrics) |
@@ -101,6 +102,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | `shell` | shell script lint findings per rule and level | ShellCheck |
 | `yaml` | YAML lint findings (syntax errors included) per rule and level | yamllint |
 | `syntax` | JSON, XML, YAML, JSON lines files and Markdown front matter that don't parse, per file and kind | built-in `wellformed` analyzer (Python's `json`, defusedxml, PyYAML composing without constructing) |
+| `citations` | `path:line` citations in Markdown that resolve (against the target and `--cite-root` folders), quotes found within 15 lines of their citation | built-in `citations` analyzer |
 | `architecture_model` | model validity, elements, relationships, views, elements per view | LikeC4, Structurizr CLI |
 | `history` (Git targets) | commits, distinct authors (counted only) and age in days since HEAD per file; change coupling between files | git log (code-maat method) |
 

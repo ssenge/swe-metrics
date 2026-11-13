@@ -12,6 +12,7 @@ from typing import Any
 
 from swe_metrics.analyzers.buildreports import report_analyzers
 from swe_metrics.analyzers.checkov import Checkov
+from swe_metrics.analyzers.citations import Citations
 from swe_metrics.analyzers.cognitive import Cognitive
 from swe_metrics.analyzers.complexipy import Complexipy
 from swe_metrics.analyzers.depcruise import Depcruise
@@ -49,6 +50,7 @@ class Settings:
 
     sast_rules: str | None = None
     reports: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+    cite_roots: tuple[str, ...] = ()
 
 
 NO_SETTINGS = Settings()
@@ -57,9 +59,9 @@ NO_SETTINGS = Settings()
 def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
     """Every analyzer, in report order."""
     return [Lizard(), Cognitive(), Complexipy(), Jscpd(), Gitleaks(), Trivy(), Opengrep(settings.sast_rules),
-            Markdownlint(), Lychee(), Terraform(), Tflint(), Checkov(), Hadolint(), Dockerfile(), Likec4(),
-            Shellcheck(), Yamllint(), Wellformed(), PythonImports(), Depcruise(),
-            Jdeps(settings.reports.get("classes", ())), DocCoverage(), GitHistory(),
+            Markdownlint(), Lychee(), Citations(settings.cite_roots), Terraform(), Tflint(), Checkov(),
+            Hadolint(), Dockerfile(), Likec4(), Shellcheck(), Yamllint(), Wellformed(), PythonImports(),
+            Depcruise(), Jdeps(settings.reports.get("classes", ())), DocCoverage(), GitHistory(),
             *report_analyzers(settings.reports)]
 
 
@@ -76,7 +78,7 @@ def _inputs(args: argparse.Namespace) -> tuple[Settings, Options]:
             details.mkdir(parents=True, exist_ok=True)
         except OSError as exc:
             raise ValueError(f"--details directory can't be created: {exc}") from exc
-    settings = Settings(args.sast_rules, parse_reports(args.report))
+    settings = Settings(args.sast_rules, parse_reports(args.report), tuple(args.cite_root))
     return settings, Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "")
 
 
@@ -151,6 +153,8 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("--out", help="write the report to this file (default: stdout)")
     m.add_argument("--details", help="keep the tools' detailed outputs (e.g. SARIF) in this directory")
     m.add_argument("--sast-rules", help="rule file or directory for static analysis (opengrep)")
+    m.add_argument("--cite-root", action="append", default=[], metavar="DIR",
+                   help="folder (relative to the target) searched for the files documents cite; repeatable")
     m.add_argument("--changed-since", help="Git targets: measure only files changed since this ref")
     m.add_argument("--report", action="append", default=[], metavar="KIND=PATH",
                    help=f"build report to read; repeatable. Kinds: {', '.join(sorted(REPORT_KINDS))}")

@@ -84,6 +84,12 @@ CATALOG: dict[str, MetricDef] = {
     "mutation.killed": MetricDef("count", "higher_better", "Mutants the tests killed"),
     "mutation.survived": MetricDef("count", "lower_better", "Mutants the tests let survive"),
     "mutation.no_coverage": MetricDef("count", "lower_better", "Mutants in code no test runs"),
+    # citations: references to code in documents
+    "citations.citations": MetricDef("count", "neutral", "Citations (`path:line`) in documents"),
+    "citations.broken": MetricDef("count", "lower_better", "Citations of a missing file or a line past it"),
+    "citations.quotes": MetricDef("count", "neutral", "Quotes (backtick spans) next to a citation"),
+    "citations.quotes_not_found": MetricDef("count", "lower_better",
+                                            "Quotes not in the code near any citation of their item"),
     # history (M4): from the Git history of a repository target
     "history.commits": MetricDef("count", "neutral", "Commits that changed a file"),
     "history.authors": MetricDef("count", "neutral", "Distinct authors who changed a file"),
