@@ -12,6 +12,7 @@ from typing import Any
 
 from swe_metrics.analyzers.buildreports import report_analyzers
 from swe_metrics.analyzers.checkov import Checkov
+from swe_metrics.analyzers.checkstyle import Checkstyle
 from swe_metrics.analyzers.citations import Citations
 from swe_metrics.analyzers.cognitive import Cognitive
 from swe_metrics.analyzers.complexipy import Complexipy
@@ -69,6 +70,7 @@ def analyzers(settings: Settings = NO_SETTINGS) -> list[Analyzer]:
             Markdownlint(), Lychee(), Citations(settings.cite_roots), Terraform(), Tflint(), Checkov(),
             Hadolint(), Dockerfile(), Likec4(), Shellcheck(), Yamllint(), Wellformed(), PythonImports(),
             Depcruise(), Jdeps(settings.reports.get("classes", ())), DocCoverage(), GitHistory(),
+            Checkstyle(settings.rules.get("checkstyle", ())),
             *report_analyzers(settings.reports)]
 
 
