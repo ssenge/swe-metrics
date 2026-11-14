@@ -41,16 +41,21 @@ class Block:
     quotes: list[Quote] = field(default_factory=list)
 
 
+def _fenced(line: str, fence: str) -> tuple[str, bool]:
+    """The open code fence after a line, and whether the line is in code (a fence line or inside one)."""
+    marker = FENCE.match(line)
+    if marker and (not fence or fence == marker.group(1)):
+        return ("" if fence else marker.group(1)), True
+    return fence, bool(fence)
+
+
 def blocks(text: str) -> list[Block]:
     """The list items and paragraphs of a document that hold a citation, outside fenced code."""
     found: list[Block] = []
     current, fence = Block(), ""
     for number, line in enumerate(text.splitlines(), 1):
-        marker = FENCE.match(line)
-        if marker and (not fence or fence == marker.group(1)):
-            fence = "" if fence else marker.group(1)
-            continue
-        if fence:
+        fence, in_code = _fenced(line, fence)
+        if in_code:
             continue
         if not line.strip() or ITEM.match(line) or line.startswith("#"):
             found.append(current)

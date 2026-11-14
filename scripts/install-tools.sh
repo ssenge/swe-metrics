@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Installs the external tools swe-metrics uses, exactly as pinned in tools.lock, for macOS and Linux
-# (arm64, x86_64). No root, no package manager: everything goes into one directory, with links in a bin
+# Installs the external tools swe-metrics uses, always at their latest release (tools.list), for macOS and
+# Linux (arm64, x86_64). No root, no package manager: everything goes into one directory, with links in a bin
 # directory. Uninstall by deleting both.
 #
 # Usage: scripts/install-tools.sh [--prefix DIR] [--bin-dir DIR] [--only TOOL]... [--check]
 #   --prefix   where the tools go          (default: ~/.local/share/swe-metrics/tools)
 #   --bin-dir  where the links go          (default: ~/.local/bin)
 #   --only     install or check only TOOL  (repeatable)
-#   --check    report installed versions against tools.lock, install nothing (exit 1 on a mismatch)
+#   --check    report the installed versions, install nothing (exit 1 when a tool is missing)
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
-LOCK="$ROOT/tools.lock"
+LIST="$ROOT/tools.list"
 PREFIX="$HOME/.local/share/swe-metrics/tools"
 BIN_DIR="$HOME/.local/bin"
 ONLY=()
@@ -50,16 +50,15 @@ installed_version() {  # the version a tool on PATH reports, or empty
   printf '%s' "$out" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true
 }
 
-check() {  # compare every selected tool with the lock; exit 1 on a mismatch
-  local failed=0 tool version platform rest found
-  while IFS=$'\t' read -r tool version platform rest; do
+check() {  # report every selected tool's installed version; exit 1 when one is missing
+  local failed=0 tool latest platform rest found
+  while IFS=$'\t' read -r tool latest platform rest; do
     [[ -z "$tool" || "$tool" == \#* ]] && continue
     [[ "$platform" != "any" && "$platform" != "$PLATFORM" ]] && continue
     wanted "$tool" || continue
     found=$(installed_version "$tool")
-    if [ "$found" = "$version" ]; then echo "ok        $tool $version"
-    else echo "MISMATCH  $tool: installed ${found:-none}, lock pins $version"; failed=1; fi
-  done < "$LOCK"
+    if [ -n "$found" ]; then echo "ok        $tool $found"; else echo "MISSING   $tool"; failed=1; fi
+  done < "$LIST"
   command -v jdeps >/dev/null || echo "note      jdeps not found: install a JDK to measure Java class files (--report classes=PATH)"
   return $failed
 }
@@ -78,47 +77,56 @@ need() {  # the commands this script itself needs
   fi
 }
 
-sha256() { if command -v sha256sum >/dev/null; then sha256sum "$1" | cut -d' ' -f1; else shasum -a 256 "$1" | cut -d' ' -f1; fi; }
+latest() {  # the newest release of a tool, from its `latest` column: prints "<tag> <version>"
+  local spec=$1 tag
+  case "$spec" in
+    gh:*)        tag=$(curl -fsSL -o /dev/null -w '%{url_effective}' "https://github.com/${spec#gh:}/releases/latest"); tag=${tag##*/} ;;
+    hashicorp:*) tag=$(curl -fsSL "https://checkpoint-api.hashicorp.com/v1/check/${spec#hashicorp:}" | python3 -c 'import json,sys; print(json.load(sys.stdin)["current_version"])') ;;
+    node)        tag=$(curl -fsSL https://nodejs.org/dist/index.json | python3 -c 'import json,sys; print(next(r["version"] for r in json.load(sys.stdin) if r["lts"]))') ;;
+    *)           tag="" ;;
+  esac
+  printf '%s %s' "$tag" "$(printf '%s' "$tag" | sed -E 's/^[^0-9]*//')"
+}
 
-fetch() {  # url sha256 -> $WORK/download, checksum verified
+fetch() {  # url -> $WORK/download
   curl -fsSL --retry 3 -o "$WORK/download" "$1"
-  local got; got=$(sha256 "$WORK/download")
-  if [ "$got" != "$2" ]; then echo "checksum mismatch for $1: got $got, expected $2" >&2; exit 1; fi
 }
 
 link() {  # make $2 in the bin directory run $1
   ln -sf "$1" "$BIN_DIR/$2"
 }
 
-node_wrapper() {  # Node tools run on the pinned Node, never on whatever Node the system has
+node_wrapper() {  # Node tools run on the Node installed here, never on whatever Node the system has
   printf '#!/bin/sh\nPATH="%s/node/bin:$PATH" exec "%s/npm/bin/%s" "$@"\n' "$PREFIX" "$PREFIX" "$1" > "$BIN_DIR/$1"
   chmod 755 "$BIN_DIR/$1"
 }
 
-install_one() {  # tool version kind sha256 source
-  local tool=$1 version=$2 kind=$3 sha=$4 url=$5 bin
-  echo "installing $tool $version"
+install_one() {  # tool latest kind source
+  local tool=$1 spec=$2 kind=$3 url=$4 bin tag version
+  read -r tag version <<< "$(latest "$spec")"
+  url=${url//\{tag\}/$tag}; url=${url//\{v\}/$version}
+  echo "installing $tool ${version:-latest}"
   case "$kind" in
-    tar:*|zip:*) bin=${kind#*:}; fetch "$url" "$sha"; rm -rf "$WORK/x"; mkdir -p "$WORK/x"
+    tar:*|zip:*) bin=${kind#*:}; fetch "$url"; rm -rf "$WORK/x"; mkdir -p "$WORK/x"
                  if [ "${kind%%:*}" = tar ]; then tar -xf "$WORK/download" -C "$WORK/x"; else unzip -q "$WORK/download" -d "$WORK/x"; fi
                  install -m 755 "$(find "$WORK/x" -type f -name "$bin" | head -1)" "$PREFIX/bin/$bin"; link "$PREFIX/bin/$bin" "$bin" ;;
-    bin:*)       bin=${kind#bin:}; fetch "$url" "$sha"; install -m 755 "$WORK/download" "$PREFIX/bin/$bin"; link "$PREFIX/bin/$bin" "$bin" ;;
-    node)        fetch "$url" "$sha"; rm -rf "$PREFIX/node"; mkdir -p "$PREFIX/node"
+    bin:*)       bin=${kind#bin:}; fetch "$url"; install -m 755 "$WORK/download" "$PREFIX/bin/$bin"; link "$PREFIX/bin/$bin" "$bin" ;;
+    node)        fetch "$url"; rm -rf "$PREFIX/node"; mkdir -p "$PREFIX/node"
                  tar -xJf "$WORK/download" -C "$PREFIX/node" --strip-components 1 ;;
     npm)         [ -x "$PREFIX/node/bin/npm" ] || { echo "node must be installed first (it is listed before npm packages)" >&2; exit 1; }
-                 PATH="$PREFIX/node/bin:$PATH" npm install -g --prefix "$PREFIX/npm" --no-fund --no-audit --loglevel=error "$url@$version" >/dev/null
+                 PATH="$PREFIX/node/bin:$PATH" npm install -g --prefix "$PREFIX/npm" --no-fund --no-audit --loglevel=error "$url" >/dev/null
                  for bin in "$PREFIX"/npm/bin/*; do node_wrapper "$(basename "$bin")"; done ;;
-    pip)         python3 -m venv "$PREFIX/$tool" && "$PREFIX/$tool/bin/pip" install -q --disable-pip-version-check "$url==$version"
+    pip)         python3 -m venv "$PREFIX/$tool" && "$PREFIX/$tool/bin/pip" install -q --upgrade --disable-pip-version-check "$url"
                  link "$PREFIX/$tool/bin/$tool" "$tool" ;;
     *)           echo "unknown kind $kind for $tool" >&2; exit 1 ;;
   esac
 }
 
 needs_node() {  # does any selected tool run on Node?
-  local tool version platform kind rest
-  while IFS=$'\t' read -r tool version platform kind rest; do
+  local tool latest platform kind rest
+  while IFS=$'\t' read -r tool latest platform kind rest; do
     [ "$kind" = npm ] && wanted "$tool" && return 0
-  done < <(grep -v '^#' "$LOCK")
+  done < <(grep -v '^#' "$LIST")
   return 1
 }
 
@@ -128,13 +136,13 @@ if [ "$OS" = linux ]; then need xz; else need; fi   # Node ships as .tar.xz; mac
 mkdir -p "$PREFIX/bin" "$BIN_DIR"
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
-while IFS=$'\t' read -r tool version platform kind sha url; do
+while IFS=$'\t' read -r tool latest platform kind url; do
   [[ -z "$tool" || "$tool" == \#* ]] && continue
   [[ "$platform" != "any" && "$platform" != "$PLATFORM" ]] && continue
   if wanted "$tool" || { [ "$kind" = node ] && needs_node && [ ! -x "$PREFIX/node/bin/node" ]; }; then
-    install_one "$tool" "$version" "$kind" "$sha" "$url"
+    install_one "$tool" "$latest" "$kind" "$url"
   fi
-done < "$LOCK"
+done < "$LIST"
 
 echo
 PATH="$BIN_DIR:$PATH" check || true

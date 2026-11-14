@@ -94,7 +94,7 @@ and XML (`syntax`).
 
 One analyzer per gap, each following the pattern of `hadolint` and `shellcheck` (a linter whose findings become
 `<family>.lint_findings` per file, rule and level; fixed configuration, so a config file in the target can't
-change the rules; skipped with "no applicable files" when the target has none), the tool pinned in `tools.lock`,
+change the rules; skipped with "no applicable files" when the target has none), the tool installed by `tools.list`,
 and a component in a new `swe-default` version. Priority by how often the type changes alone in a modernization:
 SQL, then YAML (including Kubernetes and CI misconfigurations), HTML/JSP, XML, Makefiles, JSON.
 
@@ -193,7 +193,7 @@ Request:
 
 ## FR-6: The caller's rule files for more analyzers
 
-**Status:** done (2026-11-13). As built: family `lint` (`lint.violations` per file, rule and level; `lint.unparsed_files` for ESLint). `checkstyle` is the analyzer `checkstyle`, ESLint `eslint-rules`. Checkstyle isn't in `tools.lock` (it needs a JDK): it must be on the PATH. ESLint is pinned with `typescript-eslint`, `@eslint/js` and `typescript`, which a config imports from the packages beside eslint; a config that imports local files of its own is not supported.
+**Status:** done (2026-11-13). As built: family `lint` (`lint.violations` per file, rule and level; `lint.unparsed_files` for ESLint). `checkstyle` is the analyzer `checkstyle`, ESLint `eslint-rules`. Checkstyle isn't in `tools.list` (it needs a JDK): it must be on the PATH. ESLint is pinned with `typescript-eslint`, `@eslint/js` and `typescript`, which a config imports from the packages beside eslint; a config that imports local files of its own is not supported.
 
 `--sast-rules` lets a caller measure against its own opengrep rules (a client's or a team's coding rules). The
 same need exists for Java and TypeScript coding rules, and for several rule sets at once.
@@ -217,11 +217,11 @@ Request: `--rules KIND=PATH`, repeatable; `--sast-rules PATH` stays as the same 
 CloudFormation templates have a validator, cfn-lint, that finds what checkov doesn't (invalid properties,
 wrong references, unsupported resource types). Request: analyzer `cfn-lint` in family `iac` on the
 CloudFormation files (recognized as in FR-5), fixed settings (all regions off, the default rules), metrics
-`iac.validation_findings` per file, rule and level (error, warning, informational). Pinned in `tools.lock` (pip).
+`iac.validation_findings` per file, rule and level (error, warning, informational). Installed by `tools.list` (pip).
 
 ## FR-8: Analyzer `structurizr`
 
-**Status:** done (2026-11-13). Family `architecture_model` with LikeC4's metric ids; a workspace is a `.dsl` file that says `workspace` (a file it includes is only copied); an invalid workspace is one error of its file; views also by `type` label; `architecture_model.models` counts the workspaces; implied relationships aren't counted again. Not in `tools.lock` (it needs a JDK): it must be on the PATH, like Checkstyle.
+**Status:** done (2026-11-13). Family `architecture_model` with LikeC4's metric ids; a workspace is a `.dsl` file that says `workspace` (a file it includes is only copied); an invalid workspace is one error of its file; views also by `type` label; `architecture_model.models` counts the workspaces; implied relationships aren't counted again. Not in `tools.list` (it needs a JDK): it must be on the PATH, like Checkstyle.
 
 Like `likec4` for Structurizr DSL workspaces (`*.dsl`): `structurizr-cli validate` and an export of the views.
 Metrics as `likec4` has them (`architecture_model.models`, `.invalid_models`, views per type, the most elements

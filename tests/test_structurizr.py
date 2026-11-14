@@ -22,6 +22,11 @@ def check(result):
     """The counts the good workspace and the broken one give: the same with the real tool and a recording."""
     for metric_id, want in WANT_ELEMENTS.items():
         assert values(result.metrics, metric_id) == want
+    check_views(result)
+
+
+def check_views(result):
+    """The views by type, their sizes, and the statistics of the relationships per view."""
     views = [m for m in result.metrics if m.id == "architecture_model.views"]
     assert {tuple(m.labels): m.value for m in views} == {(): 2.0, (("type", "container"),): 1.0,
                                                           (("type", "systemContext"),): 1.0}

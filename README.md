@@ -6,7 +6,7 @@ Measures software (code, infrastructure as code, documentation, architecture mod
 
 ```bash
 pip install -e .              # swe-metrics with lizard and complexipy (Python ≥ 3.12)
-scripts/install-tools.sh      # every external tool, pinned in tools.lock, into ~/.local/share/swe-metrics/tools
+scripts/install-tools.sh      # every external tool, at its latest release (tools.list), into ~/.local/share/swe-metrics/tools
 export PATH="$HOME/.local/bin:$PATH"
 swe-metrics tools             # every analyzer with its installed version
 ```
@@ -15,7 +15,7 @@ swe-metrics tools             # every analyzer with its installed version
 - Debian/Ubuntu: `sudo apt-get install -y curl unzip xz-utils python3-venv`
 - Amazon Linux / Fedora: `sudo dnf install -y curl unzip xz python3`
 
-It never needs root, verifies every download against `tools.lock`, and only prints the `PATH` line. `--check` compares the installed versions with the lock; `--only TOOL` installs one tool. Checkstyle (for `--rules checkstyle=`) and structurizr-cli are not in the lock: they must be on the PATH, with a JDK. git is expected on the machine; a JDK is needed only for Java class files (`--report classes=PATH`). Without a tool, its analyzer is reported as not installed and the others still run.
+It never needs root, always installs the latest release, and only prints the `PATH` line. `--check` lists the installed versions; `--only TOOL` installs one tool. Checkstyle (for `--rules checkstyle=`) and structurizr-cli are not in `tools.list`: they must be on the PATH, with a JDK. git is expected on the machine; a JDK is needed only for Java class files (`--report classes=PATH`). Without a tool, its analyzer is reported as not installed and the others still run.
 
 ## Use
 

@@ -115,11 +115,15 @@ def _view_metrics(views: list[tuple[str, str, dict[str, Any]]]) -> list[Metric]:
     """Views in total and by type, the elements and relationships of each, and statistics of those."""
     target = Scope("target")
     metrics = [Metric("architecture_model.views", TOOL, target, float(len(views)))]
-    for kind in sorted({k for _, k, _ in views}):
-        count = float(sum(1 for _, k, _ in views if k == kind))
-        metrics.append(Metric("architecture_model.views", TOOL, target, count, labels=(("type", kind),)))
-    for path, _, view in views:
-        scope = Scope("file", path, symbol=str(view.get("key", "")))
-        metrics += [Metric(PER_VIEW[0], TOOL, scope, float(len(view.get("elements") or ()))),
-                    Metric(PER_VIEW[1], TOOL, scope, float(len(view.get("relationships") or ())))]
+    kinds = [k for _, k, _ in views]
+    metrics += [Metric("architecture_model.views", TOOL, target, float(kinds.count(kind)),
+                       labels=(("type", kind),)) for kind in sorted(set(kinds))]
+    metrics += [m for path, _, view in views for m in _per_view(path, view)]
     return metrics + [s for s in (rollup(metrics, m, TOOL) for m in PER_VIEW) if s]
+
+
+def _per_view(path: str, view: dict[str, Any]) -> list[Metric]:
+    """The elements and relationships of one view, at its file and key."""
+    scope = Scope("file", path, symbol=str(view.get("key", "")))
+    return [Metric(PER_VIEW[0], TOOL, scope, float(len(view.get("elements") or ()))),
+            Metric(PER_VIEW[1], TOOL, scope, float(len(view.get("relationships") or ())))]

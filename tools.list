@@ -1,0 +1,53 @@
+# Tools that scripts/install-tools.sh installs: always the latest release.
+# Columns (tab-separated): tool  latest  platform  kind  source
+#   latest:   where the newest version is found: gh:<owner>/<repo> (latest GitHub release), hashicorp:<product>, node (latest LTS), - (the package manager decides)
+#   platform: darwin-arm64 | darwin-amd64 | linux-arm64 | linux-amd64 | any
+#   kind:     tar:<binary> | zip:<binary> | bin:<binary> | node | npm | pip
+#   source:   a download URL with {v} (the version, as 'V.V.V') and {tag} (the release tag); the package name for npm and pip
+gitleaks	gh:gitleaks/gitleaks	darwin-arm64	tar:gitleaks	https://github.com/gitleaks/gitleaks/releases/download/{tag}/gitleaks_{v}_darwin_arm64.tar.gz
+gitleaks	gh:gitleaks/gitleaks	darwin-amd64	tar:gitleaks	https://github.com/gitleaks/gitleaks/releases/download/{tag}/gitleaks_{v}_darwin_x64.tar.gz
+gitleaks	gh:gitleaks/gitleaks	linux-arm64	tar:gitleaks	https://github.com/gitleaks/gitleaks/releases/download/{tag}/gitleaks_{v}_linux_arm64.tar.gz
+gitleaks	gh:gitleaks/gitleaks	linux-amd64	tar:gitleaks	https://github.com/gitleaks/gitleaks/releases/download/{tag}/gitleaks_{v}_linux_x64.tar.gz
+trivy	gh:aquasecurity/trivy	darwin-arm64	tar:trivy	https://github.com/aquasecurity/trivy/releases/download/{tag}/trivy_{v}_macOS-ARM64.tar.gz
+trivy	gh:aquasecurity/trivy	darwin-amd64	tar:trivy	https://github.com/aquasecurity/trivy/releases/download/{tag}/trivy_{v}_macOS-64bit.tar.gz
+trivy	gh:aquasecurity/trivy	linux-arm64	tar:trivy	https://github.com/aquasecurity/trivy/releases/download/{tag}/trivy_{v}_Linux-ARM64.tar.gz
+trivy	gh:aquasecurity/trivy	linux-amd64	tar:trivy	https://github.com/aquasecurity/trivy/releases/download/{tag}/trivy_{v}_Linux-64bit.tar.gz
+tflint	gh:terraform-linters/tflint	darwin-arm64	zip:tflint	https://github.com/terraform-linters/tflint/releases/download/{tag}/tflint_darwin_arm64.zip
+tflint	gh:terraform-linters/tflint	darwin-amd64	zip:tflint	https://github.com/terraform-linters/tflint/releases/download/{tag}/tflint_darwin_amd64.zip
+tflint	gh:terraform-linters/tflint	linux-arm64	zip:tflint	https://github.com/terraform-linters/tflint/releases/download/{tag}/tflint_linux_arm64.zip
+tflint	gh:terraform-linters/tflint	linux-amd64	zip:tflint	https://github.com/terraform-linters/tflint/releases/download/{tag}/tflint_linux_amd64.zip
+terraform	hashicorp:terraform	darwin-arm64	zip:terraform	https://releases.hashicorp.com/terraform/{v}/terraform_{v}_darwin_arm64.zip
+terraform	hashicorp:terraform	darwin-amd64	zip:terraform	https://releases.hashicorp.com/terraform/{v}/terraform_{v}_darwin_amd64.zip
+terraform	hashicorp:terraform	linux-arm64	zip:terraform	https://releases.hashicorp.com/terraform/{v}/terraform_{v}_linux_arm64.zip
+terraform	hashicorp:terraform	linux-amd64	zip:terraform	https://releases.hashicorp.com/terraform/{v}/terraform_{v}_linux_amd64.zip
+hadolint	gh:hadolint/hadolint	darwin-arm64	bin:hadolint	https://github.com/hadolint/hadolint/releases/download/{tag}/hadolint-macos-arm64
+hadolint	gh:hadolint/hadolint	darwin-amd64	bin:hadolint	https://github.com/hadolint/hadolint/releases/download/{tag}/hadolint-macos-x86_64
+hadolint	gh:hadolint/hadolint	linux-arm64	bin:hadolint	https://github.com/hadolint/hadolint/releases/download/{tag}/hadolint-linux-arm64
+hadolint	gh:hadolint/hadolint	linux-amd64	bin:hadolint	https://github.com/hadolint/hadolint/releases/download/{tag}/hadolint-linux-x86_64
+lychee	gh:lycheeverse/lychee	darwin-arm64	tar:lychee	https://github.com/lycheeverse/lychee/releases/download/{tag}/lychee-aarch64-apple-darwin.tar.gz
+lychee	gh:lycheeverse/lychee	darwin-amd64	tar:lychee	https://github.com/lycheeverse/lychee/releases/download/{tag}/lychee-x86_64-apple-darwin.tar.gz
+lychee	gh:lycheeverse/lychee	linux-arm64	tar:lychee	https://github.com/lycheeverse/lychee/releases/download/{tag}/lychee-aarch64-unknown-linux-musl.tar.gz
+lychee	gh:lycheeverse/lychee	linux-amd64	tar:lychee	https://github.com/lycheeverse/lychee/releases/download/{tag}/lychee-x86_64-unknown-linux-musl.tar.gz
+opengrep	gh:opengrep/opengrep	darwin-arm64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_osx_arm64
+opengrep	gh:opengrep/opengrep	darwin-amd64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_osx_x86
+opengrep	gh:opengrep/opengrep	linux-arm64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_manylinux_aarch64
+opengrep	gh:opengrep/opengrep	linux-amd64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_manylinux_x86
+shellcheck	gh:koalaman/shellcheck	darwin-arm64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.darwin.aarch64.tar.gz
+shellcheck	gh:koalaman/shellcheck	darwin-amd64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.darwin.x86_64.tar.gz
+shellcheck	gh:koalaman/shellcheck	linux-arm64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.linux.aarch64.tar.gz
+shellcheck	gh:koalaman/shellcheck	linux-amd64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.linux.x86_64.tar.gz
+node	node	darwin-arm64	node	https://nodejs.org/dist/{tag}/node-{tag}-darwin-arm64.tar.xz
+node	node	darwin-amd64	node	https://nodejs.org/dist/{tag}/node-{tag}-darwin-x64.tar.xz
+node	node	linux-arm64	node	https://nodejs.org/dist/{tag}/node-{tag}-linux-arm64.tar.xz
+node	node	linux-amd64	node	https://nodejs.org/dist/{tag}/node-{tag}-linux-x64.tar.xz
+jscpd	-	any	npm	jscpd
+markdownlint-cli2	-	any	npm	markdownlint-cli2
+likec4	-	any	npm	likec4
+dependency-cruiser	-	any	npm	dependency-cruiser
+eslint	-	any	npm	eslint
+typescript-eslint	-	any	npm	typescript-eslint
+@eslint/js	-	any	npm	@eslint/js
+typescript	-	any	npm	typescript
+checkov	-	any	pip	checkov
+yamllint	-	any	pip	yamllint
+cfn-lint	-	any	pip	cfn-lint

@@ -101,12 +101,17 @@ def _reason(check: dict[str, Any]) -> str:
     return str((check.get("check_result") or {}).get("suppress_comment") or NO_REASON)
 
 
-def _metrics(reports: list[dict[str, Any]], files: set[str]) -> list[Metric]:
-    """Failed checks per file, check and framework, and in total; skips, passed checks and resources."""
+def _refuse_unparsed(reports: list[dict[str, Any]]) -> None:
+    """Fails when checkov could not parse a file: its findings would be missing, not zero."""
     errors = [p for r in reports for p in r.get("results", {}).get("parsing_errors", [])]
     unparsed = [p.split("/modules/", 1)[-1] for p in errors]
     if unparsed or any(r.get("summary", r).get("parsing_errors") for r in reports):
         raise ToolError(f"checkov could not parse: {', '.join(unparsed)}")
+
+
+def _metrics(reports: list[dict[str, Any]], files: set[str]) -> list[Metric]:
+    """Failed checks per file, check and framework, and in total; skips, passed checks and resources."""
+    _refuse_unparsed(reports)
     failed = [(f, Finding(c["check_id"], "failed", _path(c), c["file_line_range"][0]))
               for f, c in _checks(reports, "failed_checks", files)]
     skipped = [(f, Finding(c["check_id"], "skipped", _path(c), c["file_line_range"][0]))
