@@ -289,5 +289,5 @@ with and without reasons, and look-alikes that aren't marks (in strings, in pros
 ## FR-13: `score --describe` (done, 2026-11-13)
 
 `swe-metrics score --describe [--definition D]` prints a scoring definition's parts as JSON (`name`, `version`, `gates`,
-`components`, `regressions`, each with its readable selector, its tool and its limits), so a caller (agg's quality guide
+`components`, `regressions`, each with its readable selector, its tool and its limits), so a caller (a quality guide
 for workers) can explain the score from the definition the `score` judge uses, not from a copy.
