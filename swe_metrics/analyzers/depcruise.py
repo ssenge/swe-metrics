@@ -36,7 +36,9 @@ class Depcruise:
     def measure(self, target: Target, files: tuple[str, ...], scratch: str) -> Measurement:
         """Resolve the files' imports; keep only edges between the files, then the graph metrics."""
         # ponytail: files on the command line; a file list if a target ever exceeds the argv limit
-        argv = ["depcruise", "--no-config", "--output-type", "json", "--do-not-follow", "node_modules"]
+        # imports as written: TypeScript drops an unused import, but it is still a dependency of the source
+        argv = ["depcruise", "--no-config", "--ts-pre-compilation-deps", "--output-type", "json",
+                "--do-not-follow", "node_modules"]
         output = str(Path(scratch) / "depcruise.json")
         run([*argv, "--output-to", output, *files], cwd=target.root)
         metrics = graph_metrics(graph(files, _edges(read_json(output))), TOOL)

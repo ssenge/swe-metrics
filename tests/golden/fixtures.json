@@ -1,4 +1,92 @@
 {
+ "cfn-lint": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "iac.validation_findings",
+    "labels": {
+     "level": "error"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.validation_findings",
+    "labels": {
+     "level": "warning"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.validation_findings",
+    "labels": {
+     "rule": "E3002"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.validation_findings",
+    "labels": {
+     "rule": "W2001"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.validation_findings",
+    "scope": {
+     "level": "file",
+     "path": "iac_cfn/bad.yaml"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.validation_findings",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "iac.templates",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "cfn-lint",
+    "unit": "count",
+    "value": 3.0
+   }
+  ],
+  "version": "1.58.0 (default rules, target config ignored)"
+ },
  "checkov": {
   "metrics": [
    {
@@ -12,7 +100,7 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -25,13 +113,26 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
     "id": "iac.misconfigurations",
     "labels": {
      "check": "CKV2_AWS_62"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV2_K8S_6"
     },
     "scope": {
      "level": "target"
@@ -51,7 +152,7 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -64,7 +165,7 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -77,7 +178,7 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 1.0
+    "value": 4.0
    },
    {
     "direction": "lower_better",
@@ -90,7 +191,413 @@
     },
     "tool": "checkov",
     "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_53"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_54"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_55"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_AWS_56"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_10"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_11"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_12"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_13"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_14"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_15"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_20"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_21"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_22"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_23"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_28"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_29"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_30"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_31"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_37"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_38"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_40"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_43"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_8"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "check": "CKV_K8S_9"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "framework": "cloudformation"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 26.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "framework": "kubernetes"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 39.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "labels": {
+     "framework": "terraform"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 13.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "file",
+     "path": "iac_cfn/bad.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "file",
+     "path": "iac_cfn/good.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 10.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "file",
+     "path": "iac_mixed/deploy.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 20.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "file",
+     "path": "iac_mixed/template.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 10.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/main.tf"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 6.0
    },
    {
     "direction": "lower_better",
@@ -107,11 +614,101 @@
     "direction": "lower_better",
     "id": "iac.misconfigurations",
     "scope": {
+     "level": "file",
+     "path": "yaml_small/deployment.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 19.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.misconfigurations",
+    "scope": {
      "level": "target"
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 7.0
+    "value": 78.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skipped_checks",
+    "labels": {
+     "check": "CKV_AWS_18"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skipped_checks",
+    "labels": {
+     "check": "CKV_AWS_21"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skipped_checks",
+    "scope": {
+     "level": "file",
+     "path": "iac_cfn/good.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skipped_checks",
+    "scope": {
+     "level": "file",
+     "path": "iac_mixed/template.yaml"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skipped_checks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/main.tf"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skipped_checks",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.skips_without_reason",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "checkov",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "neutral",
@@ -121,7 +718,7 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 4.0
+    "value": 161.0
    },
    {
     "direction": "neutral",
@@ -131,10 +728,10 @@
     },
     "tool": "checkov",
     "unit": "count",
-    "value": 3.0
+    "value": 12.0
    }
   ],
-  "version": "3.3.19 (terraform framework, built-in checks)"
+  "version": "3.3.19 (terraform, cloudformation, kubernetes, arm, bicep and serverless frameworks, built-in checks)"
  },
  "complexipy": {
   "metrics": [
@@ -480,13 +1077,46 @@
     "direction": "lower_better",
     "id": "structure.efferent_coupling",
     "scope": {
+     "level": "module",
+     "path": "lint_ts/src/broken.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lint_ts/src/order.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "suppressions/app.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 6,
+     "count": 9,
      "max": 1.0,
-     "mean": 0.6666666666666666,
-     "p50": 1.0,
+     "mean": 0.4444444444444444,
+     "p50": 0.0,
      "p95": 1.0,
      "sum": 4.0
     },
@@ -573,12 +1203,45 @@
     "direction": "neutral",
     "id": "structure.afferent_coupling",
     "scope": {
+     "level": "module",
+     "path": "lint_ts/src/broken.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lint_ts/src/order.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "suppressions/app.js"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 6,
+     "count": 9,
      "max": 3.0,
-     "mean": 0.6666666666666666,
+     "mean": 0.4444444444444444,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 4.0
@@ -665,7 +1328,7 @@
     },
     "tool": "dependency-cruiser",
     "unit": "count",
-    "value": 6.0
+    "value": 9.0
    }
   ],
   "version": "18.4.0 (no target config)"
@@ -926,7 +1589,7 @@
     },
     "tool": "jscpd",
     "unit": "percent",
-    "value": 2.27
+    "value": 2.17
    }
   ],
   "version": "4.0.5 (min-tokens 50, min-lines 5)"
@@ -1579,6 +2242,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 2,
+     "path": "lint_java/Orders.java",
+     "symbol": "Orders::total"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 24,
      "path": "cognitive/Sample.java",
      "symbol": "Sample::chain"
@@ -1698,6 +2377,38 @@
     "tool": "lizard",
     "unit": "count",
     "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "citations/src/Api.java",
+     "symbol": "Api::find"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "lint_java/Clean.java",
+     "symbol": "Clean::answer"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -2571,6 +3282,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 3,
+     "path": "lint_ts/src/order.ts",
+     "symbol": "orderTotal"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 5,
      "path": "cognitive/sample.ts",
      "symbol": "arrow"
@@ -2586,12 +3313,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 95,
+     "count": 99,
      "max": 6.0,
-     "mean": 2.789473684210526,
+     "mean": 2.7474747474747474,
      "p50": 3.0,
      "p95": 6.0,
-     "sum": 265.0
+     "sum": 272.0
     },
     "tool": "lizard",
     "unit": "count"
@@ -3115,6 +3842,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 2,
+     "path": "lint_java/Orders.java",
+     "symbol": "Orders::total"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 24,
      "path": "cognitive/Sample.java",
      "symbol": "Sample::chain"
@@ -3234,6 +3977,38 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 9.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "citations/src/Api.java",
+     "symbol": "Api::find"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "lint_java/Clean.java",
+     "symbol": "Clean::answer"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
    },
    {
     "direction": "lower_better",
@@ -4107,6 +4882,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 3,
+     "path": "lint_ts/src/order.ts",
+     "symbol": "orderTotal"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 5,
      "path": "cognitive/sample.ts",
      "symbol": "arrow"
@@ -4122,12 +4913,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 95,
+     "count": 99,
      "max": 16.0,
-     "mean": 5.957894736842105,
+     "mean": 5.888888888888889,
      "p50": 5.0,
      "p95": 14.0,
-     "sum": 566.0
+     "sum": 583.0
     },
     "tool": "lizard",
     "unit": "lines"
@@ -4651,6 +5442,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 2,
+     "path": "lint_java/Orders.java",
+     "symbol": "Orders::total"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 24,
      "path": "cognitive/Sample.java",
      "symbol": "Sample::chain"
@@ -4770,6 +5577,38 @@
     "tool": "lizard",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "citations/src/Api.java",
+     "symbol": "Api::find"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "lint_java/Clean.java",
+     "symbol": "Clean::answer"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "lower_better",
@@ -5643,6 +6482,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 3,
+     "path": "lint_ts/src/order.ts",
+     "symbol": "orderTotal"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 5,
      "path": "cognitive/sample.ts",
      "symbol": "arrow"
@@ -5658,12 +6513,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 95,
+     "count": 99,
      "max": 4.0,
-     "mean": 1.0526315789473684,
+     "mean": 1.0404040404040404,
      "p50": 1.0,
      "p95": 2.0,
-     "sum": 100.0
+     "sum": 103.0
     },
     "tool": "lizard",
     "unit": "count"
@@ -5676,7 +6531,7 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 35.0
+    "value": 45.0
    },
    {
     "direction": "neutral",
@@ -5686,7 +6541,7 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 95.0
+    "value": 99.0
    },
    {
     "direction": "neutral",
@@ -5743,6 +6598,34 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 37.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "go"
+    },
+    "scope": {
+     "level": "file",
+     "path": "suppressions/main.go"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "citations/src/Api.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 9.0
    },
    {
     "direction": "neutral",
@@ -5860,6 +6743,48 @@
     "direction": "neutral",
     "id": "size.lines_of_code",
     "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_java/Clean.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_java/Orders.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 7.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "suppressions/App.java"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
      "language": "javascript"
     },
     "scope": {
@@ -5911,6 +6836,20 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "suppressions/app.js"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
    },
    {
     "direction": "neutral",
@@ -6126,6 +7065,20 @@
     "direction": "neutral",
     "id": "size.lines_of_code",
     "labels": {
+     "language": "python"
+    },
+    "scope": {
+     "level": "file",
+     "path": "suppressions/app.py"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
      "language": "ruby"
     },
     "scope": {
@@ -6181,16 +7134,58 @@
    {
     "direction": "neutral",
     "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_ts/src/broken.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_ts/src/order.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "unknown"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_ts/rules.mjs"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 35,
+     "count": 45,
      "max": 60.0,
-     "mean": 18.914285714285715,
-     "p50": 11.0,
+     "mean": 15.577777777777778,
+     "p50": 7.0,
      "p95": 58.0,
-     "sum": 662.0
+     "sum": 701.0
     },
     "tool": "lizard",
     "unit": "lines"
@@ -6269,7 +7264,7 @@
     },
     "tool": "markdownlint",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -6288,6 +7283,19 @@
     "direction": "lower_better",
     "id": "docs.lint_findings",
     "labels": {
+     "rule": "MD025"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "labels": {
      "rule": "MD032"
     },
     "scope": {
@@ -6296,6 +7304,43 @@
     "tool": "markdownlint",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "labels": {
+     "rule": "MD034"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "labels": {
+     "rule": "MD040"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "citations/notes.md"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 3.0
    },
    {
     "direction": "lower_better",
@@ -6323,11 +7368,33 @@
     "direction": "lower_better",
     "id": "docs.lint_findings",
     "scope": {
+     "level": "file",
+     "path": "wellformed/fine.md"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/post.md"
+    },
+    "tool": "markdownlint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "docs.lint_findings",
+    "scope": {
      "level": "target"
     },
     "tool": "markdownlint",
     "unit": "count",
-    "value": 3.0
+    "value": 8.0
    }
   ],
   "version": "0.23.3 (default rules, inline config ignored)"
@@ -6363,6 +7430,19 @@
    {
     "direction": "lower_better",
     "id": "security.findings",
+    "labels": {
+     "rules": "rules"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "opengrep",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "security.findings",
     "scope": {
      "level": "file",
      "path": "dup_tiny/tiny.py"
@@ -6393,7 +7473,7 @@
     "value": 3.0
    }
   ],
-  "version": "1.30.1"
+  "version": "1.30.1 (rules: rules sha256:28a4b9eb87e2)"
  },
  "shellcheck": {
   "metrics": [
@@ -6549,8 +7629,196 @@
   ],
   "version": "0.11.0 (default checks, rc files and SHELLCHECK_OPTS ignored)"
  },
+ "structurizr-cli": {
+  "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.errors",
+    "scope": {
+     "level": "file",
+     "path": "structurizr/broken.dsl"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.errors",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_elements",
+    "scope": {
+     "level": "file",
+     "path": "structurizr/good.dsl",
+     "symbol": "Container-001"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_elements",
+    "scope": {
+     "level": "file",
+     "path": "structurizr/good.dsl",
+     "symbol": "SystemContext-001"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_elements",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 2,
+     "max": 3.0,
+     "mean": 2.5,
+     "p50": 2.0,
+     "p95": 3.0,
+     "sum": 5.0
+    },
+    "tool": "structurizr-cli",
+    "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_relationships",
+    "scope": {
+     "level": "file",
+     "path": "structurizr/good.dsl",
+     "symbol": "Container-001"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_relationships",
+    "scope": {
+     "level": "file",
+     "path": "structurizr/good.dsl",
+     "symbol": "SystemContext-001"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "architecture_model.view_relationships",
+    "scope": {
+     "level": "target"
+    },
+    "stats": {
+     "count": 2,
+     "max": 2.0,
+     "mean": 1.5,
+     "p50": 1.0,
+     "p95": 2.0,
+     "sum": 3.0
+    },
+    "tool": "structurizr-cli",
+    "unit": "count"
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.elements",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.models",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.relationships",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.views",
+    "labels": {
+     "type": "container"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.views",
+    "labels": {
+     "type": "systemContext"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "architecture_model.views",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "structurizr-cli",
+    "unit": "count",
+    "value": 2.0
+   }
+  ],
+  "version": "2025.11.09"
+ },
  "swe-metrics": {
   "metrics": [
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "citations/src/Api.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
    {
     "direction": "higher_better",
     "id": "doc_coverage.documented",
@@ -6670,11 +7938,53 @@
      "language": "java"
     },
     "scope": {
+     "level": "file",
+     "path": "lint_java/Clean.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_java/Orders.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "suppressions/App.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 7.0
+    "value": 9.0
    },
    {
     "direction": "higher_better",
@@ -6865,6 +8175,20 @@
      "language": "python"
     },
     "scope": {
+     "level": "file",
+     "path": "suppressions/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.documented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
@@ -6879,7 +8203,21 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 14.0
+    "value": 16.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "citations/src/Api.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
    },
    {
     "direction": "higher_better",
@@ -6972,11 +8310,39 @@
      "language": "java"
     },
     "scope": {
+     "level": "file",
+     "path": "lint_java/Clean.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 100.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_java/Orders.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 30.43
+    "value": 31.03
    },
    {
     "direction": "higher_better",
@@ -7153,11 +8519,25 @@
      "language": "python"
     },
     "scope": {
+     "level": "file",
+     "path": "suppressions/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "percent",
+    "value": 0.0
+   },
+   {
+    "direction": "higher_better",
+    "id": "doc_coverage.percent",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 25.93
+    "value": 25.0
    },
    {
     "direction": "higher_better",
@@ -7167,7 +8547,49 @@
     },
     "tool": "swe-metrics",
     "unit": "percent",
-    "value": 28.0
+    "value": 28.07
+   },
+   {
+    "direction": "lower_better",
+    "id": "citations.broken",
+    "scope": {
+     "level": "file",
+     "path": "citations/notes.md"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "citations.broken",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "citations.quotes_not_found",
+    "scope": {
+     "level": "file",
+     "path": "citations/notes.md"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "citations.quotes_not_found",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
    },
    {
     "direction": "lower_better",
@@ -7673,6 +9095,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 2,
+     "path": "lint_java/Orders.java",
+     "symbol": "total"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
      "line": 24,
      "path": "cognitive/Sample.java",
      "symbol": "chain"
@@ -7808,6 +9246,38 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 7.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "citations/src/Api.java",
+     "symbol": "find"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "function",
+     "line": 4,
+     "path": "lint_java/Clean.java",
+     "symbol": "answer"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
    },
    {
     "direction": "lower_better",
@@ -8649,6 +10119,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 3,
+     "path": "lint_ts/src/order.ts",
+     "symbol": "orderTotal"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 5,
      "path": "cognitive/sample.ts",
      "symbol": "arrow"
@@ -8664,15 +10150,29 @@
      "level": "target"
     },
     "stats": {
-     "count": 93,
+     "count": 97,
      "max": 9.0,
-     "mean": 3.10752688172043,
+     "mean": 3.0103092783505154,
      "p50": 3.0,
      "p95": 8.0,
-     "sum": 289.0
+     "sum": 292.0
     },
     "tool": "swe-metrics",
     "unit": "count"
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "citations/src/Api.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -8793,11 +10293,53 @@
      "language": "java"
     },
     "scope": {
+     "level": "file",
+     "path": "lint_java/Clean.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lint_java/Orders.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
+     "level": "file",
+     "path": "suppressions/App.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "java"
+    },
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 16.0
+    "value": 20.0
    },
    {
     "direction": "lower_better",
@@ -8988,11 +10530,25 @@
      "language": "python"
     },
     "scope": {
+     "level": "file",
+     "path": "suppressions/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "doc_coverage.undocumented",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 20.0
+    "value": 21.0
    },
    {
     "direction": "lower_better",
@@ -9002,7 +10558,7 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 36.0
+    "value": 41.0
    },
    {
     "direction": "lower_better",
@@ -9206,12 +10762,26 @@
      "language": "python"
     },
     "scope": {
+     "level": "module",
+     "path": "suppressions.app"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 13,
+     "count": 14,
      "max": 3.0,
-     "mean": 0.6153846153846154,
+     "mean": 0.5714285714285714,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 8.0
@@ -9236,7 +10806,33 @@
     "direction": "lower_better",
     "id": "syntax.parse_errors",
     "labels": {
+     "language": "front-matter"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "labels": {
      "language": "json"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "labels": {
+     "language": "jsonl"
     },
     "scope": {
      "level": "target"
@@ -9257,6 +10853,19 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "labels": {
+     "language": "yaml"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -9284,11 +10893,97 @@
     "direction": "lower_better",
     "id": "syntax.parse_errors",
     "scope": {
+     "level": "file",
+     "path": "wellformed/broken.yaml"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/data.jsonl"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/post.md"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
+     "level": "file",
+     "path": "yaml_small/broken.yaml"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "syntax.parse_errors",
+    "scope": {
      "level": "target"
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 2.0
+    "value": 6.0
+   },
+   {
+    "direction": "neutral",
+    "id": "citations.citations",
+    "scope": {
+     "level": "file",
+     "path": "citations/notes.md"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "neutral",
+    "id": "citations.citations",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "neutral",
+    "id": "citations.quotes",
+    "scope": {
+     "level": "file",
+     "path": "citations/notes.md"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
+   },
+   {
+    "direction": "neutral",
+    "id": "citations.quotes",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 6.0
    },
    {
     "direction": "neutral",
@@ -9584,12 +11279,26 @@
      "language": "python"
     },
     "scope": {
+     "level": "module",
+     "path": "suppressions.app"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "labels": {
+     "language": "python"
+    },
+    "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 13,
+     "count": 14,
      "max": 3.0,
-     "mean": 0.6153846153846154,
+     "mean": 0.5714285714285714,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 8.0
@@ -9725,13 +11434,256 @@
     },
     "tool": "swe-metrics",
     "unit": "count",
-    "value": 13.0
+    "value": 14.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "has_reason": "false"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "has_reason": "true"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 7.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "checkov-skip"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "eslint-disable"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "gitleaks-allow"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "noqa"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "nosec"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "nosemgrep"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "nosonar"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "suppress-warnings"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "labels": {
+     "kind": "type-ignore"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "lint_ts/src/order.ts"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/App.java"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/app.js"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/app.py"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 5.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/ci.yaml"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/main.go"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/main.tf"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "neutral",
+    "id": "suppressions.marks",
+    "scope": {
+     "level": "target"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 14.0
    }
   ],
-  "version": "0.0.1"
+  "version": "0.5.1"
  },
  "tflint": {
   "metrics": [
+   {
+    "direction": "lower_better",
+    "id": "iac.lint_findings",
+    "labels": {
+     "rule": "terraform_required_providers"
+    },
+    "scope": {
+     "level": "target"
+    },
+    "tool": "tflint",
+    "unit": "count",
+    "value": 1.0
+   },
    {
     "direction": "lower_better",
     "id": "iac.lint_findings",
@@ -9743,7 +11695,7 @@
     },
     "tool": "tflint",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -9757,6 +11709,17 @@
     "tool": "tflint",
     "unit": "count",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "iac.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/main.tf"
+    },
+    "tool": "tflint",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -9777,7 +11740,7 @@
     },
     "tool": "tflint",
     "unit": "count",
-    "value": 2.0
+    "value": 4.0
    }
   ],
   "version": "0.64.0 (ruleset terraform 0.15.0-bundled, recommended preset)"
@@ -9795,7 +11758,7 @@
     },
     "tool": "yamllint",
     "unit": "count",
-    "value": 4.0
+    "value": 5.0
    },
    {
     "direction": "lower_better",
@@ -9808,7 +11771,7 @@
     },
     "tool": "yamllint",
     "unit": "count",
-    "value": 5.0
+    "value": 13.0
    },
    {
     "direction": "lower_better",
@@ -9834,7 +11797,7 @@
     },
     "tool": "yamllint",
     "unit": "count",
-    "value": 3.0
+    "value": 11.0
    },
    {
     "direction": "lower_better",
@@ -9860,7 +11823,7 @@
     },
     "tool": "yamllint",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -9904,7 +11867,95 @@
     "id": "yaml.lint_findings",
     "scope": {
      "level": "file",
+     "path": "iac_cfn/bad.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "iac_cfn/good.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "iac_mixed/deploy.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "iac_mixed/template.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "sast/rules-eval.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
      "path": "sast/rules.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "suppressions/ci.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/broken.yaml"
+    },
+    "tool": "yamllint",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "yaml.lint_findings",
+    "scope": {
+     "level": "file",
+     "path": "wellformed/multi.yaml"
     },
     "tool": "yamllint",
     "unit": "count",
@@ -9951,7 +12002,7 @@
     },
     "tool": "yamllint",
     "unit": "count",
-    "value": 9.0
+    "value": 18.0
    }
   ],
   "version": "1.38.0 (default rules without line-length, target config ignored, lock files skipped)"
