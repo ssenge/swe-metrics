@@ -6,7 +6,7 @@ from typing import Any
 
 from swe_metrics.core.catalog import CATALOG
 
-SCHEMA = "swe-metrics/report/v1"
+SCHEMA = "swe-metrics/report/v2"
 LEVELS = ("target", "module", "file", "function")
 STATUSES = ("ran", "skipped", "failed")
 
@@ -93,7 +93,8 @@ class Detail:
 
 @dataclass(frozen=True)
 class Subject:
-    """What was measured: the target as given, its kind, the commit, and its files per language."""
+    """What was measured: the target as given, its kind, the commit, its files per language, and the
+    files left out by reason (gitattributes, exclude)."""
 
     target: str
     kind: str
@@ -101,12 +102,14 @@ class Subject:
     languages: tuple[tuple[str, int], ...] = ()
     commit: str = ""
     changed_since: str = ""
+    excluded_by: tuple[tuple[str, int], ...] = (("gitattributes", 0), ("exclude", 0))
 
     def as_dict(self) -> dict[str, Any]:
         """The JSON form."""
         return {"target": self.target, "kind": self.kind, "commit": self.commit or None,
                 "changed_since": self.changed_since or None, "files": self.files,
-                "languages": dict(self.languages)}
+                "languages": dict(self.languages),
+                "excluded_files": sum(n for _, n in self.excluded_by), "excluded_by": dict(self.excluded_by)}
 
 
 @dataclass(frozen=True)
@@ -119,7 +122,7 @@ class Report:
     details: tuple[Detail, ...] = ()
 
     def as_dict(self) -> dict[str, Any]:
-        """The JSON form (schema swe-metrics/report/v1)."""
+        """The JSON form (schema swe-metrics/report/v2)."""
         return {"schema": SCHEMA, "subject": self.subject.as_dict(),
                 "analyzers": [a.as_dict() for a in self.analyzers],
                 "metrics": [m.as_dict() for m in self.metrics],

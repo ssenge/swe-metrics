@@ -97,7 +97,8 @@ def _inputs(args: argparse.Namespace) -> tuple[Settings, Options]:
             raise ValueError(f"--details directory can't be created: {exc}") from exc
     settings = Settings(args.sast_rules, parse_reports(args.report), tuple(args.cite_root),
                          parse_rules(args.rules))
-    return settings, Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "")
+    return settings, Options(tuple(args.only), tuple(args.exclude), details, args.changed_since or "",
+                             not args.no_gitattributes)
 
 
 def cmd_measure(args: argparse.Namespace) -> int:
@@ -175,7 +176,11 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("target")
     m.add_argument("--only", action="append", default=[],
                    help="metric family or analyzer id (see `tools`); repeatable (default: all)")
-    m.add_argument("--exclude", action="append", default=[], help="glob of paths to leave out; repeatable")
+    m.add_argument("--exclude", action="append", default=[], metavar="PATTERN",
+                   help="paths to leave out, as in .gitignore: '*' stays within a directory, '**/' also "
+                        "matches no directory, a pattern without '/' matches at any depth; repeatable")
+    m.add_argument("--no-gitattributes", action="store_true",
+                   help="also measure files .gitattributes marks linguist-vendored or linguist-generated")
     m.add_argument("--out", help="write the report to this file (default: stdout)")
     m.add_argument("--details", help="keep the tools' detailed outputs (e.g. SARIF) in this directory")
     m.add_argument("--sast-rules", help="rule file or directory for static analysis (opengrep)")

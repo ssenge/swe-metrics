@@ -29,6 +29,17 @@ def test_measure_report_is_schema_valid(tmp_path, capsys):
     assert {m["id"].split(".")[0] for m in in_file["metrics"]} == {"complexity"}
 
 
+def test_gitattributes_option(tmp_path, capsys):
+    """Files marked generated are left out and counted; --no-gitattributes measures them."""
+    root = copy_fixture("java_small", tmp_path)
+    (root / ".gitattributes").write_text("*.java linguist-generated\n")
+    assert main(["measure", str(root), "--only", "size", "--exclude", "*.json"]) == 0
+    subject = json.loads(capsys.readouterr().out)["subject"]
+    assert subject["excluded_by"] == {"gitattributes": 1, "exclude": 1} and subject["excluded_files"] == 2
+    assert main(["measure", str(root), "--only", "size", "--no-gitattributes"]) == 0
+    assert json.loads(capsys.readouterr().out)["subject"]["excluded_files"] == 0
+
+
 def test_usage_errors(tmp_path, capsys):
     """A missing target or an unknown family is a usage error (exit 2)."""
     assert main(["measure", str(tmp_path / "missing")]) == 2

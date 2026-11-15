@@ -26,7 +26,7 @@ class Cognitive:
     families: tuple[str, ...] = ("complexity",)
 
     def version(self) -> str:
-        """swe-metrics' version and the parser library's (the grammar packages are swe-metrics' dependencies)."""
+        """swe-metrics' version and the parser library's (the grammars are swe-metrics' dependencies)."""
         return f"{swe_metrics.__version__} (tree-sitter {package_version('tree-sitter')})"
 
     def prerequisites(self) -> str:

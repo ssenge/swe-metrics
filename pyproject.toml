@@ -7,7 +7,7 @@ version = "0.5.1"
 description = "Stateless software metrics: code, IaC, docs and architecture models in, a metric report out"
 requires-python = ">=3.12"
 dependencies = [
-    "lizard>=1.26.0", "complexipy>=8.0.1", "defusedxml>=0.7.1", "pyyaml>=6.0.3",
+    "lizard>=1.26.0", "complexipy>=8.0.1", "defusedxml>=0.7.1", "pyyaml>=6.0.3", "pathspec>=1.0",
     # cognitive complexity: the parser library and one grammar per language (all offline); no pins: the latest release
     "tree-sitter>=0.26.0", "tree-sitter-python>=0.25.0", "tree-sitter-java>=0.23.5",
     "tree-sitter-javascript>=0.25.0", "tree-sitter-typescript>=0.23.2", "tree-sitter-go>=0.25.0",

@@ -23,6 +23,7 @@ class Options:
     exclude: tuple[str, ...] = ()
     details: Path | None = None
     changed_since: str = ""
+    gitattributes: bool = True  # leave out files .gitattributes marks linguist-vendored or -generated
 
 
 DEFAULTS = Options()
@@ -30,7 +31,7 @@ DEFAULTS = Options()
 
 def measure(path: Path, analyzers: Sequence[Analyzer], options: Options = DEFAULTS) -> Report:
     """Measure a file, directory or repository with every analyzer, each in its own scratch directory."""
-    target, subject = discover(path, options.exclude, options.changed_since)
+    target, subject = discover(path, options.exclude, options.changed_since, options.gitattributes)
     runs, metrics, details = [], [], []
     for analyzer in analyzers:
         with tempfile.TemporaryDirectory(prefix=f"swe-metrics-{analyzer.id}-") as scratch:

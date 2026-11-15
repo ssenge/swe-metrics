@@ -1,6 +1,6 @@
 # swe-metrics: implementation plan
 
-**Status:** v0.6, 2026-10-10. M6 (quality score) is built. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The gate measures swe-metrics with itself. M5 is built: no container image; `scripts/install-tools.sh` installs the pinned tools locally on macOS and Linux, and the golden report (`scripts/integration.sh`) gives identical results on both.
+**Status:** v0.6, 2026-10-10. M6 (quality score) is built. M0–M4 are built: 25 analyzers (`swe-metrics tools` lists them), `measure` with `--only`, `--exclude`, `--changed-since`, `--report`, `--sast-rules`, `--details`; `tools [--json]`; `schema`. The gate measures swe-metrics with itself. M5 is built: no container image; `scripts/install-tools.sh` installs the tools (latest releases) locally on macOS and Linux, and the golden report (`scripts/integration.sh`) gives identical results on both.
 
 ## 1. Purpose
 
@@ -41,7 +41,8 @@ swe-metrics measure <target> [options]
 | `--rules KIND=PATH` | A rule file of the caller, repeatable: `opengrep` (several sets, each counted under its file stem; same as `--sast-rules`), `checkstyle`, `eslint`. Rules never come from the target; a report's version string names each rule file's digest |
 | `--cite-root DIR` | Folder (relative to the target) searched for the files documents cite; repeatable |
 | `--only <families or analyzer ids>` | Measure only these metric families or analyzers (`tools` lists the ids; a name that is both is the family; default: all that apply) |
-| `--exclude <glob>` | Leave paths out (e.g. `vendor/**`); `.gitignore` is honored by default |
+| `--exclude <pattern>` | Leave paths out, gitignore-style (e.g. `vendor/**`, `**/dist/**`, `*.min.js`); `.gitignore` is honored by default, and so are `linguist-vendored` and `linguist-generated` in `.gitattributes` |
+| `--no-gitattributes` | Also measure the files `.gitattributes` marks vendored or generated (audits) |
 | `--changed-since <ref>` | Git targets: measure only files changed since this ref (scope for "new code" metrics) |
 | `--report <kind>=<path>` | Results of a build the caller ran: test results, coverage, mutation (see §5, tier B) |
 | `--out <file>` | Write the report there (default: stdout) |
@@ -51,13 +52,14 @@ Languages and file kinds are detected automatically. A hint (`--kind code|iac|do
 
 ## 4. Output: the report
 
-One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, versioned).
+One JSON document, schema `swe-metrics/report/v2` (published as JSON Schema, versioned; v2 added the subject's `excluded_files` and `excluded_by`).
 
 ```json
 {
-  "schema": "swe-metrics/report/v1",
+  "schema": "swe-metrics/report/v2",
   "subject": { "target": "…", "kind": "repository", "commit": "…", "changed_since": null,
-               "languages": {"java": 2306, "xml": 410}, "files": 57 },
+               "languages": {"java": 2306, "xml": 410}, "files": 57,
+               "excluded_files": 55, "excluded_by": {"gitattributes": 55, "exclude": 0} },
   "analyzers": [
     { "id": "lizard", "tool": "lizard", "version": "1.17.10", "status": "ran" },
     { "id": "tflint", "tool": "tflint", "version": "0.53.0", "status": "skipped",

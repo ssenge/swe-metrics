@@ -20,11 +20,13 @@ It never needs root, always installs the latest release, and only prints the `PA
 ## Use
 
 ```bash
-swe-metrics measure <file|directory|repository> [--only FAMILY|ANALYZER] [--cite-root DIR] [--rules KIND=PATH] [--exclude GLOB] [--changed-since REF]
-                    [--report KIND=PATH] [--sast-rules PATH] [--details DIR] [--out FILE]
+swe-metrics measure <file|directory|repository> [--only FAMILY|ANALYZER] [--cite-root DIR] [--rules KIND=PATH] [--exclude PATTERN] [--changed-since REF]
+                    [--no-gitattributes] [--report KIND=PATH] [--sast-rules PATH] [--details DIR] [--out FILE]
 swe-metrics tools [--json]     # analyzers, their tools and installed versions
 swe-metrics schema             # the report JSON Schema
 ```
+
+What is left out: files `.gitignore` ignores; files `.gitattributes` marks `linguist-vendored` or `linguist-generated` (the attributes GitHub and GitLab use; `=false` keeps a file in; read with Git, for a plain directory too; `--no-gitattributes` measures them); and `--exclude` patterns, written as in `.gitignore`: `*` stays within a directory, `**/` also matches no directory (`**/dist/**` covers `dist/` and `web/dist/`), and a pattern without `/` matches at any depth (`*.min.js`). Since 0.6, `a/*.ts` no longer matches `a/b/c.ts`. The report's `subject` counts what was left out: `excluded_files`, and `excluded_by` (`gitattributes`, `exclude`).
 
 ## Score
 

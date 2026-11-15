@@ -1,24 +1,37 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "swe-metrics/report/v1",
+  "$id": "swe-metrics/report/v2",
   "title": "swe-metrics report",
   "description": "The metrics of one measurement. Values carry unit and direction; the report never judges them.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "subject", "analyzers", "metrics", "details"],
   "properties": {
-    "schema": { "const": "swe-metrics/report/v1" },
+    "schema": { "const": "swe-metrics/report/v2" },
     "subject": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["target", "kind", "commit", "changed_since", "files", "languages"],
+      "required": ["target", "kind", "commit", "changed_since", "files", "languages", "excluded_files",
+                   "excluded_by"],
       "properties": {
         "target": { "type": "string" },
         "kind": { "enum": ["file", "directory", "repository"] },
         "commit": { "type": ["string", "null"] },
         "changed_since": { "type": ["string", "null"], "description": "Only files changed since this Git ref" },
         "files": { "type": "integer", "minimum": 0 },
-        "languages": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } }
+        "languages": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } },
+        "excluded_files": { "type": "integer", "minimum": 0,
+                            "description": "Files left out of every analyzer (the sum of excluded_by)" },
+        "excluded_by": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["gitattributes", "exclude"],
+          "description": "Files left out per reason: marked linguist-vendored or linguist-generated in .gitattributes, or matched by --exclude",
+          "properties": {
+            "gitattributes": { "type": "integer", "minimum": 0 },
+            "exclude": { "type": "integer", "minimum": 0 }
+          }
+        }
       }
     },
     "analyzers": {

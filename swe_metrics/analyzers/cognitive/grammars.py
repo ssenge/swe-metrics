@@ -1,7 +1,7 @@
 """Per-language tables for cognitive complexity: which tree-sitter node types play which role.
 
 The walker (walk.py) implements SonarSource's rules once; a language only names its node types here.
-Adding a language: a Grammar entry, its package in pyproject (a lower bound, no pin) and white-paper-style tests.
+Adding a language: a Grammar entry, its package in pyproject (a lower bound) and white-paper-style tests.
 """
 from __future__ import annotations
 

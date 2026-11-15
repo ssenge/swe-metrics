@@ -77,3 +77,56 @@ def test_details_are_kept_only_on_request(tmp_path):
     expected = [{"analyzer": "fake", "format": "sarif", "path": "fake.sarif"}]
     assert [d.as_dict() for d in report.details] == expected
     assert (details / "fake.sarif").read_text() == "{}"
+
+
+def vendored_tree(root):
+    """A target with a vendored and a generated file, and a vendored file kept in by `=false`."""
+    for name in ("web/vendor/x.js", "web/vendor/keep.js", "gen/y.ts", "src/app.ts"):
+        (root / name).parent.mkdir(parents=True, exist_ok=True)
+        (root / name).write_text("export const a = 1;\n")
+    (root / ".gitattributes").write_text("web/vendor/** linguist-vendored\ngen/*.ts linguist-generated=true\n"
+                                         "web/vendor/keep.js linguist-vendored=false\n")
+    return root
+
+
+@pytest.mark.parametrize("repository", [True, False])
+def test_gitattributes_leave_out_vendored_and_generated_files(tmp_path, repository):
+    """linguist-vendored and -generated files are left out and counted; =false keeps a file in."""
+    root = vendored_tree(tmp_path)
+    if repository:
+        subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+    target, subject = discover(root)
+    assert target.files == (".gitattributes", "src/app.ts", "web/vendor/keep.js")
+    assert subject.as_dict()["excluded_by"] == {"gitattributes": 2, "exclude": 0}
+    assert subject.as_dict()["excluded_files"] == 2
+    target, subject = discover(root, exclude=("src/",), gitattributes=False)
+    assert {"gen/y.ts", "web/vendor/x.js"} <= set(target.files) and "src/app.ts" not in target.files
+    assert dict(subject.excluded_by) == {"gitattributes": 0, "exclude": 1}
+
+
+def test_gitattributes_without_git(tmp_path, monkeypatch):
+    """Without git, a plain directory's attributes can't be read: nothing is left out for them."""
+    root = vendored_tree(tmp_path)
+    monkeypatch.setenv("PATH", str(tmp_path / "empty"))
+    target, subject = discover(root)
+    assert "gen/y.ts" in target.files and dict(subject.excluded_by)["gitattributes"] == 0
+
+
+def test_gitattributes_of_a_single_file(tmp_path):
+    """A single file target is measured even when its directory marks it generated."""
+    root = vendored_tree(tmp_path)
+    assert discover(root / "gen" / "y.ts")[0].files == ("y.ts",)
+
+
+@pytest.mark.parametrize(("pattern", "path", "excluded"), [
+    ("**/dist/**", "dist/a.js", True), ("**/dist/**", "web/dist/a.js", True),
+    ("*.min.js", "x/y.min.js", True), ("a/*.ts", "a/b.ts", True), ("a/*.ts", "a/b/c.ts", False),
+    ("**/node_modules/**", "node_modules/p/i.js", True), ("vendor/**", "src/vendor/a.js", False),
+])
+def test_exclude_patterns_are_gitignore_style(tmp_path, pattern, path, excluded):
+    """`**/` also matches no directory, `*` stays within one, a pattern without '/' matches at any depth."""
+    (tmp_path / path).parent.mkdir(parents=True, exist_ok=True)
+    (tmp_path / path).write_text("x\n")
+    target, subject = discover(tmp_path, exclude=(pattern,))
+    assert (path not in target.files) == excluded
+    assert dict(subject.excluded_by)["exclude"] == int(excluded)
