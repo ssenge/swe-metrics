@@ -24,31 +24,47 @@ def targets(metrics):
     return {m.id: m.value for m in metrics if m.scope.level == "target"}
 
 
-def test_jscpd_metrics_from_recorded_report(tmp_path, monkeypatch):
-    """Totals and per-file values come from the report; the settings are part of the version."""
-    def fake_run(argv, cwd, ok=(0,)):
-        shutil.copyfile(FIXTURES / "recorded" / "jscpd-report.json", tmp_path / "jscpd-report.json")
+@pytest.mark.parametrize(("major", "recorded", "per_file"), [
+    ("4", "jscpd-report.json", (17, 94.44)),   # per file as jscpd 4 lists it
+    ("5", "jscpd5-report.json", (18, 94.74)),  # lines 2-19 of 19, from the clone (jscpd 5 lists no files)
+])
+def test_jscpd_metrics_from_recorded_report(tmp_path, monkeypatch, major, recorded, per_file):
+    """Totals and per-file values from each major version's report; the settings are part of the version."""
+    root = tmp_path / "target"
+    shutil.copytree(FIXTURES / "dup_java", root / "j")
+    def fake_run(argv, cwd, ok=(0,)):  # the jscpd 5 report was recorded with --absolute below /target
+        text = (FIXTURES / "recorded" / recorded).read_text().replace("/target/", f"{root.resolve()}/")
+        (tmp_path / "jscpd-report.json").write_text(text)
         return ""
     monkeypatch.setattr(jscpd_module, "run", fake_run)
-    monkeypatch.setattr(jscpd_module, "version", lambda argv: "4.0.5")
+    monkeypatch.setattr(jscpd_module, "version", lambda argv: f"{major}.0.0")
     analyzer = Jscpd()
-    result = analyzer.measure(Target(str(tmp_path), ("j/A.java",)), ("j/A.java",), str(tmp_path))
-    assert {k: v for k, v in targets(result.metrics).items() if k in EXPECTED} == {
-        k: v for k, v in EXPECTED.items() if not k.startswith("_")}
-    assert {m.scope.path for m in result.metrics if m.scope.level == "file"} == {"j/A.java", "j/B.java"}
-    assert analyzer.version() == "4.0.5 (min-tokens 50, min-lines 5)" and analyzer.prerequisites() == ""
+    metrics = analyzer.measure(Target(str(root), ("j/A.java",)), ("j/A.java",), str(tmp_path)).metrics
+    assert targets(metrics) == pytest.approx(EXPECTED[major], abs=0.01)
+    files = {(m.scope.path, m.id): m.value for m in metrics if m.scope.level == "file"}
+    assert files == {(path, metric_id): value for path in ("j/A.java", "j/B.java") for metric_id, value
+                     in zip(("duplication.duplicated_lines", "duplication.percent"), per_file, strict=True)}
+    assert analyzer.version() == f"{major}.0.0 (min-tokens 50, min-lines 5)"
+    assert analyzer.prerequisites() == ""
     monkeypatch.setattr(jscpd_module, "version", lambda argv: None)
     assert analyzer.version() is None
 
 
+def test_jscpd_file_without_lines(tmp_path):
+    """A clone in a file that can't be read is counted against one line rather than failing."""
+    clone = {"firstFile": {"name": "a.js", "start": 1, "end": 1},
+             "secondFile": {"name": "b.js", "start": 1, "end": 1}}
+    assert jscpd_module._from_clones([clone], tmp_path) == {"a.js": (1, 100.0), "b.js": (1, 100.0)}
+
+
 @pytest.mark.skipif(not shutil.which("jscpd"), reason="jscpd not installed")
 def test_jscpd_finds_the_fixture_clone(tmp_path):
-    """The real tool finds the one clone in dup_java with the hand-computed numbers."""
+    """The real tool finds the one clone in dup_java with the hand-computed numbers of its major version."""
     target, _ = discover(FIXTURES / "dup_java")
     analyzer = Jscpd()
     found = targets(analyzer.measure(target, analyzer.applicable(target), str(tmp_path)).metrics)
-    assert {k: found[k] for k in EXPECTED if not k.startswith("_")} == {
-        k: v for k, v in EXPECTED.items() if not k.startswith("_")}
+    major = (analyzer.version() or "").split(".")[0]
+    assert found == pytest.approx(EXPECTED[major], abs=0.01)
 
 
 def test_complexipy_cognitive_complexity():

@@ -1,6 +1,5 @@
 {
-  "_comment": "A.java and B.java share the 17-line compute() body: 1 clone; 17 of 36 lines duplicated = 47.22 %.",
-  "duplication.clones": 1,
-  "duplication.duplicated_lines": 17,
-  "duplication.percent": 47.22
+  "_comment": "A.java and B.java (19 lines each) share the compute() body, lines 2-19: 1 clone. jscpd 4 counts a clone's lines as end - start (17 of 36 lines = 47.22 %); jscpd 5 counts start and end (18 of 38 lines = 47.37 %).",
+  "4": {"duplication.clones": 1, "duplication.duplicated_lines": 17, "duplication.percent": 47.22},
+  "5": {"duplication.clones": 1, "duplication.duplicated_lines": 18, "duplication.percent": 47.37}
 }

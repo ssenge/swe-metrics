@@ -1,0 +1,71 @@
+{
+  "duplicates": [
+    {
+      "firstFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 1,
+          "line": 19,
+          "position": 665
+        },
+        "name": "/target/j/A.java",
+        "start": 2,
+        "startLoc": {
+          "column": 45,
+          "line": 2,
+          "position": 62
+        }
+      },
+      "format": "java",
+      "fragment": "    public int uniqueA(int x) { return x + 65; }\n    public int compute(int[] values, int offset) {\n        int total = 0;\n        total += values[0] * 0 + offset;\n        total += values[1] * 1 + offset;\n        total += values[2] * 2 + offset;\n        total += values[3] * 3 + offset;\n        total += values[4] * 4 + offset;\n        total += values[5] * 5 + offset;\n        total += values[6] * 6 + offset;\n        total += values[7] * 7 + offset;\n        total += values[8] * 8 + offset;\n        total += values[9] * 9 + offset;\n        total += values[10] * 10 + offset;\n        total += values[11] * 11 + offset;\n        return total;\n    }\n}",
+      "isNew": false,
+      "kind": "exact",
+      "lines": 18,
+      "secondFile": {
+        "end": 19,
+        "endLoc": {
+          "column": 1,
+          "line": 19,
+          "position": 665
+        },
+        "name": "/target/j/B.java",
+        "start": 2,
+        "startLoc": {
+          "column": 45,
+          "line": 2,
+          "position": 62
+        }
+      },
+      "tokens": 169
+    }
+  ],
+  "statistics": {
+    "detectionDate": "2026-11-15T17:18:39.209Z",
+    "formats": {
+      "java": {
+        "clones": 1,
+        "duplicatedLines": 18,
+        "duplicatedTokens": 169,
+        "lines": 38,
+        "newClones": 0,
+        "newDuplicatedLines": 0,
+        "percentage": 47.368421052631575,
+        "percentageTokens": 45.67567567567568,
+        "sources": 2,
+        "tokens": 370
+      }
+    },
+    "total": {
+      "clones": 1,
+      "duplicatedLines": 18,
+      "duplicatedTokens": 169,
+      "lines": 38,
+      "newClones": 0,
+      "newDuplicatedLines": 0,
+      "percentage": 47.368421052631575,
+      "percentageTokens": 45.67567567567568,
+      "sources": 2,
+      "tokens": 370
+    }
+  }
+}
