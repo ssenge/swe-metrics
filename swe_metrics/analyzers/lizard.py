@@ -1,8 +1,11 @@
 """lizard: lines of code, functions, cyclomatic complexity, function length and parameters (20+ languages)."""
 from __future__ import annotations
 
+import re
+from collections.abc import Iterator
 from importlib.metadata import version as package_version
 from pathlib import Path
+from typing import Any
 
 import lizard
 
@@ -13,6 +16,10 @@ from swe_metrics.core.target import Target, language
 
 TOOL = "lizard"
 PER_FUNCTION = ("complexity.cyclomatic", "size.function_length", "size.parameters")
+# lizard's tokenizer joins "<...?...>" into one generic-type token (Java's <? extends T>), so in
+# `a < b ? c > d : e` the ternary's "?" is never counted. A "?" (or "??") between two words is a
+# ternary: a wildcard follows "<" or ",", a nullable type precedes ">" or ",".
+HIDDEN_CONDITION = re.compile(r"(?<=\w)\s*(\?\??)(?![.?])\s*(?=\w)")
 
 
 class Lizard:
@@ -44,9 +51,28 @@ class Lizard:
         return Measurement(metrics + summary + [m for m in rollups if m])
 
 
+def hidden_conditions(token: str, conditions: set[str]) -> int:
+    """The conditions lizard can't see inside a token it took for generic type arguments."""
+    if len(token) < 3 or token[0] != "<" or token[-1] != ">":
+        return 0
+    return sum(1 for op in HIDDEN_CONDITION.findall(token) if op in conditions)
+
+
+def _count_hidden_conditions(tokens: Iterator[str], reader: Any) -> Iterator[str]:
+    """A lizard token processor: adds the hidden conditions to the function being read."""
+    for token in tokens:
+        hidden = hidden_conditions(token, reader.conditions)
+        if hidden:
+            reader.context.add_condition(hidden)
+        yield token
+
+
+ANALYZE = lizard.FileAnalyzer(lizard.get_extensions([_count_hidden_conditions]))
+
+
 def _file_metrics(root: Path, path: str) -> list[Metric]:
     """Lines of code of one file and the values of each of its functions."""
-    info = lizard.analyze_file(str(root / path))
+    info = ANALYZE(str(root / path))
     labels = (("language", language(path) or "unknown"),)
     metrics = [Metric("size.lines_of_code", TOOL, Scope("file", path), float(info.nloc), labels=labels)]
     for fn in info.function_list:

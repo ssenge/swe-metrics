@@ -1,0 +1,48 @@
+{
+ "_comment": "Per file, every function lizard reports: [name, start line, end line, cyclomatic complexity], checked by reading the code. r1-r3: lizard 1.24.1 reported wrong ranges and swallowed functions. ternary.ts: a ternary after a '<' comparison (lizard joins '< b ? c >' into one type-argument token; the analyzer counts the hidden '?').",
+ "components.tsx": [
+    ["Gen", 1, 4, 2],
+    ["Row", 6, 8, 3],
+    ["Grid", 10, 14, 2],
+    ["(anonymous)", 11, 11, 1],
+    ["(anonymous)", 12, 12, 1]
+ ],
+ "constructs.ts": [
+    ["first", 1, 4, 2],
+    ["(anonymous)", 3, 3, 1],
+    ["second", 6, 9, 2],
+    ["third", 11, 14, 3],
+    ["get size", 19, 22, 2],
+    ["set first", 24, 26, 2],
+    ["map", 28, 31, 2],
+    ["(anonymous)", 30, 30, 1],
+    ["last", 34, 37, 2]
+ ],
+ "r1.ts": [
+    ["first", 1, 4, 3],
+    ["second", 6, 9, 2],
+    ["third", 11, 14, 2]
+ ],
+ "r1.tsx": [
+    ["First", 1, 5, 3],
+    ["Second", 7, 10, 2],
+    ["Third", 12, 15, 2]
+ ],
+ "r2.ts": [
+    ["view", 2, 7, 1],
+    ["(anonymous)", 5, 5, 1],
+    ["desk", 9, 13, 3],
+    ["other", 15, 18, 2]
+ ],
+ "r3.ts": [
+    ["view", 1, 3, 1],
+    ["(anonymous)", 2, 2, 1],
+    ["desk", 5, 9, 3],
+    ["other", 11, 14, 2]
+ ],
+ "ternary.ts": [
+    ["inRange", 1, 3, 2],
+    ["pick", 5, 8, 4],
+    ["fallback", 10, 12, 3]
+ ]
+}

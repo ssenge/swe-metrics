@@ -86,7 +86,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | Family | Metrics | Tools (first binding) |
 |---|---|---|
 | `size` | lines of code, comment lines, files, functions per language | lizard, tokei |
-| `complexity` | cyclomatic per function; cognitive per function | lizard (cyclomatic, all languages); built-in `cognitive` analyzer (SonarSource's rules on tree-sitter, one implementation for every supported language; grammar packages at their latest release, offline); complexipy (cognitive, Python) as an independent second value |
+| `complexity` | cyclomatic per function; cognitive per function | lizard ≥ 1.26 (cyclomatic, all languages; earlier releases misread TypeScript function ranges; the analyzer adds the ternaries lizard hides in `a < b ? c > d : e`, which its tokenizer takes for type arguments); built-in `cognitive` analyzer (SonarSource's rules on tree-sitter, one implementation for every supported language; grammar packages at their latest release, offline); complexipy (cognitive, Python) as an independent second value |
 | `duplication` | duplicated lines and %, clone pairs | jscpd |
 | `dependencies` | direct and transitive dependencies; known vulnerabilities per severity; licenses | trivy (SBOM and vulnerabilities), osv-scanner |
 | `secrets` | secret findings per rule | gitleaks |
