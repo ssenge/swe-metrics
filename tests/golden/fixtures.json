@@ -85,7 +85,7 @@
     "value": 3.0
    }
   ],
-  "version": "1.58.0 (default rules, target config ignored)"
+  "version": "1.60.1 (default rules, target config ignored)"
  },
  "checkov": {
   "metrics": [
@@ -731,7 +731,7 @@
     "value": 12.0
    }
   ],
-  "version": "3.3.19 (terraform, cloudformation, kubernetes, arm, bicep and serverless frameworks, built-in checks)"
+  "version": "3.4.5 (terraform, cloudformation, kubernetes, arm, bicep and serverless frameworks, built-in checks)"
  },
  "complexipy": {
   "metrics": [
@@ -765,7 +765,7 @@
     },
     "tool": "complexipy",
     "unit": "count",
-    "value": 5.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -845,7 +845,7 @@
     },
     "tool": "complexipy",
     "unit": "count",
-    "value": 1.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -861,7 +861,7 @@
     },
     "tool": "complexipy",
     "unit": "count",
-    "value": 0.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -877,7 +877,7 @@
     },
     "tool": "complexipy",
     "unit": "count",
-    "value": 3.0
+    "value": 4.0
    },
    {
     "direction": "lower_better",
@@ -984,16 +984,16 @@
     "stats": {
      "count": 15,
      "max": 5.0,
-     "mean": 1.1333333333333333,
+     "mean": 1.2,
      "p50": 0.0,
      "p95": 5.0,
-     "sum": 17.0
+     "sum": 18.0
     },
     "tool": "complexipy",
     "unit": "count"
    }
   ],
-  "version": "8.0.1"
+  "version": "9.0.0"
  },
  "dependency-cruiser": {
   "metrics": [
@@ -1100,6 +1100,83 @@
     "id": "structure.efferent_coupling",
     "scope": {
      "level": "module",
+     "path": "lizard_ts/components.tsx"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/constructs.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r1.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r1.tsx"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r2.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r3.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/ternary.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "structure.efferent_coupling",
+    "scope": {
+     "level": "module",
      "path": "suppressions/app.js"
     },
     "tool": "dependency-cruiser",
@@ -1113,9 +1190,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 9,
+     "count": 16,
      "max": 1.0,
-     "mean": 0.4444444444444444,
+     "mean": 0.25,
      "p50": 0.0,
      "p95": 1.0,
      "sum": 4.0
@@ -1226,6 +1303,83 @@
     "id": "structure.afferent_coupling",
     "scope": {
      "level": "module",
+     "path": "lizard_ts/components.tsx"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/constructs.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r1.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r1.tsx"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r2.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/r3.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
+     "path": "lizard_ts/ternary.ts"
+    },
+    "tool": "dependency-cruiser",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "neutral",
+    "id": "structure.afferent_coupling",
+    "scope": {
+     "level": "module",
      "path": "suppressions/app.js"
     },
     "tool": "dependency-cruiser",
@@ -1239,9 +1393,9 @@
      "level": "target"
     },
     "stats": {
-     "count": 9,
+     "count": 16,
      "max": 3.0,
-     "mean": 0.4444444444444444,
+     "mean": 0.25,
      "p50": 0.0,
      "p95": 3.0,
      "sum": 4.0
@@ -1328,10 +1482,10 @@
     },
     "tool": "dependency-cruiser",
     "unit": "count",
-    "value": 9.0
+    "value": 16.0
    }
   ],
-  "version": "18.4.0 (no target config)"
+  "version": "18.7.2 (no target config)"
  },
  "gitleaks": {
   "metrics": [
@@ -1536,7 +1690,7 @@
     },
     "tool": "jscpd",
     "unit": "lines",
-    "value": 17.0
+    "value": 18.0
    },
    {
     "direction": "lower_better",
@@ -1547,7 +1701,7 @@
     },
     "tool": "jscpd",
     "unit": "lines",
-    "value": 17.0
+    "value": 18.0
    },
    {
     "direction": "lower_better",
@@ -1557,7 +1711,7 @@
     },
     "tool": "jscpd",
     "unit": "lines",
-    "value": 17.0
+    "value": 18.0
    },
    {
     "direction": "lower_better",
@@ -1568,7 +1722,7 @@
     },
     "tool": "jscpd",
     "unit": "percent",
-    "value": 94.44
+    "value": 94.74
    },
    {
     "direction": "lower_better",
@@ -1579,7 +1733,7 @@
     },
     "tool": "jscpd",
     "unit": "percent",
-    "value": 94.44
+    "value": 94.74
    },
    {
     "direction": "lower_better",
@@ -1589,10 +1743,10 @@
     },
     "tool": "jscpd",
     "unit": "percent",
-    "value": 2.17
+    "value": 2.107728337236534
    }
   ],
-  "version": "4.0.5 (min-tokens 50, min-lines 5)"
+  "version": "5.4.3 (min-tokens 50, min-lines 5)"
  },
  "likec4": {
   "metrics": [
@@ -1719,7 +1873,7 @@
     "value": 2.0
    }
   ],
-  "version": "1.59.4 (no layout)"
+  "version": "1.61.0 (no layout)"
  },
  "lizard": {
   "metrics": [
@@ -2020,7 +2174,8 @@
     "scope": {
      "level": "function",
      "line": 29,
-     "path": "cognitive/sample.go"
+     "path": "cognitive/sample.go",
+     "symbol": "anonymous__0"
     },
     "tool": "lizard",
     "unit": "count",
@@ -2516,11 +2671,27 @@
      "level": "function",
      "line": 14,
      "path": "cognitive/sample.js",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
      "symbol": "n"
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 3.0
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -3218,9 +3389,249 @@
     },
     "scope": {
      "level": "function",
+     "line": 1,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Gen"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "first"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "first"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "First"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "view"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "inRange"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Grid"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "fallback"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "third"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "third"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "other"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Third"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 13,
      "path": "cognitive/sample.ts",
      "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "(anonymous)"
     },
     "tool": "lizard",
     "unit": "count",
@@ -3240,7 +3651,23 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 3.0
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 15,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "other"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -3266,6 +3693,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 19,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "get size"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 2,
      "path": "cognitive/sample.ts",
      "symbol": "chain"
@@ -3273,6 +3716,70 @@
     "tool": "lizard",
     "unit": "count",
     "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "view"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 24,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "set first"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "map"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
    },
    {
     "direction": "lower_better",
@@ -3298,6 +3805,54 @@
     },
     "scope": {
      "level": "function",
+     "line": 3,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "last"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 5,
      "path": "cognitive/sample.ts",
      "symbol": "arrow"
@@ -3309,16 +3864,144 @@
    {
     "direction": "lower_better",
     "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "desk"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "pick"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Row"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "second"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "second"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Second"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "desk"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cyclomatic",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 99,
+     "count": 132,
      "max": 6.0,
-     "mean": 2.7474747474747474,
-     "p50": 3.0,
-     "p95": 6.0,
-     "sum": 272.0
+     "mean": 2.553030303030303,
+     "p50": 2.0,
+     "p95": 5.0,
+     "sum": 337.0
     },
     "tool": "lizard",
     "unit": "count"
@@ -3620,7 +4303,8 @@
     "scope": {
      "level": "function",
      "line": 29,
-     "path": "cognitive/sample.go"
+     "path": "cognitive/sample.go",
+     "symbol": "anonymous__0"
     },
     "tool": "lizard",
     "unit": "lines",
@@ -4101,6 +4785,22 @@
      "line": 13,
      "path": "cognitive/sample.js",
      "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
+     "symbol": "(anonymous)"
     },
     "tool": "lizard",
     "unit": "lines",
@@ -4818,9 +5518,249 @@
     },
     "scope": {
      "level": "function",
+     "line": 1,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Gen"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "first"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "first"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "First"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "view"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "inRange"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Grid"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "fallback"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "third"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "third"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "other"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Third"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 13,
      "path": "cognitive/sample.ts",
      "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "(anonymous)"
     },
     "tool": "lizard",
     "unit": "lines",
@@ -4850,6 +5790,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 15,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "other"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 16,
      "path": "cognitive/sample.ts",
      "symbol": "tryIt"
@@ -4857,6 +5813,22 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 19,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "get size"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
    },
    {
     "direction": "lower_better",
@@ -4882,6 +5854,70 @@
     },
     "scope": {
      "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "view"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 6.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 24,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "set first"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "map"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 3,
      "path": "lint_ts/src/order.ts",
      "symbol": "orderTotal"
@@ -4889,6 +5925,54 @@
     "tool": "lizard",
     "unit": "lines",
     "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 3,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "last"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
    },
    {
     "direction": "lower_better",
@@ -4909,16 +5993,144 @@
    {
     "direction": "lower_better",
     "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "desk"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "pick"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Row"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "second"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "second"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Second"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "desk"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 5.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.function_length",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 99,
+     "count": 132,
      "max": 16.0,
-     "mean": 5.888888888888889,
-     "p50": 5.0,
-     "p95": 14.0,
-     "sum": 583.0
+     "mean": 5.242424242424242,
+     "p50": 4.0,
+     "p95": 13.0,
+     "sum": 692.0
     },
     "tool": "lizard",
     "unit": "lines"
@@ -5220,7 +6432,8 @@
     "scope": {
      "level": "function",
      "line": 29,
-     "path": "cognitive/sample.go"
+     "path": "cognitive/sample.go",
+     "symbol": "anonymous__0"
     },
     "tool": "lizard",
     "unit": "count",
@@ -5701,6 +6914,22 @@
      "line": 13,
      "path": "cognitive/sample.js",
      "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "javascript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.js",
+     "symbol": "(anonymous)"
     },
     "tool": "lizard",
     "unit": "count",
@@ -6418,9 +7647,249 @@
     },
     "scope": {
      "level": "function",
+     "line": 1,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Gen"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "first"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "first"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "First"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "view"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "inRange"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Grid"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "fallback"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "third"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "third"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "other"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Third"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 13,
      "path": "cognitive/sample.ts",
      "symbol": "m"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 14,
+     "path": "cognitive/sample.ts",
+     "symbol": "(anonymous)"
     },
     "tool": "lizard",
     "unit": "count",
@@ -6450,6 +7919,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 15,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "other"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 16,
      "path": "cognitive/sample.ts",
      "symbol": "tryIt"
@@ -6466,9 +7951,89 @@
     },
     "scope": {
      "level": "function",
+     "line": 19,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "get size"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 2,
      "path": "cognitive/sample.ts",
      "symbol": "chain"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "view"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 24,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "set first"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "map"
     },
     "tool": "lizard",
     "unit": "count",
@@ -6498,9 +8063,185 @@
     },
     "scope": {
      "level": "function",
+     "line": 3,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 30,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "last"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 5,
      "path": "cognitive/sample.ts",
      "symbol": "arrow"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "(anonymous)"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "desk"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "pick"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 3.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Row"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "second"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "second"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Second"
+    },
+    "tool": "lizard",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "size.parameters",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "desk"
     },
     "tool": "lizard",
     "unit": "count",
@@ -6513,12 +8254,12 @@
      "level": "target"
     },
     "stats": {
-     "count": 99,
+     "count": 132,
      "max": 4.0,
-     "mean": 1.0404040404040404,
+     "mean": 1.1136363636363635,
      "p50": 1.0,
      "p95": 2.0,
-     "sum": 103.0
+     "sum": 147.0
     },
     "tool": "lizard",
     "unit": "count"
@@ -6531,7 +8272,7 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 45.0
+    "value": 52.0
    },
    {
     "direction": "neutral",
@@ -6541,7 +8282,7 @@
     },
     "tool": "lizard",
     "unit": "count",
-    "value": 99.0
+    "value": 132.0
    },
    {
     "direction": "neutral",
@@ -7163,6 +8904,104 @@
     "direction": "neutral",
     "id": "size.lines_of_code",
     "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/components.tsx"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/constructs.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 30.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/r1.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/r1.tsx"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 13.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/r2.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 17.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/r3.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 12.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "file",
+     "path": "lizard_ts/ternary.ts"
+    },
+    "tool": "lizard",
+    "unit": "lines",
+    "value": 10.0
+   },
+   {
+    "direction": "neutral",
+    "id": "size.lines_of_code",
+    "labels": {
      "language": "unknown"
     },
     "scope": {
@@ -7180,18 +9019,18 @@
      "level": "target"
     },
     "stats": {
-     "count": 45,
+     "count": 52,
      "max": 60.0,
-     "mean": 15.577777777777778,
-     "p50": 7.0,
+     "mean": 15.51923076923077,
+     "p50": 9.0,
      "p95": 58.0,
-     "sum": 701.0
+     "sum": 807.0
     },
     "tool": "lizard",
     "unit": "lines"
    }
   ],
-  "version": "1.24.1"
+  "version": "1.26.0"
  },
  "lychee": {
   "metrics": [
@@ -7397,7 +9236,7 @@
     "value": 8.0
    }
   ],
-  "version": "0.23.3 (default rules, inline config ignored)"
+  "version": "0.24.1 (default rules, inline config ignored)"
  },
  "opengrep": {
   "metrics": [
@@ -7473,7 +9312,7 @@
     "value": 3.0
    }
   ],
-  "version": "1.30.1 (rules: rules sha256:28a4b9eb87e2)"
+  "version": "2.0.0 (rules: rules sha256:28a4b9eb87e2)"
  },
  "shellcheck": {
   "metrics": [
@@ -10055,6 +11894,198 @@
     },
     "scope": {
      "level": "function",
+     "line": 1,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Gen"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "first"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "first"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "First"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "view"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 1,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "inRange"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Grid"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 10,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "fallback"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "third"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "third"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 11,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "other"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 12,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Third"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 13,
      "path": "cognitive/sample.ts",
      "symbol": "m"
@@ -10087,6 +12118,22 @@
     },
     "scope": {
      "level": "function",
+     "line": 15,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "other"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 16,
      "path": "cognitive/sample.ts",
      "symbol": "tryIt"
@@ -10094,6 +12141,22 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 19,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "size"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -10119,6 +12182,54 @@
     },
     "scope": {
      "level": "function",
+     "line": 2,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "view"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 24,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "first"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 28,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "map"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
      "line": 3,
      "path": "lint_ts/src/order.ts",
      "symbol": "orderTotal"
@@ -10126,6 +12237,22 @@
     "tool": "swe-metrics",
     "unit": "count",
     "value": 0.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 34,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "last"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
    },
    {
     "direction": "lower_better",
@@ -10146,16 +12273,128 @@
    {
     "direction": "lower_better",
     "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/r3.ts",
+     "symbol": "desk"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 5,
+     "path": "lizard_ts/ternary.ts",
+     "symbol": "pick"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 4.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/components.tsx",
+     "symbol": "Row"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/constructs.ts",
+     "symbol": "second"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 6,
+     "path": "lizard_ts/r1.ts",
+     "symbol": "second"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 7,
+     "path": "lizard_ts/r1.tsx",
+     "symbol": "Second"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 1.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
+    "labels": {
+     "language": "typescript"
+    },
+    "scope": {
+     "level": "function",
+     "line": 9,
+     "path": "lizard_ts/r2.ts",
+     "symbol": "desk"
+    },
+    "tool": "swe-metrics",
+    "unit": "count",
+    "value": 2.0
+   },
+   {
+    "direction": "lower_better",
+    "id": "complexity.cognitive",
     "scope": {
      "level": "target"
     },
     "stats": {
-     "count": 97,
+     "count": 122,
      "max": 9.0,
-     "mean": 3.0103092783505154,
-     "p50": 3.0,
+     "mean": 2.6557377049180326,
+     "p50": 2.0,
      "p95": 8.0,
-     "sum": 292.0
+     "sum": 324.0
     },
     "tool": "swe-metrics",
     "unit": "count"
@@ -11667,7 +13906,7 @@
     "value": 14.0
    }
   ],
-  "version": "0.5.1"
+  "version": "0.6.0"
  },
  "tflint": {
   "metrics": [
@@ -11743,7 +13982,7 @@
     "value": 4.0
    }
   ],
-  "version": "0.64.0 (ruleset terraform 0.15.0-bundled, recommended preset)"
+  "version": "0.66.0 (ruleset terraform 0.17.0-bundled, recommended preset)"
  },
  "yamllint": {
   "metrics": [

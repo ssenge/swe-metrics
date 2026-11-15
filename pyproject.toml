@@ -3,7 +3,7 @@
 
 [project]
 name = "swe-metrics"
-version = "0.5.1"
+version = "0.6.0"
 description = "Stateless software metrics: code, IaC, docs and architecture models in, a metric report out"
 requires-python = ">=3.12"
 dependencies = [
