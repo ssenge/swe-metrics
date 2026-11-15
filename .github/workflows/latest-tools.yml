@@ -1,0 +1,44 @@
+# The installer takes the latest release of every tool, so an upstream release can break a download URL or an
+# analyzer at any time. Weekly and on every change to the tool list: resolve every download URL, then install
+# the latest tools and run the analyzers against them.
+name: latest-tools
+on:
+  schedule: [{ cron: "17 5 * * 1" }]
+  workflow_dispatch:
+  push:
+    paths: [tools.list, scripts/install-tools.sh, .github/workflows/latest-tools.yml]
+  pull_request:
+    paths: [tools.list, scripts/install-tools.sh, .github/workflows/latest-tools.yml]
+jobs:
+  urls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: every download URL of every platform resolves
+        run: scripts/install-tools.sh --check-urls
+  analyzers:
+    strategy:
+      fail-fast: false
+      matrix: { os: [ubuntu-latest, macos-latest] }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: swe-metrics with the latest Python dependencies
+        run: python -m pip install --upgrade -e ".[dev]"
+      - name: the latest release of every tool
+        run: scripts/install-tools.sh && echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: tests, with every installed tool
+        run: python -m pytest -q
+      - name: no analyzer fails on the fixtures (tools outside tools.list may be missing)
+        run: |
+          swe-metrics measure fixtures --sast-rules fixtures/sast/rules.yaml --out report.json
+          python - <<'PY'
+          import json
+          runs = json.load(open("report.json"))["analyzers"]
+          failed = [f"{a['id']}: {a['reason']}" for a in runs
+                    if a["status"] == "failed" and not a["reason"].endswith("is not installed")]
+          print("\n".join(f"{a['id']:20} {a['status']:8} {a.get('version', '')}" for a in runs))
+          assert not failed, "analyzers failed:\n" + "\n".join(failed)
+          PY

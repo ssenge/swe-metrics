@@ -30,8 +30,8 @@ lychee	gh:lycheeverse/lychee	linux-arm64	tar:lychee	https://github.com/lycheever
 lychee	gh:lycheeverse/lychee	linux-amd64	tar:lychee	https://github.com/lycheeverse/lychee/releases/download/{tag}/lychee-x86_64-unknown-linux-musl.tar.gz
 opengrep	gh:opengrep/opengrep	darwin-arm64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_osx_arm64
 opengrep	gh:opengrep/opengrep	darwin-amd64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_osx_x86
-opengrep	gh:opengrep/opengrep	linux-arm64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_manylinux_aarch64
-opengrep	gh:opengrep/opengrep	linux-amd64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_manylinux_x86
+opengrep	gh:opengrep/opengrep	linux-arm64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_linux_aarch64
+opengrep	gh:opengrep/opengrep	linux-amd64	bin:opengrep	https://github.com/opengrep/opengrep/releases/download/{tag}/opengrep_linux_x86
 shellcheck	gh:koalaman/shellcheck	darwin-arm64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.darwin.aarch64.tar.gz
 shellcheck	gh:koalaman/shellcheck	darwin-amd64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.darwin.x86_64.tar.gz
 shellcheck	gh:koalaman/shellcheck	linux-arm64	tar:shellcheck	https://github.com/koalaman/shellcheck/releases/download/{tag}/shellcheck-{tag}.linux.aarch64.tar.gz

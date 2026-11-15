@@ -3,11 +3,15 @@
 # Linux (arm64, x86_64). No root, no package manager: everything goes into one directory, with links in a bin
 # directory. Uninstall by deleting both.
 #
-# Usage: scripts/install-tools.sh [--prefix DIR] [--bin-dir DIR] [--only TOOL]... [--check]
-#   --prefix   where the tools go          (default: ~/.local/share/swe-metrics/tools)
-#   --bin-dir  where the links go          (default: ~/.local/bin)
-#   --only     install or check only TOOL  (repeatable)
-#   --check    report the installed versions, install nothing (exit 1 when a tool is missing)
+# A tool that fails to install doesn't stop the others; the script then exits 1 and names it.
+#
+# Usage: scripts/install-tools.sh [--prefix DIR] [--bin-dir DIR] [--only TOOL]... [--check | --check-urls] [--list FILE]
+#   --prefix      where the tools go          (default: ~/.local/share/swe-metrics/tools)
+#   --bin-dir     where the links go          (default: ~/.local/bin)
+#   --only        install or check only TOOL  (repeatable)
+#   --check       report the installed versions, install nothing (exit 1 when a tool is missing)
+#   --check-urls  resolve every download URL of the latest releases, for every platform (exit 1 naming the broken)
+#   --list        the tool list               (default: tools.list next to this script's directory)
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -16,13 +20,16 @@ PREFIX="$HOME/.local/share/swe-metrics/tools"
 BIN_DIR="$HOME/.local/bin"
 ONLY=()
 CHECK=0
+CHECK_URLS=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --prefix) PREFIX=$2; shift 2 ;;
     --bin-dir) BIN_DIR=$2; shift 2 ;;
     --only) ONLY+=("$2"); shift 2 ;;
     --check) CHECK=1; shift ;;
-    -h|--help) sed -n '2,10p' "$0"; exit 0 ;;
+    --check-urls) CHECK_URLS=1; shift ;;
+    --list) LIST=$2; shift 2 ;;
+    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
     *) echo "unknown option: $1" >&2; exit 2 ;;
   esac
 done
@@ -122,6 +129,19 @@ install_one() {  # tool latest kind source
   esac
 }
 
+check_urls() {  # resolve every selected download URL, for every platform; exit 1 naming those that fail
+  local broken=() tool spec platform kind url tag version
+  while IFS=$'\t' read -r tool spec platform kind url; do
+    [[ -z "$tool" || "$tool" == \#* || "$url" != http* ]] && continue
+    wanted "$tool" || continue
+    read -r tag version <<< "$(latest "$spec")"
+    url=${url//\{tag\}/$tag}; url=${url//\{v\}/$version}
+    if curl -fsIL --retry 3 -o /dev/null "$url"; then echo "ok        $tool $platform"
+    else echo "BROKEN    $tool $platform $url"; broken+=("$tool/$platform"); fi
+  done < "$LIST"
+  [ ${#broken[@]} -eq 0 ] || { echo "broken download URLs: ${broken[*]}" >&2; return 1; }
+}
+
 needs_node() {  # does any selected tool run on Node?
   local tool latest platform kind rest
   while IFS=$'\t' read -r tool latest platform kind rest; do
@@ -131,19 +151,25 @@ needs_node() {  # does any selected tool run on Node?
 }
 
 if [ "$CHECK" -eq 1 ]; then PATH="$BIN_DIR:$PATH" check; exit $?; fi
+if [ "$CHECK_URLS" -eq 1 ]; then check_urls; exit $?; fi
 
 if [ "$OS" = linux ]; then need xz; else need; fi   # Node ships as .tar.xz; macOS tar reads xz by itself
 mkdir -p "$PREFIX/bin" "$BIN_DIR"
 WORK=$(mktemp -d)
 trap 'rm -rf "$WORK"' EXIT
+FAILED=()
 while IFS=$'\t' read -r tool latest platform kind url; do
   [[ -z "$tool" || "$tool" == \#* ]] && continue
   [[ "$platform" != "any" && "$platform" != "$PLATFORM" ]] && continue
   if wanted "$tool" || { [ "$kind" = node ] && needs_node && [ ! -x "$PREFIX/node/bin/node" ]; }; then
-    install_one "$tool" "$latest" "$kind" "$url"
+    # in the background, so `set -e` stops this tool's install at its first error (it is off in a tested
+    # subshell) and the loop goes on with the next tool
+    install_one "$tool" "$latest" "$kind" "$url" &
+    wait $! || { echo "FAILED to install $tool" >&2; FAILED+=("$tool"); }
   fi
 done < "$LIST"
 
 echo
 PATH="$BIN_DIR:$PATH" check || true
 case ":$PATH:" in *":$BIN_DIR:"*) ;; *) echo; echo "Add the tools to your PATH:  export PATH=\"$BIN_DIR:\$PATH\"" ;; esac
+if [ ${#FAILED[@]} -gt 0 ]; then echo; echo "failed to install: ${FAILED[*]}" >&2; exit 1; fi
