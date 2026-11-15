@@ -1,5 +1,6 @@
 """Tests for the command line: reports validate against the published schema; usage errors exit 2."""
 import json
+from importlib.metadata import version as package_version
 
 import jsonschema
 
@@ -48,7 +49,9 @@ def test_tools(capsys):
     assert "lizard" in capsys.readouterr().out
     assert main(["tools", "--json"]) == 0
     rows = json.loads(capsys.readouterr().out)
-    assert {"id": "lizard", "tool": "lizard", "version": "1.24.1", "families": ["size", "complexity"]} in rows
+    lizard = {"id": "lizard", "tool": "lizard", "version": package_version("lizard"),
+              "families": ["size", "complexity"]}
+    assert lizard in rows
 
 
 def test_unusable_output_paths(tmp_path, capsys):

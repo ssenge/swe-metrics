@@ -2,6 +2,7 @@
 import json
 import shutil
 from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as package_version
 
 import pytest
 
@@ -60,7 +61,7 @@ def test_complexipy_cognitive_complexity():
     by_function = {m.scope.symbol: m.value for m in metrics if m.scope.level == "function"}
     assert by_function == {k: v for k, v in expected.items() if not k.startswith("_")}
     assert targets(metrics)["complexity.cognitive"] is None  # target level carries statistics, not a value
-    assert analyzer.version() == "8.0.1"
+    assert analyzer.version() == package_version("complexipy")
 
 
 def test_complexipy_not_installed(monkeypatch):

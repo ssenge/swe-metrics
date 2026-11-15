@@ -1,5 +1,6 @@
 """The lizard analyzer against fixtures with hand-computed values (fixtures/*/expected.json)."""
 import json
+from importlib.metadata import version as package_version
 
 import pytest
 
@@ -41,4 +42,4 @@ def test_applicable_and_version():
     """Only files lizard can read are measured; the version is lizard's."""
     target, _ = discover(FIXTURES / "python_small")
     assert Lizard().applicable(target) == ("calc.py",)
-    assert Lizard().version() == "1.24.1"
+    assert Lizard().version() == package_version("lizard")

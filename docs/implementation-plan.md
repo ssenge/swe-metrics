@@ -86,7 +86,7 @@ One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, ver
 | Family | Metrics | Tools (first binding) |
 |---|---|---|
 | `size` | lines of code, comment lines, files, functions per language | lizard, tokei |
-| `complexity` | cyclomatic per function; cognitive per function | lizard (cyclomatic, all languages); built-in `cognitive` analyzer (SonarSource's rules on tree-sitter, one implementation for every supported language; pinned grammar packages, offline); complexipy (cognitive, Python) as an independent second value |
+| `complexity` | cyclomatic per function; cognitive per function | lizard (cyclomatic, all languages); built-in `cognitive` analyzer (SonarSource's rules on tree-sitter, one implementation for every supported language; grammar packages at their latest release, offline); complexipy (cognitive, Python) as an independent second value |
 | `duplication` | duplicated lines and %, clone pairs | jscpd |
 | `dependencies` | direct and transitive dependencies; known vulnerabilities per severity; licenses | trivy (SBOM and vulnerabilities), osv-scanner |
 | `secrets` | secret findings per rule | gitleaks |
@@ -145,7 +145,7 @@ swe_metrics/
 
 swe-metrics runs locally and uses the tools installed on the machine. There is no container image. *(M5; the container image built in M2 is removed.)*
 
-- **Python package** `swe-metrics` (Python ≥ 3.12), installed with pip or uv. lizard and complexipy come with it as pinned Python dependencies.
+- **Python package** `swe-metrics` (Python ≥ 3.12), installed with pip or uv. lizard and complexipy come with it as Python dependencies at their latest release (no pins, only lower bounds).
 - **External tools** are found on `PATH`. A missing tool is not an error: its analyzer is reported as `failed` with "… is not installed", and every other analyzer still runs.
 - **`scripts/install-tools.sh`** installs the external tools on a Unix-like system (macOS and Linux, arm64 and x86_64; on Windows inside WSL):
   - **No root, no package manager.** Everything goes into one user directory, `~/.local/share/swe-metrics/tools` by default (`--prefix` to change it), with links in `~/.local/bin`. The script only prints the `PATH` line to add; it never edits shell profiles. Uninstalling means deleting the directory.
@@ -198,7 +198,7 @@ Each milestone is a set of small changes (≤ 400 changed code lines each), ever
 0. **Recorded decisions (M1).**
    - Settings that change results are part of the analyzer's version string: trivy's database date, jscpd's minimum tokens and lines.
    - jscpd ignores files with fewer than its minimum lines (5, counted as the content split at newlines) and writes no report when it ignores every file. Those files aren't applicable to the analyzer, so a change of tiny files only is `skipped` ("no applicable files"), not `failed`. If jscpd still writes no report (it also skips files by format and size), the analyzer ran and measured nothing; an error exit still fails it.
-   - Tools that are Python packages (lizard, complexipy) are pinned dependencies and used through their API; the others are found on `PATH`.
+   - Tools that are Python packages (lizard, complexipy) are dependencies (latest release, no pins) and used through their API; the others are found on `PATH`.
    - opengrep is installed from its latest release binary.
    - **Merges.** Every analyzer was built on its own branch with a gated commit each (≤ 400 changed lines). The merge commits ran the full gate; only the change-size check doesn't apply to them, because it compares against one parent and so counts the other side's already-gated commits.
    - **M4 history** (`git-history`, tool git): one `git log --no-merges --no-renames` over the full history of HEAD, parsed in `core/history.py`. Renames are not followed: a file's history is that of its current path. Merge commits are left out. Ages count from the HEAD commit's committer date, never the wall clock. Authors are distinct author e-mails (lowercased, after `.mailmap`), counted only and never reported. A subdirectory target keeps its own files, but a commit's size for the bulk-change limit counts all its files, so a pair gets the same coupling whatever the target is. Change coupling follows code-maat: shared commits / mean commits of both files × 100, only with ≥ 2 shared commits and ≥ 2 commits per file, without commits that change > 50 files. These parameters are part of the version string. Files without a commit (untracked) get no history metrics.

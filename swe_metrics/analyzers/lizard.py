@@ -1,10 +1,10 @@
 """lizard: lines of code, functions, cyclomatic complexity, function length and parameters (20+ languages)."""
 from __future__ import annotations
 
+from importlib.metadata import version as package_version
 from pathlib import Path
 
 import lizard
-from lizard_ext import version as lizard_version
 
 from swe_metrics.core.analyzer import Measurement
 from swe_metrics.core.report import Metric, Scope
@@ -23,8 +23,8 @@ class Lizard:
     families: tuple[str, ...] = ("size", "complexity")
 
     def version(self) -> str | None:
-        """The installed lizard version."""
-        return str(lizard_version)
+        """The installed lizard version (its package metadata: lizard_ext.version has lagged releases)."""
+        return package_version("lizard")
 
     def prerequisites(self) -> str:
         """lizard needs nothing beyond itself."""
