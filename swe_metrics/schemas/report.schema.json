@@ -1,18 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "swe-metrics/report/v2",
+  "$id": "swe-metrics/report/v1",
   "title": "swe-metrics report",
   "description": "The metrics of one measurement. Values carry unit and direction; the report never judges them.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "subject", "analyzers", "metrics", "details"],
   "properties": {
-    "schema": { "const": "swe-metrics/report/v2" },
+    "schema": { "const": "swe-metrics/report/v1" },
     "subject": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["target", "kind", "commit", "changed_since", "files", "languages", "excluded_files",
-                   "excluded_by"],
+      "required": ["target", "kind", "commit", "changed_since", "files", "languages"],
       "properties": {
         "target": { "type": "string" },
         "kind": { "enum": ["file", "directory", "repository"] },

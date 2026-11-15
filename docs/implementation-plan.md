@@ -52,11 +52,11 @@ Languages and file kinds are detected automatically. A hint (`--kind code|iac|do
 
 ## 4. Output: the report
 
-One JSON document, schema `swe-metrics/report/v2` (published as JSON Schema, versioned; v2 added the subject's `excluded_files` and `excluded_by`).
+One JSON document, schema `swe-metrics/report/v1` (published as JSON Schema, versioned: a change a reader of v1 can't ignore gets a new id; optional fields such as the subject's `excluded_files` and `excluded_by` (0.6.0) don't).
 
 ```json
 {
-  "schema": "swe-metrics/report/v2",
+  "schema": "swe-metrics/report/v1",
   "subject": { "target": "…", "kind": "repository", "commit": "…", "changed_since": null,
                "languages": {"java": 2306, "xml": 410}, "files": 57,
                "excluded_files": 55, "excluded_by": {"gitattributes": 55, "exclude": 0} },
@@ -192,7 +192,7 @@ swe-metrics must meet the same standard it helps others enforce. Its gate (`scri
 | **M6 Quality score** *(done)* | `swe-metrics score` with scoring definitions in Python (building blocks: gates, linear components, densities, regressions against a baseline report), the shipped default `swe-default@0.1`, score schema, `--definition` for custom code | The default gives the hand-computed score on the fixtures; a failed gate caps the score; a missing tool fails closed; a regression against a baseline lowers the score |
 
 | **M7 Field requests** *(done, 0.5.0)* | `--only` by analyzer id (FR-4); `citations` (FR-3); YAML, JSON lines and front matter in `wellformed` (FR-9); checkov on every IaC framework with its skips (FR-5); `--rules` with opengrep sets, `checkstyle` and `eslint-rules` (FR-6); `cfn-lint` (FR-7); `structurizr` (FR-8); files no test reached (FR-10); `gitlab-security` reports (FR-11); `suppressions` (FR-12) | Fixture values match, recorded and real tool where installed; gate passes. `syntax.parse_errors` is a gate of `swe-default@0.4`: it now also fails on broken YAML, JSON lines and front matter |
-| **M8 Measurement fixes** *(done, 0.6.0)* | No version pins: Python dependencies at their latest release (lizard ≥ 1.26: earlier releases misread TypeScript function ranges; TypeScript and TSX regression fixtures, checked against the `cognitive` analyzer's functions). `.gitattributes` `linguist-vendored` and `linguist-generated` leave files out of every analyzer (`--no-gitattributes` to measure them); the subject counts what was left out (`excluded_files`, `excluded_by`; schema `swe-metrics/report/v2`). **Behaviour change:** `--exclude` patterns are gitignore-style: `**/dist/**` now covers a top-level `dist/`, and `a/*.ts` no longer matches `a/b/c.ts`. jscpd 5 reports; dependency-cruiser `failed` (with the reason) instead of an incomplete graph; installer: one failed tool doesn't stop the others, `--check-urls`, a CI job against the latest tools | Fixture values match with the latest tools and with jscpd 4; gate passes |
+| **M8 Measurement fixes** *(done, 0.6.0)* | No version pins: Python dependencies at their latest release (lizard ≥ 1.26: earlier releases misread TypeScript function ranges; TypeScript and TSX regression fixtures, checked against the `cognitive` analyzer's functions). `.gitattributes` `linguist-vendored` and `linguist-generated` leave files out of every analyzer (`--no-gitattributes` to measure them); the subject counts what was left out (`excluded_files`, `excluded_by`: optional fields, schema still `swe-metrics/report/v1`). **Behaviour change:** `--exclude` patterns are gitignore-style: `**/dist/**` now covers a top-level `dist/`, and `a/*.ts` no longer matches `a/b/c.ts`. jscpd 5 reports; dependency-cruiser `failed` (with the reason) instead of an incomplete graph; installer: one failed tool doesn't stop the others, `--check-urls`, a CI job against the latest tools | Fixture values match with the latest tools and with jscpd 4; gate passes |
 
 Each milestone is a set of small changes (≤ 400 changed code lines each), every one passing the gate.
 

@@ -6,7 +6,7 @@ from typing import Any
 
 from swe_metrics.core.catalog import CATALOG
 
-SCHEMA = "swe-metrics/report/v2"
+SCHEMA = "swe-metrics/report/v1"
 LEVELS = ("target", "module", "file", "function")
 STATUSES = ("ran", "skipped", "failed")
 
@@ -122,7 +122,7 @@ class Report:
     details: tuple[Detail, ...] = ()
 
     def as_dict(self) -> dict[str, Any]:
-        """The JSON form (schema swe-metrics/report/v2)."""
+        """The JSON form (schema swe-metrics/report/v1)."""
         return {"schema": SCHEMA, "subject": self.subject.as_dict(),
                 "analyzers": [a.as_dict() for a in self.analyzers],
                 "metrics": [m.as_dict() for m in self.metrics],

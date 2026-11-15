@@ -23,7 +23,7 @@ run pytest -q "${CODE[@]/#/--cov=}" --cov-report=term-missing:skip-covered
 run bandit -q -r "${SRC[@]}" --severity-level high --exclude '*/test_*.py'
 run pip-audit --progress-spinner off .
 run gitleaks git --no-banner --redact .
-run npx -y jscpd@4.0.5 --silent --threshold 3 --min-lines 5 "${SRC[@]}"
+run npx -y jscpd@latest --silent --threshold 3 --min-lines 5 "${SRC[@]}"
 run lint-imports                  # layer contracts in pyproject.toml [tool.importlinter]
 run python scripts/self_check.py  # dogfooding: swe-metrics measures itself against the same limits
 
